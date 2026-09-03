@@ -60,6 +60,7 @@ export function BookingFormZh({
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -133,7 +134,7 @@ export function BookingFormZh({
     ]);
 
     const lines = [
-      'Hello, I would like to request a Cappadocia airport transfer. / 您好，我想预订卡帕多奇亚机场接送：',
+      '您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。',
       '',
       `Service / 服务: ${serviceEnglish}`,
       `Journey / 行程: ${journey === 'round-trip' ? 'Round Trip / 往返' : 'One Way / 单程'}`,
@@ -239,6 +240,16 @@ export function BookingFormZh({
             <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={initialTown ? `请填写${initialTown}的完整酒店名称` : '请填写完整酒店名称和所在城镇'} required />
           </div>
 
+          {!expanded && (
+            <div className="field full">
+              <button className="btn booking-continue" type="button" onClick={() => setExpanded(true)}>
+                继续填写航班与乘客资料 · €{total}
+              </button>
+              <div className="form-note">只有继续下一步后，才会展开航班、乘客与护照信息。</div>
+            </div>
+          )}
+
+          {expanded && <>
           <div className="field">
             <label htmlFor={`zh-date-${compact ? 'compact' : 'full'}`}>{isDepartureOnly ? '送机日期' : '抵达 / 首段接送日期'}</label>
             <input id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
@@ -306,6 +317,7 @@ export function BookingFormZh({
             <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨；穆斯塔法帕夏（Mustafapaşa）需要私人接送询价。</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
+          </>}
         </div>
       </form>
     </div>

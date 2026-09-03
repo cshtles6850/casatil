@@ -56,6 +56,7 @@ export function BookingForm({
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -124,7 +125,7 @@ export function BookingForm({
     ]);
 
     const lines = [
-      'Hello, I would like to request a Cappadocia airport transfer:',
+      'Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.',
       '',
       `Service: ${transferType === 'shuttle' ? 'Cappadocia Shuttle Transfer' : 'Private Airport Transfer'}`,
       `Journey: ${journey === 'round-trip' ? 'Round Trip' : 'One Way'}`,
@@ -232,6 +233,16 @@ export function BookingForm({
             <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={initialTown ? `Full hotel name in ${initialTown}` : 'Full hotel name and town'} required />
           </div>
 
+          {!expanded && (
+            <div className="field full">
+              <button className="btn booking-continue" type="button" onClick={() => setExpanded(true)}>
+                Continue with flight & passenger details · €{total}
+              </button>
+              <div className="form-note">The form expands only when you are ready to add flight, passenger and passport details.</div>
+            </div>
+          )}
+
+          {expanded && <>
           <div className="field">
             <label htmlFor={`date-${compact ? 'compact' : 'full'}`}>{isDepartureOnly ? 'Departure transfer date' : 'Arrival / first transfer date'}</label>
             <input id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
@@ -316,6 +327,7 @@ export function BookingForm({
             <div className="form-note">Your booking is confirmed only after confirmation on WhatsApp. Shared shuttle coverage includes Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar; Mustafapasa requires a private transfer request.</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
+          </>}
         </div>
       </form>
     </div>

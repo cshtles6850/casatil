@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
+const whatsappMessage = encodeURIComponent('Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.');
+
 export function Footer() {
   return (
     <footer className="footer">
@@ -11,7 +13,7 @@ export function Footer() {
             <h3>Cappadocia Airport Shuttle</h3>
             <p>Shared shuttle and private airport transfer between Kayseri Airport, Nevsehir Airport and central Cappadocia hotel areas.</p>
             <a className="footer-email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            <a className="footer-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={20} /><span>WhatsApp {SITE.whatsappDisplay}</span></a>
+            <a className="footer-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={20} /><span>Book on WhatsApp</span></a>
           </div>
           <div>
             <h3>Services</h3>
@@ -42,7 +44,7 @@ export function Footer() {
           <span>{SITE.company} · TURSAB No: {SITE.tursab}</span>
         </div>
       </div>
-      <a className="floating-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noreferrer" aria-label="Contact Cappadocia Airport Shuttle on WhatsApp"><WhatsAppIcon size={27} /><span>WhatsApp</span></a>
+      <a className="floating-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer" aria-label="Contact Cappadocia Airport Shuttle on WhatsApp"><WhatsAppIcon size={27} /><span>WhatsApp</span></a>
     </footer>
   );
 }

@@ -48,6 +48,7 @@ export default function ChineseHomePage() {
     <JsonLd data={serviceSchema}/><JsonLd data={faqSchema}/>
 
     <section className="home-hero"><div className="container hero-grid">
+      <div className="hero-visual" aria-label="卡帕多奇亚机场接送车辆"><Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="卡帕多奇亚机场接送 Mercedes Vito 和 Sprinter" width={1200} height={675} priority sizes="(max-width: 800px) 94vw, 48vw" /></div>
       <div className="hero-copy">
         <span className="eyebrow">开塞利 ASR · 内夫谢希尔 NAV</span>
         <h1>卡帕多奇亚机场接送</h1>
@@ -55,7 +56,6 @@ export default function ChineseHomePage() {
         <div className="hero-actions"><a className="btn btn-primary" href="#booking">预订机场接送</a><Link className="btn btn-secondary" href="/zh-cn/cappadocia-shuttle-transfer">查看拼车详情</Link></div>
         <div className="trust-row"><span>两座机场拼车均 €15</span><span>机场接机与酒店接送</span><span>现金支付给司机</span></div>
       </div>
-      <div className="hero-visual" aria-label="卡帕多奇亚机场接送车辆"><Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="卡帕多奇亚机场接送 Mercedes Vito 和 Sprinter" width={1200} height={675} priority sizes="(max-width: 800px) 94vw, 48vw" /></div>
     </div></section>
 
     <section className="section booking-section" id="booking"><div className="container home-booking-grid">

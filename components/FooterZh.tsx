@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
+const whatsappMessage = encodeURIComponent('您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。');
+
 export function FooterZh() {
   return (
     <footer className="footer">
@@ -11,7 +13,7 @@ export function FooterZh() {
             <h3>Cappadocia Airport Shuttle</h3>
             <p>开塞利机场、内夫谢希尔机场与卡帕多奇亚主要酒店区域之间的拼车班车和私人机场接送。</p>
             <a className="footer-email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            <a className="footer-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={20} /><span>WhatsApp {SITE.whatsappDisplay}</span></a>
+            <a className="footer-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={20} /><span>WhatsApp 预订</span></a>
           </div>
           <div>
             <h3>服务</h3>
@@ -42,7 +44,7 @@ export function FooterZh() {
           <span>{SITE.company} · TURSAB No: {SITE.tursab}</span>
         </div>
       </div>
-      <a className="floating-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noreferrer" aria-label="通过 WhatsApp 联系卡帕多奇亚机场接送"><WhatsAppIcon size={27} /><span>WhatsApp</span></a>
+      <a className="floating-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer" aria-label="通过 WhatsApp 联系卡帕多奇亚机场接送"><WhatsAppIcon size={27} /><span>WhatsApp</span></a>
     </footer>
   );
 }

@@ -9,7 +9,7 @@ import { SITE, towns } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute: 'Cappadocia Airport Shuttle | Kayseri & Nevsehir €15' },
   description: 'Cappadocia Airport Shuttle from Kayseri Airport (ASR) and Nevsehir Airport (NAV) to Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Shared shuttle €15 per person; private Vito and Sprinter available.',
-  keywords: ['cappadocia airport shuttle','cappadocia shuttle transfer','cappadocia airport transfer','cappadocia transfers','kayseri airport shuttle','nevsehir airport shuttle','goreme airport transfer'],
+  keywords: ['cappadocia airport shuttle','airport shuttle cappadocia','cappadocia hotel shuttle','cappadocia shared airport shuttle','kayseri nevsehir airport shuttle'],
   alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh-cn', 'x-default': '/' } },
 };
 
@@ -48,15 +48,15 @@ export default function HomePage() {
     <JsonLd data={serviceSchema} /><JsonLd data={faqSchema} />
 
     <section className="home-hero"><div className="container hero-grid">
+      <div className="hero-visual" aria-label="Cappadocia airport shuttle vehicles">
+        <Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="Cappadocia Airport Shuttle Mercedes Vito and Sprinter vehicles" width={1200} height={675} priority sizes="(max-width: 800px) 94vw, 48vw" />
+      </div>
       <div className="hero-copy">
         <span className="eyebrow">Kayseri ASR · Nevsehir NAV</span>
         <h1>Cappadocia Airport Shuttle</h1>
         <p className="lead">Book a <strong>€15 per person Cappadocia shuttle transfer</strong> between Kayseri or Nevsehir Airport and Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin. Private Vito and Sprinter transfers are available too.</p>
         <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book your transfer</a><Link className="btn btn-secondary" href="/cappadocia-shuttle-transfer">Shuttle details</Link></div>
         <div className="trust-row"><span>€15 from both airports</span><span>Airport meet & hotel transfer</span><span>Cash to driver</span></div>
-      </div>
-      <div className="hero-visual" aria-label="Cappadocia airport shuttle vehicles">
-        <Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="Cappadocia Airport Shuttle Mercedes Vito and Sprinter vehicles" width={1200} height={675} priority sizes="(max-width: 800px) 94vw, 48vw" />
       </div>
     </div></section>
 

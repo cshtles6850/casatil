@@ -3,6 +3,8 @@ import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
+const whatsappMessage = encodeURIComponent('Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.');
+
 const nav = [
   ['Shuttle', '/cappadocia-shuttle-transfer'],
   ['Private Transfer', '/private-airport-transfer-cappadocia'],
@@ -23,12 +25,12 @@ export function Header() {
         </nav>
         <div className="nav-actions">
           <LanguageSwitcher />
-          <a className="btn btn-whatsapp nav-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={18} /> WhatsApp</a>
+          <a className="btn btn-whatsapp nav-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={18} /> WhatsApp</a>
           <details className="mobile-menu">
             <summary aria-label="Open navigation">☰</summary>
             <nav aria-label="Mobile navigation">
               {nav.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
-              <a href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={17} /> WhatsApp</a>
+              <a href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={17} /> WhatsApp</a>
             </nav>
           </details>
         </div>
