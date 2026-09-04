@@ -1,0 +1,41 @@
+import Link from 'next/link';
+import { SITE } from '@/lib/site';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import { LanguageSwitcher } from './LanguageSwitcher';
+
+const whatsappMessage = encodeURIComponent('您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。');
+
+const nav = [
+  ['机场班车', '/zh-cn'],
+  ['开塞利班车', '/zh-cn/kayseri-airport-shuttle'],
+  ['内夫谢希尔班车', '/zh-cn/nevsehir-airport-shuttle'],
+  ['私人接送', '/zh-cn/private-airport-transfer-cappadocia'],
+  ['价格', '/zh-cn/airport-transfer-prices'],
+] as const;
+
+export function HeaderZh() {
+  return (
+    <header className="site-header">
+      <div className="container nav">
+        <Link href="/zh-cn" className="brand" aria-label="卡帕多奇亚机场接送首页">
+          <span className="brand-title">Cappadocia Airport Shuttle</span>
+          <span className="brand-subtitle">卡帕多奇亚机场接送</span>
+        </Link>
+        <nav className="nav-links" aria-label="主导航">
+          {nav.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+        </nav>
+        <div className="nav-actions">
+          <LanguageSwitcher />
+          <a className="btn btn-whatsapp nav-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={18} /> WhatsApp</a>
+          <details className="mobile-menu">
+            <summary aria-label="打开导航">☰</summary>
+            <nav aria-label="移动端导航">
+              {nav.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+              <a href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={17} /> WhatsApp</a>
+            </nav>
+          </details>
+        </div>
+      </div>
+    </header>
+  );
+}
