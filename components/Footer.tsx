@@ -17,30 +17,28 @@ export function Footer() {
           </div>
           <div>
             <h3>Services</h3>
-            <Link href="/cappadocia-shuttle-transfer">Cappadocia Shuttle Transfer</Link>
             <Link href="/cappadocia-airport-transfer">Airport Transfer</Link>
+            <Link href="/goreme-airport-transfer">Goreme Airport Transfer</Link>
             <Link href="/private-airport-transfer-cappadocia">Private Transfer</Link>
-            <Link href="/hotel-to-airport-transfer">Hotel to Airport</Link>
+            <Link href="/airport-transfer-prices">Transfer Prices</Link>
           </div>
           <div>
             <h3>Airports</h3>
-            <Link href="/kayseri-airport-transfer">Kayseri Airport Transfer</Link>
-            <Link href="/nevsehir-airport-transfer">Nevsehir Airport Transfer</Link>
+            <Link href="/kayseri-airport-shuttle">Kayseri Airport Shuttle</Link>
+            <Link href="/nevsehir-airport-shuttle">Nevsehir Airport Shuttle</Link>
             <Link href="/cappadocia-to-kayseri-airport-shuttle">Cappadocia to Kayseri Airport</Link>
             <Link href="/cappadocia-to-nevsehir-airport-shuttle">Cappadocia to Nevsehir Airport</Link>
           </div>
           <div>
-            <h3>Popular Areas</h3>
-            <Link href="/goreme-airport-transfer">Goreme</Link>
-            <Link href="/urgup-airport-transfer">Urgup</Link>
-            <Link href="/uchisar-airport-transfer">Uchisar</Link>
-            <Link href="/avanos-airport-transfer">Avanos</Link>
-            <Link href="/ortahisar-airport-transfer">Ortahisar</Link>
-            <Link href="/cavusin-airport-transfer">Cavusin</Link>
+            <h3>Company & Support</h3>
+            <Link href="/about-us">About Us</Link>
+            <Link href="/contact-us">Contact Us</Link>
+            <Link href="/service-contract">Service Contract</Link>
+            <Link href="/privacy-policy">Privacy Policy</Link>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Cappadocia Airport Shuttle · <Link href="/privacy-policy">Privacy Policy</Link></span>
+          <span>© {new Date().getFullYear()} Cappadocia Airport Shuttle</span>
           <span>{SITE.company} · TURSAB No: {SITE.tursab}</span>
         </div>
       </div>

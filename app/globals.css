@@ -247,3 +247,17 @@ p { margin-top: 0; }
   .brand-subtitle { font-size: .61rem; }
   .language-switcher a { min-width: 30px; min-height: 30px; padding: 0 6px; font-size: .7rem; }
 }
+
+/* Contact / trust pages */
+.contact-grid { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:34px; align-items:start; }
+.contact-card { padding:22px; border:1px solid var(--line); border-radius:18px; background:#fff; box-shadow:0 10px 30px rgba(20,51,56,.045); }
+.contact-card > p { color:var(--ink-soft); }
+.contact-form { margin-top:18px; }
+.contact-submit { width:100%; }
+.contact-aside { display:grid; gap:16px; }
+.contact-method { display:grid; gap:4px; padding:10px 0; border-bottom:1px solid #e8f0ee; }
+.contact-method:last-child { border-bottom:0; }
+.contact-method span { color:var(--ink-soft); font-size:.78rem; font-weight:800; }
+.contact-method a { display:inline-flex; align-items:center; gap:7px; color:var(--sea-dark); font-weight:800; overflow-wrap:anywhere; }
+.form-status-error { color:#a13d3d; }
+@media (max-width:820px) { .contact-grid { grid-template-columns:1fr; } }

@@ -101,7 +101,7 @@ export function BookingFormZh({
       passport: person.passport.trim(),
     }));
 
-    const serviceEnglish = transferType === 'shuttle' ? 'Cappadocia Shuttle Transfer' : 'Private Airport Transfer';
+    const serviceEnglish = transferType === 'shuttle' ? 'Shared Airport Shuttle' : 'Private Airport Transfer';
     const vehicleEnglish = transferType === 'private' ? (vehicle === 'vito' ? 'Mercedes Vito (max 5)' : 'Mercedes Sprinter (max 16)') : 'Shared shuttle';
     const directionEnglish = journey === 'round-trip' ? 'Airport ⇄ Hotel' : direction === 'airport-hotel' ? 'Airport → Hotel' : 'Hotel → Airport';
 
@@ -309,12 +309,12 @@ export function BookingFormZh({
 
           <label className="confirm-row field full">
             <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} required />
-            <span>我确认以上预订信息正确，并了解所需乘客资料将按照 <a className="inline-link" href="/zh-cn/privacy-policy" target="_blank" rel="noreferrer">隐私政策</a> 处理。</span>
+            <span>我确认以上预订信息正确，同意 <a className="inline-link" href="/zh-cn/service-contract" target="_blank" rel="noreferrer">服务合同</a>，并了解所需乘客资料将按照 <a className="inline-link" href="/zh-cn/privacy-policy" target="_blank" rel="noreferrer">隐私政策</a> 处理。</span>
           </label>
 
           <div className="field full">
             <button className="btn btn-whatsapp booking-submit" type="submit"><WhatsAppIcon size={20} /> 提交并继续到 WhatsApp</button>
-            <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨；穆斯塔法帕夏（Mustafapaşa）需要私人接送询价。</div>
+            <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨；穆斯塔法帕夏（Mustafapasa）需要私人接送询价。</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
           </>}

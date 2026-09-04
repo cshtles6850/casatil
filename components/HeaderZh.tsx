@@ -6,10 +6,10 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 const whatsappMessage = encodeURIComponent('您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。');
 
 const nav = [
-  ['机场拼车', '/zh-cn/cappadocia-shuttle-transfer'],
+  ['机场班车', '/zh-cn'],
+  ['开塞利班车', '/zh-cn/kayseri-airport-shuttle'],
+  ['内夫谢希尔班车', '/zh-cn/nevsehir-airport-shuttle'],
   ['私人接送', '/zh-cn/private-airport-transfer-cappadocia'],
-  ['开塞利机场', '/zh-cn/kayseri-airport-transfer'],
-  ['内夫谢希尔机场', '/zh-cn/nevsehir-airport-transfer'],
   ['价格', '/zh-cn/airport-transfer-prices'],
 ] as const;
 

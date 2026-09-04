@@ -59,7 +59,7 @@ function bookingDefaults(page: ZhSeoPage) {
   if (page.route) return { initialAirport: page.route.airport, initialDirection: page.route.direction === 'arrival' ? 'airport-hotel' as const : 'hotel-airport' as const, initialTown: zhTownNames[page.route.town] };
   const initialAirport = page.slug.includes('nevsehir') ? 'nevsehir' as const : 'kayseri' as const;
   const townKey = (Object.keys(towns) as (keyof typeof towns)[]).find((key) => page.slug === `${key}-airport-transfer`);
-  return { initialAirport, initialDirection: page.slug.startsWith('cappadocia-to-') || page.slug === 'hotel-to-airport-transfer' ? 'hotel-airport' as const : 'airport-hotel' as const, initialTown: townKey ? zhTownNames[townKey] : '' };
+  return { initialAirport, initialDirection: page.slug.startsWith('cappadocia-to-') ? 'hotel-airport' as const : 'airport-hotel' as const, initialTown: townKey ? zhTownNames[townKey] : '' };
 }
 
 export default async function ChineseSeoPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -83,14 +83,14 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/zh-cn">首页</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
-      <div className="hero-actions"><a className="btn btn-primary" href="#booking">预订这条接送</a><Link className="btn btn-secondary" href="/zh-cn/cappadocia-shuttle-transfer">机场拼车服务</Link></div>
+      <div className="hero-actions"><a className="btn btn-primary" href="#booking">{page.route ? '预订机场班车' : '预订机场接送'}</a><Link className="btn btn-secondary" href="/zh-cn">机场班车首页</Link></div>
       <div className="trust-row"><span>WhatsApp 确认</span><span>单程或往返</span><span>现金支付给司机</span></div>
     </div></section>
 
     <section className="section page-content-section"><div className="container content-grid">
       <article className="prose">
         {page.sections.map((section)=><section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>)}
-        <section className="content-section related-section"><h2>相关机场接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、价格与行程建议 →</span></Link>)}</div></section>
+        <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
         <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>
       </article>
       <aside className="sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>

@@ -46,6 +46,6 @@ export const futureLocales = [
   { code: 'de', label: 'Deutsch', active: false },
   { code: 'pt-BR', label: 'Português (Brasil)', active: false },
   { code: 'ms-MY', label: 'Bahasa Melayu', active: false },
-  { code: 'fr-FR', label: 'Français', active: false },
+  { code: 'fr-FR', label: 'Francais', active: false },
   { code: 'id-ID', label: 'Bahasa Indonesia', active: false },
 ] as const;

@@ -48,7 +48,7 @@ function bookingDefaults(page: SeoPage) {
   if (page.route) return { initialAirport: page.route.airport, initialDirection: page.route.direction === 'arrival' ? 'airport-hotel' as const : 'hotel-airport' as const, initialTown: towns[page.route.town].name };
   const initialAirport = page.slug.includes('nevsehir') ? 'nevsehir' as const : 'kayseri' as const;
   const townKey = (Object.keys(towns) as (keyof typeof towns)[]).find((key) => page.slug === `${key}-airport-transfer`);
-  return { initialAirport, initialDirection: page.slug.startsWith('cappadocia-to-') || page.slug === 'hotel-to-airport-transfer' ? 'hotel-airport' as const : 'airport-hotel' as const, initialTown: townKey ? towns[townKey].name : '' };
+  return { initialAirport, initialDirection: page.slug.startsWith('cappadocia-to-') ? 'hotel-airport' as const : 'airport-hotel' as const, initialTown: townKey ? towns[townKey].name : '' };
 }
 
 export default async function SeoPageView({ params }: { params: Promise<{ slug: string }> }) {
@@ -72,7 +72,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
-      <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book this transfer</a><Link className="btn btn-secondary" href="/cappadocia-shuttle-transfer">Shuttle service</Link></div>
+      <div className="hero-actions"><a className="btn btn-primary" href="#booking">{page.route ? 'Book this shuttle' : 'Book airport service'}</a><Link className="btn btn-secondary" href="/">Airport shuttle</Link></div>
       <div className="trust-row"><span>WhatsApp confirmation</span><span>One way or round trip</span><span>Cash to driver</span></div>
     </div></section>
 
@@ -80,8 +80,8 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
       <article className="prose">
         {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
 
-        <section className="content-section related-section"><h2>Related transfer pages</h2><div className="related-grid">
-          {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, prices and planning →</span></Link>)}
+        <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
+          {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}
         </div></section>
 
         <section className="content-section"><h2>Frequently asked questions</h2><div className="faq">{page.faq.map((item) => <details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>

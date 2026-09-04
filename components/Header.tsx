@@ -6,10 +6,10 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 const whatsappMessage = encodeURIComponent('Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.');
 
 const nav = [
-  ['Shuttle', '/cappadocia-shuttle-transfer'],
+  ['Airport Shuttle', '/'],
+  ['Kayseri Shuttle', '/kayseri-airport-shuttle'],
+  ['Nevsehir Shuttle', '/nevsehir-airport-shuttle'],
   ['Private Transfer', '/private-airport-transfer-cappadocia'],
-  ['Kayseri Airport', '/kayseri-airport-transfer'],
-  ['Nevsehir Airport', '/nevsehir-airport-transfer'],
   ['Prices', '/airport-transfer-prices'],
 ] as const;
 

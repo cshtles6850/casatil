@@ -127,7 +127,7 @@ export function BookingForm({
     const lines = [
       'Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.',
       '',
-      `Service: ${transferType === 'shuttle' ? 'Cappadocia Shuttle Transfer' : 'Private Airport Transfer'}`,
+      `Service: ${transferType === 'shuttle' ? 'Shared Airport Shuttle' : 'Private Airport Transfer'}`,
       `Journey: ${journey === 'round-trip' ? 'Round Trip' : 'One Way'}`,
       `Direction: ${resolvedDirection}`,
       `Airport: ${airportLabels[airport]}`,
@@ -306,7 +306,7 @@ export function BookingForm({
           <div className="field full booking-summary">
             <div className="booking-summary-head"><strong>Booking summary</strong><strong className="summary-total">€{total}</strong></div>
             <dl>
-              <div><dt>Service</dt><dd>{transferType === 'shuttle' ? 'Cappadocia Shuttle Transfer' : vehicle === 'vito' ? 'Private Mercedes Vito' : 'Private Mercedes Sprinter'}</dd></div>
+              <div><dt>Service</dt><dd>{transferType === 'shuttle' ? 'Shared Airport Shuttle' : vehicle === 'vito' ? 'Private Mercedes Vito' : 'Private Mercedes Sprinter'}</dd></div>
               <div><dt>Journey</dt><dd>{journey === 'round-trip' ? 'Round Trip' : 'One Way'} · {resolvedDirection}</dd></div>
               <div><dt>Airport</dt><dd>{airportLabels[airport]}</dd></div>
               <div><dt>Hotel</dt><dd>{hotel || '—'}</dd></div>
@@ -319,7 +319,7 @@ export function BookingForm({
 
           <label className="confirm-row field full">
             <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} required />
-            <span>I confirm that my booking request details are correct and understand that required passenger information is handled as described in the <a className="inline-link" href="/privacy-policy" target="_blank" rel="noreferrer">Privacy Policy</a>.</span>
+            <span>I confirm that my booking request details are correct, accept the <a className="inline-link" href="/service-contract" target="_blank" rel="noreferrer">Service Contract</a>, and understand that required passenger information is handled as described in the <a className="inline-link" href="/privacy-policy" target="_blank" rel="noreferrer">Privacy Policy</a>.</span>
           </label>
 
           <div className="field full">

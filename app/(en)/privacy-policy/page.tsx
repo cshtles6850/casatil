@@ -3,58 +3,27 @@ import Link from 'next/link';
 import { SITE } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Privacy information for Cappadocia Airport Shuttle booking requests and passenger information.',
-  keywords: ['Cappadocia Airport Shuttle privacy policy','passenger information privacy','airport transfer booking data'],
-  alternates: { canonical: '/privacy-policy', languages: { en: '/privacy-policy', 'zh-CN': '/zh-cn/privacy-policy' } },
-  robots: { index: false, follow: true },
+  title: { absolute:'Privacy Policy | Cappadocia Airport Shuttle' },
+  description:'Privacy policy for Cappadocia Airport Shuttle booking requests, contact messages and passenger information.',
+  alternates:{ canonical:'/privacy-policy', languages:{ en:'/privacy-policy','zh-CN':'/zh-cn/privacy-policy','x-default':'/privacy-policy' } },
+  robots:{ index:false, follow:true },
 };
 
-export default function PrivacyPolicyPage() {
-  return <main>
-    <section className="page-hero"><div className="container">
-      <div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>Privacy Policy</span></div>
-      <span className="eyebrow">Passenger information</span>
-      <h1>Privacy Policy</h1>
-      <p className="lead">This page explains how information submitted through the Cappadocia Airport Shuttle booking form is used for reservation and transfer operation.</p>
-    </div></section>
-
-    <section className="section page-content-section"><div className="container privacy-prose prose">
-      <section className="content-section">
-        <h2>Information collected for a booking request</h2>
-        <p>The booking form can collect the selected service, airport, travel direction, transfer dates, flight codes, hotel or accommodation name, passenger count, contact WhatsApp number, passenger full names, passport numbers and any optional notes you choose to provide.</p>
-      </section>
-
-      <section className="content-section">
-        <h2>Why passenger names and passport numbers are requested</h2>
-        <p>Passenger names and passport numbers are requested because they are required by the operating company for reservation and transfer operation. They are not requested for advertising or to create a public customer profile.</p>
-      </section>
-
-      <section className="content-section">
-        <h2>How a request is sent</h2>
-        <p>When you submit the form, the site prepares a WhatsApp message containing the booking information so you can send it to the transfer team. The site can also send a booking copy to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> through the configured transactional email service. The website code does not intentionally create a separate customer database for passport numbers.</p>
-        <p>Information sent through WhatsApp or email is also subject to the security and privacy practices of those communication providers. Please do not send additional sensitive information that is not needed for the transfer.</p>
-      </section>
-
-      <section className="content-section">
-        <h2>How the information is used</h2>
-        <p>Booking information is used to review the transfer request, identify passengers, plan airport meeting or hotel pickup, coordinate the booked flight and accommodation, communicate about changes, calculate the selected service price and complete the transfer operation.</p>
-      </section>
-
-      <section className="content-section">
-        <h2>Retention and access</h2>
-        <p>Operational booking information should be kept only for as long as it is reasonably needed to manage the reservation, complete the service and meet applicable business or legal recordkeeping requirements. Access should be limited to people who need the information for the booking and transfer operation.</p>
-      </section>
-
-      <section className="content-section">
-        <h2>Website security and spam protection</h2>
-        <p>The booking endpoint uses basic validation, abuse controls and no-cache responses. No website can promise absolute security, so sensitive passenger information is kept out of public pages and should not be shared unnecessarily.</p>
-      </section>
-
-      <section className="content-section">
-        <h2>Questions about your booking information</h2>
-        <p>For questions about information submitted with a transfer request, contact us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use the WhatsApp contact shown on this website.</p>
-      </section>
-    </div></section>
-  </main>;
-}
+export default function PrivacyPolicyPage(){return <main>
+  <section className="page-hero"><div className="container"><div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>Privacy Policy</span></div><span className="eyebrow">Personal data</span><h1>Privacy Policy</h1><p className="lead">Cappadocia Airport Shuttle respects your privacy and uses personal information only for legitimate booking, support, operational, security and legal purposes.</p></div></section>
+  <section className="section page-content-section"><div className="container privacy-prose prose">
+    <section className="content-section"><h2>Personal data</h2><p>When you make a reservation or contact us, we may collect your name, email address, telephone or WhatsApp number, flight information, hotel or accommodation details, passenger count, booking details, passport information where required for operational or regulatory purposes, and information you voluntarily enter in message or notes fields.</p><p>We do not sell, rent, trade or lease personal information collected through this website.</p></section>
+    <section className="content-section"><h2>How we use information</h2><p>Information may be used to process and confirm a booking, organize shared shuttle or private transfer service, coordinate airport meeting and hotel pickup/drop-off, communicate about flight or reservation changes, respond to Contact Us messages, maintain website security and meet applicable operational or legal requirements.</p></section>
+    <section className="content-section"><h2>Disclosure of information</h2><p>Customer information is not publicly disclosed or sold. It may be shared only when reasonably necessary to provide the requested service, for example with the driver or operational personnel responsible for the transfer, or where disclosure is required by law or a competent public authority.</p></section>
+    <section className="content-section"><h2>Booking and passport information</h2><p>Certain passenger or passport information may be requested when required for reservation operation or an applicable regulatory purpose. It is not collected for advertising and is not sold to third parties.</p></section>
+    <section className="content-section"><h2>Contact form information</h2><p>The Contact Us form can collect your name, email address, WhatsApp or phone number, subject and message. This information is used to answer the enquiry and provide relevant booking or customer support.</p></section>
+    <section className="content-section"><h2>Server logs and IP addresses</h2><p>Hosting and website systems may automatically process technical information such as IP address, browser or device information, requested pages, access time and similar logs. This information may be used for security, troubleshooting, abuse prevention and aggregated website statistics.</p></section>
+    <section className="content-section"><h2>Secure data transfer</h2><p>The website uses HTTPS/SSL encryption for information transmitted between your browser and the site. Reasonable technical and organizational measures are used to protect submitted information, but no internet transmission or electronic storage method can be guaranteed to be completely secure.</p></section>
+    <section className="content-section"><h2>Payment information</h2><p>The standard payment method is <strong>cash to the driver</strong>. The standard booking form does not collect or store customer credit-card details.</p></section>
+    <section className="content-section"><h2>Data retention</h2><p>Personal information is kept only for as long as reasonably necessary to manage bookings, provide customer support, meet operational needs and comply with applicable legal obligations.</p></section>
+    <section className="content-section"><h2>Third-party services</h2><p>The website may use hosting, transactional email, analytics or communication providers. These services can process limited technical or personal information as necessary to perform their functions. Information sent through WhatsApp or email is also subject to the privacy practices of those providers.</p></section>
+    <section className="content-section"><h2>Your requests</h2><p>You may ask about personal information associated with your booking or contact message, request correction of inaccurate information, or request deletion where applicable. Send privacy questions through <Link href="/contact-us">Contact Us</Link> or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p></section>
+    <section className="content-section"><h2>Changes to this policy</h2><p>This policy may be updated when the website, services, legal obligations or data-processing practices change. The current version will be published on this page.</p></section>
+    <section className="content-section"><h2>Service provider</h2><p><strong>Cappadocia Airport Shuttle</strong><br/>Operated by <strong>{SITE.company}</strong><br/>TURSAB No: <strong>{SITE.tursab}</strong></p></section>
+  </div></section>
+</main>}

@@ -7,7 +7,7 @@ import { SITE, towns } from '@/lib/site';
 
 
 export const metadata: Metadata = {
-  title: { absolute: 'Cappadocia Airport Shuttle | Kayseri & Nevsehir €15' },
+  title: { absolute: 'Cappadocia Airport Shuttle | Kayseri & Nevsehir Airports' },
   description: 'Cappadocia Airport Shuttle from Kayseri Airport (ASR) and Nevsehir Airport (NAV) to Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Shared shuttle €15 per person; private Vito and Sprinter available.',
   keywords: ['cappadocia airport shuttle','airport shuttle cappadocia','cappadocia hotel shuttle','cappadocia shared airport shuttle','kayseri nevsehir airport shuttle'],
   alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh-cn', 'x-default': '/' } },
@@ -54,8 +54,8 @@ export default function HomePage() {
       <div className="hero-copy">
         <span className="eyebrow">Kayseri ASR · Nevsehir NAV</span>
         <h1>Cappadocia Airport Shuttle</h1>
-        <p className="lead">Book a <strong>€15 per person Cappadocia shuttle transfer</strong> between Kayseri or Nevsehir Airport and Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin. Private Vito and Sprinter transfers are available too.</p>
-        <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book your transfer</a><Link className="btn btn-secondary" href="/cappadocia-shuttle-transfer">Shuttle details</Link></div>
+        <p className="lead">Book a <strong>Cappadocia Airport Shuttle</strong> between Kayseri or Nevsehir Airport and Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin. Private Vito and Sprinter transfers are available too.</p>
+        <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book airport shuttle</a><Link className="btn btn-secondary" href="/cappadocia-shared-shuttle-vs-private-transfer">Shuttle vs private</Link></div>
         <div className="trust-row"><span>€15 from both airports</span><span>Airport meet & hotel transfer</span><span>Cash to driver</span></div>
       </div>
     </div></section>
@@ -88,8 +88,8 @@ export default function HomePage() {
     <section className="section"><div className="container">
       <div className="section-head"><div className="kicker">Airport hubs</div><h2>Choose the airport before the route</h2><p>Both airports use the same €15 shared-shuttle fare. Road distance, flight schedule and private vehicle price are different.</p></div>
       <div className="cards">
-        <Link href="/kayseri-airport-transfer" className="card card-link"><h3>Kayseri Airport Transfer (ASR)</h3><p>Route hub for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Vito €90 · Sprinter €110.</p></Link>
-        <Link href="/nevsehir-airport-transfer" className="card card-link"><h3>Nevsehir Airport Transfer (NAV)</h3><p>Shorter road access to many central towns. Vito €80 · Sprinter €90.</p></Link>
+        <Link href="/kayseri-airport-shuttle" className="card card-link"><h3>Kayseri Airport Shuttle (ASR)</h3><p>Route hub for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Vito €90 · Sprinter €110.</p></Link>
+        <Link href="/nevsehir-airport-shuttle" className="card card-link"><h3>Nevsehir Airport Shuttle (NAV)</h3><p>Shorter road access to many central towns. Vito €80 · Sprinter €90.</p></Link>
         <Link href="/kayseri-or-nevsehir-airport-for-cappadocia" className="card card-link"><h3>Kayseri or Nevsehir?</h3><p>Compare airport distance, flight convenience and transfer cost before choosing.</p></Link>
       </div>
     </div></section>
@@ -97,26 +97,26 @@ export default function HomePage() {
     <section className="section"><div className="container">
       <div className="section-head"><div className="kicker">Airport → hotel</div><h2>All Cappadocia arrival routes</h2><p>Each route includes airport-specific timing, hotel-access notes, local arrival ideas and return-planning guidance for that journey.</p></div>
       <div className="route-groups">
-        <div><h3>Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/kayseri-airport-to-${key}-transfer`}><strong>Kayseri Airport → {towns[key].name}</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span></Link>)}</div></div>
-        <div><h3>Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/nevsehir-airport-to-${key}-transfer`}><strong>Nevsehir Airport → {towns[key].name}</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span></Link>)}</div></div>
+        <div><h3>Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/kayseri-airport-to-${key}-shuttle`}><strong>Kayseri Airport → {towns[key].name}</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span><span>€15 shared shuttle · cash to driver</span></Link>)}</div></div>
+        <div><h3>Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/nevsehir-airport-to-${key}-shuttle`}><strong>Nevsehir Airport → {towns[key].name}</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span><span>€15 shared shuttle · cash to driver</span></Link>)}</div></div>
       </div>
     </div></section>
 
     <section className="section section-muted"><div className="container">
       <div className="section-head"><div className="kicker">Hotel → airport</div><h2>Return shuttle routes for the flight home</h2><p>Departure pages focus on pickup timing, hotel access, flight changes and what to do with spare time before leaving.</p></div>
       <div className="route-groups">
-        <div><h3>To Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-kayseri-airport-transfer`}><strong>{towns[key].name} → Kayseri Airport</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span></Link>)}</div></div>
-        <div><h3>To Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-nevsehir-airport-transfer`}><strong>{towns[key].name} → Nevsehir Airport</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span></Link>)}</div></div>
+        <div><h3>To Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-kayseri-airport-shuttle`}><strong>{towns[key].name} → Kayseri Airport</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span><span>€15 shared shuttle · cash to driver</span></Link>)}</div></div>
+        <div><h3>To Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-nevsehir-airport-shuttle`}><strong>{towns[key].name} → Nevsehir Airport</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span><span>€15 shared shuttle · cash to driver</span></Link>)}</div></div>
       </div>
     </div></section>
 
     <section className="section"><div className="container content-grid homepage-content-grid">
       <article className="prose">
-        <section className="content-section"><div className="kicker">Cappadocia shuttle first</div><h2>Why the €15 shuttle is our main airport service</h2><p>A <strong>Cappadocia shuttle transfer</strong> gives solo travelers, couples and small groups a pre-booked connection between the airport and hotel without paying for an entire private vehicle. The trade-off is that the run can include other booked passengers and hotel stops.</p><p>If your group wants a dedicated vehicle, compare the <Link href="/private-airport-transfer-cappadocia">private airport transfer</Link>. Vito carries up to 5 passengers and Sprinter up to 16, with airport-specific fixed prices.</p></section>
-        <section className="content-section"><h2>Hotel access matters in Cappadocia</h2><p>Goreme, Uchisar, Urgup, Ortahisar and Cavusin include historic cave or stone accommodation where the road to reception may be narrow or steep. Avanos is more spread out around the river. That is why the booking form asks for the full hotel name rather than only the town.</p><p>For cave accommodation details, use the <Link href="/cappadocia-cave-hotel-airport-transfer">Cappadocia cave hotel airport transfer guide</Link>. The individual town pages go further with local hotel names and pickup/drop-off guidance.</p></section>
+        <section className="content-section"><div className="kicker">Shared airport shuttle</div><h2>Why shared airport shuttle is the value option</h2><p>A shared airport shuttle gives solo travelers, couples and small groups a pre-booked connection between the airport and hotel without paying for an entire private vehicle. Travelers also search for this service as a Cappadocia shuttle transfer. Because it is shared, the run can include other booked passengers and hotel stops.</p><p>If your group wants a dedicated vehicle, compare the <Link href="/private-airport-transfer-cappadocia">private airport transfer</Link>. Vito carries up to 5 passengers and Sprinter up to 16, with airport-specific fixed prices.</p></section>
+        <section className="content-section"><h2>Hotel access matters in Cappadocia</h2><p>Goreme, Uchisar, Urgup, Ortahisar and Cavusin include historic cave or stone accommodation where the road to reception may be narrow or steep. Avanos is more spread out around the river. That is why the booking form asks for the full hotel name rather than only the town.</p><p>For cave accommodation details, use the <Link href="/cappadocia-cave-hotel-airport-transfer">Cappadocia cave hotel airport transfer guide</Link>. The individual airport-to-town route pages go further with route-specific pickup and drop-off guidance.</p></section>
         <section className="content-section"><h2>Coming from Istanbul?</h2><p>Most travelers fly from IST or SAW to ASR or NAV rather than taking an airport shuttle all the way from Istanbul. The <Link href="/istanbul-to-cappadocia">Istanbul to Cappadocia guide</Link> explains how the flight and final airport shuttle fit together.</p></section>
       </article>
-      <aside className="summary-box guide-box"><h3>Useful planning guides</h3><Link href="/cappadocia-airport">Cappadocia Airport: NAV & ASR</Link><Link href="/nearest-airport-to-cappadocia">Nearest Airport to Cappadocia</Link><Link href="/cappadocia-airport-code">Cappadocia Airport Codes: NAV & ASR</Link><Link href="/cappadocia-shared-shuttle-vs-private-transfer">Shuttle vs Private Transfer</Link><Link href="/airport-transfer-prices">Airport Transfer Prices</Link><Link href="/cappadocia-airport-transfer-travel-times">Transfer Times & Distances</Link><Link href="/cappadocia-cave-hotel-airport-transfer">Cave Hotel Transfer Guide</Link><Link href="/cappadocia-to-istanbul">Cappadocia to Istanbul</Link></aside>
+      <aside className="summary-box guide-box"><h3>Useful planning guides</h3><Link href="/cappadocia-airport">Cappadocia Airport: NAV & ASR</Link><Link href="/nearest-airport-to-cappadocia">Nearest Airport to Cappadocia</Link><Link href="/cappadocia-shared-shuttle-vs-private-transfer">Shuttle vs Private Transfer</Link><Link href="/airport-transfer-prices">Airport Transfer Prices</Link><Link href="/cappadocia-cave-hotel-airport-transfer">Cave Hotel Transfer Guide</Link><Link href="/cappadocia-to-istanbul">Cappadocia to Istanbul</Link></aside>
     </div></section>
 
     <section className="section section-muted"><div className="container"><div className="section-head"><div className="kicker">FAQ</div><h2>Cappadocia airport shuttle questions</h2></div><div className="faq faq-wide">{homeFaq.map(([q,a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
