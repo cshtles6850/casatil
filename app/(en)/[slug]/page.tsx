@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BookingForm } from '@/components/BookingForm';
+import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
+import { QuickFacts } from '@/components/QuickFacts';
 import { JsonLd } from '@/components/JsonLd';
 import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
@@ -39,21 +41,21 @@ function RouteQuickFacts({ page }: { page: SeoPage }) {
   const t = towns[page.route.town];
   const distance = page.route.airport === 'kayseri' ? t.distanceKayseri : t.distanceNevsehir;
   const time = page.route.airport === 'kayseri' ? t.timeKayseri : t.timeNevsehir;
-  return <div className="route-quick-facts" aria-label="Route quick facts">
-    <div className="route-fact-card"><span>Distance</span><strong>{distance}</strong></div>
-    <div className="route-fact-card"><span>Travel Time</span><strong>{time}</strong></div>
-    <div className="route-fact-card"><span>Price</span><strong>€15 / person</strong></div>
-  </div>;
+  return <QuickFacts
+    ariaLabel="Route quick facts"
+    items={[
+      { label: 'Distance', value: distance },
+      { label: 'Travel Time', value: time },
+      { label: 'Price', value: '€15 / person' },
+    ]}
+  />;
 }
 
-function BookingInfoChecklist() {
-  const items = ['Passenger name', 'Passport number', 'Flight number', 'Full accommodation name'];
-  return <section className="content-section booking-info-section">
-    <h2>Booking details to have ready</h2>
-    <div className="booking-info-list">
-      {items.map((item) => <div className="booking-info-chip" key={item}><span aria-hidden="true">✓</span><strong>{item}</strong></div>)}
-    </div>
-  </section>;
+function RouteBookingInfoChecklist() {
+  return <BookingInfoChecklist
+    heading="Booking details to have ready"
+    items={['Passenger name', 'Passport number', 'Flight number', 'Full accommodation name']}
+  />;
 }
 
 function bookingDefaults(page: SeoPage) {
@@ -93,7 +95,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
       <article className={page.route ? 'prose route-prose' : 'prose'}>
         {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
 
-        {page.route && <BookingInfoChecklist />}
+        {page.route && <RouteBookingInfoChecklist />}
 
         <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
           {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}

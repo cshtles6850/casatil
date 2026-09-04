@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BookingFormZh } from '@/components/BookingFormZh';
+import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
+import { QuickFacts } from '@/components/QuickFacts';
 import { JsonLd } from '@/components/JsonLd';
 import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
@@ -49,21 +51,21 @@ function RouteQuickFactsZh({ page }: { page: ZhSeoPage }) {
   const t = towns[page.route.town];
   const distance = page.route.airport === 'kayseri' ? t.distanceKayseri : t.distanceNevsehir;
   const time = page.route.airport === 'kayseri' ? t.timeKayseri : t.timeNevsehir;
-  return <div className="route-quick-facts" aria-label="路线快速信息">
-    <div className="route-fact-card"><span>距离</span><strong>{distance}</strong></div>
-    <div className="route-fact-card"><span>参考车程</span><strong>{time}</strong></div>
-    <div className="route-fact-card"><span>价格</span><strong>€15 / 人</strong></div>
-  </div>;
+  return <QuickFacts
+    ariaLabel="路线快速信息"
+    items={[
+      { label: '距离', value: distance },
+      { label: '参考车程', value: time },
+      { label: '价格', value: '€15 / 人' },
+    ]}
+  />;
 }
 
-function BookingInfoChecklistZh() {
-  const items = ['乘客姓名', '护照号码', '航班号', '完整住宿名称'];
-  return <section className="content-section booking-info-section">
-    <h2>预订前请准备</h2>
-    <div className="booking-info-list">
-      {items.map((item) => <div className="booking-info-chip" key={item}><span aria-hidden="true">✓</span><strong>{item}</strong></div>)}
-    </div>
-  </section>;
+function RouteBookingInfoChecklistZh() {
+  return <BookingInfoChecklist
+    heading="预订前请准备"
+    items={['乘客姓名', '护照号码', '航班号', '完整住宿名称']}
+  />;
 }
 
 function bookingDefaults(page: ZhSeoPage) {
@@ -103,7 +105,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
       <article className={page.route ? 'prose route-prose' : 'prose'}>
         {page.sections.map((section)=><section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>)}
 
-        {page.route && <BookingInfoChecklistZh />}
+        {page.route && <RouteBookingInfoChecklistZh />}
 
         <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
         <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>

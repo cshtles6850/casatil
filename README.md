@@ -1,14 +1,32 @@
-# Cappadocia Airport Shuttle
+# Cappadocia Airport Shuttle — Production Source
 
-Production source for `cappadociaairportshuttle.com`.
+This repository contains production website source only.
 
-Public locales:
-- English `/`
-- Simplified Chinese `/zh-cn/`
+## Reusable information components
 
-Deployment: Vercel + Next.js.
+`QuickFacts` and `BookingInfoChecklist` are reusable presentation components. They are not route-only components, but they must never be placed automatically on every page.
 
-## Email delivery
-Booking requests and Contact Us messages use Resend. Configure the variables shown in `.env.example` in Vercel before production deployment. `RESEND_FROM` must use a sender/domain accepted by your Resend account.
+### QuickFacts placement policy
 
-Keep real secrets only in Vercel environment variables. Never commit `.env` or `.env.local`.
+Current route pages may use `QuickFacts` for route-specific Distance / Travel Time / Price data.
+
+Do **not** treat the following multi-route / multi-direction hub pages as QuickFacts candidates, because a single distance or travel-time value would be misleading:
+
+- `/goreme-airport-transfer`
+- `/kayseri-airport-shuttle`
+- `/nevsehir-airport-shuttle`
+
+The only current hub-type QuickFacts candidate is:
+
+- `/airport-transfer-prices` — only as a price-oriented grid; do not present one shared distance/travel-time value for this page.
+
+No hub or non-route page should receive `QuickFacts` or `BookingInfoChecklist` without explicit page-by-page approval.
+
+## Deployment
+
+Install dependencies and run a full production build before deployment:
+
+```bash
+npm install
+npm run build
+```
