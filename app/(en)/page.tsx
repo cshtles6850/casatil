@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BookingForm } from '@/components/BookingForm';
 import { JsonLd } from '@/components/JsonLd';
+import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { SITE, towns } from '@/lib/site';
 
 
@@ -44,7 +45,7 @@ export default function HomePage() {
   };
   const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q,a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 
-  return <main>
+  return <main className="has-booking-cta">
     <JsonLd data={serviceSchema} /><JsonLd data={faqSchema} />
 
     <section className="home-hero"><div className="container hero-grid">
@@ -54,6 +55,7 @@ export default function HomePage() {
       <div className="hero-copy">
         <span className="eyebrow">Kayseri ASR · Nevsehir NAV</span>
         <h1>Cappadocia Airport Shuttle</h1>
+        <p className="hero-price-highlight">From €15 per person</p>
         <p className="lead">Book a <strong>Cappadocia Airport Shuttle</strong> between Kayseri or Nevsehir Airport and Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin. Private Vito and Sprinter transfers are available too.</p>
         <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book airport shuttle</a><Link className="btn btn-secondary" href="/cappadocia-shared-shuttle-vs-private-transfer">Shuttle vs private</Link></div>
         <div className="trust-row"><span>€15 from both airports</span><span>Airport meet & hotel transfer</span><span>Cash to driver</span></div>
@@ -120,5 +122,6 @@ export default function HomePage() {
     </div></section>
 
     <section className="section section-muted"><div className="container"><div className="section-head"><div className="kicker">FAQ</div><h2>Cappadocia airport shuttle questions</h2></div><div className="faq faq-wide">{homeFaq.map(([q,a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
+    <MobileBookingCta priceLabel="€15 / person" bookLabel="Book Now" ariaLabel="Quick booking" />
   </main>;
 }

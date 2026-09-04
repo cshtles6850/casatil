@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { FloatingWhatsApp } from './FloatingWhatsApp';
 
 const whatsappMessage = encodeURIComponent('Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.');
 
@@ -42,7 +43,7 @@ export function Footer() {
           <span>{SITE.company} · TURSAB No: {SITE.tursab}</span>
         </div>
       </div>
-      <a className="floating-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer" aria-label="Contact Cappadocia Airport Shuttle on WhatsApp"><WhatsAppIcon size={27} /><span>WhatsApp</span></a>
+      <FloatingWhatsApp href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} ariaLabel="Contact Cappadocia Airport Shuttle on WhatsApp" />
     </footer>
   );
 }

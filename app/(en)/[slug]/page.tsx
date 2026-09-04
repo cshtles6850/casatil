@@ -5,9 +5,11 @@ import { BookingForm } from '@/components/BookingForm';
 import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
 import { QuickFacts } from '@/components/QuickFacts';
 import { JsonLd } from '@/components/JsonLd';
+import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { pageBySlug, pages, prettySlug, type SeoPage } from '@/lib/content';
+import { pageHasBookingForm } from '@/lib/booking-visibility';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return pages.map((page) => ({ slug: page.slug })); }
@@ -80,18 +82,20 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
     ] : undefined,
   };
   const defaults = bookingDefaults(page);
+  const hasBookingForm = pageHasBookingForm(page.slug, Boolean(page.route));
+  const mainClassName = [page.route ? 'route-page' : '', hasBookingForm ? 'has-booking-cta' : ''].filter(Boolean).join(' ') || undefined;
 
-  return <main className={page.route ? 'route-page' : undefined}>
+  return <main className={mainClassName}>
     <JsonLd data={faqSchema} /><JsonLd data={breadcrumb} /><JsonLd data={service} />
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
       <RouteQuickFacts page={page} />
-      <div className="hero-actions"><a className="btn btn-primary" href="#booking">{page.route ? 'Book this shuttle' : 'Book airport service'}</a><Link className="btn btn-secondary" href="/">Airport shuttle</Link></div>
+      <div className="hero-actions"><a className="btn btn-primary" href={hasBookingForm ? '#booking' : '/#booking'}>{page.route ? 'Book this shuttle' : 'Book airport service'}</a><Link className="btn btn-secondary" href="/">Airport shuttle</Link></div>
       <div className="trust-row"><span>WhatsApp confirmation</span><span>One way or round trip</span><span>Cash to driver</span></div>
     </div></section>
 
-    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : 'container content-grid'}>
+    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : hasBookingForm ? 'container content-grid' : 'container guide-content-wrap'}>
       <article className={page.route ? 'prose route-prose' : 'prose'}>
         {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
 
@@ -106,9 +110,9 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
         {page.route && <section className="route-booking-section" id="booking"><BookingForm {...defaults} /></section>}
       </article>
 
-      {!page.route && <aside className="sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>}
+      {!page.route && hasBookingForm && <aside className="sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>}
     </div></section>
 
-    {page.route && <div className="mobile-route-cta" role="region" aria-label="Quick booking"><span className="mobile-route-price">€15 / person</span><a className="mobile-route-book" href="#booking">Book Now</a></div>}
+    {hasBookingForm && <MobileBookingCta priceLabel="€15 / person" bookLabel="Book Now" ariaLabel="Quick booking" />}
   </main>;
 }

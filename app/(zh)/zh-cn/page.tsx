@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BookingFormZh } from '@/components/BookingFormZh';
 import { JsonLd } from '@/components/JsonLd';
+import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { SITE, towns } from '@/lib/site';
 import { zhTownNames } from '@/lib/content-zh';
 
@@ -44,7 +45,7 @@ export default function ChineseHomePage() {
   };
   const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:homeFaq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
 
-  return <main lang="zh-CN">
+  return <main lang="zh-CN" className="has-booking-cta">
     <JsonLd data={serviceSchema}/><JsonLd data={faqSchema}/>
 
     <section className="home-hero"><div className="container hero-grid">
@@ -52,6 +53,7 @@ export default function ChineseHomePage() {
       <div className="hero-copy">
         <span className="eyebrow">开塞利 ASR · 内夫谢希尔 NAV</span>
         <h1>卡帕多奇亚机场接送</h1>
+        <p className="hero-price-highlight">每人 €15 起</p>
         <p className="lead">预订 <strong>€15/人的卡帕多奇亚机场拼车</strong>，连接开塞利或内夫谢希尔机场与格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛。也可选择私人 Mercedes Vito 或 Sprinter。</p>
         <div className="hero-actions"><a className="btn btn-primary" href="#booking">预订机场接送</a><Link className="btn btn-secondary" href="/zh-cn/cappadocia-shared-shuttle-vs-private-transfer">拼车还是私人接送</Link></div>
         <div className="trust-row"><span>两座机场拼车均 €15</span><span>机场接机与酒店接送</span><span>现金支付给司机</span></div>
@@ -127,5 +129,6 @@ export default function ChineseHomePage() {
     </div></section>
 
     <section className="section"><div className="container"><div className="section-head"><div className="kicker">常见问题</div><h2>预订前常见问题</h2></div><div className="faq">{homeFaq.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
+    <MobileBookingCta priceLabel="€15 / 人" bookLabel="立即预订" ariaLabel="快速预订" />
   </main>;
 }

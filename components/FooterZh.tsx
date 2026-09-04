@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { FloatingWhatsApp } from './FloatingWhatsApp';
 
 const whatsappMessage = encodeURIComponent('您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。');
 
@@ -42,7 +43,7 @@ export function FooterZh() {
           <span>{SITE.company} · TURSAB No: {SITE.tursab}</span>
         </div>
       </div>
-      <a className="floating-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer" aria-label="通过 WhatsApp 联系卡帕多奇亚机场接送"><WhatsAppIcon size={27} /><span>WhatsApp</span></a>
+      <FloatingWhatsApp href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} ariaLabel="通过 WhatsApp 联系卡帕多奇亚机场接送" />
     </footer>
   );
 }

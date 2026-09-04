@@ -30,3 +30,9 @@ Install dependencies and run a full production build before deployment:
 npm install
 npm run build
 ```
+
+## Floating WhatsApp UI policy
+- The floating WhatsApp control uses one pill component on desktop and mobile: icon + “WhatsApp” in a single horizontal row.
+- Base brand color is the official WhatsApp green `#25D366`.
+- On route pages, mobile placement stays above the sticky price / Book Now bar.
+- A collision guard temporarily fades the floating pill only while it would cover route CTAs, Quick Facts, booking checklist, route headings/text, related cards, FAQ, or the booking form. It reappears automatically when the viewport has a safe slot.

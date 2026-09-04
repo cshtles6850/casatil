@@ -5,9 +5,11 @@ import { BookingFormZh } from '@/components/BookingFormZh';
 import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
 import { QuickFacts } from '@/components/QuickFacts';
 import { JsonLd } from '@/components/JsonLd';
+import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { zhPageBySlug, zhPages, zhPrettySlug, zhTownNames, type ZhSeoPage } from '@/lib/content-zh';
+import { pageHasBookingForm } from '@/lib/booking-visibility';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return zhPages.map((page) => ({ slug: page.slug })); }
@@ -90,18 +92,20 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
     ]:undefined,
   };
   const defaults=bookingDefaults(page);
+  const hasBookingForm = pageHasBookingForm(page.slug, Boolean(page.route));
+  const mainClassName = [page.route ? 'route-page' : '', hasBookingForm ? 'has-booking-cta' : ''].filter(Boolean).join(' ') || undefined;
 
-  return <main lang="zh-CN" className={page.route ? 'route-page' : undefined}>
+  return <main lang="zh-CN" className={mainClassName}>
     <JsonLd data={faqSchema}/><JsonLd data={breadcrumb}/><JsonLd data={service}/>
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/zh-cn">首页</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
       <RouteQuickFactsZh page={page} />
-      <div className="hero-actions"><a className="btn btn-primary" href="#booking">{page.route ? '预订机场班车' : '预订机场接送'}</a><Link className="btn btn-secondary" href="/zh-cn">机场班车首页</Link></div>
+      <div className="hero-actions"><a className="btn btn-primary" href={hasBookingForm ? '#booking' : '/zh-cn#booking'}>{page.route ? '预订机场班车' : '预订机场接送'}</a><Link className="btn btn-secondary" href="/zh-cn">机场班车首页</Link></div>
       <div className="trust-row"><span>WhatsApp 确认</span><span>单程或往返</span><span>现金支付给司机</span></div>
     </div></section>
 
-    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : 'container content-grid'}>
+    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : hasBookingForm ? 'container content-grid' : 'container guide-content-wrap'}>
       <article className={page.route ? 'prose route-prose' : 'prose'}>
         {page.sections.map((section)=><section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>)}
 
@@ -112,9 +116,9 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
 
         {page.route && <section className="route-booking-section" id="booking"><BookingFormZh {...defaults}/></section>}
       </article>
-      {!page.route && <aside className="sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>}
+      {!page.route && hasBookingForm && <aside className="sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>}
     </div></section>
 
-    {page.route && <div className="mobile-route-cta" role="region" aria-label="快速预订"><span className="mobile-route-price">€15 / 人</span><a className="mobile-route-book" href="#booking">立即预订</a></div>}
+    {hasBookingForm && <MobileBookingCta priceLabel="€15 / 人" bookLabel="立即预订" ariaLabel="快速预订" />}
   </main>;
 }
