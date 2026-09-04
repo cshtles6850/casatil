@@ -31,23 +31,35 @@ function RouteSummary({ page }: { page: SeoPage }) {
       <div className="summary-line"><span>Payment</span><strong>Cash to driver</strong></div>
     </div>;
   }
-  const a = airports[page.route.airport]; const t = towns[page.route.town];
+  return null;
+}
+
+function RouteQuickFacts({ page }: { page: SeoPage }) {
+  if (!page.route) return null;
+  const t = towns[page.route.town];
   const distance = page.route.airport === 'kayseri' ? t.distanceKayseri : t.distanceNevsehir;
   const time = page.route.airport === 'kayseri' ? t.timeKayseri : t.timeNevsehir;
-  const from = page.route.direction === 'arrival' ? `${a.name} (${a.code})` : t.name;
-  const to = page.route.direction === 'arrival' ? t.name : `${a.name} (${a.code})`;
-  return <div className="summary-box"><h3>Route at a glance</h3>
-    <div className="summary-line"><span>From</span><strong>{from}</strong></div><div className="summary-line"><span>To</span><strong>{to}</strong></div>
-    <div className="summary-line"><span>Distance</span><strong>{distance}</strong></div><div className="summary-line"><span>Road estimate</span><strong>{time}</strong></div>
-    <div className="summary-line"><span>Shuttle</span><strong>€15 / person</strong></div><div className="summary-line"><span>Vito · max 5</span><strong>€{a.vito}</strong></div><div className="summary-line"><span>Sprinter · max 16</span><strong>€{a.sprinter}</strong></div>
-    <div className="summary-line"><span>Payment</span><strong>Cash to driver</strong></div>
+  return <div className="route-quick-facts" aria-label="Route quick facts">
+    <div className="route-fact-card"><span>Distance</span><strong>{distance}</strong></div>
+    <div className="route-fact-card"><span>Travel Time</span><strong>{time}</strong></div>
+    <div className="route-fact-card"><span>Price</span><strong>€15 / person</strong></div>
   </div>;
+}
+
+function BookingInfoChecklist() {
+  const items = ['Passenger name', 'Passport number', 'Flight number', 'Full accommodation name'];
+  return <section className="content-section booking-info-section">
+    <h2>Booking details to have ready</h2>
+    <div className="booking-info-list">
+      {items.map((item) => <div className="booking-info-chip" key={item}><span aria-hidden="true">✓</span><strong>{item}</strong></div>)}
+    </div>
+  </section>;
 }
 
 function bookingDefaults(page: SeoPage) {
   if (page.route) return { initialAirport: page.route.airport, initialDirection: page.route.direction === 'arrival' ? 'airport-hotel' as const : 'hotel-airport' as const, initialTown: towns[page.route.town].name };
   const initialAirport = page.slug.includes('nevsehir') ? 'nevsehir' as const : 'kayseri' as const;
-  const townKey = (Object.keys(towns) as (keyof typeof towns)[]).find((key) => page.slug === `${key}-airport-transfer`);
+  const townKey = (Object.keys(towns) as (keyof typeof towns)[]).find((key) => page.slug === `${String(key)}-airport-transfer`);
   return { initialAirport, initialDirection: page.slug.startsWith('cappadocia-to-') ? 'hotel-airport' as const : 'airport-hotel' as const, initialTown: townKey ? towns[townKey].name : '' };
 }
 
@@ -67,27 +79,34 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
   };
   const defaults = bookingDefaults(page);
 
-  return <main>
+  return <main className={page.route ? 'route-page' : undefined}>
     <JsonLd data={faqSchema} /><JsonLd data={breadcrumb} /><JsonLd data={service} />
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
+      <RouteQuickFacts page={page} />
       <div className="hero-actions"><a className="btn btn-primary" href="#booking">{page.route ? 'Book this shuttle' : 'Book airport service'}</a><Link className="btn btn-secondary" href="/">Airport shuttle</Link></div>
       <div className="trust-row"><span>WhatsApp confirmation</span><span>One way or round trip</span><span>Cash to driver</span></div>
     </div></section>
 
-    <section className="section page-content-section"><div className="container content-grid">
-      <article className="prose">
+    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : 'container content-grid'}>
+      <article className={page.route ? 'prose route-prose' : 'prose'}>
         {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
+
+        {page.route && <BookingInfoChecklist />}
 
         <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
           {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}
         </div></section>
 
         <section className="content-section"><h2>Frequently asked questions</h2><div className="faq">{page.faq.map((item) => <details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>
+
+        {page.route && <section className="route-booking-section" id="booking"><BookingForm {...defaults} /></section>}
       </article>
 
-      <aside className="sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>
+      {!page.route && <aside className="sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>}
     </div></section>
+
+    {page.route && <div className="mobile-route-cta" role="region" aria-label="Quick booking"><span className="mobile-route-price">€15 / person</span><a className="mobile-route-book" href="#booking">Book Now</a></div>}
   </main>;
 }

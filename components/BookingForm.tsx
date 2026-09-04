@@ -330,6 +330,7 @@ export function BookingForm({
           </>}
         </div>
       </form>
+      <div className="booking-agency-trust">Operated by <strong>Ekwo Travel &amp; Outdoor Travel Agency</strong> · TURSAB No: 7896</div>
     </div>
   );
 }

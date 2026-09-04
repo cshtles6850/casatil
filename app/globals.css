@@ -8,8 +8,8 @@
   --paper: #fcfdff;
   --white: #fff;
   --line: #dfe4f2;
-  --wa: #25d366;
-  --wa-bright: #25d366;
+  --wa: #25D366;
+  --wa-bright: #25D366;
   --shadow: 0 18px 50px rgba(21,55,59,.09);
   --radius: 20px;
   --max: 1180px;
@@ -174,7 +174,7 @@ p { margin-top: 0; }
 .footer a { display: block; margin: 7px 0; color: #d8e8e5; font-size: .85rem; }
 .footer-email { overflow-wrap: anywhere; }
 .footer-whatsapp { display: inline-flex !important; align-items: center; gap: 8px; margin-top: 13px !important; padding: 10px 13px; border-radius: 999px; background: var(--wa); color: #fff !important; font-weight: 850; }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); color: #9fbebb; font-size: .73rem; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); color: #9fbebb; font-size: .82rem; }
 .floating-whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 80; display: inline-flex; align-items: center; gap: 8px; padding: 12px 15px; border-radius: 999px; background: var(--wa-bright); color: #fff; font-weight: 900; box-shadow: 0 14px 35px rgba(0,0,0,.2); }
 
 @media (max-width: 1030px) {
@@ -261,3 +261,160 @@ p { margin-top: 0; }
 .contact-method a { display:inline-flex; align-items:center; gap:7px; color:var(--sea-dark); font-weight:800; overflow-wrap:anywhere; }
 .form-status-error { color:#a13d3d; }
 @media (max-width:820px) { .contact-grid { grid-template-columns:1fr; } }
+
+/* Route-page conversion layout */
+.route-content-wrap { width: min(920px, calc(100% - 36px)); margin-inline: auto; }
+.route-prose { width: 100%; min-width: 0; }
+.route-quick-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 18px;
+}
+.route-fact-card {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid #a9d1ca;
+  border-radius: 16px;
+  background: #edf7f5;
+  box-shadow: 0 8px 24px rgba(21,56,59,.055);
+}
+.route-fact-card span {
+  color: #456864;
+  font-size: .75rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.route-fact-card strong {
+  color: #15383b;
+  font-size: 1.03rem;
+  line-height: 1.25;
+}
+.booking-info-section { margin-top: 4px; }
+.booking-info-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.booking-info-chip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 13px;
+  border: 1px solid #c7ddd9;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font-size: .88rem;
+}
+.booking-info-chip > span {
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e3f3ef;
+  color: #128c7e;
+  font-weight: 950;
+}
+.route-booking-section {
+  scroll-margin-top: 88px;
+  margin: 12px auto 0;
+  padding-top: 8px;
+  max-width: 760px;
+}
+.route-booking-section .booking-card { max-width: 760px; margin-inline: auto; }
+.mobile-route-cta { display: none; }
+
+/* WhatsApp brand green with pill-style desktop floating button */
+.floating-whatsapp,
+.footer-whatsapp { background: var(--wa); }
+.floating-whatsapp:hover,
+.footer-whatsapp:hover { background: #20bd5a; }
+@media (min-width: 821px) {
+  .floating-whatsapp {
+    min-height: 54px;
+    padding: 12px 18px;
+    gap: 9px;
+    border-radius: 999px;
+    font-size: 1rem;
+    letter-spacing: -.01em;
+    box-shadow: 0 12px 28px rgba(37,211,102,.28);
+  }
+}
+
+/* Agency trust line used below booking forms */
+.booking-agency-trust {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: .8rem;
+  font-weight: 700;
+}
+.booking-agency-trust strong { color: var(--ink); }
+
+@media (max-width: 820px) {
+  .route-content-wrap { width: min(var(--max), calc(100% - 28px)); }
+  .route-page { padding-bottom: 86px; }
+  .route-page + .footer { padding-bottom: 150px; }
+  .mobile-route-cta {
+    position: fixed;
+    left: 11px;
+    right: 11px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 84;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 62px;
+    padding: 8px 9px 8px 17px;
+    border: 1px solid #b8d3ce;
+    border-radius: 999px;
+    background: rgba(255,255,255,.97);
+    box-shadow: 0 12px 34px rgba(14,48,50,.18);
+    backdrop-filter: blur(12px);
+  }
+  .mobile-route-price {
+    color: #15383b;
+    font-size: .98rem;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+  .mobile-route-book {
+    display: inline-flex;
+    min-width: 122px;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--sea-dark);
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 900;
+    box-shadow: 0 8px 20px rgba(70,85,164,.2);
+  }
+  .route-page + .footer .floating-whatsapp {
+    right: 14px;
+    bottom: calc(102px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 560px) {
+  .route-content-wrap { width: calc(100% - 22px); }
+  .route-quick-facts { grid-template-columns: 1fr; gap: 8px; margin-top: 17px; }
+  .route-fact-card { padding: 11px 13px; border-radius: 14px; }
+  .route-fact-card strong { font-size: .98rem; }
+  .booking-info-list { grid-template-columns: 1fr; gap: 8px; }
+  .mobile-route-cta { left: 10px; right: 10px; }
+  .mobile-route-book { min-width: 116px; }
+}
+
+@media (max-width: 820px) {
+  .route-quick-facts { grid-template-columns: 1fr; gap: 8px; }
+}

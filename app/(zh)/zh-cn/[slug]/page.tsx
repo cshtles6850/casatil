@@ -41,24 +41,35 @@ function RouteSummaryZh({ page }: { page: ZhSeoPage }) {
       <div className="summary-line"><span>付款</span><strong>现金支付给司机</strong></div>
     </div>;
   }
-  const a=airports[page.route.airport]; const t=towns[page.route.town]; const town=zhTownNames[page.route.town];
-  const distance=page.route.airport==='kayseri'?t.distanceKayseri:t.distanceNevsehir;
-  const time=page.route.airport==='kayseri'?t.timeKayseri:t.timeNevsehir;
-  const airportName=page.route.airport==='kayseri'?'开塞利机场 (ASR)':'内夫谢希尔机场 (NAV)';
-  const from=page.route.direction==='arrival'?airportName:town;
-  const to=page.route.direction==='arrival'?town:airportName;
-  return <div className="summary-box"><h3>路线一览</h3>
-    <div className="summary-line"><span>出发</span><strong>{from}</strong></div><div className="summary-line"><span>到达</span><strong>{to}</strong></div>
-    <div className="summary-line"><span>距离</span><strong>{distance}</strong></div><div className="summary-line"><span>参考车程</span><strong>{time}</strong></div>
-    <div className="summary-line"><span>拼车</span><strong>€15 / 人</strong></div><div className="summary-line"><span>Vito · 最多5人</span><strong>€{a.vito}</strong></div><div className="summary-line"><span>Sprinter · 最多16人</span><strong>€{a.sprinter}</strong></div>
-    <div className="summary-line"><span>付款</span><strong>现金支付给司机</strong></div>
+  return null;
+}
+
+function RouteQuickFactsZh({ page }: { page: ZhSeoPage }) {
+  if (!page.route) return null;
+  const t = towns[page.route.town];
+  const distance = page.route.airport === 'kayseri' ? t.distanceKayseri : t.distanceNevsehir;
+  const time = page.route.airport === 'kayseri' ? t.timeKayseri : t.timeNevsehir;
+  return <div className="route-quick-facts" aria-label="路线快速信息">
+    <div className="route-fact-card"><span>距离</span><strong>{distance}</strong></div>
+    <div className="route-fact-card"><span>参考车程</span><strong>{time}</strong></div>
+    <div className="route-fact-card"><span>价格</span><strong>€15 / 人</strong></div>
   </div>;
+}
+
+function BookingInfoChecklistZh() {
+  const items = ['乘客姓名', '护照号码', '航班号', '完整住宿名称'];
+  return <section className="content-section booking-info-section">
+    <h2>预订前请准备</h2>
+    <div className="booking-info-list">
+      {items.map((item) => <div className="booking-info-chip" key={item}><span aria-hidden="true">✓</span><strong>{item}</strong></div>)}
+    </div>
+  </section>;
 }
 
 function bookingDefaults(page: ZhSeoPage) {
   if (page.route) return { initialAirport: page.route.airport, initialDirection: page.route.direction === 'arrival' ? 'airport-hotel' as const : 'hotel-airport' as const, initialTown: zhTownNames[page.route.town] };
   const initialAirport = page.slug.includes('nevsehir') ? 'nevsehir' as const : 'kayseri' as const;
-  const townKey = (Object.keys(towns) as (keyof typeof towns)[]).find((key) => page.slug === `${key}-airport-transfer`);
+  const townKey = (Object.keys(towns) as (keyof typeof towns)[]).find((key) => page.slug === `${String(key)}-airport-transfer`);
   return { initialAirport, initialDirection: page.slug.startsWith('cappadocia-to-') ? 'hotel-airport' as const : 'airport-hotel' as const, initialTown: townKey ? zhTownNames[townKey] : '' };
 }
 
@@ -78,22 +89,30 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
   };
   const defaults=bookingDefaults(page);
 
-  return <main lang="zh-CN">
+  return <main lang="zh-CN" className={page.route ? 'route-page' : undefined}>
     <JsonLd data={faqSchema}/><JsonLd data={breadcrumb}/><JsonLd data={service}/>
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/zh-cn">首页</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
+      <RouteQuickFactsZh page={page} />
       <div className="hero-actions"><a className="btn btn-primary" href="#booking">{page.route ? '预订机场班车' : '预订机场接送'}</a><Link className="btn btn-secondary" href="/zh-cn">机场班车首页</Link></div>
       <div className="trust-row"><span>WhatsApp 确认</span><span>单程或往返</span><span>现金支付给司机</span></div>
     </div></section>
 
-    <section className="section page-content-section"><div className="container content-grid">
-      <article className="prose">
+    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : 'container content-grid'}>
+      <article className={page.route ? 'prose route-prose' : 'prose'}>
         {page.sections.map((section)=><section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>)}
+
+        {page.route && <BookingInfoChecklistZh />}
+
         <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
         <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>
+
+        {page.route && <section className="route-booking-section" id="booking"><BookingFormZh {...defaults}/></section>}
       </article>
-      <aside className="sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>
+      {!page.route && <aside className="sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>}
     </div></section>
+
+    {page.route && <div className="mobile-route-cta" role="region" aria-label="快速预订"><span className="mobile-route-price">€15 / 人</span><a className="mobile-route-book" href="#booking">立即预订</a></div>}
   </main>;
 }

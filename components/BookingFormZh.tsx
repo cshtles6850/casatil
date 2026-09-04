@@ -320,6 +320,7 @@ export function BookingFormZh({
           </>}
         </div>
       </form>
+      <div className="booking-agency-trust">由 <strong>Ekwo Travel &amp; Outdoor Travel Agency</strong> 运营 · TURSAB No: 7896</div>
     </div>
   );
 }
