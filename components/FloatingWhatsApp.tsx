@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 type Props = {
@@ -8,25 +8,10 @@ type Props = {
   ariaLabel: string;
 };
 
-const SAFE_GAP = 14;
-const PROTECTED_SELECTORS = [
-  '.breadcrumb',
-  '.eyebrow',
-  '.route-page h1',
-  '.lead',
-  '.quick-facts',
-  '.hero-actions',
-  '.trust-row',
-  '.booking-info-list',
-  '.route-prose h2',
-  '.route-prose p',
-  '.related-grid',
-  '.faq',
-  '.booking-card',
-];
-
 export function FloatingWhatsApp({ href, ariaLabel }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const expandedWidthRef = useRef(0);
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     const button = ref.current;
@@ -34,87 +19,63 @@ export function FloatingWhatsApp({ href, ariaLabel }: Props) {
 
     let frame = 0;
 
-    const updateSafePosition = () => {
+    const update = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const hasStickyBookingCta = Boolean(document.querySelector('.mobile-booking-cta'));
-        const isMobile = window.matchMedia('(max-width: 820px)').matches;
-        const baseBottom = hasStickyBookingCta && isMobile ? 88 : isMobile ? 16 : 24;
+        const bookingForm = document.querySelector<HTMLElement>('#booking .booking-card');
 
-        button.style.setProperty('--wa-safe-bottom', `${baseBottom}px`);
-        button.style.setProperty('--wa-collision-lift', '0px');
-        button.dataset.collision = 'false';
-
-        const buttonRect = button.getBoundingClientRect();
-        const height = buttonRect.height;
-        const left = buttonRect.left;
-        const right = buttonRect.right;
-
-        const headerBottom = document.querySelector<HTMLElement>('.site-header')?.getBoundingClientRect().bottom ?? 0;
-        const stickyTop = hasStickyBookingCta && isMobile
-          ? document.querySelector<HTMLElement>('.mobile-booking-cta')?.getBoundingClientRect().top ?? window.innerHeight
-          : window.innerHeight;
-
-        const minTop = Math.max(12, headerBottom + SAFE_GAP);
-        const baseTop = window.innerHeight - baseBottom - height;
-        const maxTop = Math.min(baseTop, stickyTop - SAFE_GAP - height);
-
-        const blocked: DOMRect[] = [];
-        for (const selector of PROTECTED_SELECTORS) {
-          document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
-            const horizontalOverlap = left < rect.right && right > rect.left;
-            if (horizontalOverlap) blocked.push(rect);
-          });
-        }
-
-        let top = maxTop;
-        let attempts = 0;
-        while (attempts < 24) {
-          const collision = blocked.find((rect) =>
-            top < rect.bottom + SAFE_GAP && top + height > rect.top - SAFE_GAP
-          );
-          if (!collision) break;
-          top = collision.top - SAFE_GAP - height;
-          attempts += 1;
-        }
-
-        if (top < minTop) {
-          // A narrow viewport can occasionally have no genuine free slot.
-          // Protect the page content rather than covering a CTA or text.
-          button.dataset.collision = 'true';
+        if (!bookingForm) {
+          setCollapsed(false);
           return;
         }
 
-        const requiredBottom = window.innerHeight - top - height;
-        button.style.setProperty('--wa-collision-lift', `${Math.max(0, requiredBottom - baseBottom)}px`);
+        const buttonRect = button.getBoundingClientRect();
+        const bookingRect = bookingForm.getBoundingClientRect();
+
+        // Measure the expanded pill once and keep using that width while collapsed,
+        // so the button does not flicker between states as its own width changes.
+        const expandedWidth = expandedWidthRef.current || buttonRect.width;
+
+        const bookingIsInViewport = bookingRect.bottom > 0 && bookingRect.top < window.innerHeight;
+        const expandedLeft = buttonRect.right - expandedWidth;
+        const expandedWouldOverlap = bookingIsInViewport
+          && expandedLeft < bookingRect.right
+          && buttonRect.right > bookingRect.left
+          && buttonRect.top < bookingRect.bottom
+          && buttonRect.bottom > bookingRect.top;
+
+        setCollapsed(expandedWouldOverlap);
       });
     };
 
-    updateSafePosition();
-    window.addEventListener('scroll', updateSafePosition, { passive: true });
-    window.addEventListener('resize', updateSafePosition);
+    // Initial expanded-width measurement, then react only to scroll/resize.
+    frame = requestAnimationFrame(() => {
+      expandedWidthRef.current = button.getBoundingClientRect().width;
+      update();
+    });
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
 
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', updateSafePosition);
-      window.removeEventListener('resize', updateSafePosition);
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
     };
   }, []);
 
   return (
     <a
       ref={ref}
-      className="floating-whatsapp"
+      className={`floating-whatsapp${collapsed ? ' is-collapsed' : ''}`}
       href={href}
       target="_blank"
       rel="noreferrer"
       aria-label={ariaLabel}
-      data-collision="false"
+      data-collapsed={collapsed ? 'true' : 'false'}
     >
       <WhatsAppIcon size={24} />
-      <span>WhatsApp</span>
+      <span className="floating-whatsapp-label">WhatsApp</span>
     </a>
   );
 }

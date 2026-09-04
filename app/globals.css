@@ -168,7 +168,7 @@ p { margin-top: 0; }
 .guide-box a { padding: 9px 0; border-bottom: 1px solid #e8f0ee; color: var(--sea-dark); font-size: .88rem; font-weight: 750; }
 .guide-box a:last-child { border-bottom: 0; }
 
-.footer { position: relative; padding: 48px 0 18px; background: #15383b; color: #eaf3f2; }
+.footer { position: relative; z-index: 1; padding: 48px 0 18px; background: #1E2A5E; color: #eaf3f2; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3,1fr); gap: 28px; }
 .footer h3 { color: #fff; font-size: .95rem; }
 .footer p { color: #c5dad7; font-size: .88rem; }
@@ -276,20 +276,20 @@ p { margin-top: 0; }
   gap: 4px;
   min-width: 0;
   padding: 14px 16px;
-  border: 1px solid #a9d1ca;
+  border: 1px solid #cbd2ee;
   border-radius: 16px;
-  background: #edf7f5;
-  box-shadow: 0 8px 24px rgba(21,56,59,.055);
+  background: #EEF0FB;
+  box-shadow: 0 8px 24px rgba(30,42,94,.06);
 }
 .quick-fact-card span {
-  color: #456864;
+  color: #58679b;
   font-size: .75rem;
   font-weight: 850;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
 .quick-fact-card strong {
-  color: #15383b;
+  color: #1E2A5E;
   font-size: 1.03rem;
   line-height: 1.25;
 }
@@ -366,7 +366,7 @@ p { margin-top: 0; }
     left: 11px;
     right: 11px;
     bottom: calc(10px + env(safe-area-inset-bottom));
-    z-index: 84;
+    z-index: 90;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -375,9 +375,8 @@ p { margin-top: 0; }
     padding: 8px 9px 8px 17px;
     border: 1px solid #b8d3ce;
     border-radius: 999px;
-    background: rgba(255,255,255,.97);
+    background: #fff;
     box-shadow: 0 12px 34px rgba(14,48,50,.18);
-    backdrop-filter: blur(12px);
   }
   .mobile-booking-price {
     color: #15383b;
@@ -415,13 +414,11 @@ p { margin-top: 0; }
   .quick-facts { grid-template-columns: 1fr; gap: 8px; }
 }
 
-/* Floating WhatsApp: one consistent pill on desktop and mobile. */
+/* Floating WhatsApp: fixed position; only the booking form can collapse it. */
 .footer .floating-whatsapp {
-  --wa-safe-bottom: 24px;
-  --wa-collision-lift: 0px;
   position: fixed;
   right: 20px;
-  bottom: calc(var(--wa-safe-bottom) + var(--wa-collision-lift) + env(safe-area-inset-bottom));
+  bottom: calc(24px + env(safe-area-inset-bottom));
   z-index: 82;
   display: inline-flex !important;
   flex-direction: row !important;
@@ -429,10 +426,11 @@ p { margin-top: 0; }
   justify-content: center;
   gap: 9px;
   width: auto;
-  height: auto;
-  min-width: 0;
+  max-width: 180px;
+  min-width: 48px;
   min-height: 48px;
   padding: 11px 16px;
+  overflow: hidden;
   border-radius: 999px;
   background: #25D366;
   color: #fff !important;
@@ -441,42 +439,54 @@ p { margin-top: 0; }
   line-height: 1;
   white-space: nowrap;
   box-shadow: 0 12px 30px rgba(37,211,102,.28);
-  transition: transform .16s ease, box-shadow .16s ease, bottom .12s ease, opacity .14s ease;
+  transition: max-width 200ms ease, width 200ms ease, padding 200ms ease, gap 200ms ease, box-shadow 160ms ease;
 }
 .footer .floating-whatsapp:hover {
   background: #25D366;
-  transform: translateY(-1px);
   box-shadow: 0 14px 34px rgba(37,211,102,.34);
 }
-.footer .floating-whatsapp svg { flex: 0 0 auto; display: block; }
-.footer .floating-whatsapp span { display: inline-block !important; white-space: nowrap; }
+.footer .floating-whatsapp svg {
+  flex: 0 0 24px;
+  display: block;
+}
+.footer .floating-whatsapp-label {
+  display: inline-block !important;
+  max-width: 100px;
+  opacity: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 200ms ease, opacity 160ms ease;
+}
+.footer .floating-whatsapp.is-collapsed {
+  width: 48px;
+  max-width: 48px;
+  min-width: 48px;
+  padding: 11px 12px;
+  gap: 0;
+}
+.footer .floating-whatsapp.is-collapsed .floating-whatsapp-label {
+  max-width: 0;
+  opacity: 0;
+}
 
 @media (max-width: 820px) {
   .footer .floating-whatsapp {
-    --wa-safe-bottom: 16px;
     right: 12px;
+    /* Constant spot on every mobile page; sits above the sticky booking bar when present. */
+    bottom: calc(88px + env(safe-area-inset-bottom));
     min-height: 46px;
+    min-width: 46px;
     padding: 10px 14px;
     gap: 8px;
     border-radius: 999px;
     font-size: .88rem;
   }
-  .has-booking-cta + .footer .floating-whatsapp {
-    --wa-safe-bottom: 88px;
-    right: 12px;
-    bottom: calc(var(--wa-safe-bottom) + var(--wa-collision-lift) + env(safe-area-inset-bottom));
+  .footer .floating-whatsapp.is-collapsed {
+    width: 46px;
+    max-width: 46px;
+    min-width: 46px;
+    padding: 10px 11px;
+    gap: 0;
   }
 }
 
-/* If a narrow viewport has no collision-free slot, protect the content first. */
-@media (max-width: 820px) {
-  .footer .floating-whatsapp[data-collision="true"] {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(4px);
-  }
-  .footer .floating-whatsapp[data-collision="false"] {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
