@@ -276,10 +276,10 @@ p { margin-top: 0; }
   gap: 4px;
   min-width: 0;
   padding: 14px 16px;
-  border: 1px solid #cbd2ee;
+  border: 1px solid #D4A017;
   border-radius: 16px;
-  background: #EEF0FB;
-  box-shadow: 0 8px 24px rgba(30,42,94,.06);
+  background: #fff;
+  box-shadow: 0 0 12px rgba(212, 160, 23, 0.4);
 }
 .quick-fact-card span {
   color: #58679b;
