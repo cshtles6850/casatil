@@ -454,6 +454,13 @@ p { margin-top: 0; }
   background: #25D366;
   box-shadow: 0 14px 34px rgba(37,211,102,.34);
 }
+.floating-whatsapp.is-initializing {
+  visibility: hidden;
+  transition: none;
+}
+.floating-whatsapp.is-ready {
+  visibility: visible;
+}
 .floating-whatsapp svg {
   flex: 0 0 24px;
   display: block;

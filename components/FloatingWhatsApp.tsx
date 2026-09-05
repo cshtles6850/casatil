@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 type Props = {
@@ -9,6 +9,11 @@ type Props = {
 };
 
 const HERO_COLLISION_MARGIN = 24;
+
+type VisualState = {
+  ready: boolean;
+  collapsed: boolean;
+};
 
 function rectsOverlap(a: DOMRect, b: DOMRect) {
   return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
@@ -26,60 +31,73 @@ function expandRect(rect: DOMRect, margin: number) {
 export function FloatingWhatsApp({ href, ariaLabel }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
   const expandedSizeRef = useRef({ width: 0, height: 0 });
-  const [collapsed, setCollapsed] = useState(false);
+  const [visualState, setVisualState] = useState<VisualState>({
+    ready: false,
+    collapsed: false,
+  });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const button = ref.current;
     if (!button) return;
 
     let frame = 0;
 
+    const shouldCollapse = () => {
+      const currentRect = button.getBoundingClientRect();
+      if (!expandedSizeRef.current.width) {
+        expandedSizeRef.current = { width: currentRect.width, height: currentRect.height };
+      }
+
+      const { width, height } = expandedSizeRef.current;
+      const expandedRect = new DOMRect(
+        currentRect.right - width,
+        currentRect.bottom - height,
+        width,
+        height,
+      );
+
+      // Condition A: collapse whenever the booking form is visible in the viewport.
+      const bookingForm = document.querySelector<HTMLElement>('#booking .booking-card');
+      const bookingInView = bookingForm
+        ? (() => {
+            const rect = bookingForm.getBoundingClientRect();
+            return rect.bottom > 0 && rect.top < window.innerHeight;
+          })()
+        : false;
+
+      // Condition B: at the hero, collapse if the expanded pill would cover a
+      // hero CTA button or the trust/checkmark row, including the safety margin.
+      const heroTargets = Array.from(
+        document.querySelectorAll<HTMLElement>('.hero-actions .btn, .trust-row'),
+      );
+      const heroWouldBeCovered = heroTargets.some((target) => {
+        const rect = target.getBoundingClientRect();
+        const targetInView =
+          rect.bottom > -HERO_COLLISION_MARGIN &&
+          rect.top < window.innerHeight + HERO_COLLISION_MARGIN;
+        return targetInView && rectsOverlap(expandedRect, expandRect(rect, HERO_COLLISION_MARGIN));
+      });
+
+      return bookingInView || heroWouldBeCovered;
+    };
+
+    // Critical initial-load check: measure the expanded pill and determine its
+    // correct state synchronously in a layout effect, before making it visible.
+    // This prevents a one-frame flash of the expanded label over the hero CTA.
+    const initialCollapsed = shouldCollapse();
+    setVisualState({ ready: true, collapsed: initialCollapsed });
+
     const update = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const currentRect = button.getBoundingClientRect();
-        if (!expandedSizeRef.current.width) {
-          expandedSizeRef.current = { width: currentRect.width, height: currentRect.height };
-        }
-
-        const { width, height } = expandedSizeRef.current;
-        const expandedRect = new DOMRect(
-          currentRect.right - width,
-          currentRect.bottom - height,
-          width,
-          height,
+        const nextCollapsed = shouldCollapse();
+        setVisualState((current) =>
+          current.collapsed === nextCollapsed
+            ? current
+            : { ready: true, collapsed: nextCollapsed },
         );
-
-        // Condition A: collapse whenever the booking form is visible in the viewport.
-        const bookingForm = document.querySelector<HTMLElement>('#booking .booking-card');
-        const bookingInView = bookingForm
-          ? (() => {
-              const rect = bookingForm.getBoundingClientRect();
-              return rect.bottom > 0 && rect.top < window.innerHeight;
-            })()
-          : false;
-
-        // Condition B: at the hero, collapse only if the expanded pill would cover
-        // a hero CTA button or the trust/checkmark row. No other page elements matter.
-        const heroTargets = Array.from(
-          document.querySelectorAll<HTMLElement>('.hero-actions .btn, .trust-row'),
-        );
-        const heroWouldBeCovered = heroTargets.some((target) => {
-          const rect = target.getBoundingClientRect();
-          const targetInView = rect.bottom > -HERO_COLLISION_MARGIN && rect.top < window.innerHeight + HERO_COLLISION_MARGIN;
-          return targetInView && rectsOverlap(expandedRect, expandRect(rect, HERO_COLLISION_MARGIN));
-        });
-
-        setCollapsed(bookingInView || heroWouldBeCovered);
       });
     };
-
-    // Measure the expanded pill first so collapsing never causes width-based flicker.
-    frame = requestAnimationFrame(() => {
-      const rect = button.getBoundingClientRect();
-      expandedSizeRef.current = { width: rect.width, height: rect.height };
-      update();
-    });
 
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
@@ -94,12 +112,13 @@ export function FloatingWhatsApp({ href, ariaLabel }: Props) {
   return (
     <a
       ref={ref}
-      className={`floating-whatsapp${collapsed ? ' is-collapsed' : ''}`}
+      className={`floating-whatsapp${visualState.ready ? ' is-ready' : ' is-initializing'}${visualState.collapsed ? ' is-collapsed' : ''}`}
       href={href}
       target="_blank"
       rel="noreferrer"
       aria-label={ariaLabel}
-      data-collapsed={collapsed ? 'true' : 'false'}
+      data-collapsed={visualState.collapsed ? 'true' : 'false'}
+      data-ready={visualState.ready ? 'true' : 'false'}
     >
       <WhatsAppIcon size={24} />
       <span className="floating-whatsapp-label">WhatsApp</span>
