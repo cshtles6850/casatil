@@ -175,7 +175,9 @@ p { margin-top: 0; }
 .footer a { display: block; margin: 7px 0; color: #d8e8e5; font-size: .85rem; }
 .footer-email { overflow-wrap: anywhere; }
 .footer-whatsapp { display: inline-flex !important; align-items: center; gap: 8px; margin-top: 13px !important; padding: 10px 13px; border-radius: 999px; background: var(--wa); color: #fff !important; font-weight: 850; }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); color: #9fbebb; font-size: .82rem; }
+.footer-bottom { display: grid; gap: 6px; margin-top: 30px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); color: #b7c4e6; font-size: .82rem; }
+.footer-copyright { color: #b7c4e6; }
+.footer-agency-line { display: block; color: #d7def5; font-size: .875rem; font-weight: 700; line-height: 1.45; }
 .floating-whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 2147483647; display: inline-flex; align-items: center; gap: 8px; padding: 12px 15px; border-radius: 999px; background: var(--wa-bright); color: #fff; font-weight: 900; box-shadow: 0 14px 35px rgba(0,0,0,.2); }
 
 @media (max-width: 1030px) {

@@ -18,14 +18,14 @@ const townKeys = Object.keys(towns) as (keyof typeof towns)[];
 
 const homeFaq = [
   ['How much is Cappadocia Airport Shuttle?', 'The shared shuttle is €15 per person one way from either Kayseri Airport (ASR) or Nevsehir Airport (NAV). Round trip is €30 per person.'],
-  ['Which Cappadocia towns are covered by the shared shuttle?', 'Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar are within the shared-shuttle service area. Mustafapasa requires a private transfer request.'],
+  ['Which Cappadocia towns are covered by the shared shuttle?', 'Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar are within the shared-shuttle service area.'],
   ['Can I book both airport arrival and hotel-to-airport return?', 'Yes. Select Round Trip and enter both arrival and departure flight information.'],
   ['How much is a private Vito?', 'Kayseri Airport Vito is €90 one way; Nevsehir Airport Vito is €80. The Vito is for up to 5 passengers.'],
   ['How much is a private Sprinter?', 'Kayseri Airport Sprinter is €110 one way; Nevsehir Airport Sprinter is €90. The Sprinter is for up to 16 passengers.'],
   ['How do I pay for the transfer?', 'Payment is cash to the driver. Prices are shown in EUR; USD or TRY cash payment can be arranged using the current exchange rate confirmed for the booking.'],
-  ['Why does the booking form ask for passport numbers?', 'Passenger names and passport numbers are required by the operating company for reservation and transfer operation.'],
-  ['Will the driver meet me at the airport?', 'Meeting details are confirmed on WhatsApp after the booking request. The reservation passenger name can be used for the airport meeting sign.'],
-  ['What happens if my flight is delayed?', 'Send updated flight information on WhatsApp as early as possible. Shared-shuttle operation can involve several passengers, so a schedule change should be reconfirmed.'],
+  ['Why does the booking form ask for passport numbers?', 'Passenger names and passport numbers are required for every reservation.'],
+  ['Will the driver meet me at the airport?', 'Meeting details are confirmed on WhatsApp after the booking request, using the name on your reservation for the airport meeting sign.'],
+  ['What happens if my flight is delayed?', 'Send updated flight information on WhatsApp as early as possible, since a shared shuttle can involve several passengers and a schedule change needs to be reconfirmed.'],
   ['Can a shuttle reach every cave hotel door?', 'Not always. Some historic lanes are too narrow or unsuitable for a large vehicle, so a nearby safe stopping point may be confirmed for the specific hotel.'],
 ] as const;
 
@@ -56,7 +56,7 @@ export default function HomePage() {
         <span className="eyebrow">Kayseri ASR · Nevsehir NAV</span>
         <h1>Cappadocia Airport Shuttle</h1>
         <p className="hero-price-highlight">From €15 per person</p>
-        <p className="lead">Book a <strong>Cappadocia Airport Shuttle</strong> between Kayseri or Nevsehir Airport and Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin. Private Vito and Sprinter transfers are available too.</p>
+        <p className="lead">Book a <strong>Cappadocia Airport Shuttle</strong> between Kayseri Airport (ASR), Nevsehir Airport (NAV) and hotels across Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Private Vito and Sprinter transfers are available too.</p>
         <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book airport shuttle</a><Link className="btn btn-secondary" href="/cappadocia-shared-shuttle-vs-private-transfer">Shuttle vs private</Link></div>
         <div className="trust-row"><span>€15 from both airports</span><span>Airport meet & hotel transfer</span><span>Cash to driver</span></div>
       </div>
@@ -78,11 +78,11 @@ export default function HomePage() {
     </div></section>
 
     <section className="section section-muted"><div className="container">
-      <div className="section-head"><div className="kicker">Why book with us</div><h2>Local airport transfer operation, clear booking details</h2><p>The service is operated with insured shuttle vehicles and experienced local drivers on Kayseri, Nevsehir and Cappadocia hotel routes.</p></div>
+      <div className="section-head"><div className="kicker">Why book with us</div><h2>How the airport shuttle works</h2><p>Vehicles are insured and driven by experienced local drivers on the Kayseri, Nevsehir and Cappadocia hotel routes.</p></div>
       <div className="cards trust-cards">
-        <div className="card"><h3>Airport meet & greet</h3><p>Arrival meeting details are confirmed on WhatsApp and can use the passenger reservation name.</p></div>
+        <div className="card"><h3>Airport meet & greet</h3><p>Arrival meeting details are confirmed on WhatsApp using the name on your reservation.</p></div>
         <div className="card"><h3>Hotel pickup & drop-off</h3><p>Supported shared-shuttle areas are Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar.</p></div>
-        <div className="card"><h3>Insured vehicles</h3><p>Shared vehicle type can vary with the daily reservation plan and passenger count; private Vito or Sprinter is selected in the booking.</p></div>
+        <div className="card"><h3>Shared or private, your choice</h3><p>The shared shuttle vehicle depends on the day's passenger count; for a dedicated ride, choose a private Vito or Sprinter when booking.</p></div>
         <div className="card"><h3>WhatsApp confirmation</h3><p>Flight, meeting, pickup and reservation details are checked and confirmed for the specific booking.</p></div>
       </div>
     </div></section>
@@ -114,7 +114,7 @@ export default function HomePage() {
 
     <section className="section"><div className="container content-grid homepage-content-grid">
       <article className="prose">
-        <section className="content-section"><div className="kicker">Shared airport shuttle</div><h2>Why shared airport shuttle is the value option</h2><p>A shared airport shuttle gives solo travelers, couples and small groups a pre-booked connection between the airport and hotel without paying for an entire private vehicle. Travelers also search for this service as a Cappadocia shuttle transfer. Because it is shared, the run can include other booked passengers and hotel stops.</p><p>If your group wants a dedicated vehicle, compare the <Link href="/private-airport-transfer-cappadocia">private airport transfer</Link>. Vito carries up to 5 passengers and Sprinter up to 16, with airport-specific fixed prices.</p></section>
+        <section className="content-section"><div className="kicker">Shared airport shuttle</div><h2>Why shared airport shuttle is the value option</h2><p>A shared <Link href="/cappadocia-shuttle-transfer">Cappadocia shuttle transfer</Link> gives solo travelers, couples and small groups a pre-booked connection between the airport and hotel without paying for an entire private vehicle. Because it is shared, the run can include other booked passengers and hotel stops.</p><p>If your group wants a dedicated vehicle, compare the <Link href="/private-airport-transfer-cappadocia">private airport transfer</Link>. Vito carries up to 5 passengers and Sprinter up to 16, with airport-specific fixed prices.</p></section>
         <section className="content-section"><h2>Hotel access matters in Cappadocia</h2><p>Goreme, Uchisar, Urgup, Ortahisar and Cavusin include historic cave or stone accommodation where the road to reception may be narrow or steep. Avanos is more spread out around the river. That is why the booking form asks for the full hotel name rather than only the town.</p><p>For cave accommodation details, use the <Link href="/cappadocia-cave-hotel-airport-transfer">Cappadocia cave hotel airport transfer guide</Link>. The individual airport-to-town route pages go further with route-specific pickup and drop-off guidance.</p></section>
         <section className="content-section"><h2>Coming from Istanbul?</h2><p>Most travelers fly from IST or SAW to ASR or NAV rather than taking an airport shuttle all the way from Istanbul. The <Link href="/istanbul-to-cappadocia">Istanbul to Cappadocia guide</Link> explains how the flight and final airport shuttle fit together.</p></section>
       </article>

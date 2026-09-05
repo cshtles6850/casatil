@@ -40,8 +40,8 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Cappadocia Airport Shuttle</span>
-          <span>{SITE.company} · TURSAB No: {SITE.tursab}</span>
+          <span className="footer-copyright">© {new Date().getFullYear()} Cappadocia Airport Shuttle</span>
+          <span className="footer-agency-line">{SITE.company} · TURSAB No: {SITE.tursab}</span>
         </div>
       </div>
     </footer>
