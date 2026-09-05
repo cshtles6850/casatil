@@ -123,7 +123,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
       <div className="trust-row"><span>WhatsApp 确认</span><span>单程或往返</span><span>现金支付给司机</span></div>
     </div></section>
 
-    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : hasBookingForm ? 'container content-grid' : 'container guide-content-wrap'}>
+    <section className="section page-content-section"><div className={page.route ? 'container route-page-grid' : hasBookingForm ? 'container content-grid' : 'container guide-content-wrap'}>
       <article className={page.route ? 'prose route-prose' : 'prose'}>
         <RouteAirportMeetingZh page={page} />
         {page.sections.map((section)=><section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>)}
@@ -133,8 +133,8 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
         <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
         <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>
 
-        {page.route && <section className="route-booking-section" id="booking"><BookingFormZh {...defaults}/></section>}
       </article>
+      {page.route && <aside className="sidebar route-booking-sidebar" id="booking"><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>}
       {!page.route && hasBookingForm && <aside className="sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>}
     </div></section>
 

@@ -8,8 +8,19 @@ type Props = {
   ariaLabel: string;
 };
 
+const HERO_COLLISION_MARGIN = 24;
+
 function rectsOverlap(a: DOMRect, b: DOMRect) {
   return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+}
+
+function expandRect(rect: DOMRect, margin: number) {
+  return new DOMRect(
+    rect.left - margin,
+    rect.top - margin,
+    rect.width + margin * 2,
+    rect.height + margin * 2,
+  );
 }
 
 export function FloatingWhatsApp({ href, ariaLabel }: Props) {
@@ -55,8 +66,8 @@ export function FloatingWhatsApp({ href, ariaLabel }: Props) {
         );
         const heroWouldBeCovered = heroTargets.some((target) => {
           const rect = target.getBoundingClientRect();
-          const targetInView = rect.bottom > 0 && rect.top < window.innerHeight;
-          return targetInView && rectsOverlap(expandedRect, rect);
+          const targetInView = rect.bottom > -HERO_COLLISION_MARGIN && rect.top < window.innerHeight + HERO_COLLISION_MARGIN;
+          return targetInView && rectsOverlap(expandedRect, expandRect(rect, HERO_COLLISION_MARGIN));
         });
 
         setCollapsed(bookingInView || heroWouldBeCovered);

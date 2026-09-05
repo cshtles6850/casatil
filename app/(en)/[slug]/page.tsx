@@ -113,7 +113,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
       <div className="trust-row"><span>WhatsApp confirmation</span><span>One way or round trip</span><span>Cash to driver</span></div>
     </div></section>
 
-    <section className="section page-content-section"><div className={page.route ? 'container route-content-wrap' : hasBookingForm ? 'container content-grid' : 'container guide-content-wrap'}>
+    <section className="section page-content-section"><div className={page.route ? 'container route-page-grid' : hasBookingForm ? 'container content-grid' : 'container guide-content-wrap'}>
       <article className={page.route ? 'prose route-prose' : 'prose'}>
         <RouteAirportMeeting page={page} />
         {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
@@ -126,9 +126,9 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
 
         <section className="content-section"><h2>Frequently asked questions</h2><div className="faq">{page.faq.map((item) => <details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>
 
-        {page.route && <section className="route-booking-section" id="booking"><BookingForm {...defaults} /></section>}
       </article>
 
+      {page.route && <aside className="sidebar route-booking-sidebar" id="booking"><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>}
       {!page.route && hasBookingForm && <aside className="sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>}
     </div></section>
 
