@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BookingForm } from '@/components/BookingForm';
+import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
 import { JsonLd } from '@/components/JsonLd';
 import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { SITE, towns } from '@/lib/site';
@@ -73,6 +74,7 @@ export default function HomePage() {
           <div className="summary-line"><span>Nevsehir Sprinter · max 16</span><strong>€90</strong></div>
         </div>
         <p className="small-copy">Round trip is exactly double. Private prices are per vehicle. Passenger names and passport numbers are required for reservation and transfer operation.</p>
+        <BookingInfoChecklist className="home-booking-checklist" />
       </aside>
       <BookingForm />
     </div></section>

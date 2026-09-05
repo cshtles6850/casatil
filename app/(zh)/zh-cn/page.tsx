@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BookingFormZh } from '@/components/BookingFormZh';
+import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
 import { JsonLd } from '@/components/JsonLd';
 import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { SITE, towns } from '@/lib/site';
@@ -71,6 +72,7 @@ export default function ChineseHomePage() {
           <div className="summary-line"><span>内夫谢希尔 Sprinter · 最多16人</span><strong>€90</strong></div>
         </div>
         <p className="small-copy">往返正好是单程的两倍。私人接送按整车计价。乘客姓名和护照号码是运营公司用于预订与接送操作的必填资料。</p>
+        <BookingInfoChecklist locale="zh-CN" className="home-booking-checklist" />
       </aside>
       <BookingFormZh />
     </div></section>
