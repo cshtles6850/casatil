@@ -166,13 +166,11 @@ export function BookingForm({
 
   return (
     <div className={`booking-card${compact ? ' booking-card-compact' : ''}`}>
-      {!compact && (
-        <div className="section-head booking-head">
-          <div className="kicker">Book your transfer</div>
-          <h2>One way or round trip</h2>
-          <p>Choose the airport and service, enter flight and passenger details, then review the total before continuing to WhatsApp.</p>
-        </div>
-      )}
+      <div className="section-head booking-head">
+        <div className="kicker">BOOK YOUR TRANSFER</div>
+        <h2>One way or round trip</h2>
+        <p>Choose the airport and service, enter flight and passenger details, then review the total before continuing to WhatsApp.</p>
+      </div>
 
       <form onSubmit={submit}>
         <input className="hp-field" tabIndex={-1} autoComplete="off" name="companyWebsite" aria-hidden="true" />

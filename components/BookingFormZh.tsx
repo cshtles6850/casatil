@@ -173,13 +173,11 @@ export function BookingFormZh({
 
   return (
     <div className={`booking-card${compact ? ' booking-card-compact' : ''}`}>
-      {!compact && (
-        <div className="section-head booking-head">
-          <div className="kicker">预订机场接送</div>
-          <h2>选择单程或往返</h2>
-          <p>选择机场与服务，填写航班、乘客和酒店信息，确认总价后继续到 WhatsApp。</p>
-        </div>
-      )}
+      <div className="section-head booking-head">
+        <div className="kicker">预订机场接送</div>
+        <h2>选择单程或往返</h2>
+        <p>选择机场与服务，填写航班、乘客和酒店信息，确认总价后继续到 WhatsApp。</p>
+      </div>
 
       <form onSubmit={submit}>
         <input className="hp-field" tabIndex={-1} autoComplete="off" name="companyWebsite" aria-hidden="true" />
