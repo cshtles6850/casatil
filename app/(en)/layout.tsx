@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const org = {
     '@context': 'https://schema.org', '@type': 'TravelAgency', name: SITE.name, url: SITE.domain,
-    email: SITE.email, telephone: SITE.whatsappDisplay,
+    telephone: SITE.whatsappDisplay,
     areaServed: ['Goreme','Urgup','Uchisar','Avanos','Ortahisar','Cavusin','Kayseri Airport','Nevsehir Airport'],
     identifier: `TURSAB ${SITE.tursab}`,
     parentOrganization: { '@type': 'Organization', name: SITE.company },

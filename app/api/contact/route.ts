@@ -35,9 +35,9 @@ export async function POST(request: NextRequest) {
   if (!name || !emailOk || !subject || message.length < 3) return reply({ ok:false, error:'missing-or-invalid-fields' }, 400);
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_EMAIL_TO || process.env.BOOKING_EMAIL_TO || 'cappadociaairportshuttle@gmail.com';
+  const to = process.env.CONTACT_EMAIL_TO || process.env.BOOKING_EMAIL_TO;
   const from = process.env.RESEND_FROM || 'Cappadocia Reservations <onboarding@resend.dev>';
-  if (!apiKey) return reply({ ok:false, error:'email-not-configured' }, 503);
+  if (!apiKey || !to) return reply({ ok:false, error:'email-not-configured' }, 503);
 
   const text = `Contact request.\n\nLanguage: ${language}\nName: ${name}\nEmail: ${email}\nWhatsApp/phone: ${whatsapp || '-'}\nSubject: ${subject}\n\n${message}`;
   const response = await fetch('https://api.resend.com/emails', {

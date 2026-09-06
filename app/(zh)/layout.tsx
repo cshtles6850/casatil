@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function ChineseRootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const org = {
     '@context': 'https://schema.org', '@type': 'TravelAgency', name: SITE.name, url: `${SITE.domain}/zh-cn`,
-    email: SITE.email, telephone: SITE.whatsappDisplay,
+    telephone: SITE.whatsappDisplay,
     areaServed: ['格雷梅','于尔居普','乌奇希萨尔','阿瓦诺斯','奥塔西萨','恰武辛','开塞利机场','内夫谢希尔机场'],
     identifier: `TURSAB ${SITE.tursab}`,
     parentOrganization: { '@type': 'Organization', name: SITE.company },

@@ -1,7 +1,6 @@
 export const SITE = {
   name: 'Cappadocia Airport Shuttle',
   domain: 'https://cappadociaairportshuttle.com',
-  email: 'cappadociaairportshuttle@gmail.com',
   whatsappDisplay: '+90 538 828 26 66',
   whatsappDigits: '905388282666',
   whatsappDirectMessageEn: 'Hello, I have a question about an airport shuttle.',

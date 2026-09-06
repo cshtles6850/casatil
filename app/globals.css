@@ -101,6 +101,8 @@ p { margin-top: 0; }
 .radio-card:has(input:checked) { border-color: #a9b2e8; background: var(--mist); }
 .radio-card input { margin-right: 6px; }
 .journey-note { padding: 10px 12px; border: 1px solid #dce1f5; border-radius: 11px; background: var(--mist); color: var(--ink-soft); font-size: .84rem; }
+.same-day-warning { display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border: 1px solid #f1c04e; border-radius: 11px; background: #fff7df; color: #75520a; font-size: .8rem; line-height: 1.45; }
+.same-day-warning strong { color: #614400; }
 .passenger-block { padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: #fafbff; }
 .passenger-heading strong { display: block; }
 .passenger-heading span { display: block; margin-top: 2px; color: var(--ink-soft); font-size: .77rem; }

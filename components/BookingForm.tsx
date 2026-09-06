@@ -10,6 +10,7 @@ type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
 type Passenger = { fullName: string; passport: string };
+type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportLabels: Record<Airport, string> = {
   kayseri: 'Kayseri Airport (ASR)',
@@ -20,6 +21,27 @@ const privatePrices: Record<Airport, Record<Vehicle, number>> = {
   kayseri: { vito: 90, sprinter: 110 },
   nevsehir: { vito: 80, sprinter: 90 },
 };
+
+const townLabels: Record<Town, string> = {
+  goreme: 'Goreme',
+  urgup: 'Urgup',
+  uchisar: 'Uchisar',
+  avanos: 'Avanos',
+  ortahisar: 'Ortahisar',
+  cavusin: 'Cavusin',
+};
+
+function initialTownKey(value: string): Town | '' {
+  const normalized = value.trim().toLowerCase();
+  const found = (Object.keys(townLabels) as Town[]).find((key) => townLabels[key].toLowerCase() === normalized || key === normalized);
+  return found || '';
+}
+
+function todayInIstanbul() {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
 
 function maskPassport(value: string) {
   const clean = value.trim();
@@ -46,18 +68,24 @@ export function BookingForm({
   const [vehicle, setVehicle] = useState<Vehicle>('vito');
   const [passengers, setPassengers] = useState(1);
   const [people, setPeople] = useState<Passenger[]>([{ fullName: '', passport: '' }]);
+  const [destination, setDestination] = useState<Town | ''>(() => initialTownKey(initialTown));
   const [hotel, setHotel] = useState('');
   const [firstTransferDate, setFirstTransferDate] = useState('');
+  const [firstTransferTime, setFirstTransferTime] = useState('');
   const [arrivalFlight, setArrivalFlight] = useState('');
   const [departureFlight, setDepartureFlight] = useState('');
   const [returnTransferDate, setReturnTransferDate] = useState('');
+  const [returnTransferTime, setReturnTransferTime] = useState('');
   const [returnFlight, setReturnFlight] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const today = useMemo(() => todayInIstanbul(), []);
   const hotelReady = hotel.trim().length > 0;
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && firstTransferTime);
+  const sameDayBooking = Boolean(firstTransferDate && firstTransferDate === today);
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -80,6 +108,13 @@ export function BookingForm({
   const resolvedDirection = journey === 'round-trip'
     ? 'Airport ⇄ Hotel'
     : direction === 'airport-hotel' ? 'Airport → Hotel' : 'Hotel → Airport';
+  const destinationLabel = journey === 'round-trip' ? 'Hotel town' : direction === 'airport-hotel' ? 'Destination' : 'Pickup town';
+  const firstDateLabel = journey === 'round-trip' || direction === 'airport-hotel' ? 'Arrival date' : 'Departure flight date';
+  const firstTimeLabel = journey === 'round-trip' || direction === 'airport-hotel' ? 'Arrival time' : 'Departure flight time';
+
+  useEffect(() => {
+    if (expanded && !firstStageReady) setExpanded(false);
+  }, [expanded, firstStageReady]);
 
   function updatePassenger(index: number, field: keyof Passenger, value: string) {
     setPeople((current) => current.map((person, i) => i === index ? { ...person, [field]: value } : person));
@@ -105,11 +140,14 @@ export function BookingForm({
       airport: airportLabels[airport],
       vehicle: transferType === 'private' ? (vehicle === 'vito' ? 'Mercedes Vito (max 5)' : 'Mercedes Sprinter (max 16)') : 'Shared shuttle',
       passengers: String(passengers),
+      destination: destination ? townLabels[destination] : '',
       hotel,
       firstTransferDate,
+      firstTransferTime,
       arrivalFlight,
       departureFlight,
       returnTransferDate,
+      returnTransferTime,
       returnFlight,
       whatsapp,
       passengerDetails: passengerPayload,
@@ -133,11 +171,14 @@ export function BookingForm({
       `Airport: ${airportLabels[airport]}`,
       transferType === 'private' ? `Vehicle: ${vehicle === 'vito' ? 'Mercedes Vito (max 5)' : 'Mercedes Sprinter (max 16)'}` : '',
       `Passengers: ${passengers}`,
-      `Hotel / Area: ${hotel || '-'}`,
-      `First transfer date: ${firstTransferDate || '-'}`,
+      `${destinationLabel}: ${destination ? townLabels[destination] : '-'}`,
+      `Hotel / Accommodation: ${hotel || '-'}`,
+      `${firstDateLabel}: ${firstTransferDate || '-'}`,
+      `${firstTimeLabel}: ${firstTransferTime || '-'}`,
       isArrivalOnly || journey === 'round-trip' ? `Arrival flight: ${arrivalFlight || '-'}` : '',
       isDepartureOnly ? `Departure flight: ${departureFlight || '-'}` : '',
-      journey === 'round-trip' ? `Return transfer date: ${returnTransferDate || '-'}` : '',
+      journey === 'round-trip' ? `Return flight date: ${returnTransferDate || '-'}` : '',
+      journey === 'round-trip' ? `Return flight time: ${returnTransferTime || '-'}` : '',
       journey === 'round-trip' ? `Return flight: ${returnFlight || '-'}` : '',
       `Contact WhatsApp: ${whatsapp || '-'}`,
       ...passengerLines,
@@ -212,6 +253,14 @@ export function BookingForm({
           </div>
 
           <div className="field">
+            <label htmlFor={`destination-${compact ? 'compact' : 'full'}`}>{destinationLabel}</label>
+            <select id={`destination-${compact ? 'compact' : 'full'}`} name="destination" value={destination} onChange={(e) => setDestination(e.target.value as Town | '')} required>
+              <option value="">Select town</option>
+              {(Object.keys(townLabels) as Town[]).map((key) => <option key={key} value={key}>{townLabels[key]}</option>)}
+            </select>
+          </div>
+
+          <div className="field full">
             <label htmlFor={`passengers-${compact ? 'compact' : 'full'}`}>Passenger count</label>
             <input id={`passengers-${compact ? 'compact' : 'full'}`} name="passengerCount" type="number" min="1" max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} value={passengers} onChange={(e) => { const max = transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16; setPassengers(Math.min(max, Math.max(1, Number(e.target.value) || 1))); }} required />
           </div>
@@ -226,25 +275,35 @@ export function BookingForm({
             </div>
           )}
 
+          <div className="field">
+            <label htmlFor={`date-${compact ? 'compact' : 'full'}`}>{firstDateLabel}</label>
+            <input id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" min={today} value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
+          </div>
+
+          <div className="field">
+            <label htmlFor={`time-${compact ? 'compact' : 'full'}`}>{firstTimeLabel}</label>
+            <input id={`time-${compact ? 'compact' : 'full'}`} name="firstTransferTime" type="time" value={firstTransferTime} onChange={(e) => setFirstTransferTime(e.target.value)} required />
+          </div>
+
+          {sameDayBooking && (
+            <div className="field full same-day-warning">⚠️ <span>Same-day bookings are subject to availability. <strong>Please wait for our WhatsApp confirmation before considering your transfer confirmed.</strong></span></div>
+          )}
+
           <div className="field full">
             <label htmlFor={`hotel-${compact ? 'compact' : 'full'}`}>Hotel / accommodation</label>
-            <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={initialTown ? `Full hotel name in ${initialTown}` : 'Full hotel name and town'} required />
+            <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} required />
           </div>
 
           {!expanded && (
             <div className="field full">
-              <button className="btn booking-continue" type="button" disabled={!hotelReady} aria-disabled={!hotelReady} onClick={() => { if (hotelReady) setExpanded(true); }}>
+              <button className="btn booking-continue" type="button" disabled={!firstStageReady} aria-disabled={!firstStageReady} onClick={() => { if (firstStageReady) setExpanded(true); }}>
                 Continue with flight & passenger details · €{total}
               </button>
-              <div className="form-note">{hotelReady ? 'The form expands only when you are ready to add flight, passenger and passport details.' : 'Enter the full hotel name and town to continue.'}</div>
+              <div className="form-note">{firstStageReady ? 'The form expands only when the transfer details above are complete.' : 'Select the town and enter the flight date, flight time and full hotel name to continue.'}</div>
             </div>
           )}
 
           {expanded && <>
-          <div className="field">
-            <label htmlFor={`date-${compact ? 'compact' : 'full'}`}>{isDepartureOnly ? 'Departure transfer date' : 'Arrival / first transfer date'}</label>
-            <input id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
-          </div>
 
           {(isArrivalOnly || journey === 'round-trip') && (
             <div className="field">
@@ -263,10 +322,14 @@ export function BookingForm({
           {journey === 'round-trip' && (
             <>
               <div className="field">
-                <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return transfer date</label>
-                <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
+                <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
+                <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
               </div>
               <div className="field">
+                <label htmlFor={`return-time-${compact ? 'compact' : 'full'}`}>Return flight time</label>
+                <input id={`return-time-${compact ? 'compact' : 'full'}`} name="returnTransferTime" type="time" value={returnTransferTime} onChange={(e) => setReturnTransferTime(e.target.value)} required />
+              </div>
+              <div className="field full">
                 <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>
                 <input id={`return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="e.g. TK2011" required />
               </div>
@@ -307,6 +370,7 @@ export function BookingForm({
               <div><dt>Service</dt><dd>{transferType === 'shuttle' ? 'Shared Airport Shuttle' : vehicle === 'vito' ? 'Private Mercedes Vito' : 'Private Mercedes Sprinter'}</dd></div>
               <div><dt>Journey</dt><dd>{journey === 'round-trip' ? 'Round Trip' : 'One Way'} · {resolvedDirection}</dd></div>
               <div><dt>Airport</dt><dd>{airportLabels[airport]}</dd></div>
+              <div><dt>{destinationLabel}</dt><dd>{destination ? townLabels[destination] : '—'}</dd></div>
               <div><dt>Hotel</dt><dd>{hotel || '—'}</dd></div>
               <div><dt>Passengers</dt><dd>{passengers}</dd></div>
               {people.map((person, index) => <div key={index}><dt>Passenger {index + 1}</dt><dd>{person.fullName || '—'} · Passport {maskPassport(person.passport)}</dd></div>)}

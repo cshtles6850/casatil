@@ -14,7 +14,6 @@ export function Footer() {
           <div className="footer-brand">
             <h3>Cappadocia Airport Shuttle</h3>
             <p>Shared shuttle and private airport transfer between Kayseri Airport, Nevsehir Airport and central Cappadocia hotel areas.</p>
-            <a className="footer-email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
             <a className="footer-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={20} /><span>Book on WhatsApp</span></a>
           </div>
           <div>

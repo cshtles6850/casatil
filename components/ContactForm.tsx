@@ -43,7 +43,7 @@ export function ContactForm() {
       <div className="field full">
         <button className="btn btn-primary contact-submit" type="submit" disabled={status==='sending'}>{status==='sending' ? 'Sending…' : 'Send message'}</button>
         {status==='sent' && <p className="form-status" role="status">Your message has been sent. We will reply using the contact details you provided.</p>}
-        {status==='error' && <p className="form-status form-status-error" role="alert">The message could not be sent. Please try again or contact us by email or WhatsApp.</p>}
+        {status==='error' && <p className="form-status form-status-error" role="alert">The message could not be sent. Please try again or contact us on WhatsApp.</p>}
         <p className="form-note">Information submitted here is handled as described in our <a className="inline-link" href="/privacy-policy" target="_blank" rel="noreferrer">Privacy Policy</a>.</p>
       </div>
     </div>

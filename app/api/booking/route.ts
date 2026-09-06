@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic';
 type Passenger = { number?: number; fullName?: string; passport?: string };
 type RawBooking = {
   transferType?: unknown; journey?: unknown; direction?: unknown; airport?: unknown; vehicle?: unknown;
-  passengers?: unknown; hotel?: unknown; firstTransferDate?: unknown; arrivalFlight?: unknown;
-  departureFlight?: unknown; returnTransferDate?: unknown; returnFlight?: unknown; whatsapp?: unknown;
+  passengers?: unknown; destination?: unknown; hotel?: unknown; firstTransferDate?: unknown; firstTransferTime?: unknown; arrivalFlight?: unknown;
+  departureFlight?: unknown; returnTransferDate?: unknown; returnTransferTime?: unknown; returnFlight?: unknown; whatsapp?: unknown;
   passengerDetails?: unknown; notes?: unknown; total?: unknown; payment?: unknown; website?: unknown;
   submittedAt?: unknown;
 };
@@ -70,9 +70,9 @@ export async function POST(request: NextRequest) {
   const passengerCount = Number.parseInt(clean(raw.passengers, 3), 10);
   const data = {
     transferType: clean(raw.transferType, 30), journey: clean(raw.journey, 30), direction: clean(raw.direction, 60),
-    airport: clean(raw.airport, 80), vehicle: clean(raw.vehicle, 80), passengerCount,
-    hotel: clean(raw.hotel, 240), firstTransferDate: clean(raw.firstTransferDate, 30), arrivalFlight: clean(raw.arrivalFlight, 50),
-    departureFlight: clean(raw.departureFlight, 50), returnTransferDate: clean(raw.returnTransferDate, 30), returnFlight: clean(raw.returnFlight, 50),
+    airport: clean(raw.airport, 80), vehicle: clean(raw.vehicle, 80), passengerCount, destination: clean(raw.destination, 40),
+    hotel: clean(raw.hotel, 240), firstTransferDate: clean(raw.firstTransferDate, 30), firstTransferTime: clean(raw.firstTransferTime, 10), arrivalFlight: clean(raw.arrivalFlight, 50),
+    departureFlight: clean(raw.departureFlight, 50), returnTransferDate: clean(raw.returnTransferDate, 30), returnTransferTime: clean(raw.returnTransferTime, 10), returnFlight: clean(raw.returnFlight, 50),
     whatsapp: clean(raw.whatsapp, 80), notes: clean(raw.notes, 1200), payment: 'Cash to the driver',
     submittedAt: clean(raw.submittedAt, 80),
   };
@@ -87,12 +87,14 @@ export async function POST(request: NextRequest) {
     ? data.vehicle === 'Shared shuttle'
     : data.vehicle === 'Mercedes Vito (max 5)' || data.vehicle === 'Mercedes Sprinter (max 16)';
   const validPassengers = Number.isInteger(passengerCount) && passengerCount >= 1 && passengerCount <= 16 && passengers.length === passengerCount;
+  const validDestination = ['Goreme', 'Urgup', 'Uchisar', 'Avanos', 'Ortahisar', 'Cavusin'].includes(data.destination);
   const validDate = /^\d{4}-\d{2}-\d{2}$/.test(data.firstTransferDate);
+  const validTime = /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.firstTransferTime);
   const isVito = data.vehicle === 'Mercedes Vito (max 5)';
-  if (!validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDate || !data.whatsapp || !data.hotel) {
+  if (!validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !data.whatsapp || !data.hotel) {
     return reply({ ok: false, error: 'missing-or-invalid-fields' }, 400);
   }
-  if (data.journey === 'round-trip' && !/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate)) return reply({ ok: false, error: 'missing-return-fields' }, 400);
+  if (data.journey === 'round-trip' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate) || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.returnTransferTime))) return reply({ ok: false, error: 'missing-return-fields' }, 400);
   if (data.journey === 'round-trip' && data.returnTransferDate < data.firstTransferDate) return reply({ ok: false, error: 'invalid-return-date' }, 400);
   if (data.transferType === 'private' && isVito && passengerCount > 5) return reply({ ok: false, error: 'vehicle-capacity' }, 400);
   if (passengers.some((p) => !p.fullName || !p.passport)) return reply({ ok: false, error: 'missing-passenger-fields' }, 400);
@@ -111,13 +113,13 @@ export async function POST(request: NextRequest) {
     ? 'Shared Shuttle'
     : data.vehicle.includes('Vito') ? 'Private Vito' : 'Private Sprinter';
   const arrivalValue = data.arrivalFlight
-    ? `${data.firstTransferDate} · ${data.arrivalFlight}`
+    ? `${data.firstTransferDate} ${data.firstTransferTime} · ${data.arrivalFlight}`
     : '';
   const departureValue = data.departureFlight
-    ? `${data.firstTransferDate} · ${data.departureFlight}`
+    ? `${data.firstTransferDate} ${data.firstTransferTime} · ${data.departureFlight}`
     : '';
   const returnValue = data.returnTransferDate
-    ? `${data.returnTransferDate}${data.returnFlight ? ` · ${data.returnFlight}` : ''}`
+    ? `${data.returnTransferDate} ${data.returnTransferTime}${data.returnFlight ? ` · ${data.returnFlight}` : ''}`
     : '';
 
   const mainRows: Array<[string, string]> = [
@@ -125,6 +127,7 @@ export async function POST(request: NextRequest) {
     ['Service', serviceLabel],
     ['Direction', data.direction],
     ['Airport', data.airport],
+    ['Destination', data.destination],
     ...(arrivalValue ? [['Arrival', arrivalValue] as [string, string]] : []),
     ...(departureValue ? [['Departure', departureValue] as [string, string]] : []),
     ...(returnValue ? [['Return', returnValue] as [string, string]] : []),
@@ -139,9 +142,9 @@ export async function POST(request: NextRequest) {
   ];
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.BOOKING_EMAIL_TO || 'cappadociaairportshuttle@gmail.com';
+  const to = process.env.BOOKING_EMAIL_TO;
   const from = process.env.RESEND_FROM || 'Cappadocia Reservations <onboarding@resend.dev>';
-  if (!apiKey) return reply({ ok: true, email: 'not-configured' });
+  if (!apiKey || !to) return reply({ ok: true, email: 'not-configured' });
 
   const regularRows = mainRows.map(([label, value]) =>
     `<tr><td style="padding:8px;border-bottom:1px solid #eee;width:34%"><strong>${escapeHtml(label)}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`

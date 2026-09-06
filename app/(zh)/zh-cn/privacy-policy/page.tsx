@@ -22,7 +22,7 @@ export default function PrivacyPolicyZh(){return <main lang="zh-CN">
     <section className="content-section"><h2>付款资料</h2><p>标准付款方式为<strong>现金支付给司机</strong>。标准预订流程不收集或保存客户银行卡资料。</p></section>
     <section className="content-section"><h2>保存期限</h2><p>个人资料只在管理预订、提供客服、满足运营需要和适用法律义务所合理需要的期间内保存。</p></section>
     <section className="content-section"><h2>第三方服务</h2><p>网站可能使用托管、交易邮件、统计或通信服务。这些服务只在其功能需要范围内处理有限资料。通过 WhatsApp 或电子邮件发送的信息也受相应服务商自己的隐私规则约束。</p></section>
-    <section className="content-section"><h2>你的请求</h2><p>如需查询、纠正或在适用情况下请求删除与预订/留言相关的个人资料，可通过 <Link href="/zh-cn/contact-us">联系我们</Link> 或发送邮件至 <a href={`mailto:${SITE.email}`}>{SITE.email}</a>。</p></section>
+    <section className="content-section"><h2>你的请求</h2><p>如需查询、纠正或在适用情况下请求删除与预订/留言相关的个人资料，可通过 <Link href="/zh-cn/contact-us">联系我们</Link> 页面提交请求。</p></section>
     <section className="content-section"><h2>政策更新</h2><p>当网站、服务、法律义务或资料处理方式变化时，本政策可能更新，最新版本会发布在本页面。</p></section>
     <section className="content-section"><h2>服务提供方</h2><p><strong>Cappadocia Airport Shuttle</strong><br/>由 <strong>{SITE.company}</strong> 运营<br/>TURSAB No: <strong>{SITE.tursab}</strong></p></section>
   </div></section>

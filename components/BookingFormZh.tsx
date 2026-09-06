@@ -10,6 +10,7 @@ type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
 type Passenger = { fullName: string; passport: string };
+type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportDisplayLabels: Record<Airport, string> = {
   kayseri: '开塞利机场 Kayseri Airport (ASR)',
@@ -24,6 +25,37 @@ const privatePrices: Record<Airport, Record<Vehicle, number>> = {
   kayseri: { vito: 90, sprinter: 110 },
   nevsehir: { vito: 80, sprinter: 90 },
 };
+
+const townEnglishLabels: Record<Town, string> = {
+  goreme: 'Goreme',
+  urgup: 'Urgup',
+  uchisar: 'Uchisar',
+  avanos: 'Avanos',
+  ortahisar: 'Ortahisar',
+  cavusin: 'Cavusin',
+};
+const townZhLabels: Record<Town, string> = {
+  goreme: '格雷梅',
+  urgup: '于尔居普',
+  uchisar: '乌奇希萨尔',
+  avanos: '阿瓦诺斯',
+  ortahisar: '奥塔西萨',
+  cavusin: '恰武辛',
+};
+
+function initialTownKey(value: string): Town | '' {
+  const normalized = value.trim().toLowerCase();
+  const found = (Object.keys(townEnglishLabels) as Town[]).find((key) =>
+    townEnglishLabels[key].toLowerCase() === normalized || townZhLabels[key] === value.trim() || key === normalized
+  );
+  return found || '';
+}
+
+function todayInIstanbul() {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
 
 function maskPassport(value: string) {
   const clean = value.trim();
@@ -50,18 +82,24 @@ export function BookingFormZh({
   const [vehicle, setVehicle] = useState<Vehicle>('vito');
   const [passengers, setPassengers] = useState(1);
   const [people, setPeople] = useState<Passenger[]>([{ fullName: '', passport: '' }]);
+  const [destination, setDestination] = useState<Town | ''>(() => initialTownKey(initialTown));
   const [hotel, setHotel] = useState('');
   const [firstTransferDate, setFirstTransferDate] = useState('');
+  const [firstTransferTime, setFirstTransferTime] = useState('');
   const [arrivalFlight, setArrivalFlight] = useState('');
   const [departureFlight, setDepartureFlight] = useState('');
   const [returnTransferDate, setReturnTransferDate] = useState('');
+  const [returnTransferTime, setReturnTransferTime] = useState('');
   const [returnFlight, setReturnFlight] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const today = useMemo(() => todayInIstanbul(), []);
   const hotelReady = hotel.trim().length > 0;
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && firstTransferTime);
+  const sameDayBooking = Boolean(firstTransferDate && firstTransferDate === today);
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -84,6 +122,13 @@ export function BookingFormZh({
   const resolvedDirection = journey === 'round-trip'
     ? '机场 ⇄ 酒店'
     : direction === 'airport-hotel' ? '机场 → 酒店' : '酒店 → 机场';
+  const destinationLabel = journey === 'round-trip' ? '酒店所在城镇' : direction === 'airport-hotel' ? '目的地' : '上车城镇';
+  const firstDateLabel = journey === 'round-trip' || direction === 'airport-hotel' ? '抵达日期' : '离港航班日期';
+  const firstTimeLabel = journey === 'round-trip' || direction === 'airport-hotel' ? '抵达时间' : '离港航班时间';
+
+  useEffect(() => {
+    if (expanded && !firstStageReady) setExpanded(false);
+  }, [expanded, firstStageReady]);
 
   function updatePassenger(index: number, field: keyof Passenger, value: string) {
     setPeople((current) => current.map((person, i) => i === index ? { ...person, [field]: value } : person));
@@ -114,11 +159,14 @@ export function BookingFormZh({
       airport: airportApiLabels[airport],
       vehicle: vehicleEnglish,
       passengers: String(passengers),
+      destination: destination ? townEnglishLabels[destination] : '',
       hotel,
       firstTransferDate,
+      firstTransferTime,
       arrivalFlight,
       departureFlight,
       returnTransferDate,
+      returnTransferTime,
       returnFlight,
       whatsapp,
       passengerDetails: passengerPayload,
@@ -142,11 +190,14 @@ export function BookingFormZh({
       `Airport / 机场: ${airportDisplayLabels[airport]}`,
       transferType === 'private' ? `Vehicle / 车型: ${vehicleEnglish}` : '',
       `Passengers / 人数: ${passengers}`,
+      `${destinationLabel} / Town: ${destination ? `${townZhLabels[destination]} (${townEnglishLabels[destination]})` : '-'}`,
       `Hotel / 酒店住宿: ${hotel || '-'}`,
-      `First transfer date / 首段接送日期: ${firstTransferDate || '-'}`,
+      `${firstDateLabel} / Date: ${firstTransferDate || '-'}`,
+      `${firstTimeLabel} / Time: ${firstTransferTime || '-'}`,
       isArrivalOnly || journey === 'round-trip' ? `Arrival flight / 抵达航班: ${arrivalFlight || '-'}` : '',
       isDepartureOnly ? `Departure flight / 离港航班: ${departureFlight || '-'}` : '',
-      journey === 'round-trip' ? `Return transfer date / 返程接送日期: ${returnTransferDate || '-'}` : '',
+      journey === 'round-trip' ? `Return flight date / 返程航班日期: ${returnTransferDate || '-'}` : '',
+      journey === 'round-trip' ? `Return flight time / 返程航班时间: ${returnTransferTime || '-'}` : '',
       journey === 'round-trip' ? `Return flight / 返程航班: ${returnFlight || '-'}` : '',
       `Contact WhatsApp / 联系号码: ${whatsapp || '-'}`,
       ...passengerLines,
@@ -219,6 +270,14 @@ export function BookingFormZh({
           </div>
 
           <div className="field">
+            <label htmlFor={`zh-destination-${compact ? 'compact' : 'full'}`}>{destinationLabel}</label>
+            <select id={`zh-destination-${compact ? 'compact' : 'full'}`} name="destination" value={destination} onChange={(e) => setDestination(e.target.value as Town | '')} required>
+              <option value="">请选择城镇</option>
+              {(Object.keys(townZhLabels) as Town[]).map((key) => <option key={key} value={key}>{townZhLabels[key]} · {townEnglishLabels[key]}</option>)}
+            </select>
+          </div>
+
+          <div className="field full">
             <label htmlFor={`zh-passengers-${compact ? 'compact' : 'full'}`}>乘客人数</label>
             <input id={`zh-passengers-${compact ? 'compact' : 'full'}`} name="passengerCount" type="number" min="1" max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} value={passengers} onChange={(e) => { const max = transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16; setPassengers(Math.min(max, Math.max(1, Number(e.target.value) || 1))); }} required />
           </div>
@@ -233,25 +292,35 @@ export function BookingFormZh({
             </div>
           )}
 
+          <div className="field">
+            <label htmlFor={`zh-date-${compact ? 'compact' : 'full'}`}>{firstDateLabel}</label>
+            <input id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" min={today} value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
+          </div>
+
+          <div className="field">
+            <label htmlFor={`zh-time-${compact ? 'compact' : 'full'}`}>{firstTimeLabel}</label>
+            <input id={`zh-time-${compact ? 'compact' : 'full'}`} name="firstTransferTime" type="time" value={firstTransferTime} onChange={(e) => setFirstTransferTime(e.target.value)} required />
+          </div>
+
+          {sameDayBooking && (
+            <div className="field full same-day-warning">⚠️ <span>当天预订需视余位情况而定。<strong>在收到我们的 WhatsApp 确认之前，请勿将接送视为已确认。</strong></span></div>
+          )}
+
           <div className="field full">
             <label htmlFor={`zh-hotel-${compact ? 'compact' : 'full'}`}>酒店 / 住宿</label>
-            <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={initialTown ? `请填写${initialTown}的完整酒店名称` : '请填写完整酒店名称和所在城镇'} required />
+            <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} required />
           </div>
 
           {!expanded && (
             <div className="field full">
-              <button className="btn booking-continue" type="button" disabled={!hotelReady} aria-disabled={!hotelReady} onClick={() => { if (hotelReady) setExpanded(true); }}>
+              <button className="btn booking-continue" type="button" disabled={!firstStageReady} aria-disabled={!firstStageReady} onClick={() => { if (firstStageReady) setExpanded(true); }}>
                 继续填写航班与乘客资料 · €{total}
               </button>
-              <div className="form-note">{hotelReady ? '只有继续下一步后，才会展开航班、乘客与护照信息。' : '请先填写完整酒店名称和所在城镇，再继续下一步。'}</div>
+              <div className="form-note">{firstStageReady ? '以上接送信息完整后，才会展开航班、乘客和护照资料。' : '请选择城镇，并填写航班日期、时间和完整酒店名称后再继续。'}</div>
             </div>
           )}
 
           {expanded && <>
-          <div className="field">
-            <label htmlFor={`zh-date-${compact ? 'compact' : 'full'}`}>{isDepartureOnly ? '送机日期' : '抵达 / 首段接送日期'}</label>
-            <input id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
-          </div>
 
           {(isArrivalOnly || journey === 'round-trip') && (
             <div className="field">
@@ -269,8 +338,9 @@ export function BookingFormZh({
 
           {journey === 'round-trip' && (
             <>
-              <div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程接送日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div>
-              <div className="field"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
+              <div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div>
+              <div className="field"><label htmlFor={`zh-return-time-${compact ? 'compact' : 'full'}`}>返程航班时间</label><input id={`zh-return-time-${compact ? 'compact' : 'full'}`} name="returnTransferTime" type="time" value={returnTransferTime} onChange={(e) => setReturnTransferTime(e.target.value)} required /></div>
+              <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>
           )}
 
@@ -297,6 +367,7 @@ export function BookingFormZh({
               <div><dt>服务</dt><dd>{transferType === 'shuttle' ? '卡帕多奇亚机场拼车' : vehicle === 'vito' ? '私人 Mercedes Vito' : '私人 Mercedes Sprinter'}</dd></div>
               <div><dt>行程</dt><dd>{journey === 'round-trip' ? '往返' : '单程'} · {resolvedDirection}</dd></div>
               <div><dt>机场</dt><dd>{airportDisplayLabels[airport]}</dd></div>
+              <div><dt>{destinationLabel}</dt><dd>{destination ? `${townZhLabels[destination]} · ${townEnglishLabels[destination]}` : '—'}</dd></div>
               <div><dt>酒店</dt><dd>{hotel || '—'}</dd></div>
               <div><dt>人数</dt><dd>{passengers}</dd></div>
               {people.map((person, index) => <div key={index}><dt>乘客 {index + 1}</dt><dd>{person.fullName || '—'} · 护照 {maskPassport(person.passport)}</dd></div>)}
