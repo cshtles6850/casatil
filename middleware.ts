@@ -28,9 +28,11 @@ export function middleware(request: NextRequest) {
 
   const response = NextResponse.next();
 
-  // Parameterized page variants must not become indexable duplicates.
-  // Canonicals are already generated from the clean pathname in page metadata.
-  if (isGetOrHead && isPage && searchParams.size > 0) {
+  // TEMPORARY PRE-LAUNCH INDEXING BLOCK:
+  // Keep every rendered page crawlable, but prevent Google and other compliant
+  // search engines from indexing it until the multilingual launch is ready.
+  // Remove this site-wide header when the site is ready to be indexed.
+  if (isGetOrHead && isPage) {
     response.headers.set('X-Robots-Tag', 'noindex, follow');
   }
 
