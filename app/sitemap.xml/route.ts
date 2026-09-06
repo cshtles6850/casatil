@@ -11,7 +11,7 @@ type LocaleSource = {
   slugs: string[];
 };
 
-const LASTMOD = '2026-09-07';
+const LASTMOD = '2026-09-07T00:00:00+00:00';
 
 const localeSources: LocaleSource[] = [
   { prefix: '', slugs: pages.map((page) => page.slug) },
@@ -25,6 +25,8 @@ const localeSources: LocaleSource[] = [
 // Privacy Policy and Service Contract intentionally remain noindex and are
 // therefore excluded from the sitemap.
 const indexableStaticPaths = ['', 'about-us', 'contact-us'] as const;
+
+const exactRoutePattern = /^(?:(?:kayseri|nevsehir)-airport-to-(?:goreme|urgup|uchisar|avanos|ortahisar|cavusin)-shuttle|(?:goreme|urgup|uchisar|avanos|ortahisar|cavusin)-to-(?:kayseri|nevsehir)-airport-shuttle)$/;
 
 function escapeXml(value: string) {
   return value
@@ -40,6 +42,36 @@ function absoluteUrl(prefix: string, path: string) {
   return `${SITE.domain}${prefix}${cleanPath}`;
 }
 
+function sitemapMeta(prefix: string, path: string) {
+  const localized = prefix !== '';
+
+  if (path === '') {
+    return {
+      changefreq: 'weekly',
+      priority: localized ? '0.97' : '1.00',
+    };
+  }
+
+  if (path === 'about-us' || path === 'contact-us') {
+    return {
+      changefreq: 'monthly',
+      priority: localized ? '0.52' : '0.55',
+    };
+  }
+
+  if (exactRoutePattern.test(path)) {
+    return {
+      changefreq: 'monthly',
+      priority: localized ? '0.79' : '0.82',
+    };
+  }
+
+  return {
+    changefreq: 'weekly',
+    priority: localized ? '0.75' : '0.78',
+  };
+}
+
 export function GET() {
   const rows: string[] = [];
 
@@ -48,11 +80,15 @@ export function GET() {
 
     for (const path of paths) {
       const url = absoluteUrl(locale.prefix, path);
+      const meta = sitemapMeta(locale.prefix, path);
+
       rows.push([
-        '<url>',
-        `  <loc>${escapeXml(url)}</loc>`,
-        `  <lastmod>${LASTMOD}</lastmod>`,
-        '</url>',
+        '  <url>',
+        `    <loc>${escapeXml(url)}</loc>`,
+        `    <lastmod>${LASTMOD}</lastmod>`,
+        `    <changefreq>${meta.changefreq}</changefreq>`,
+        `    <priority>${meta.priority}</priority>`,
+        '  </url>',
       ].join('\n'));
     }
   }
