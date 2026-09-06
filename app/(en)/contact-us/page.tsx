@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   twitter: { card:'summary_large_image', title:'Contact Us | Cappadocia Airport Shuttle', description:'Questions about an airport shuttle, private transfer, flight change or hotel pickup? Contact Cappadocia Airport Shuttle by email or WhatsApp.', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };
 
-const whatsappMessage = encodeURIComponent('Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com).');
+const whatsappMessage = encodeURIComponent(SITE.whatsappDirectMessageEn);
 
 export default function ContactUsPage(){return <main>
   <section className="page-hero"><div className="container"><div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>Contact Us</span></div><span className="eyebrow">Booking & support</span><h1>Contact Us</h1><p className="lead">Send a question about an airport shuttle, private transfer, flight change or hotel pickup. Messages submitted here are delivered to our email inbox.</p></div></section>

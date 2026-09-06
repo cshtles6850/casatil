@@ -61,6 +61,7 @@ export function BookingFormZh({
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const hotelReady = hotel.trim().length > 0;
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -124,7 +125,6 @@ export function BookingFormZh({
       notes,
       total: `EUR ${total}`,
       payment: 'Cash to the driver',
-      website: `${SITE.domain}/zh-cn`,
       submittedAt: new Date().toISOString(),
     };
 
@@ -134,7 +134,7 @@ export function BookingFormZh({
     ]);
 
     const lines = [
-      '您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。',
+      'Booking request.',
       '',
       `Service / 服务: ${serviceEnglish}`,
       `Journey / 行程: ${journey === 'round-trip' ? 'Round Trip / 往返' : 'One Way / 单程'}`,
@@ -240,10 +240,10 @@ export function BookingFormZh({
 
           {!expanded && (
             <div className="field full">
-              <button className="btn booking-continue" type="button" onClick={() => setExpanded(true)}>
+              <button className="btn booking-continue" type="button" disabled={!hotelReady} aria-disabled={!hotelReady} onClick={() => { if (hotelReady) setExpanded(true); }}>
                 继续填写航班与乘客资料 · €{total}
               </button>
-              <div className="form-note">只有继续下一步后，才会展开航班、乘客与护照信息。</div>
+              <div className="form-note">{hotelReady ? '只有继续下一步后，才会展开航班、乘客与护照信息。' : '请先填写完整酒店名称和所在城镇，再继续下一步。'}</div>
             </div>
           )}
 

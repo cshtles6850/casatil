@@ -114,10 +114,12 @@ p { margin-top: 0; }
 .booking-summary dt { color: var(--ink-soft); }
 .booking-summary dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
 .confirm-row { display: flex; grid-template-columns: none; align-items: flex-start; gap: 8px; font-size: .8rem; cursor: pointer; }
-.confirm-row input { width: auto; margin-top: 4px; }
+.confirm-row input { width: 22px; height: 22px; min-width: 22px; flex: 0 0 22px; margin-top: 1px; cursor: pointer; }
 .booking-submit { width: 100%; }
 .booking-continue { width: 100%; background: var(--sea-dark); color: #fff; border-radius: 13px; padding: 11px 15px; box-shadow: 0 8px 22px rgba(70,85,164,.14); }
 .booking-continue:hover { background: #3f4e9b; }
+.booking-continue:disabled, .booking-continue[aria-disabled="true"] { opacity: .52; cursor: not-allowed; box-shadow: none; }
+.booking-continue:disabled:hover, .booking-continue[aria-disabled="true"]:hover { background: var(--sea-dark); }
 .prose ul.long-list { columns: 2; column-gap: 30px; padding-left: 20px; }
 .prose ul.long-list li { break-inside: avoid; }
 

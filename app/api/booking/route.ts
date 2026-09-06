@@ -106,44 +106,57 @@ export async function POST(request: NextRequest) {
   const total = expectedTotal(data);
   if (total === null) return reply({ ok: false, error: 'invalid-price-selection' }, 400);
 
-  const emailData: Record<string, string> = {
-    transferType: data.transferType,
-    journey: data.journey,
-    direction: data.direction,
-    airport: data.airport,
-    vehicle: data.vehicle,
-    passengers: String(data.passengerCount),
-    hotel: data.hotel,
-    firstTransferDate: data.firstTransferDate,
-    arrivalFlight: data.arrivalFlight,
-    departureFlight: data.departureFlight,
-    returnTransferDate: data.returnTransferDate,
-    returnFlight: data.returnFlight,
-    whatsapp: data.whatsapp,
-    notes: data.notes,
-    total: `EUR ${total}`,
-    payment: data.payment,
-    submittedAt: data.submittedAt,
-  };
+  const journeyLabel = data.journey === 'round-trip' ? 'Round Trip Transfer' : '1 Way Transfer';
+  const serviceLabel = data.transferType === 'shuttle'
+    ? 'Shared Shuttle'
+    : data.vehicle.includes('Vito') ? 'Private Vito' : 'Private Sprinter';
+  const arrivalValue = data.arrivalFlight
+    ? `${data.firstTransferDate} · ${data.arrivalFlight}`
+    : '';
+  const departureValue = data.departureFlight
+    ? `${data.firstTransferDate} · ${data.departureFlight}`
+    : '';
+  const returnValue = data.returnTransferDate
+    ? `${data.returnTransferDate}${data.returnFlight ? ` · ${data.returnFlight}` : ''}`
+    : '';
+
+  const mainRows: Array<[string, string]> = [
+    ['Transfer Type', journeyLabel],
+    ['Service', serviceLabel],
+    ['Direction', data.direction],
+    ['Airport', data.airport],
+    ...(arrivalValue ? [['Arrival', arrivalValue] as [string, string]] : []),
+    ...(departureValue ? [['Departure', departureValue] as [string, string]] : []),
+    ...(returnValue ? [['Return', returnValue] as [string, string]] : []),
+    ['Hotel / Accommodation', data.hotel],
+    ['Passenger Count', String(data.passengerCount)],
+    ['Contact WhatsApp', data.whatsapp],
+  ];
+  const finalRows: Array<[string, string]> = [
+    ['Total Price', `EUR ${total}`],
+    ['Payment', 'Cash to driver (EUR / USD / TRY)'],
+    ['Notes', data.notes || '—'],
+  ];
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.BOOKING_EMAIL_TO || 'cappadociaairportshuttle@gmail.com';
-  const from = process.env.RESEND_FROM || 'Cappadocia Airport Shuttle <bookings@cappadociaairportshuttle.com>';
+  const from = process.env.RESEND_FROM || 'Cappadocia Reservations <onboarding@resend.dev>';
   if (!apiKey) return reply({ ok: true, email: 'not-configured' });
 
-  const regularRows = Object.entries(emailData).filter(([, value]) => value).map(([key, value]) =>
-    `<tr><td style="padding:8px;border-bottom:1px solid #eee"><strong>${escapeHtml(key.replace(/([A-Z])/g, ' $1'))}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`
+  const regularRows = mainRows.map(([label, value]) =>
+    `<tr><td style="padding:8px;border-bottom:1px solid #eee;width:34%"><strong>${escapeHtml(label)}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`
   ).join('');
   const passengerRows = passengers.map((p) => `<tr><td style="padding:8px;border-bottom:1px solid #eee"><strong>Passenger ${p.number}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(p.fullName || '')}<br>Passport: ${escapeHtml(p.passport || '')}</td></tr>`).join('');
-  const textPassengers = passengers.map((p) => `Passenger ${p.number}: ${p.fullName}\nPassport ${p.number}: ${p.passport}`).join('\n');
-  const text = `${Object.entries(emailData).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n')}\n${textPassengers}`;
+  const finalHtmlRows = finalRows.map(([label, value]) => `<tr><td style="padding:8px;border-bottom:1px solid #eee"><strong>${escapeHtml(label)}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`).join('');
+  const textPassengers = passengers.map((p) => `Passenger ${p.number}: ${p.fullName}\nPassport: ${p.passport}`).join('\n');
+  const text = `Booking request.\n\n${mainRows.map(([label, value]) => `${label}: ${value}`).join('\n')}\n${textPassengers}\n${finalRows.map(([label, value]) => `${label}: ${value}`).join('\n')}`;
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from, to: [to], subject: `New transfer request · ${data.airport} · ${data.journey}`, text,
-      html: `<h2>New Cappadocia Airport Shuttle booking request</h2><table style="border-collapse:collapse;width:100%">${regularRows}${passengerRows}</table><p style="color:#666;font-size:12px">Passenger passport information is included because it is required for the reservation. Handle this email securely and do not forward it unnecessarily.</p>`,
+      from, to: [to], subject: `New transfer request · ${data.airport} · ${journeyLabel}`, text,
+      html: `<h2>Booking request.</h2><table style="border-collapse:collapse;width:100%">${regularRows}${passengerRows}${finalHtmlRows}</table><p style="color:#666;font-size:12px">Passenger passport information is included because it is required for the reservation. Handle this email securely and do not forward it unnecessarily.</p>`,
     }),
   });
 

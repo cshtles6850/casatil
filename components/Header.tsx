@@ -3,7 +3,7 @@ import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
-const whatsappMessage = encodeURIComponent('Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.');
+const whatsappMessage = encodeURIComponent(SITE.whatsappDirectMessageEn);
 
 const nav = [
   ['Airport Shuttle', '/'],

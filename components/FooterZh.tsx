@@ -3,7 +3,7 @@ import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { FloatingWhatsApp } from './FloatingWhatsApp';
 
-const whatsappMessage = encodeURIComponent('您好，我想通过 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）预订机场接送服务。');
+const whatsappMessage = encodeURIComponent(SITE.whatsappDirectMessageZh);
 
 export function FooterZh() {
   return (

@@ -36,10 +36,10 @@ export async function POST(request: NextRequest) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO || process.env.BOOKING_EMAIL_TO || 'cappadociaairportshuttle@gmail.com';
-  const from = process.env.RESEND_FROM || 'Cappadocia Airport Shuttle <bookings@cappadociaairportshuttle.com>';
+  const from = process.env.RESEND_FROM || 'Cappadocia Reservations <onboarding@resend.dev>';
   if (!apiKey) return reply({ ok:false, error:'email-not-configured' }, 503);
 
-  const text = `New website contact message\nLanguage: ${language}\nName: ${name}\nEmail: ${email}\nWhatsApp/phone: ${whatsapp || '-'}\nSubject: ${subject}\n\n${message}`;
+  const text = `Contact request.\n\nLanguage: ${language}\nName: ${name}\nEmail: ${email}\nWhatsApp/phone: ${whatsapp || '-'}\nSubject: ${subject}\n\n${message}`;
   const response = await fetch('https://api.resend.com/emails', {
     method:'POST',
     headers:{ Authorization:`Bearer ${apiKey}`, 'Content-Type':'application/json' },
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       reply_to:email,
       subject:`Website contact · ${subject}`,
       text,
-      html:`<h2>New Cappadocia Airport Shuttle contact message</h2><p><strong>Language:</strong> ${escapeHtml(language)}</p><p><strong>Name:</strong> ${escapeHtml(name)}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>WhatsApp/phone:</strong> ${escapeHtml(whatsapp || '-')}<br><strong>Subject:</strong> ${escapeHtml(subject)}</p><hr><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
+      html:`<h2>Contact request.</h2><p><strong>Language:</strong> ${escapeHtml(language)}</p><p><strong>Name:</strong> ${escapeHtml(name)}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>WhatsApp/phone:</strong> ${escapeHtml(whatsapp || '-')}<br><strong>Subject:</strong> ${escapeHtml(subject)}</p><hr><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
     }),
   });
   if (!response.ok) return reply({ ok:false, error:'send-failed' }, 502);

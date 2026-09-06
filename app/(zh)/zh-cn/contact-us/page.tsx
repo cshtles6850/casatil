@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots:{ index:true, follow:true },
   twitter:{ card:'summary_large_image', title:'联系我们｜Cappadocia Airport Shuttle', description:'咨询机场班车、私人接送、航班变更或酒店接车，可通过电子邮件或 WhatsApp 联系 Cappadocia Airport Shuttle。', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };
-const whatsappMessage=encodeURIComponent('您好，我想联系 Cappadocia Airport Shuttle（cappadociaairportshuttle.com）。');
+const whatsappMessage = encodeURIComponent(SITE.whatsappDirectMessageZh);
 export default function ContactUsZh(){return <main lang="zh-CN">
   <section className="page-hero"><div className="container"><div className="breadcrumb"><Link href="/zh-cn">首页</Link><span>›</span><span>联系我们</span></div><span className="eyebrow">预订与客服</span><h1>联系我们</h1><p className="lead">可咨询机场拼车、私人接送、航班变更或酒店接车。此表单提交的消息会发送到我们的联系邮箱。</p></div></section>
   <section className="section page-content-section"><div className="container contact-grid"><div className="contact-card"><h2>发送消息</h2><p>一般问题可以使用这里。如果航班、酒店和乘客信息已经确定并准备预订，首页预订表单会更直接。</p><ContactFormZh/></div><aside className="contact-aside">

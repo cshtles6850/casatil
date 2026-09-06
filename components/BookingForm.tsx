@@ -57,6 +57,7 @@ export function BookingForm({
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const hotelReady = hotel.trim().length > 0;
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -115,7 +116,6 @@ export function BookingForm({
       notes,
       total: `EUR ${total}`,
       payment: 'Cash to the driver',
-      website: SITE.domain,
       submittedAt: new Date().toISOString(),
     };
 
@@ -125,7 +125,7 @@ export function BookingForm({
     ]);
 
     const lines = [
-      'Hello, I’m contacting Cappadocia Airport Shuttle (cappadociaairportshuttle.com) to book a transfer.',
+      'Booking request.',
       '',
       `Service: ${transferType === 'shuttle' ? 'Shared Airport Shuttle' : 'Private Airport Transfer'}`,
       `Journey: ${journey === 'round-trip' ? 'Round Trip' : 'One Way'}`,
@@ -233,10 +233,10 @@ export function BookingForm({
 
           {!expanded && (
             <div className="field full">
-              <button className="btn booking-continue" type="button" onClick={() => setExpanded(true)}>
+              <button className="btn booking-continue" type="button" disabled={!hotelReady} aria-disabled={!hotelReady} onClick={() => { if (hotelReady) setExpanded(true); }}>
                 Continue with flight & passenger details · €{total}
               </button>
-              <div className="form-note">The form expands only when you are ready to add flight, passenger and passport details.</div>
+              <div className="form-note">{hotelReady ? 'The form expands only when you are ready to add flight, passenger and passport details.' : 'Enter the full hotel name and town to continue.'}</div>
             </div>
           )}
 
