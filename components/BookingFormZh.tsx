@@ -142,7 +142,7 @@ export function BookingFormZh({
       `Airport / 机场: ${airportDisplayLabels[airport]}`,
       transferType === 'private' ? `Vehicle / 车型: ${vehicleEnglish}` : '',
       `Passengers / 人数: ${passengers}`,
-      `Hotel / 酒店区域: ${hotel || '-'}`,
+      `Hotel / 酒店住宿: ${hotel || '-'}`,
       `First transfer date / 首段接送日期: ${firstTransferDate || '-'}`,
       isArrivalOnly || journey === 'round-trip' ? `Arrival flight / 抵达航班: ${arrivalFlight || '-'}` : '',
       isDepartureOnly ? `Departure flight / 离港航班: ${departureFlight || '-'}` : '',
@@ -280,7 +280,7 @@ export function BookingFormZh({
           </div>
 
           <div className="field full passenger-block">
-            <div className="passenger-heading"><div><strong>乘客信息</strong><span>运营公司要求姓名与护照号码用于预订和接送操作。</span></div></div>
+            <div className="passenger-heading"><div><strong>乘客信息</strong><span>姓名与护照号码是每笔预订所需资料。</span></div></div>
             {people.map((person, index) => (
               <div className="passenger-row" key={index}>
                 <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名（与护照一致）</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', e.target.value)} autoComplete={index === 0 ? 'name' : 'off'} required /></div>
@@ -289,7 +289,7 @@ export function BookingFormZh({
             ))}
           </div>
 
-          <div className="field full"><label htmlFor={`zh-notes-${compact ? 'compact' : 'full'}`}>备注（可选）</label><textarea id={`zh-notes-${compact ? 'compact' : 'full'}`} name="notes" rows={compact ? 2 : 3} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="行李、儿童座椅、酒店道路或其他需要说明的信息" /></div>
+          <div className="field full"><label htmlFor={`zh-notes-${compact ? 'compact' : 'full'}`}>备注（可选）</label><textarea id={`zh-notes-${compact ? 'compact' : 'full'}`} name="notes" rows={compact ? 2 : 3} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="行李、儿童座椅、酒店周边道路或其他需要说明的信息" /></div>
 
           <div className="field full booking-summary">
             <div className="booking-summary-head"><strong>预订摘要</strong><strong className="summary-total">€{total}</strong></div>
@@ -312,7 +312,7 @@ export function BookingFormZh({
 
           <div className="field full">
             <button className="btn btn-whatsapp booking-submit" type="submit"><WhatsAppIcon size={20} /> 提交并继续到 WhatsApp</button>
-            <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨；穆斯塔法帕夏（Mustafapasa）需要私人接送询价。</div>
+            <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨。</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
           </>}

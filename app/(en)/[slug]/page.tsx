@@ -15,6 +15,51 @@ import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInline
 export const dynamicParams = false;
 export function generateStaticParams() { return pages.map((page) => ({ slug: page.slug })); }
 
+const WEBPAGE_GUIDE_SLUGS = new Set([
+  'cappadocia-airport',
+  'nearest-airport-to-cappadocia',
+  'kayseri-or-nevsehir-airport-for-cappadocia',
+  'cappadocia-shared-shuttle-vs-private-transfer',
+  'istanbul-to-cappadocia',
+  'cappadocia-to-istanbul',
+]);
+
+function airportSchema(airportKey: keyof typeof airports) {
+  const airport = airports[airportKey];
+  return {
+    '@type': 'Airport',
+    name: airportKey === 'nevsehir' ? airport.fullName : airport.name,
+    alternateName: airportKey === 'nevsehir' ? airport.name : airport.fullName,
+    iataCode: airport.code,
+  };
+}
+
+function serviceAreaServed(page: SeoPage) {
+  if (page.route) return [airportSchema(page.route.airport), { '@type': 'Place', name: towns[page.route.town].name }];
+
+  const townPlaces = (Object.keys(towns) as (keyof typeof towns)[]).map((key) => ({ '@type': 'Place', name: towns[key].name }));
+  if (page.slug === 'goreme-airport-transfer') return [airportSchema('kayseri'), airportSchema('nevsehir'), { '@type': 'Place', name: towns.goreme.name }];
+  if (page.slug.includes('kayseri') && !page.slug.includes('nevsehir')) return [airportSchema('kayseri'), ...townPlaces];
+  if (page.slug.includes('nevsehir') && !page.slug.includes('kayseri')) return [airportSchema('nevsehir'), ...townPlaces];
+  return [airportSchema('kayseri'), airportSchema('nevsehir'), ...townPlaces];
+}
+
+function AirportComparisonTables() {
+  const rows = (Object.keys(towns) as (keyof typeof towns)[]).map((key) => ({ key, town: towns[key] }));
+  return <section className="content-section airport-comparison-tables" aria-label="Kayseri and Nevsehir airport comparison">
+    <h2>Airport Distance & Transfer Time by Town</h2>
+    <div className="table-scroll"><table><thead><tr><th>Town</th><th>Nevsehir (NAV)</th><th>Kayseri (ASR)</th></tr></thead><tbody>
+      {rows.map(({ key, town }) => <tr key={key}><th scope="row">{town.name}</th><td>{town.distanceNevsehir} / {town.timeNevsehir}</td><td>{town.distanceKayseri} / {town.timeKayseri}</td></tr>)}
+    </tbody></table></div>
+    <h2>Shared Shuttle & Private Transfer Prices</h2>
+    <div className="table-scroll"><table><thead><tr><th>Service</th><th>Nevsehir (NAV)</th><th>Kayseri (ASR)</th></tr></thead><tbody>
+      <tr><th scope="row">Shared shuttle</th><td>€15 / person</td><td>€15 / person</td></tr>
+      <tr><th scope="row">Private Vito</th><td>€80 / vehicle</td><td>€90 / vehicle</td></tr>
+      <tr><th scope="row">Private Sprinter</th><td>€90 / vehicle</td><td>€110 / vehicle</td></tr>
+    </tbody></table></div>
+  </section>;
+}
+
 function plainRichText(text: string) {
   return text
     .replace(/\[\[([^\]|]+)\|[^\]]+\]\]/g, '$1')
@@ -26,15 +71,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params; const page = pageBySlug.get(slug); if (!page) return {};
   return {
     title: { absolute: page.title }, description: page.description,
-    keywords: [page.primaryKeyword, ...(page.secondaryKeywords || [])],
     alternates: { canonical: `/${page.slug}`, languages: { en: `/${page.slug}`, 'zh-CN': `/zh-cn/${page.slug}`, 'x-default': `/${page.slug}` } },
-    openGraph: { type: 'article', title: page.title, description: page.description, url: `${SITE.domain}/${page.slug}`, images: [{ url: '/cappadocia-airport-shuttle-vito-sprinter.webp', width: 1200, height: 675, alt: 'Cappadocia Airport Shuttle Vito and Sprinter' }] },
-    twitter: page.twitterTitle || page.twitterDescription ? {
+    openGraph: { type: 'website', title: page.title, description: page.description, url: `${SITE.domain}/${page.slug}`, images: [{ url: '/cappadocia-airport-shuttle-vito-sprinter.webp', width: 1200, height: 675, alt: 'Cappadocia Airport Shuttle Vito and Sprinter' }] },
+    twitter: {
       card: 'summary_large_image',
       title: page.twitterTitle ?? page.title,
       description: page.twitterDescription ?? page.description,
       images: ['/cappadocia-airport-shuttle-vito-sprinter.webp'],
-    } : undefined,
+    },
   };
 }
 
@@ -96,13 +140,18 @@ function bookingDefaults(page: SeoPage) {
 }
 
 export default async function SeoPageView({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params; const page = pageBySlug.get(slug); if (!page) notFound();
+  const { slug } = await params; const page = pageBySlug.get(slug); if (!page) return notFound();
   const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: page.faq.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: plainRichText(item.a) } })) };
   const breadcrumb = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain }, { '@type': 'ListItem', position: 2, name: page.h1, item: `${SITE.domain}/${page.slug}` }] };
-  const service = {
-    '@context': 'https://schema.org', '@type': 'Service', name: page.h1, serviceType: page.primaryKeyword,
+  const primarySchema = WEBPAGE_GUIDE_SLUGS.has(page.slug) ? {
+    '@context': 'https://schema.org', '@type': 'WebPage', name: page.h1, description: page.description,
+    url: `${SITE.domain}/${page.slug}`, inLanguage: 'en',
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.domain },
+    publisher: { '@type': 'TravelAgency', name: SITE.name, url: SITE.domain },
+  } : {
+    '@context': 'https://schema.org', '@type': 'Service', name: page.h1, serviceType: page.h1,
     provider: { '@type': 'TravelAgency', name: SITE.name, url: SITE.domain },
-    areaServed: page.route ? [airports[page.route.airport].name, towns[page.route.town].name] : ['Cappadocia', 'Kayseri Airport', 'Nevsehir Airport'],
+    areaServed: serviceAreaServed(page),
     offers: page.route ? [
       { '@type': 'Offer', price: '15', priceCurrency: 'EUR', description: 'Shared shuttle per person, one way' },
       { '@type': 'Offer', price: String(airports[page.route.airport].vito), priceCurrency: 'EUR', description: 'Private Mercedes Vito, one way, up to 5 passengers' },
@@ -116,7 +165,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
   const mainClassName = [page.route ? 'route-page' : '', hasBookingForm ? 'has-booking-cta' : ''].filter(Boolean).join(' ') || undefined;
 
   return <main className={mainClassName}>
-    <JsonLd data={faqSchema} /><JsonLd data={breadcrumb} /><JsonLd data={service} />
+    <JsonLd data={faqSchema} /><JsonLd data={breadcrumb} /><JsonLd data={primarySchema} />
     <section className="page-hero"><div className="container">
       <div className="breadcrumb"><Link href="/">Home</Link><span>›</span><span>{page.h1}</span></div>
       <span className="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p className="lead">{page.lead}</p>
@@ -128,6 +177,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
     <section className="section page-content-section"><div className={page.route ? 'container route-page-grid' : hasBookingForm ? `container content-grid${usesGuideInlineBooking ? ' guide-booking-grid' : ''}` : 'container guide-content-wrap'}>
       {usesGuideInlineBooking ? <>
         <article className="prose guide-booking-intro">
+          {page.slug === 'kayseri-or-nevsehir-airport-for-cappadocia' && <AirportComparisonTables />}
           {page.sections.slice(0, guideIntroSectionCount).map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
         </article>
         <aside className="sidebar guide-booking-sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>

@@ -590,3 +590,10 @@ p { margin-top: 0; }
   .meeting-step-copy strong { font-size: .96rem; }
   .meeting-step-copy span { font-size: .86rem; }
 }
+
+/* Compact comparison tables used on the NAV vs ASR guide. */
+.airport-comparison-tables .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 1.25rem}
+.airport-comparison-tables table{width:100%;border-collapse:collapse;min-width:560px;font-size:.95rem}
+.airport-comparison-tables th,.airport-comparison-tables td{padding:.72rem .8rem;border:1px solid var(--border);text-align:left;vertical-align:top}
+.airport-comparison-tables thead th{font-weight:700;background:rgba(0,0,0,.025)}
+.airport-comparison-tables tbody th{font-weight:650}

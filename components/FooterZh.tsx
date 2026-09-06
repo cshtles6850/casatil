@@ -41,7 +41,7 @@ export function FooterZh() {
         </div>
         <div className="footer-bottom">
           <span className="footer-copyright">© {new Date().getFullYear()} Cappadocia Airport Shuttle</span>
-          <span className="footer-agency-line">{SITE.company} · TURSAB No: {SITE.tursab}</span>
+          <span className="footer-agency-line">{SITE.company} · TURSAB 编号：{SITE.tursab}</span>
         </div>
       </div>
     </footer>

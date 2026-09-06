@@ -248,14 +248,14 @@ export function BookingForm({
 
           {(isArrivalOnly || journey === 'round-trip') && (
             <div className="field">
-              <label htmlFor={`arrival-flight-${compact ? 'compact' : 'full'}`}>Arrival flight code</label>
+              <label htmlFor={`arrival-flight-${compact ? 'compact' : 'full'}`}>Arrival flight number</label>
               <input id={`arrival-flight-${compact ? 'compact' : 'full'}`} name="arrivalFlight" value={arrivalFlight} onChange={(e) => setArrivalFlight(e.target.value)} placeholder="e.g. TK2010" required />
             </div>
           )}
 
           {isDepartureOnly && (
             <div className="field">
-              <label htmlFor={`departure-flight-${compact ? 'compact' : 'full'}`}>Departure flight code</label>
+              <label htmlFor={`departure-flight-${compact ? 'compact' : 'full'}`}>Departure flight number</label>
               <input id={`departure-flight-${compact ? 'compact' : 'full'}`} name="departureFlight" value={departureFlight} onChange={(e) => setDepartureFlight(e.target.value)} placeholder="e.g. TK2011" required />
             </div>
           )}
@@ -267,7 +267,7 @@ export function BookingForm({
                 <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
               </div>
               <div className="field">
-                <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight code</label>
+                <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>
                 <input id={`return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="e.g. TK2011" required />
               </div>
             </>
@@ -280,7 +280,7 @@ export function BookingForm({
 
           <div className="field full passenger-block">
             <div className="passenger-heading">
-              <div><strong>Passenger information</strong><span>Names and passport numbers are used for reservation and transfer operation.</span></div>
+              <div><strong>Passenger information</strong><span>Names and passport numbers are required for every reservation.</span></div>
             </div>
             {people.map((person, index) => (
               <div className="passenger-row" key={index}>
@@ -322,7 +322,7 @@ export function BookingForm({
 
           <div className="field full">
             <button className="btn btn-whatsapp booking-submit" type="submit"><WhatsAppIcon size={20} /> Submit & Continue on WhatsApp</button>
-            <div className="form-note">Your booking is confirmed only after confirmation on WhatsApp. Shared shuttle coverage includes Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar; Mustafapasa requires a private transfer request.</div>
+            <div className="form-note">Your booking is confirmed only after confirmation on WhatsApp. Shared shuttle coverage includes Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar.</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
           </>}

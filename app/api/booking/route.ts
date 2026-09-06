@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from, to: [to], subject: `New transfer request · ${data.airport} · ${data.journey}`, text,
-      html: `<h2>New Cappadocia Airport Shuttle booking request</h2><table style="border-collapse:collapse;width:100%">${regularRows}${passengerRows}</table><p style="color:#666;font-size:12px">Passenger passport information is included because it is required for transfer operation. Handle this email securely and do not forward it unnecessarily.</p>`,
+      html: `<h2>New Cappadocia Airport Shuttle booking request</h2><table style="border-collapse:collapse;width:100%">${regularRows}${passengerRows}</table><p style="color:#666;font-size:12px">Passenger passport information is included because it is required for the reservation. Handle this email securely and do not forward it unnecessarily.</p>`,
     }),
   });
 
