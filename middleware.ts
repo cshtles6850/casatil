@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
   const isPage = isPageRequest(pathname);
 
   // Enforce one canonical URL shape with an explicit HTTP 301.
-  // Query parameters are preserved; the resulting parameterized page is then noindexed.
+  // Query parameters are preserved. Parameterized page URLs remain noindexed below.
   if (isGetOrHead && isPage && pathname !== '/' && pathname.endsWith('/')) {
     const cleanUrl = request.nextUrl.clone();
     cleanUrl.pathname = pathname.replace(/\/+$/, '');
@@ -28,11 +28,9 @@ export function middleware(request: NextRequest) {
 
   const response = NextResponse.next();
 
-  // TEMPORARY PRE-LAUNCH INDEXING BLOCK:
-  // Keep every rendered page crawlable, but prevent Google and other compliant
-  // search engines from indexing it until the multilingual launch is ready.
-  // Remove this site-wide header when the site is ready to be indexed.
-  if (isGetOrHead && isPage) {
+  // Clean production pages are indexable. Keep parameterized variants out of
+  // the index to avoid duplicate URLs while still allowing crawlers to follow links.
+  if (isGetOrHead && isPage && searchParams.size > 0) {
     response.headers.set('X-Robots-Tag', 'noindex, follow');
   }
 

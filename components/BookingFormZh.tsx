@@ -281,7 +281,13 @@ export function BookingFormZh({
             </select>
           </div>
 
-          <PassengerCounter id={`zh-passengers-${compact ? 'compact' : 'full'}`} label="乘客人数" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
+          <div className="field full passenger-hotel-row">
+            <PassengerCounter id={`zh-passengers-${compact ? 'compact' : 'full'}`} label="乘客人数" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
+            <div className="field passenger-hotel-field">
+              <label htmlFor={`zh-hotel-${compact ? 'compact' : 'full'}`}>酒店 / 住宿</label>
+              <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} required />
+            </div>
+          </div>
 
           {transferType === 'private' && (
             <div className="field full">
@@ -303,11 +309,6 @@ export function BookingFormZh({
           {sameDayBooking && (
             <div className="field full same-day-warning">⚠️ <span>当天预订需视余位情况而定。<strong>在收到我们的 WhatsApp 确认之前，请勿将接送视为已确认。</strong></span></div>
           )}
-
-          <div className="field full">
-            <label htmlFor={`zh-hotel-${compact ? 'compact' : 'full'}`}>酒店 / 住宿</label>
-            <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} required />
-          </div>
 
           {!expanded && (
             <div className="field full">

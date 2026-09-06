@@ -263,7 +263,13 @@ export function BookingForm({
             </select>
           </div>
 
-          <PassengerCounter id={`passengers-${compact ? 'compact' : 'full'}`} label="Passenger count" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
+          <div className="field full passenger-hotel-row">
+            <PassengerCounter id={`passengers-${compact ? 'compact' : 'full'}`} label="Passenger count" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
+            <div className="field passenger-hotel-field">
+              <label htmlFor={`hotel-${compact ? 'compact' : 'full'}`}>Hotel / accommodation</label>
+              <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} required />
+            </div>
+          </div>
 
           {transferType === 'private' && (
             <div className="field full">
@@ -285,11 +291,6 @@ export function BookingForm({
           {sameDayBooking && (
             <div className="field full same-day-warning">⚠️ <span>Same-day bookings are subject to availability. <strong>Please wait for our WhatsApp confirmation before considering your transfer confirmed.</strong></span></div>
           )}
-
-          <div className="field full">
-            <label htmlFor={`hotel-${compact ? 'compact' : 'full'}`}>Hotel / accommodation</label>
-            <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} required />
-          </div>
 
           {!expanded && (
             <div className="field full">

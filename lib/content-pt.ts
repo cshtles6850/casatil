@@ -460,7 +460,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "A volta para NAV depende da cidade do hotel",
         "paragraphs": [
-          "A tarifa compartilhada de volta ao Aeroporto de Nevsehir é €15 por pessoa. Use o voo real de saída e a rota correspondente na página [[Capadócia para o Aeroporto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]], para que uma coleta em Goreme não seja planejada da mesma forma que em Uchisar, Avanos ou outra área hoteleira."
+          "A tarifa compartilhada de volta ao Aeroporto de Nevsehir é €15 por pessoa. Use o voo real de saída e a rota correspondente na página [[Capadócia para o Aeroporto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]], para que um embarque em Goreme não seja planejado da mesma forma que em Uchisar, Avanos ou outra área hoteleira."
         ]
       },
       {
@@ -517,7 +517,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "O planejamento da saída para ASR começa antes do que a distância no mapa sugere",
         "paragraphs": [
-          "Para a maioria dos hotéis da região central, o Aeroporto de Kayseri é a saída rodoviária mais longa. O horário confirmado de embarque no hotel considera o voo real de saída, a cidade, outras coletas compartilhadas e a margem necessária no aeroporto — não basta simplesmente inverter o tempo da viagem de chegada."
+          "Para a maioria dos hotéis da região central, o Aeroporto de Kayseri é a saída rodoviária mais longa. O horário confirmado de embarque no hotel considera o voo real de saída, a cidade, outros embarques compartilhados e a margem necessária no aeroporto — não basta simplesmente inverter o tempo da viagem de chegada."
         ]
       },
       {
@@ -529,13 +529,13 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Esteja pronto antes do início da janela de embarque para ASR",
         "paragraphs": [
-          "Como a estrada até Kayseri é mais longa, esteja com a bagagem pronta e no ponto confirmado antes do início da janela de embarque. Não calcule a saída apenas pelo tempo direto de estrada; coletas em outros hotéis e a margem de chegada ao aeroporto já fazem parte do horário confirmado."
+          "Como a estrada até Kayseri é mais longa, esteja com a bagagem pronta e no ponto confirmado antes do início da janela de embarque. Não calcule a saída apenas pelo tempo direto de estrada; embarques em outros hotéis e a margem de chegada ao aeroporto já fazem parte do horário confirmado."
         ]
       },
       {
         "heading": "Transfer privativo para Kayseri em uma saída exclusiva",
         "paragraphs": [
-          "Um Vito [[privativo|private-airport-transfer-cappadocia]] custa €90 por trecho para até 5 passageiros, e um Sprinter €110 para até 16. O serviço privativo elimina coletas em hotéis de outros passageiros, mas o veículo ainda precisa de um ponto seguro e acessível na propriedade."
+          "Um Vito [[privativo|private-airport-transfer-cappadocia]] custa €90 por trecho para até 5 passageiros, e um Sprinter €110 para até 16. O serviço privativo elimina embarques em hotéis de outros passageiros, mas o veículo ainda precisa de um ponto seguro e acessível na propriedade."
         ]
       },
       {
@@ -552,7 +552,7 @@ export const ptPages: PtSeoPage[] = [
       },
       {
         "q": "Por que não devo calcular o embarque para ASR apenas pelo tempo direto de estrada?",
-        "a": "A estrada mais longa até o aeroporto, o acesso ao hotel e outras coletas compartilhadas precisam estar incluídos no horário confirmado."
+        "a": "A estrada mais longa até o aeroporto, o acesso ao hotel e outros embarques compartilhados precisam estar incluídos no horário confirmado."
       },
       {
         "q": "Quais cidades podem usar o shuttle compartilhado para ASR?",
@@ -587,7 +587,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "NAV é mais perto, mas o horário de embarque no hotel continua vindo do voo",
         "paragraphs": [
-          "O Aeroporto de Nevsehir tem uma distância rodoviária menor a partir de muitas cidades centrais da Capadócia, mas isso não é motivo para inventar um horário mais tarde. A coleta compartilhada é confirmada com base no voo real de saída, na localização do hotel e no planejamento dos passageiros daquele dia."
+          "O Aeroporto de Nevsehir tem uma distância rodoviária menor a partir de muitas cidades centrais da Capadócia, mas isso não é motivo para inventar um horário mais tarde. O embarque compartilhado é confirmado com base no voo real de saída, na localização do hotel e no planejamento dos passageiros daquele dia."
         ]
       },
       {
@@ -599,13 +599,13 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Esteja pronto antes do início da janela de embarque para NAV",
         "paragraphs": [
-          "NAV é mais próximo de muitas cidades centrais, mas o horário confirmado ainda considera o acesso ao hotel, outras coletas compartilhadas e a margem necessária antes do voo. Deixe a bagagem pronta e esteja no ponto confirmado antes do início da janela de embarque."
+          "NAV é mais próximo de muitas cidades centrais, mas o horário confirmado ainda considera o acesso ao hotel, outros embarques compartilhados e a margem necessária antes do voo. Deixe a bagagem pronta e esteja no ponto confirmado antes do início da janela de embarque."
         ]
       },
       {
         "heading": "Transfer privativo para Nevsehir é a alternativa direta",
         "paragraphs": [
-          "Um Vito [[privativo|private-airport-transfer-cappadocia]] custa €80 por trecho para até 5 passageiros, e um Sprinter €90 para até 16. O serviço evita coletas em hotéis de outros passageiros, embora o ponto final de encontro ainda dependa do acesso seguro do veículo."
+          "Um Vito [[privativo|private-airport-transfer-cappadocia]] custa €80 por trecho para até 5 passageiros, e um Sprinter €90 para até 16. O serviço evita embarques em hotéis de outros passageiros, embora o ponto final de encontro ainda dependa do acesso seguro do veículo."
         ]
       },
       {
@@ -622,7 +622,7 @@ export const ptPages: PtSeoPage[] = [
       },
       {
         "q": "Posso sair mais tarde só porque NAV é mais perto?",
-        "a": "Não altere o horário por conta própria. Use o horário confirmado com base no seu voo, hotel e coleta compartilhada."
+        "a": "Não altere o horário por conta própria. Use o horário confirmado com base no seu voo, hotel e embarque compartilhado."
       },
       {
         "q": "Quais cidades podem usar o shuttle compartilhado para NAV?",
@@ -730,7 +730,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Planejando o embarque no hotel em Goreme para o voo de volta",
         "paragraphs": [
-          "No dia da saída, volte ao ponto de embarque confirmado com a bagagem pronta antes do início da janela de coleta. O movimento das estradas ao nascer do sol, o clima de inverno e a ordem das coletas nos hotéis podem afetar o horário, por isso siga o horário confirmado em vez de calcular a saída apenas pela distância no mapa.",
+          "No dia da saída, volte ao ponto de embarque confirmado com a bagagem pronta antes do início da janela de embarque. O movimento das estradas ao nascer do sol, o clima de inverno e a ordem dos embarques nos hotéis podem afetar o horário, por isso siga o horário confirmado em vez de calcular a saída apenas pela distância no mapa.",
           "Para ASR, use [[Goreme para o Aeroporto de Kayseri|goreme-to-kayseri-airport-shuttle]]; para NAV, use [[Goreme para o Aeroporto de Nevsehir|goreme-to-nevsehir-airport-shuttle]]."
         ]
       }
@@ -754,7 +754,7 @@ export const ptPages: PtSeoPage[] = [
       },
       {
         "q": "O movimento dos balões interfere no embarque em Goreme?",
-        "a": "Pode interferir perto do nascer do sol. O movimento das estradas e as coletas em hotéis são motivos para seguir o horário confirmado em vez de calcular apenas pela distância do mapa."
+        "a": "Pode interferir perto do nascer do sol. O movimento das estradas e os embarques em hotéis são motivos para seguir o horário confirmado em vez de calcular apenas pela distância do mapa."
       },
       {
         "q": "Devo informar o nome do hotel ou apenas Goreme?",
@@ -1417,7 +1417,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Goreme para o Aeroporto de Kayseri (ASR): shuttle €15 por pessoa, 75 km, 60–75 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Goreme → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Goreme para o Aeroporto de Kayseri",
-    "lead": "O embarque no hotel em Goreme com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 75 km, com tempo típico de 60–75 minutos. As ruas íngremes e dos hotéis-caverna de Goreme podem acrescentar tempo ao embarque antes de o veículo alcançar a estrada principal. Siga o horário de embarque confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Goreme com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 75 km, com tempo típico de 60–75 minutos. As ruas íngremes e dos hotéis-caverna de Goreme podem acrescentar tempo ao embarque antes de o veículo alcançar a estrada principal. Siga o horário de embarque confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -1427,13 +1427,13 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "ASR exige uma margem real de saída desde Goreme",
         "paragraphs": [
-          "De Goreme ao Aeroporto de Kayseri são cerca de 75 km / 60–75 minutos por estrada. O horário de embarque confirmado também considera outras coletas em hotéis e a margem necessária para chegar ao aeroporto, por isso pode ser mais cedo do que a duração da estrada, isoladamente, sugere."
+          "De Goreme ao Aeroporto de Kayseri são cerca de 75 km / 60–75 minutos por estrada. O horário de embarque confirmado também considera outros embarques em hotéis e a margem necessária para chegar ao aeroporto, por isso pode ser mais cedo do que a duração da estrada, isoladamente, sugere."
         ]
       },
       {
         "heading": "Por que o horário de embarque em Goreme pode variar",
         "paragraphs": [
-          "As coletas compartilhadas em hotéis de Goreme podem acrescentar tempo antes de o veículo chegar à estrada principal, especialmente quando várias estão programadas. Siga o horário confirmado enviado para sua reserva em vez de calcular a saída apenas pelo tempo de viagem. Nas manhãs de balões, o trânsito local também pode aumentar antes de o veículo alcançar a estrada aberta.",
+          "Os embarques compartilhados em hotéis de Goreme podem acrescentar tempo antes de o veículo chegar à estrada principal, especialmente quando vários estão programados. Siga o horário confirmado enviado para sua reserva em vez de calcular a saída apenas pelo tempo de viagem. Nas manhãs de balões, o trânsito local também pode aumentar antes de o veículo alcançar a estrada aberta.",
           "Vai voar por NAV? Veja [[Shuttle de Goreme para o Aeroporto de Nevsehir|goreme-to-nevsehir-airport-shuttle]]. Para comparar os dois aeroportos, consulte [[Transfer do Aeroporto para Goreme|goreme-airport-transfer]]."
         ]
       },
@@ -1447,7 +1447,7 @@ export const ptPages: PtSeoPage[] = [
     "faq": [
       {
         "q": "Por que o embarque em Goreme pode ser mais cedo do que os 60–75 minutos de estrada sugerem?",
-        "a": "Uma saída compartilhada pode incluir tempo para coletas em hotéis, além da margem necessária no aeroporto antes do voo."
+        "a": "Uma saída compartilhada pode incluir tempo para embarques em hotéis, além da margem necessária no aeroporto antes do voo."
       },
       {
         "q": "Posso reservar um veículo privativo nesta rota em vez do shuttle compartilhado?",
@@ -1471,7 +1471,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Urgup para o Aeroporto de Kayseri (ASR): shuttle €15 por pessoa, 70 km, 60–75 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Urgup → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Urgup para o Aeroporto de Kayseri",
-    "lead": "O embarque no hotel em Urgup com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 70 km, com tempo típico de 60–75 minutos. As hospedagens de Urgup se distribuem entre ruas centrais e áreas nas encostas, por isso o ponto de embarque confirmado é importante antes de começar o trajeto ao aeroporto. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Urgup com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 70 km, com tempo típico de 60–75 minutos. As hospedagens de Urgup se distribuem entre ruas centrais e áreas nas encostas, por isso o ponto de embarque confirmado é importante antes de começar o trajeto ao aeroporto. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -1481,7 +1481,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Por que o ponto de embarque em Urgup é importante",
         "paragraphs": [
-          "As hospedagens de Urgup se distribuem entre ruas centrais e áreas nas encostas, por isso a própria coleta no hotel pode acrescentar tempo antes de o veículo chegar à estrada principal. Esteja pronto no ponto confirmado, sem presumir que o veículo conseguirá entrar em todas as vias antigas da cidade."
+          "As hospedagens de Urgup se distribuem entre ruas centrais e áreas nas encostas, por isso o próprio embarque no hotel pode acrescentar tempo antes de o veículo chegar à estrada principal. Esteja pronto no ponto confirmado, sem presumir que o veículo conseguirá entrar em todas as vias antigas da cidade."
         ]
       },
       {
@@ -1530,7 +1530,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Uchisar para o Aeroporto de Kayseri (ASR): shuttle €15 por pessoa, 80 km, 70–85 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Uchisar → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Uchisar para o Aeroporto de Kayseri",
-    "lead": "O embarque no hotel em Uchisar com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 80 km, com tempo típico de 70–85 minutos. As ruas íngremes da parte alta de Uchisar podem exigir um ponto de embarque acessível em vez de acesso direto a todas as portas de hotéis. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Uchisar com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 80 km, com tempo típico de 70–85 minutos. As ruas íngremes da parte alta de Uchisar podem exigir um ponto de embarque acessível em vez de acesso direto a todas as portas de hotéis. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -1587,7 +1587,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Avanos para o Aeroporto de Kayseri (ASR): shuttle €15 por pessoa, 70 km, 60–75 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Avanos → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Avanos para o Aeroporto de Kayseri",
-    "lead": "O embarque no hotel em Avanos com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 70 km, com tempo típico de 60–75 minutos. As hospedagens de Avanos ficam espalhadas por diferentes partes da cidade, por isso o nome completo do hotel ajuda a confirmar o ponto correto de embarque. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Avanos com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 70 km, com tempo típico de 60–75 minutos. As hospedagens de Avanos ficam espalhadas por diferentes partes da cidade, por isso o nome completo do hotel ajuda a confirmar o ponto correto de embarque. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -1597,7 +1597,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Avanos para o Aeroporto de Kayseri: cerca de 70 km / 60–75 minutos",
         "paragraphs": [
-          "A estimativa de 60–75 minutos cobre apenas o trajeto rodoviário. Em uma saída compartilhada, siga o horário de embarque confirmado enviado para sua reserva, pois as coletas em hotéis e a margem de chegada ao aeroporto são consideradas separadamente do tempo de estrada.",
+          "A estimativa de 60–75 minutos cobre apenas o trajeto rodoviário. Em uma saída compartilhada, siga o horário de embarque confirmado enviado para sua reserva, pois os embarques em hotéis e a margem de chegada ao aeroporto são considerados separadamente do tempo de estrada.",
           "As hospedagens de Avanos se distribuem por diferentes partes da cidade, por isso o nome completo da propriedade ajuda a equipe a confirmar o ponto correto de embarque, em vez de depender de uma localização genérica em “Avanos”.",
           "Vai voar por NAV? Veja [[Shuttle de Avanos para o Aeroporto de Nevsehir|avanos-to-nevsehir-airport-shuttle]]."
         ]
@@ -1635,7 +1635,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Ortahisar para o Aeroporto de Kayseri (ASR): shuttle €15 por pessoa, 75 km, 60–75 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Ortahisar → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Ortahisar para o Aeroporto de Kayseri",
-    "lead": "O embarque no hotel em Ortahisar com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 75 km, com tempo típico de 60–75 minutos. As ruas estreitas da parte antiga da vila podem influenciar os primeiros minutos da coleta, por isso o ponto de encontro confirmado é importante. Siga o horário de embarque confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Ortahisar com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 75 km, com tempo típico de 60–75 minutos. As ruas estreitas da parte antiga da vila podem influenciar os primeiros minutos do embarque, por isso o ponto de encontro confirmado é importante. Siga o horário de embarque confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1645,13 +1645,13 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Ortahisar para o Aeroporto de Kayseri: cerca de 75 km / 60–75 minutos",
         "paragraphs": [
-          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outras coletas compartilhadas em hotéis e da margem de chegada ao aeroporto. O acesso pela parte antiga da vila pode influenciar os primeiros minutos, por isso o ponto confirmado para sua hospedagem é a referência importante para começar a viagem, e não apenas a distância por estrada."
+          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outros embarques compartilhados em hotéis e da margem de chegada ao aeroporto. O acesso pela parte antiga da vila pode influenciar os primeiros minutos, por isso o ponto confirmado para sua hospedagem é a referência importante para começar a viagem, e não apenas a distância por estrada."
         ]
       },
       {
         "heading": "Por que o horário de embarque em Ortahisar é importante",
         "paragraphs": [
-          "Um veículo compartilhado pode fazer outras coletas em hotéis antes de deixar Ortahisar, e as ruas estreitas da vila podem influenciar o tempo necessário para chegar ao ponto confirmado. Deixe a bagagem pronta antes do início da janela de embarque para que o veículo siga até o Aeroporto de Kayseri sem atrasos desnecessários.",
+          "Um veículo compartilhado pode fazer outros embarques em hotéis antes de deixar Ortahisar, e as ruas estreitas da vila podem influenciar o tempo necessário para chegar ao ponto confirmado. Deixe a bagagem pronta antes do início da janela de embarque para que o veículo siga até o Aeroporto de Kayseri sem atrasos desnecessários.",
           "Vai voar por NAV? Veja [[Shuttle de Ortahisar para o Aeroporto de Nevsehir|ortahisar-to-nevsehir-airport-shuttle]]. Para o sentido de chegada, consulte [[Shuttle do Aeroporto de Kayseri para Ortahisar|kayseri-airport-to-ortahisar-shuttle]]."
         ]
       },
@@ -1664,8 +1664,8 @@ export const ptPages: PtSeoPage[] = [
     ],
     "faq": [
       {
-        "q": "Por que devo estar pronto com antecedência para uma coleta Ortahisar–ASR?",
-        "a": "Uma saída compartilhada pode incluir outras coletas em hotéis, por isso siga o horário confirmado enviado para sua reserva."
+        "q": "Por que devo estar pronto com antecedência para um embarque Ortahisar–ASR?",
+        "a": "Uma saída compartilhada pode incluir outros embarques em hotéis, por isso siga o horário confirmado enviado para sua reserva."
       },
       {
         "q": "Posso reservar um veículo privativo nesta rota em vez do shuttle compartilhado?",
@@ -1688,7 +1688,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Cavusin para o Aeroporto de Kayseri (ASR): shuttle €15 por pessoa, 75 km, 65–80 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Cavusin → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Cavusin para o Aeroporto de Kayseri",
-    "lead": "O embarque no hotel em Cavusin com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 75 km, com tempo típico de 65–80 minutos. As hospedagens de Cavusin podem ficar perto da estrada principal, da vila antiga ou de áreas próximas aos vales, por isso o ponto de embarque confirmado é importante. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Cavusin com destino ao Aeroporto de Kayseri (ASR) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 75 km, com tempo típico de 65–80 minutos. As hospedagens de Cavusin podem ficar perto da estrada principal, da vila antiga ou de áreas próximas aos vales, por isso o ponto de embarque confirmado é importante. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1698,7 +1698,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Cavusin para o Aeroporto de Kayseri: cerca de 75 km / 65–80 minutos",
         "paragraphs": [
-          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outras coletas compartilhadas e da margem de chegada ao aeroporto. As hospedagens de Cavusin podem ficar junto à estrada principal, mais perto da vila antiga ou em direção aos acessos dos vales, por isso o ponto confirmado para sua hospedagem é o que realmente importa ao planejar a saída."
+          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outros embarques compartilhados e da margem de chegada ao aeroporto. As hospedagens de Cavusin podem ficar junto à estrada principal, mais perto da vila antiga ou em direção aos acessos dos vales, por isso o ponto confirmado para sua hospedagem é o que realmente importa ao planejar a saída."
         ]
       },
       {
@@ -1747,7 +1747,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Goreme para o Aeroporto de Nevsehir (NAV): shuttle €15 por pessoa, 40 km, 35–45 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Goreme → NAV · shuttle para o aeroporto",
     "h1": "Shuttle de Goreme para o Aeroporto de Nevsehir",
-    "lead": "O embarque no hotel em Goreme com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 40 km, com tempo típico de 35–45 minutos. As ruas íngremes e dos hotéis-caverna de Goreme podem acrescentar tempo local à coleta antes de o veículo chegar à estrada principal. Siga o horário de embarque confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Goreme com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 40 km, com tempo típico de 35–45 minutos. As ruas íngremes e dos hotéis-caverna de Goreme podem acrescentar tempo local ao embarque antes de o veículo chegar à estrada principal. Siga o horário de embarque confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1757,11 +1757,11 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Goreme para o Aeroporto de Nevsehir: cerca de 40 km / 35–45 minutos",
         "paragraphs": [
-          "O trajeto rodoviário é relativamente curto, mas o horário de embarque confirmado também considera outras coletas em hotéis e a margem necessária para chegar ao aeroporto."
+          "O trajeto rodoviário é relativamente curto, mas o horário de embarque confirmado também considera outros embarques em hotéis e a margem necessária para chegar ao aeroporto."
         ]
       },
       {
-        "heading": "A coleta em hotel-caverna pode acrescentar tempo antes de sair de Goreme",
+        "heading": "O embarque em hotel-caverna pode acrescentar tempo antes de sair de Goreme",
         "paragraphs": [
           "A estrada de Goreme até NAV é curta, mas uma hospedagem em caverna ou em uma encosta ainda pode acrescentar tempo local antes de o veículo deixar Goreme. Em uma saída cedo, mantenha a bagagem pronta e esteja no ponto confirmado no horário, mesmo que o trajeto até NAV seja relativamente curto.",
           "Para voos por Kayseri, use [[Shuttle de Goreme para o Aeroporto de Kayseri|goreme-to-kayseri-airport-shuttle]]. Para comparar os dois aeroportos, consulte [[Transfer do Aeroporto para Goreme|goreme-airport-transfer]]."
@@ -1777,7 +1777,7 @@ export const ptPages: PtSeoPage[] = [
     "faq": [
       {
         "q": "Qual é a distância de Goreme até o Aeroporto de Nevsehir?",
-        "a": "A estimativa rodoviária habitual é de cerca de 40 km / 35–45 minutos. O trânsito e outras coletas confirmadas podem alterar o tempo total."
+        "a": "A estimativa rodoviária habitual é de cerca de 40 km / 35–45 minutos. O trânsito e outros embarques confirmados podem alterar o tempo total."
       },
       {
         "q": "Posso reservar um veículo privativo nesta rota em vez do shuttle compartilhado?",
@@ -1801,7 +1801,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Urgup para o Aeroporto de Nevsehir (NAV): shuttle €15 por pessoa, 50 km, 45–60 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Urgup → NAV · shuttle para o aeroporto",
     "h1": "Shuttle de Urgup para o Aeroporto de Nevsehir",
-    "lead": "O embarque no hotel em Urgup com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 50 km, com tempo típico de 45–60 minutos. As hospedagens de Urgup se distribuem entre ruas centrais e áreas nas encostas, por isso o ponto de embarque confirmado é importante antes de começar o trajeto ao aeroporto. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Urgup com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 50 km, com tempo típico de 45–60 minutos. As hospedagens de Urgup se distribuem entre ruas centrais e áreas nas encostas, por isso o ponto de embarque confirmado é importante antes de começar o trajeto ao aeroporto. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1811,7 +1811,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Urgup para o Aeroporto de Nevsehir: cerca de 50 km / 45–60 minutos",
         "paragraphs": [
-          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outras coletas compartilhadas em hotéis e da margem de chegada ao aeroporto."
+          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outros embarques compartilhados em hotéis e da margem de chegada ao aeroporto."
         ]
       },
       {
@@ -1855,7 +1855,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Uchisar para o Aeroporto de Nevsehir (NAV): shuttle €15 por pessoa, 35 km, 30–40 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Uchisar → NAV · shuttle para o aeroporto",
     "h1": "Shuttle de Uchisar para o Aeroporto de Nevsehir",
-    "lead": "O embarque no hotel em Uchisar com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 35 km, com tempo típico de 30–40 minutos. As ruas íngremes da parte alta de Uchisar podem exigir um ponto de embarque acessível em vez de acesso direto a todas as portas de hotéis. Siga o horário de embarque confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Uchisar com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 35 km, com tempo típico de 30–40 minutos. As ruas íngremes da parte alta de Uchisar podem exigir um ponto de embarque acessível em vez de acesso direto a todas as portas de hotéis. Siga o horário de embarque confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1865,7 +1865,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Uchisar para o Aeroporto de Nevsehir: cerca de 35 km / 30–40 minutos",
         "paragraphs": [
-          "A estimativa rodoviária é de cerca de 35 km / 30–40 minutos, mas o horário confirmado de embarque também considera outras coletas em hotéis e a margem de chegada ao aeroporto."
+          "A estimativa rodoviária é de cerca de 35 km / 30–40 minutos, mas o horário confirmado de embarque também considera outros embarques em hotéis e a margem de chegada ao aeroporto."
         ]
       },
       {
@@ -1885,7 +1885,7 @@ export const ptPages: PtSeoPage[] = [
     "faq": [
       {
         "q": "Os 30–40 minutos são suficientes para eu calcular sozinho o horário de saída do hotel?",
-        "a": "Não. Os 30–40 minutos são apenas a estimativa rodoviária. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto."
+        "a": "Não. Os 30–40 minutos são apenas a estimativa rodoviária. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto."
       },
       {
         "q": "Por que vocês precisam do número do meu voo de saída do Aeroporto de Nevsehir?",
@@ -1913,7 +1913,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Avanos para o Aeroporto de Nevsehir (NAV): shuttle €15 por pessoa, 38 km, 35–50 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Avanos → NAV · shuttle para o aeroporto",
     "h1": "Shuttle de Avanos para o Aeroporto de Nevsehir",
-    "lead": "O embarque no hotel em Avanos com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 38 km, com tempo típico de 35–50 minutos. As hospedagens de Avanos ficam espalhadas por diferentes partes da cidade, por isso o nome completo do hotel ajuda a confirmar o ponto correto de embarque. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Avanos com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 38 km, com tempo típico de 35–50 minutos. As hospedagens de Avanos ficam espalhadas por diferentes partes da cidade, por isso o nome completo do hotel ajuda a confirmar o ponto correto de embarque. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1923,7 +1923,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Avanos para o Aeroporto de Nevsehir: cerca de 38 km / 35–50 minutos",
         "paragraphs": [
-          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outras coletas compartilhadas em hotéis e da margem de chegada ao aeroporto. As hospedagens de Avanos ficam espalhadas por diferentes partes da cidade, por isso o nome completo da propriedade ajuda a equipe a confirmar o ponto correto de embarque em vez de depender de uma localização genérica em “Avanos”.",
+          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outros embarques compartilhados em hotéis e da margem de chegada ao aeroporto. As hospedagens de Avanos ficam espalhadas por diferentes partes da cidade, por isso o nome completo da propriedade ajuda a equipe a confirmar o ponto correto de embarque em vez de depender de uma localização genérica em “Avanos”.",
           "Vai voar por ASR? Veja [[Shuttle de Avanos para o Aeroporto de Kayseri|avanos-to-kayseri-airport-shuttle]]."
         ]
       },
@@ -1961,7 +1961,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Ortahisar para o Aeroporto de Nevsehir (NAV): shuttle €15 por pessoa, 45 km, 40–50 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Ortahisar → NAV · shuttle para o aeroporto",
     "h1": "Shuttle de Ortahisar para o Aeroporto de Nevsehir",
-    "lead": "O embarque no hotel em Ortahisar com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 45 km, com tempo típico de 40–50 minutos. As ruas estreitas da parte antiga da vila podem influenciar os primeiros minutos da coleta, por isso o ponto de encontro confirmado é importante. Siga o horário de embarque confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Ortahisar com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 45 km, com tempo típico de 40–50 minutos. As ruas estreitas da parte antiga da vila podem influenciar os primeiros minutos do embarque, por isso o ponto de encontro confirmado é importante. Siga o horário de embarque confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1971,7 +1971,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Ortahisar para o Aeroporto de Nevsehir: cerca de 45 km / 40–50 minutos",
         "paragraphs": [
-          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outras coletas compartilhadas em hotéis e da margem de chegada ao aeroporto. O acesso pela parte antiga da vila pode influenciar os primeiros minutos, por isso o ponto confirmado para sua hospedagem é o que realmente importa ao planejar a saída."
+          "A estimativa rodoviária cobre apenas o trajeto; o horário real de embarque também depende de outros embarques compartilhados em hotéis e da margem de chegada ao aeroporto. O acesso pela parte antiga da vila pode influenciar os primeiros minutos, por isso o ponto confirmado para sua hospedagem é o que realmente importa ao planejar a saída."
         ]
       },
       {
@@ -2015,7 +2015,7 @@ export const ptPages: PtSeoPage[] = [
     "description": "Cavusin para o Aeroporto de Nevsehir (NAV): shuttle €15 por pessoa, 42 km, 40–55 min, embarque no hotel e opção privativa Vito/Sprinter.",
     "eyebrow": "Cavusin → NAV · shuttle para o aeroporto",
     "h1": "Shuttle de Cavusin para o Aeroporto de Nevsehir",
-    "lead": "O embarque no hotel em Cavusin com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 42 km, com tempo típico de 40–55 minutos. As hospedagens de Cavusin podem ficar perto da estrada principal, da vila antiga ou de áreas próximas aos vales, por isso o ponto de embarque confirmado é importante. Siga o horário confirmado, que também considera outras coletas compartilhadas e a margem de chegada ao aeroporto.",
+    "lead": "O embarque no hotel em Cavusin com destino ao Aeroporto de Nevsehir (NAV) está disponível por shuttle compartilhado a €15 por pessoa ou por Vito/Sprinter privativo. A distância rodoviária usual é de cerca de 42 km, com tempo típico de 40–55 minutos. As hospedagens de Cavusin podem ficar perto da estrada principal, da vila antiga ou de áreas próximas aos vales, por isso o ponto de embarque confirmado é importante. Siga o horário confirmado, que também considera outros embarques compartilhados e a margem de chegada ao aeroporto.",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -2025,7 +2025,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Cavusin para o Aeroporto de Nevsehir: cerca de 42 km / 40–55 minutos",
         "paragraphs": [
-          "A estimativa rodoviária é de cerca de 42 km / 40–55 minutos, mas o horário confirmado de embarque também considera outras coletas compartilhadas em hotéis e a margem de chegada ao aeroporto."
+          "A estimativa rodoviária é de cerca de 42 km / 40–55 minutos, mas o horário confirmado de embarque também considera outros embarques compartilhados em hotéis e a margem de chegada ao aeroporto."
         ]
       },
       {
@@ -2112,7 +2112,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Voltando da Capadócia para o aeroporto",
         "paragraphs": [
-          "Na saída, a pergunta útil deixa de ser “qual é o Aeroporto da Capadócia?” e passa a ser “qual aeroporto aparece no meu voo de saída?”. Use [[Capadócia para o Aeroporto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]] para NAV ou [[Capadócia para o Aeroporto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] para ASR. O horário de embarque é confirmado a partir do voo real e do plano de coleta compartilhada, e não por uma regra fixa de relógio."
+          "Na saída, a pergunta útil deixa de ser “qual é o Aeroporto da Capadócia?” e passa a ser “qual aeroporto aparece no meu voo de saída?”. Use [[Capadócia para o Aeroporto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]] para NAV ou [[Capadócia para o Aeroporto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] para ASR. O horário de embarque é confirmado a partir do voo real e do plano de embarque compartilhado, e não por uma regra fixa de relógio."
         ]
       },
       {
@@ -2596,7 +2596,7 @@ export const ptPages: PtSeoPage[] = [
   {
     "slug": "cappadocia-to-istanbul",
     "title": "Capadócia para Istambul | Shuttle ao Aeroporto e Voo",
-    "description": "Guia Capadócia para Istambul: embarque no hotel para NAV ou ASR, planejamento do voo, contexto de distância e horário de coleta.",
+    "description": "Guia Capadócia para Istambul: embarque no hotel para NAV ou ASR, planejamento do voo, contexto de distância e horário de embarque.",
     "eyebrow": "Capadócia → Istambul",
     "h1": "Capadócia para Istambul: Shuttle do Hotel e Voo",
     "lead": "Para a maioria dos viajantes em estadias curtas, a volta prática é um embarque no hotel para Nevsehir (NAV) ou Kayseri (ASR), seguido de voo para Istambul. O shuttle cobre o trecho hotel → aeroporto; a parte até Istambul é aérea.",
@@ -2623,7 +2623,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Embarque no hotel antes do voo para Istambul",
         "paragraphs": [
-          "Informe o número do voo de saída, nome completo da hospedagem, dados dos passageiros e contato de WhatsApp. O horário é confirmado com base no voo real e na ordem das coletas compartilhadas. Não calcule a saída apenas pelo tempo direto de estrada, pois o shuttle pode buscar outros hotéis antes de sair da Capadócia. Use [[Capadócia para o Aeroporto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]] ou [[Capadócia para o Aeroporto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] conforme o voo e combine o horário e o ponto de encontro com Goreme, Urgup, Uchisar, Avanos, Ortahisar ou Cavusin, de acordo com a sua hospedagem."
+          "Informe o número do voo de saída, nome completo da hospedagem, dados dos passageiros e contato de WhatsApp. O horário é confirmado com base no voo real e na ordem dos embarques compartilhados. Não calcule a saída apenas pelo tempo direto de estrada, pois o shuttle pode buscar outros hotéis antes de sair da Capadócia. Use [[Capadócia para o Aeroporto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]] ou [[Capadócia para o Aeroporto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] conforme o voo e combine o horário e o ponto de encontro com Goreme, Urgup, Uchisar, Avanos, Ortahisar ou Cavusin, de acordo com a sua hospedagem."
         ]
       },
       {
@@ -2641,7 +2641,7 @@ export const ptPages: PtSeoPage[] = [
       {
         "heading": "Não confunda a distância até Istambul com o horário de embarque para o aeroporto",
         "paragraphs": [
-          "A longa distância rodoviária até Istambul é útil para decidir entre voar e viajar por terra, mas nunca deve ser usada para calcular o embarque no hotel. O transfer termina em NAV ou ASR, e o horário é confirmado a partir do voo de saída e do plano de coletas compartilhadas."
+          "A longa distância rodoviária até Istambul é útil para decidir entre voar e viajar por terra, mas nunca deve ser usada para calcular o embarque no hotel. O transfer termina em NAV ou ASR, e o horário é confirmado a partir do voo de saída e do plano de embarques compartilhados."
         ]
       }
     ],
