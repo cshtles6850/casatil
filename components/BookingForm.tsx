@@ -3,6 +3,8 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { TimeSelect, isValidTime } from './TimeSelect';
+import { PassengerCounter } from './PassengerCounter';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -84,7 +86,7 @@ export function BookingForm({
   const [expanded, setExpanded] = useState(false);
   const today = useMemo(() => todayInIstanbul(), []);
   const hotelReady = hotel.trim().length > 0;
-  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && firstTransferTime);
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime));
   const sameDayBooking = Boolean(firstTransferDate && firstTransferDate === today);
 
   useEffect(() => {
@@ -154,6 +156,7 @@ export function BookingForm({
       notes,
       total: `EUR ${total}`,
       payment: 'Cash to the driver',
+      language: 'en',
       submittedAt: new Date().toISOString(),
     };
 
@@ -260,10 +263,7 @@ export function BookingForm({
             </select>
           </div>
 
-          <div className="field full">
-            <label htmlFor={`passengers-${compact ? 'compact' : 'full'}`}>Passenger count</label>
-            <input id={`passengers-${compact ? 'compact' : 'full'}`} name="passengerCount" type="number" min="1" max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} value={passengers} onChange={(e) => { const max = transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16; setPassengers(Math.min(max, Math.max(1, Number(e.target.value) || 1))); }} required />
-          </div>
+          <PassengerCounter id={`passengers-${compact ? 'compact' : 'full'}`} label="Passenger count" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
 
           {transferType === 'private' && (
             <div className="field full">
@@ -280,10 +280,7 @@ export function BookingForm({
             <input id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" min={today} value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
           </div>
 
-          <div className="field">
-            <label htmlFor={`time-${compact ? 'compact' : 'full'}`}>{firstTimeLabel}</label>
-            <input id={`time-${compact ? 'compact' : 'full'}`} name="firstTransferTime" type="time" value={firstTransferTime} onChange={(e) => setFirstTransferTime(e.target.value)} required />
-          </div>
+          <TimeSelect idPrefix={`time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
 
           {sameDayBooking && (
             <div className="field full same-day-warning">⚠️ <span>Same-day bookings are subject to availability. <strong>Please wait for our WhatsApp confirmation before considering your transfer confirmed.</strong></span></div>
@@ -325,10 +322,7 @@ export function BookingForm({
                 <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
                 <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
               </div>
-              <div className="field">
-                <label htmlFor={`return-time-${compact ? 'compact' : 'full'}`}>Return flight time</label>
-                <input id={`return-time-${compact ? 'compact' : 'full'}`} name="returnTransferTime" type="time" value={returnTransferTime} onChange={(e) => setReturnTransferTime(e.target.value)} required />
-              </div>
+              <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
               <div className="field full">
                 <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>
                 <input id={`return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="e.g. TK2011" required />

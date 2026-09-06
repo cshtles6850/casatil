@@ -36,8 +36,13 @@ export async function POST(request: NextRequest) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO || process.env.BOOKING_EMAIL_TO;
-  const from = process.env.RESEND_FROM || 'Cappadocia Reservations <onboarding@resend.dev>';
-  if (!apiKey || !to) return reply({ ok:false, error:'email-not-configured' }, 503);
+  // Use Resend's test sender by default. This works without domain verification
+  // as long as the recipient is the Resend account owner's email address.
+  const from = process.env.RESEND_FROM?.trim() || 'Cappadocia Contact <onboarding@resend.dev>';
+  if (!apiKey || !to) {
+    console.error('[contact-email] Resend is not configured', { hasApiKey: Boolean(apiKey), hasRecipient: Boolean(to) });
+    return reply({ ok:false, error:'email-not-configured' }, 503);
+  }
 
   const text = `Contact request.\n\nLanguage: ${language}\nName: ${name}\nEmail: ${email}\nWhatsApp/phone: ${whatsapp || '-'}\nSubject: ${subject}\n\n${message}`;
   const response = await fetch('https://api.resend.com/emails', {
@@ -52,6 +57,9 @@ export async function POST(request: NextRequest) {
       html:`<h2>Contact request.</h2><p><strong>Language:</strong> ${escapeHtml(language)}</p><p><strong>Name:</strong> ${escapeHtml(name)}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>WhatsApp/phone:</strong> ${escapeHtml(whatsapp || '-')}<br><strong>Subject:</strong> ${escapeHtml(subject)}</p><hr><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
     }),
   });
-  if (!response.ok) return reply({ ok:false, error:'send-failed' }, 502);
+  if (!response.ok) {
+    console.error('[contact-email] Resend request failed', { status: response.status });
+    return reply({ ok:false, error:'send-failed' }, 502);
+  }
   return reply({ ok:true });
 }

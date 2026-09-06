@@ -9,8 +9,8 @@ type RawBooking = {
   transferType?: unknown; journey?: unknown; direction?: unknown; airport?: unknown; vehicle?: unknown;
   passengers?: unknown; destination?: unknown; hotel?: unknown; firstTransferDate?: unknown; firstTransferTime?: unknown; arrivalFlight?: unknown;
   departureFlight?: unknown; returnTransferDate?: unknown; returnTransferTime?: unknown; returnFlight?: unknown; whatsapp?: unknown;
-  passengerDetails?: unknown; notes?: unknown; total?: unknown; payment?: unknown; website?: unknown;
-  submittedAt?: unknown;
+  passengerDetails?: unknown; notes?: unknown; total?: unknown; payment?: unknown; website?: unknown; companyWebsite?: unknown;
+  language?: unknown; locale?: unknown; submittedAt?: unknown;
 };
 
 const rateWindowMs = 10 * 60 * 1000;
@@ -35,6 +35,11 @@ function isRateLimited(request: NextRequest) {
 }
 
 function clean(value: unknown, max = 1200) { return String(value ?? '').trim().slice(0, max); }
+function todayInIstanbul() {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
 function escapeHtml(value: string) {
   return value.replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char] || char));
 }
@@ -66,6 +71,8 @@ export async function POST(request: NextRequest) {
   try { raw = await request.json(); }
   catch { return reply({ ok: false, error: 'invalid-json' }, 400); }
 
+  if (clean(raw.website, 200) || clean(raw.companyWebsite, 200)) return reply({ ok: true, email: 'honeypot' });
+
   const passengers = normalizePassengers(raw.passengerDetails);
   const passengerCount = Number.parseInt(clean(raw.passengers, 3), 10);
   const data = {
@@ -74,7 +81,7 @@ export async function POST(request: NextRequest) {
     hotel: clean(raw.hotel, 240), firstTransferDate: clean(raw.firstTransferDate, 30), firstTransferTime: clean(raw.firstTransferTime, 10), arrivalFlight: clean(raw.arrivalFlight, 50),
     departureFlight: clean(raw.departureFlight, 50), returnTransferDate: clean(raw.returnTransferDate, 30), returnTransferTime: clean(raw.returnTransferTime, 10), returnFlight: clean(raw.returnFlight, 50),
     whatsapp: clean(raw.whatsapp, 80), notes: clean(raw.notes, 1200), payment: 'Cash to the driver',
-    submittedAt: clean(raw.submittedAt, 80),
+    language: clean(raw.language ?? raw.locale, 20) || 'en', submittedAt: clean(raw.submittedAt, 80),
   };
 
   const validTransferType = data.transferType === 'shuttle' || data.transferType === 'private';
@@ -90,8 +97,9 @@ export async function POST(request: NextRequest) {
   const validDestination = ['Goreme', 'Urgup', 'Uchisar', 'Avanos', 'Ortahisar', 'Cavusin'].includes(data.destination);
   const validDate = /^\d{4}-\d{2}-\d{2}$/.test(data.firstTransferDate);
   const validTime = /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.firstTransferTime);
+  const validFutureOrToday = validDate && data.firstTransferDate >= todayInIstanbul();
   const isVito = data.vehicle === 'Mercedes Vito (max 5)';
-  if (!validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !data.whatsapp || !data.hotel) {
+  if (!validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !validFutureOrToday || !data.whatsapp || !data.hotel) {
     return reply({ ok: false, error: 'missing-or-invalid-fields' }, 400);
   }
   if (data.journey === 'round-trip' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate) || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.returnTransferTime))) return reply({ ok: false, error: 'missing-return-fields' }, 400);
@@ -112,17 +120,18 @@ export async function POST(request: NextRequest) {
   const serviceLabel = data.transferType === 'shuttle'
     ? 'Shared Shuttle'
     : data.vehicle.includes('Vito') ? 'Private Vito' : 'Private Sprinter';
-  const arrivalValue = data.arrivalFlight
+  const arrivalValue = arrivalRequired && data.arrivalFlight
     ? `${data.firstTransferDate} ${data.firstTransferTime} · ${data.arrivalFlight}`
     : '';
-  const departureValue = data.departureFlight
+  const departureValue = data.journey === 'one-way' && departureRequired && data.departureFlight
     ? `${data.firstTransferDate} ${data.firstTransferTime} · ${data.departureFlight}`
     : '';
-  const returnValue = data.returnTransferDate
+  const returnValue = data.journey === 'round-trip' && data.returnTransferDate
     ? `${data.returnTransferDate} ${data.returnTransferTime}${data.returnFlight ? ` · ${data.returnFlight}` : ''}`
     : '';
 
   const mainRows: Array<[string, string]> = [
+    ['Language', data.language],
     ['Transfer Type', journeyLabel],
     ['Service', serviceLabel],
     ['Direction', data.direction],
@@ -143,8 +152,13 @@ export async function POST(request: NextRequest) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.BOOKING_EMAIL_TO;
-  const from = process.env.RESEND_FROM || 'Cappadocia Reservations <onboarding@resend.dev>';
-  if (!apiKey || !to) return reply({ ok: true, email: 'not-configured' });
+  // Domain verification is not required for this project's current Resend setup.
+  // onboarding@resend.dev may send only to the Resend account owner's email address.
+  const from = process.env.RESEND_FROM?.trim() || 'Cappadocia Airport Shuttle <onboarding@resend.dev>';
+  if (!apiKey || !to) {
+    console.error('[booking-email] Resend is not configured', { hasApiKey: Boolean(apiKey), hasRecipient: Boolean(to) });
+    return reply({ ok: false, email: 'not-configured', error: 'email-not-configured' }, 503);
+  }
 
   const regularRows = mainRows.map(([label, value]) =>
     `<tr><td style="padding:8px;border-bottom:1px solid #eee;width:34%"><strong>${escapeHtml(label)}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`
@@ -158,11 +172,14 @@ export async function POST(request: NextRequest) {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from, to: [to], subject: `New transfer request · ${data.airport} · ${journeyLabel}`, text,
+      from, to: [to], subject: `New Booking · ${data.airport} · ${journeyLabel}`, text,
       html: `<h2>Booking request.</h2><table style="border-collapse:collapse;width:100%">${regularRows}${passengerRows}${finalHtmlRows}</table><p style="color:#666;font-size:12px">Passenger passport information is included because it is required for the reservation. Handle this email securely and do not forward it unnecessarily.</p>`,
     }),
   });
 
-  if (!response.ok) return reply({ ok: true, email: 'send-failed' });
+  if (!response.ok) {
+    console.error('[booking-email] Resend request failed', { status: response.status });
+    return reply({ ok: false, email: 'send-failed', error: 'email-send-failed' }, 502);
+  }
   return reply({ ok: true, email: 'sent' });
 }

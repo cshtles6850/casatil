@@ -3,6 +3,8 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { TimeSelect, isValidTime } from './TimeSelect';
+import { PassengerCounter } from './PassengerCounter';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -98,7 +100,7 @@ export function BookingFormZh({
   const [expanded, setExpanded] = useState(false);
   const today = useMemo(() => todayInIstanbul(), []);
   const hotelReady = hotel.trim().length > 0;
-  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && firstTransferTime);
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime));
   const sameDayBooking = Boolean(firstTransferDate && firstTransferDate === today);
 
   useEffect(() => {
@@ -150,9 +152,11 @@ export function BookingFormZh({
     const serviceEnglish = transferType === 'shuttle' ? 'Shared Airport Shuttle' : 'Private Airport Transfer';
     const vehicleEnglish = transferType === 'private' ? (vehicle === 'vito' ? 'Mercedes Vito (max 5)' : 'Mercedes Sprinter (max 16)') : 'Shared shuttle';
     const directionEnglish = journey === 'round-trip' ? 'Airport ⇄ Hotel' : direction === 'airport-hotel' ? 'Airport → Hotel' : 'Hotel → Airport';
+    const serviceZh = transferType === 'shuttle' ? '拼车机场接送' : '私人机场接送';
+    const vehicleZh = vehicle === 'vito' ? 'Mercedes Vito（最多5人）' : 'Mercedes Sprinter（最多16人）';
 
     const details = {
-      locale: 'zh-CN',
+      language: 'zh-CN',
       transferType,
       journey,
       direction: directionEnglish,
@@ -177,33 +181,33 @@ export function BookingFormZh({
     };
 
     const passengerLines = passengerPayload.flatMap((person) => [
-      `Passenger ${person.number} / 乘客 ${person.number}: ${person.fullName || '-'}`,
-      `Passport ${person.number} / 护照号 ${person.number}: ${person.passport || '-'}`,
+      `乘客 ${person.number}：${person.fullName || '-'}`,
+      `护照号码 ${person.number}：${person.passport || '-'}`,
     ]);
 
     const lines = [
-      'Booking request.',
+      '机场接送预订请求。',
       '',
-      `Service / 服务: ${serviceEnglish}`,
-      `Journey / 行程: ${journey === 'round-trip' ? 'Round Trip / 往返' : 'One Way / 单程'}`,
-      `Direction / 方向: ${directionEnglish}`,
-      `Airport / 机场: ${airportDisplayLabels[airport]}`,
-      transferType === 'private' ? `Vehicle / 车型: ${vehicleEnglish}` : '',
-      `Passengers / 人数: ${passengers}`,
-      `${destinationLabel} / Town: ${destination ? `${townZhLabels[destination]} (${townEnglishLabels[destination]})` : '-'}`,
-      `Hotel / 酒店住宿: ${hotel || '-'}`,
-      `${firstDateLabel} / Date: ${firstTransferDate || '-'}`,
-      `${firstTimeLabel} / Time: ${firstTransferTime || '-'}`,
-      isArrivalOnly || journey === 'round-trip' ? `Arrival flight / 抵达航班: ${arrivalFlight || '-'}` : '',
-      isDepartureOnly ? `Departure flight / 离港航班: ${departureFlight || '-'}` : '',
-      journey === 'round-trip' ? `Return flight date / 返程航班日期: ${returnTransferDate || '-'}` : '',
-      journey === 'round-trip' ? `Return flight time / 返程航班时间: ${returnTransferTime || '-'}` : '',
-      journey === 'round-trip' ? `Return flight / 返程航班: ${returnFlight || '-'}` : '',
-      `Contact WhatsApp / 联系号码: ${whatsapp || '-'}`,
+      `服务：${serviceZh}`,
+      `行程：${journey === 'round-trip' ? '往返' : '单程'}`,
+      `方向：${resolvedDirection}`,
+      `机场：${airportDisplayLabels[airport]}`,
+      transferType === 'private' ? `车型：${vehicleZh}` : '',
+      `乘客人数：${passengers}`,
+      `${destinationLabel}：${destination ? `${townZhLabels[destination]}（${townEnglishLabels[destination]}）` : '-'}`,
+      `酒店 / 住宿：${hotel || '-'}`,
+      `${firstDateLabel}：${firstTransferDate || '-'}`,
+      `${firstTimeLabel}：${firstTransferTime || '-'}`,
+      isArrivalOnly || journey === 'round-trip' ? `抵达航班：${arrivalFlight || '-'}` : '',
+      isDepartureOnly ? `离港航班：${departureFlight || '-'}` : '',
+      journey === 'round-trip' ? `返程航班日期：${returnTransferDate || '-'}` : '',
+      journey === 'round-trip' ? `返程航班时间：${returnTransferTime || '-'}` : '',
+      journey === 'round-trip' ? `返程航班：${returnFlight || '-'}` : '',
+      `联系 WhatsApp：${whatsapp || '-'}`,
       ...passengerLines,
-      `Estimated total / 预计总价: EUR ${total}`,
-      'Payment / 付款: Cash to the driver / 现金支付给司机',
-      notes ? `Notes / 备注: ${notes}` : '',
+      `预计总价：EUR ${total}`,
+      '付款：现金支付给司机',
+      notes ? `备注：${notes}` : '',
     ].filter(Boolean);
 
     const url = `https://wa.me/${SITE.whatsappDigits}?text=${encodeURIComponent(lines.join('\n'))}`;
@@ -277,10 +281,7 @@ export function BookingFormZh({
             </select>
           </div>
 
-          <div className="field full">
-            <label htmlFor={`zh-passengers-${compact ? 'compact' : 'full'}`}>乘客人数</label>
-            <input id={`zh-passengers-${compact ? 'compact' : 'full'}`} name="passengerCount" type="number" min="1" max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} value={passengers} onChange={(e) => { const max = transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16; setPassengers(Math.min(max, Math.max(1, Number(e.target.value) || 1))); }} required />
-          </div>
+          <PassengerCounter id={`zh-passengers-${compact ? 'compact' : 'full'}`} label="乘客人数" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
 
           {transferType === 'private' && (
             <div className="field full">
@@ -297,10 +298,7 @@ export function BookingFormZh({
             <input id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" min={today} value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
           </div>
 
-          <div className="field">
-            <label htmlFor={`zh-time-${compact ? 'compact' : 'full'}`}>{firstTimeLabel}</label>
-            <input id={`zh-time-${compact ? 'compact' : 'full'}`} name="firstTransferTime" type="time" value={firstTransferTime} onChange={(e) => setFirstTransferTime(e.target.value)} required />
-          </div>
+          <TimeSelect idPrefix={`zh-time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
 
           {sameDayBooking && (
             <div className="field full same-day-warning">⚠️ <span>当天预订需视余位情况而定。<strong>在收到我们的 WhatsApp 确认之前，请勿将接送视为已确认。</strong></span></div>
@@ -339,7 +337,7 @@ export function BookingFormZh({
           {journey === 'round-trip' && (
             <>
               <div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div>
-              <div className="field"><label htmlFor={`zh-return-time-${compact ? 'compact' : 'full'}`}>返程航班时间</label><input id={`zh-return-time-${compact ? 'compact' : 'full'}`} name="returnTransferTime" type="time" value={returnTransferTime} onChange={(e) => setReturnTransferTime(e.target.value)} required /></div>
+              <TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} />
               <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>
           )}

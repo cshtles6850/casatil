@@ -95,6 +95,12 @@ p { margin-top: 0; }
 .field label, .field > label { font-size: .82rem; font-weight: 800; }
 .field input, .field select, .field textarea { width: 100%; min-width: 0; padding: 10px 11px; border: 1px solid #d4daeb; border-radius: 11px; background: #fff; color: var(--ink); outline: none; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--sea); box-shadow: 0 0 0 3px rgba(102,115,199,.10); }
+.time-select-row { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 7px; }
+.time-select-separator { font-weight: 900; color: var(--ink-soft); text-align: center; }
+.passenger-counter { display: grid; grid-template-columns: 46px minmax(72px,1fr) 46px; align-items: stretch; border: 1px solid #d4daeb; border-radius: 11px; overflow: hidden; background: #fff; }
+.passenger-counter button { min-height: 44px; border: 0; background: var(--mist); color: var(--ink); font-size: 1.35rem; font-weight: 900; cursor: pointer; }
+.passenger-counter button:disabled { opacity: .4; cursor: default; }
+.passenger-counter output { display: grid; place-items: center; min-height: 44px; border-inline: 1px solid #e1e5f2; font-weight: 900; font-variant-numeric: tabular-nums; }
 .radio-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .radio-card { flex: 1; min-width: 145px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 11px; background: #fff; cursor: pointer; font-size: .82rem; }
 .booking-card-compact .radio-card { min-width: 100%; }
