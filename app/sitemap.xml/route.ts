@@ -1,24 +1,29 @@
 import { pages } from '@/lib/content';
+import { zhPages } from '@/lib/content-zh';
+import { esPages } from '@/lib/content-es';
+import { ptPages } from '@/lib/content-pt';
+import { koPages } from '@/lib/content-ko';
+import { jaPages } from '@/lib/content-ja';
 import { SITE } from '@/lib/site';
 
-const variants = [
-  ['en', ''],
-  ['zh-CN', '/zh-cn'],
-  ['es', '/es'],
-  ['pt-BR', '/pt-br'],
-  ['ko', '/ko'],
-  ['ja', '/ja'],
-] as const;
-
-type ChangeFrequency = 'weekly' | 'monthly';
-
-type SitemapEntry = {
-  url: string;
-  lang: string;
-  priority: number;
-  changeFrequency: ChangeFrequency;
-  alternates: Record<string, string>;
+type LocaleSource = {
+  lang: 'en' | 'zh-CN' | 'es' | 'pt-BR' | 'ko' | 'ja';
+  prefix: string;
+  slugs: Set<string>;
 };
+
+const localeSources: LocaleSource[] = [
+  { lang: 'en', prefix: '', slugs: new Set(pages.map((page) => page.slug)) },
+  { lang: 'zh-CN', prefix: '/zh-cn', slugs: new Set(zhPages.map((page) => page.slug)) },
+  { lang: 'es', prefix: '/es', slugs: new Set(esPages.map((page) => page.slug)) },
+  { lang: 'pt-BR', prefix: '/pt-br', slugs: new Set(ptPages.map((page) => page.slug)) },
+  { lang: 'ko', prefix: '/ko', slugs: new Set(koPages.map((page) => page.slug)) },
+  { lang: 'ja', prefix: '/ja', slugs: new Set(jaPages.map((page) => page.slug)) },
+];
+
+// Privacy Policy and Service Contract intentionally remain noindex and therefore
+// are not listed in the sitemap. The indexable static pages are listed here.
+const indexableStaticPaths = ['', 'about-us', 'contact-us'] as const;
 
 function escapeXml(value: string) {
   return value
@@ -29,65 +34,74 @@ function escapeXml(value: string) {
     .replace(/'/g, '&apos;');
 }
 
-function localizedUrls(path = '') {
-  const clean = path ? `/${path.replace(/^\/+|\/+$/g, '')}` : '';
-  return Object.fromEntries(
-    variants.map(([lang, prefix]) => [lang, `${SITE.domain}${prefix}${clean}`]),
-  ) as Record<string, string>;
+function absoluteUrl(prefix: string, path: string) {
+  const cleanPath = path ? `/${path.replace(/^\/+|\/+$/g, '')}` : '';
+  return `${SITE.domain}${prefix}${cleanPath}`;
 }
 
-function addLocalizedEntries(
-  result: SitemapEntry[],
-  path: string,
-  priority: number,
-  changeFrequency: ChangeFrequency,
-) {
-  const urls = localizedUrls(path);
-  const alternates = { ...urls, 'x-default': urls.en };
+function buildDynamicPaths() {
+  const ordered = [
+    ...pages.map((page) => page.slug),
+    ...zhPages.map((page) => page.slug),
+    ...esPages.map((page) => page.slug),
+    ...ptPages.map((page) => page.slug),
+    ...koPages.map((page) => page.slug),
+    ...jaPages.map((page) => page.slug),
+  ];
 
-  for (const [lang] of variants) {
-    result.push({
-      url: urls[lang],
-      lang,
-      changeFrequency,
-      priority: lang === 'en' ? priority : Math.max(0.1, priority - 0.03),
-      alternates,
-    });
-  }
+  return [...new Set(ordered)];
 }
 
-function buildEntries() {
-  const result: SitemapEntry[] = [];
-
-  addLocalizedEntries(result, '', 1, 'weekly');
-  for (const page of pages) {
-    addLocalizedEntries(result, page.slug, page.route ? 0.82 : 0.78, page.route ? 'monthly' : 'weekly');
-  }
-  for (const slug of ['about-us', 'contact-us']) {
-    addLocalizedEntries(result, slug, 0.55, 'monthly');
+function availableLocales(path: string) {
+  if ((indexableStaticPaths as readonly string[]).includes(path)) {
+    return localeSources;
   }
 
-  return result;
+  return localeSources.filter((locale) => locale.slugs.has(path));
 }
 
 export function GET() {
-  const entries = buildEntries();
-  const rows = entries.map((entry) => {
-    const alternateLinks = Object.entries(entry.alternates)
-      .map(([hreflang, href]) => `    <xhtml:link rel="alternate" hreflang="${escapeXml(hreflang)}" href="${escapeXml(href)}" />`)
-      .join('\n');
+  const paths = [...indexableStaticPaths, ...buildDynamicPaths()];
+  const rows: string[] = [];
 
-    return [
-      '  <url>',
-      `    <loc>${escapeXml(entry.url)}</loc>`,
-      `    <changefreq>${entry.changeFrequency}</changefreq>`,
-      `    <priority>${entry.priority.toFixed(2)}</priority>`,
-      alternateLinks,
-      '  </url>',
-    ].join('\n');
-  }).join('\n');
+  for (const path of paths) {
+    const locales = availableLocales(path);
+    if (locales.length === 0) continue;
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${rows}\n</urlset>\n`;
+    const alternates = locales.map((locale) => ({
+      lang: locale.lang,
+      href: absoluteUrl(locale.prefix, path),
+    }));
+
+    const english = alternates.find((alternate) => alternate.lang === 'en');
+    const xDefault = english?.href ?? alternates[0].href;
+
+    for (const locale of locales) {
+      const url = absoluteUrl(locale.prefix, path);
+      const alternateLinks = [
+        ...alternates.map(
+          (alternate) =>
+            `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.lang)}" href="${escapeXml(alternate.href)}" />`,
+        ),
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(xDefault)}" />`,
+      ].join('\n');
+
+      rows.push([
+        '  <url>',
+        `    <loc>${escapeXml(url)}</loc>`,
+        alternateLinks,
+        '  </url>',
+      ].join('\n'));
+    }
+  }
+
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    rows.join('\n'),
+    '</urlset>',
+    '',
+  ].join('\n');
 
   return new Response(xml, {
     headers: {
