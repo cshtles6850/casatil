@@ -198,6 +198,27 @@ p { margin-top: 0; }
 }
 .floating-whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 2147483647; display: inline-flex; align-items: center; gap: 8px; padding: 12px 15px; border-radius: 999px; background: var(--wa-bright); color: #fff; font-weight: 900; box-shadow: 0 14px 35px rgba(0,0,0,.2); }
 
+/* Desktop booking form density: keep mobile touch targets roomy, make the full desktop form more compact. */
+@media (min-width: 821px) {
+  .booking-card:not(.booking-card-compact) { padding: 18px; }
+  .booking-card:not(.booking-card-compact) .booking-head { margin-bottom: 16px; }
+  .booking-card:not(.booking-card-compact) .booking-head h2 { font-size: 1.55rem; margin-bottom: 10px; }
+  .booking-card:not(.booking-card-compact) .form-grid { gap: 10px 12px; }
+  .booking-card:not(.booking-card-compact) .field { gap: 4px; }
+  .booking-card:not(.booking-card-compact) .field input,
+  .booking-card:not(.booking-card-compact) .field select,
+  .booking-card:not(.booking-card-compact) .field textarea { padding: 8px 10px; }
+  .booking-card:not(.booking-card-compact) .radio-card { padding: 7px 9px; }
+  .booking-card:not(.booking-card-compact) .passenger-counter {
+    width: 180px;
+    grid-template-columns: 40px minmax(58px,1fr) 40px;
+    justify-self: start;
+  }
+  .booking-card:not(.booking-card-compact) .passenger-counter button,
+  .booking-card:not(.booking-card-compact) .passenger-counter output { min-height: 40px; }
+  .booking-card:not(.booking-card-compact) .passenger-counter button { font-size: 1.15rem; }
+}
+
 @media (max-width: 1030px) {
   .nav-links { display: none; }
   .mobile-menu { display: block; }
