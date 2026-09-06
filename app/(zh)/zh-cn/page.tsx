@@ -11,7 +11,7 @@ import { zhTownNames } from '@/lib/content-zh';
 export const metadata: Metadata = {
   title: { absolute: '卡帕多奇亚机场接送｜ASR / NAV 机场班车' },
   description: '卡帕多奇亚机场接送：从开塞利 ASR 或内夫谢希尔 NAV 前往格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛。拼车 €15/人，私人 Vito / Sprinter 可选。',
-  alternates: { canonical: '/zh-cn', languages: { en: '/', 'zh-CN': '/zh-cn', 'x-default': '/' } },
+  alternates: { canonical: '/zh-cn', languages: { en: '/', 'zh-CN': '/zh-cn', es:'/es', 'pt-BR':'/pt-br', ko:'/ko', ja:'/ja', 'x-default': '/' } },
   openGraph: { type: 'website', locale: 'zh_CN', title: '卡帕多奇亚机场接送｜ASR / NAV 机场班车', description: 'ASR / NAV 到卡帕多奇亚酒店，拼车 €15/人，私人 Vito / Sprinter 可选。', url: `${SITE.domain}/zh-cn`, images: [{ url: '/cappadocia-airport-shuttle-vito-sprinter.webp', width: 1200, height: 675, alt: '卡帕多奇亚机场接送 Vito 与 Sprinter' }] },
   other: { 'applicable-device': 'pc,mobile' },
 };

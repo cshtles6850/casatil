@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute:'Privacy Policy | Cappadocia Airport Shuttle' },
   description:'Privacy policy for Cappadocia Airport Shuttle booking requests, contact messages and passenger information.',
-  alternates:{ canonical:'/privacy-policy', languages:{ en:'/privacy-policy','zh-CN':'/zh-cn/privacy-policy','x-default':'/privacy-policy' } },
+  alternates:{ canonical:'/privacy-policy', languages:{ en:'/privacy-policy','zh-CN':'/zh-cn/privacy-policy',es:'/es/privacy-policy','pt-BR':'/pt-br/privacy-policy',ko:'/ko/privacy-policy',ja:'/ja/privacy-policy','x-default':'/privacy-policy' } },
   robots:{ index:false, follow:true },
   twitter: { card:'summary_large_image', title:'Privacy Policy | Cappadocia Airport Shuttle', description:'How Cappadocia Airport Shuttle collects, uses and protects personal information for bookings and customer support.', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

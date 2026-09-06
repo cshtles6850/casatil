@@ -7,7 +7,7 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon';
 export const metadata: Metadata = {
   title: { absolute:'联系我们｜Cappadocia Airport Shuttle' },
   description:'联系 Cappadocia Airport Shuttle：咨询 ASR / NAV 机场拼车、私人接送、航班变化或酒店接车。',
-  alternates:{ canonical:'/zh-cn/contact-us', languages:{ en:'/contact-us','zh-CN':'/zh-cn/contact-us','x-default':'/contact-us' } },
+  alternates:{ canonical:'/zh-cn/contact-us', languages:{ en:'/contact-us','zh-CN':'/zh-cn/contact-us',es:'/es/contact-us','pt-BR':'/pt-br/contact-us',ko:'/ko/contact-us',ja:'/ja/contact-us','x-default':'/contact-us' } },
   robots:{ index:true, follow:true },
   twitter:{ card:'summary_large_image', title:'联系我们｜Cappadocia Airport Shuttle', description:'咨询机场班车、私人接送、航班变更或酒店接车，可通过电子邮件或 WhatsApp 联系 Cappadocia Airport Shuttle。', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

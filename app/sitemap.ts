@@ -1,32 +1,18 @@
 import type { MetadataRoute } from 'next';
 import { pages } from '@/lib/content';
-import { zhPages } from '@/lib/content-zh';
 import { SITE } from '@/lib/site';
 
-function entry(url:string, enUrl:string, zhUrl:string, priority:number, changeFrequency:'weekly'|'monthly'):MetadataRoute.Sitemap[number] {
-  return { url, changeFrequency, priority, alternates:{ languages:{ en:enUrl, 'zh-CN':zhUrl, 'x-default':enUrl } } };
+const variants = [
+  ['en',''], ['zh-CN','/zh-cn'], ['es','/es'], ['pt-BR','/pt-br'], ['ko','/ko'], ['ja','/ja'],
+] as const;
+function urls(path=''){const clean=path?`/${path}`:'';return Object.fromEntries(variants.map(([lang,p])=>[lang,`${SITE.domain}${p}${clean}`])) as Record<string,string>}
+function addAll(result:MetadataRoute.Sitemap,path:string,priority:number,changeFrequency:'weekly'|'monthly'){
+  const u=urls(path); const languages={...u,'x-default':u.en};
+  for(const [lang] of variants) result.push({url:u[lang],changeFrequency,priority:lang==='en'?priority:Math.max(0.1,priority-0.03),alternates:{languages}});
 }
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const enHome=SITE.domain;
-  const zhHome=`${SITE.domain}/zh-cn`;
-  const result:MetadataRoute.Sitemap=[entry(enHome,enHome,zhHome,1,'weekly'), entry(zhHome,enHome,zhHome,0.95,'weekly')];
-
-  const zhSlugs=new Set(zhPages.map((page)=>page.slug));
-  for (const page of pages) {
-    const enUrl=`${SITE.domain}/${page.slug}`;
-    const hasZh=zhSlugs.has(page.slug);
-    const zhUrl=hasZh?`${SITE.domain}/zh-cn/${page.slug}`:enUrl;
-    const priority=page.route?0.82:0.78;
-    const freq=page.route?'monthly':'weekly';
-    result.push(hasZh?entry(enUrl,enUrl,zhUrl,priority,freq):{url:enUrl,changeFrequency:freq,priority,alternates:{languages:{en:enUrl,'x-default':enUrl}}});
-    if (hasZh) result.push(entry(zhUrl,enUrl,zhUrl,priority,freq));
-  }
-
-  // Indexable trust pages. Privacy Policy and Service Contract are intentionally noindex and therefore not listed here.
-  for (const slug of ['about-us','contact-us']) {
-    const enUrl=`${SITE.domain}/${slug}`; const zhUrl=`${SITE.domain}/zh-cn/${slug}`;
-    result.push(entry(enUrl,enUrl,zhUrl,0.55,'monthly'), entry(zhUrl,enUrl,zhUrl,0.5,'monthly'));
-  }
-  return result;
+export default function sitemap():MetadataRoute.Sitemap{
+ const result:MetadataRoute.Sitemap=[]; addAll(result,'',1,'weekly');
+ for(const page of pages)addAll(result,page.slug,page.route?0.82:0.78,page.route?'monthly':'weekly');
+ for(const slug of ['about-us','contact-us'])addAll(result,slug,0.55,'monthly');
+ return result;
 }

@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute:'服务合同｜Cappadocia Airport Shuttle' },
   description:'Cappadocia Airport Shuttle 共享机场班车与私人接送预订的基本服务条款。',
-  alternates:{ canonical:'/zh-cn/service-contract', languages:{ en:'/service-contract','zh-CN':'/zh-cn/service-contract','x-default':'/service-contract' } },
+  alternates:{ canonical:'/zh-cn/service-contract', languages:{ en:'/service-contract','zh-CN':'/zh-cn/service-contract',es:'/es/service-contract','pt-BR':'/pt-br/service-contract',ko:'/ko/service-contract',ja:'/ja/service-contract','x-default':'/service-contract' } },
   robots:{ index:false, follow:true },
   twitter:{ card:'summary_large_image', title:'服务合同｜Cappadocia Airport Shuttle', description:'适用于 Cappadocia Airport Shuttle 预订的条款，包括付款、取消、酒店周边道路、延误与责任。', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

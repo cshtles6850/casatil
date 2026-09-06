@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params; const page = pageBySlug.get(slug); if (!page) return {};
   return {
     title: { absolute: page.title }, description: page.description,
-    alternates: { canonical: `/${page.slug}`, languages: { en: `/${page.slug}`, 'zh-CN': `/zh-cn/${page.slug}`, 'x-default': `/${page.slug}` } },
+    alternates: { canonical: `/${page.slug}`, languages: { en: `/${page.slug}`, 'zh-CN': `/zh-cn/${page.slug}`, es: `/es/${page.slug}`, 'pt-BR': `/pt-br/${page.slug}`, ko: `/ko/${page.slug}`, ja: `/ja/${page.slug}`, 'x-default': `/${page.slug}` } },
     openGraph: { type: 'website', title: page.title, description: page.description, url: `${SITE.domain}/${page.slug}`, images: [{ url: '/cappadocia-airport-shuttle-vito-sprinter.webp', width: 1200, height: 675, alt: 'Cappadocia Airport Shuttle Vito and Sprinter' }] },
     twitter: {
       card: 'summary_large_image',

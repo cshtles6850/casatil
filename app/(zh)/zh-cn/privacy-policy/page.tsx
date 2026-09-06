@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title:{ absolute:'隐私政策｜Cappadocia Airport Shuttle' },
   description:'说明 Cappadocia Airport Shuttle 在预订、联系表单和机场接送服务中如何处理乘客与联系资料。',
-  alternates:{ canonical:'/zh-cn/privacy-policy', languages:{ en:'/privacy-policy','zh-CN':'/zh-cn/privacy-policy','x-default':'/privacy-policy' } },
+  alternates:{ canonical:'/zh-cn/privacy-policy', languages:{ en:'/privacy-policy','zh-CN':'/zh-cn/privacy-policy',es:'/es/privacy-policy','pt-BR':'/pt-br/privacy-policy',ko:'/ko/privacy-policy',ja:'/ja/privacy-policy','x-default':'/privacy-policy' } },
   robots:{ index:false, follow:true },
   twitter:{ card:'summary_large_image', title:'隐私政策｜Cappadocia Airport Shuttle', description:'说明 Cappadocia Airport Shuttle 如何为预订和客户支持收集、使用与保护个人信息。', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

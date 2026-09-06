@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute: 'Service Contract | Cappadocia Airport Shuttle' },
   description: 'Service contract for Cappadocia Airport Shuttle shared shuttle and private airport transfer bookings.',
-  alternates: { canonical:'/service-contract', languages:{ en:'/service-contract','zh-CN':'/zh-cn/service-contract','x-default':'/service-contract' } },
+  alternates: { canonical:'/service-contract', languages:{ en:'/service-contract','zh-CN':'/zh-cn/service-contract',es:'/es/service-contract','pt-BR':'/pt-br/service-contract',ko:'/ko/service-contract',ja:'/ja/service-contract','x-default':'/service-contract' } },
   robots: { index:false, follow:true },
   twitter: { card:'summary_large_image', title:'Service Contract | Cappadocia Airport Shuttle', description:'Terms that apply to Cappadocia Airport Shuttle reservations: payment, cancellation, hotel access, delays and liability.', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

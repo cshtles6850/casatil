@@ -11,7 +11,7 @@ import { SITE, towns } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute: 'Cappadocia Airport Shuttle | Kayseri & Nevsehir Airports' },
   description: 'Cappadocia Airport Shuttle from Kayseri Airport (ASR) and Nevsehir Airport (NAV) to Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Shared shuttle €15 per person; private Vito and Sprinter available.',
-  alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh-cn', 'x-default': '/' } },
+  alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh-cn', es:'/es', 'pt-BR':'/pt-br', ko:'/ko', ja:'/ja', 'x-default': '/' } },
 };
 
 const townKeys = Object.keys(towns) as (keyof typeof towns)[];

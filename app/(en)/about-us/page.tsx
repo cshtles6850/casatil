@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute: 'About Us | Cappadocia Airport Shuttle' },
   description: 'About Cappadocia Airport Shuttle: shared airport shuttle and private transfer service for Kayseri ASR, Nevsehir NAV and central Cappadocia hotels.',
-  alternates: { canonical: '/about-us', languages: { en:'/about-us', 'zh-CN':'/zh-cn/about-us', 'x-default':'/about-us' } },
+  alternates: { canonical: '/about-us', languages: { en:'/about-us', 'zh-CN':'/zh-cn/about-us', es:'/es/about-us', 'pt-BR':'/pt-br/about-us', ko:'/ko/about-us', ja:'/ja/about-us', 'x-default':'/about-us' } },
   robots: { index:true, follow:true },
   twitter: { card:'summary_large_image', title:'About Us | Cappadocia Airport Shuttle', description:'About Cappadocia Airport Shuttle: shared airport shuttle and private transfer service for Kayseri ASR, Nevsehir NAV and central Cappadocia hotels.', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

@@ -1,0 +1,9 @@
+import Link from 'next/link';
+import { SITE } from '@/lib/site';
+import { localePrefix, localeUi, type NewLocale } from '@/lib/locale-config';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import { FloatingWhatsApp } from './FloatingWhatsApp';
+export function LocalizedFooter({locale}:{locale:NewLocale}) {
+  const t=localeUi[locale], p=localePrefix[locale], m=encodeURIComponent(t.directWhatsapp), L=t.footerLinks;
+  return <><footer className="footer"><div className="container"><div className="footer-grid"><div className="footer-brand"><h3>Cappadocia Airport Shuttle</h3><p>{t.footerIntro}</p><a className="footer-whatsapp" href={`https://wa.me/${SITE.whatsappDigits}?text=${m}`} target="_blank" rel="noreferrer"><WhatsAppIcon size={20}/><span>{t.bookWhatsapp}</span></a></div><div><h3>{t.services}</h3><Link href={`${p}/cappadocia-airport-transfer`}>{L[0]}</Link><Link href={`${p}/goreme-airport-transfer`}>{L[1]}</Link><Link href={`${p}/private-airport-transfer-cappadocia`}>{L[2]}</Link><Link href={`${p}/airport-transfer-prices`}>{L[3]}</Link></div><div><h3>{t.airports}</h3><Link href={`${p}/kayseri-airport-shuttle`}>{L[4]}</Link><Link href={`${p}/nevsehir-airport-shuttle`}>{L[5]}</Link><Link href={`${p}/cappadocia-to-kayseri-airport-shuttle`}>{L[6]}</Link><Link href={`${p}/cappadocia-to-nevsehir-airport-shuttle`}>{L[7]}</Link></div><div><h3>{t.companySupport}</h3><Link href={`${p}/about-us`}>{L[8]}</Link><Link href={`${p}/contact-us`}>{L[9]}</Link><Link href={`${p}/service-contract`}>{L[10]}</Link><Link href={`${p}/privacy-policy`}>{L[11]}</Link></div></div><div className="footer-bottom"><span className="footer-copyright">© {new Date().getFullYear()} Cappadocia Airport Shuttle</span><span className="footer-agency-line">{SITE.company} · TURSAB No: {SITE.tursab}</span></div></div></footer><FloatingWhatsApp href={`https://wa.me/${SITE.whatsappDigits}?text=${m}`} ariaLabel={t.floatingAria}/></>;
+}

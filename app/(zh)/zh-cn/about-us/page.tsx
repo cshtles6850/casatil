@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: { absolute: '关于我们｜Cappadocia Airport Shuttle' },
   description: '了解 Cappadocia Airport Shuttle：开塞利 ASR、内夫谢希尔 NAV 与卡帕多奇亚主要酒店区之间的机场拼车和私人接送。',
-  alternates: { canonical:'/zh-cn/about-us', languages:{ en:'/about-us', 'zh-CN':'/zh-cn/about-us', 'x-default':'/about-us' } },
+  alternates: { canonical:'/zh-cn/about-us', languages:{ en:'/about-us', 'zh-CN':'/zh-cn/about-us', es:'/es/about-us', 'pt-BR':'/pt-br/about-us', ko:'/ko/about-us', ja:'/ja/about-us', 'x-default':'/about-us' } },
   robots:{ index:true, follow:true },
   twitter:{ card:'summary_large_image', title:'关于我们｜Cappadocia Airport Shuttle', description:'了解 Cappadocia Airport Shuttle：提供开塞利 ASR、内夫谢希尔 NAV 与卡帕多奇亚主要酒店区之间的共享机场班车和私人接送。', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

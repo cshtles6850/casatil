@@ -601,3 +601,15 @@ p { margin-top: 0; }
 .airport-comparison-tables th,.airport-comparison-tables td{padding:.72rem .8rem;border:1px solid var(--border);text-align:left;vertical-align:top}
 .airport-comparison-tables thead th{font-weight:700;background:rgba(0,0,0,.025)}
 .airport-comparison-tables tbody th{font-weight:650}
+
+/* Compact language menu on small screens: keeps six locales from overflowing the header. */
+.language-switcher-mobile { display: none; position: relative; }
+.language-switcher-mobile summary { list-style: none; cursor: pointer; min-width: 48px; height: 38px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--sea-dark); font-size: .72rem; font-weight: 850; white-space: nowrap; }
+.language-switcher-mobile summary::-webkit-details-marker { display: none; }
+.language-switcher-menu { position: absolute; right: 0; top: 44px; z-index: 80; width: 132px; padding: 6px; display: grid; gap: 2px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+.language-switcher-menu a { display: flex; align-items: center; justify-content: center; min-height: 34px; padding: 6px 10px; border-radius: 9px; color: var(--ink-soft); font-size: .76rem; font-weight: 800; }
+.language-switcher-menu a.active { background: var(--mist); color: var(--sea-dark); }
+@media (max-width: 820px) {
+  .language-switcher-desktop { display: none; }
+  .language-switcher-mobile { display: block; }
+}

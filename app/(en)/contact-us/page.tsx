@@ -7,7 +7,7 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon';
 export const metadata: Metadata = {
   title: { absolute: 'Contact Us | Cappadocia Airport Shuttle' },
   description: 'Contact Cappadocia Airport Shuttle about Kayseri or Nevsehir airport shuttle bookings, private transfer, flight details or hotel pickup.',
-  alternates: { canonical:'/contact-us', languages:{ en:'/contact-us', 'zh-CN':'/zh-cn/contact-us', 'x-default':'/contact-us' } },
+  alternates: { canonical:'/contact-us', languages:{ en:'/contact-us', 'zh-CN':'/zh-cn/contact-us', es:'/es/contact-us', 'pt-BR':'/pt-br/contact-us', ko:'/ko/contact-us', ja:'/ja/contact-us', 'x-default':'/contact-us' } },
   robots: { index:true, follow:true },
   twitter: { card:'summary_large_image', title:'Contact Us | Cappadocia Airport Shuttle', description:'Questions about an airport shuttle, private transfer, flight change or hotel pickup? Use the contact form or WhatsApp.', images:['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };

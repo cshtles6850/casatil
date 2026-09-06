@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: page.description,
     alternates: {
       canonical: `/zh-cn/${page.slug}`,
-      languages: { en: `/${page.slug}`, 'zh-CN': `/zh-cn/${page.slug}`, 'x-default': `/${page.slug}` },
+      languages: { en: `/${page.slug}`, 'zh-CN': `/zh-cn/${page.slug}`, es: `/es/${page.slug}`, 'pt-BR': `/pt-br/${page.slug}`, ko: `/ko/${page.slug}`, ja: `/ja/${page.slug}`, 'x-default': `/${page.slug}` },
     },
     openGraph: {
       type: 'website', locale: 'zh_CN', title: page.title, description: page.description,
