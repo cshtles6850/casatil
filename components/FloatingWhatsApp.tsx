@@ -43,6 +43,11 @@ export function FloatingWhatsApp({ href, ariaLabel }: Props) {
     let frame = 0;
 
     const shouldCollapse = () => {
+      // Desktop: keep the full WhatsApp pill visible at all times.
+      // The collision/collapse behaviour is only needed on mobile, where
+      // screen space is limited and the floating control can overlap UI.
+      if (window.innerWidth > 820) return false;
+
       const currentRect = button.getBoundingClientRect();
       if (!expandedSizeRef.current.width) {
         expandedSizeRef.current = { width: currentRect.width, height: currentRect.height };
