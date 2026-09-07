@@ -337,7 +337,7 @@ export function BookingFormZh({
           {expanded && <>
 
           {(isArrivalOnly || journey === 'round-trip') && (
-            <div className="field">
+            <div className={`field${journey === 'round-trip' ? ' full' : ''}`}>
               <label htmlFor={`zh-arrival-flight-${compact ? 'compact' : 'full'}`}>抵达航班号</label>
               <input id={`zh-arrival-flight-${compact ? 'compact' : 'full'}`} name="arrivalFlight" value={arrivalFlight} onChange={(e) => setArrivalFlight(e.target.value)} placeholder="例如 TK2010" required />
             </div>
@@ -352,8 +352,7 @@ export function BookingFormZh({
 
           {journey === 'round-trip' && (
             <>
-              <div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div>
-              <TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} />
+              <div className="field full return-datetime-row"><div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div><TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} /></div>
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>返程日期和时间必须<strong>晚于首次接送的日期和时间。</strong></span></div>}
               <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>

@@ -319,7 +319,7 @@ export function BookingForm({
           {expanded && <>
 
           {(isArrivalOnly || journey === 'round-trip') && (
-            <div className="field">
+            <div className={`field${journey === 'round-trip' ? ' full' : ''}`}>
               <label htmlFor={`arrival-flight-${compact ? 'compact' : 'full'}`}>Arrival flight number</label>
               <input id={`arrival-flight-${compact ? 'compact' : 'full'}`} name="arrivalFlight" value={arrivalFlight} onChange={(e) => setArrivalFlight(e.target.value)} placeholder="e.g. TK2010" required />
             </div>
@@ -334,11 +334,13 @@ export function BookingForm({
 
           {journey === 'round-trip' && (
             <>
-              <div className="field">
-                <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
-                <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
+              <div className="field full return-datetime-row">
+                <div className="field">
+                  <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
+                  <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
+                </div>
+                <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
               </div>
-              <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>Return date and time must be <strong>after the first transfer date and time.</strong></span></div>}
               <div className="field full">
                 <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>
