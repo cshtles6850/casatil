@@ -23,5 +23,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     identifier: `TURSAB ${SITE.tursab}`,
     parentOrganization: { '@type': 'Organization', name: SITE.company },
   };
-  return <html lang="en"><body><JsonLd data={org} /><Header />{children}<Footer /></body></html>;
+  return <html lang="en"><head><script src="https://analytics.ahrefs.com/analytics.js" data-key="JtSCb+u8cD998Q5+cUfyTg" async></script></head><body><JsonLd data={org} /><Header />{children}<Footer /></body></html>;
 }

@@ -23,5 +23,5 @@ export default function ChineseRootLayout({ children }: Readonly<{ children: Rea
     identifier: `TURSAB ${SITE.tursab}`,
     parentOrganization: { '@type': 'Organization', name: SITE.company },
   };
-  return <html lang="zh-CN"><body><JsonLd data={org} /><HeaderZh />{children}<FooterZh /></body></html>;
+  return <html lang="zh-CN"><head><script src="https://analytics.ahrefs.com/analytics.js" data-key="JtSCb+u8cD998Q5+cUfyTg" async></script></head><body><JsonLd data={org} /><HeaderZh />{children}<FooterZh /></body></html>;
 }
