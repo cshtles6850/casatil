@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
+import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -39,11 +40,6 @@ function initialTownKey(value: string): Town | '' {
   return found || '';
 }
 
-function todayInIstanbul() {
-  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
-  return `${get('year')}-${get('month')}-${get('day')}`;
-}
 
 function maskPassport(value: string) {
   const clean = value.trim();
@@ -84,10 +80,17 @@ export function BookingForm({
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
   const [expanded, setExpanded] = useState(false);
-  const today = useMemo(() => todayInIstanbul(), []);
+  const [clockTick, setClockTick] = useState(() => Date.now());
+  const today = todayInIstanbul(clockTick);
   const hotelReady = hotel.trim().length > 0;
-  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime));
-  const sameDayBooking = Boolean(firstTransferDate && firstTransferDate === today);
+  const firstTiming = getBookingTiming(firstTransferDate, firstTransferTime, clockTick);
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past');
+  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime));
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -125,6 +128,14 @@ export function BookingForm({
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!confirmed) return;
+    if (getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
+      setStatus('The selected date and time has already passed. Please choose a future date and time.');
+      return;
+    }
+    if (journey === 'round-trip' && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)) {
+      setStatus('Return date and time must be after the first transfer date and time.');
+      return;
+    }
 
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return; // honeypot
@@ -288,8 +299,12 @@ export function BookingForm({
 
           <TimeSelect idPrefix={`time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
 
-          {sameDayBooking && (
-            <div className="field full same-day-warning">⚠️ <span>Same-day bookings are subject to availability. <strong>Please wait for our WhatsApp confirmation before considering your transfer confirmed.</strong></span></div>
+          {firstTiming === 'past' && (
+            <div className="field full booking-time-error" role="alert">⚠️ <span>The selected date and time has already passed. <strong>Please choose a future date and time.</strong></span></div>
+          )}
+
+          {(firstTiming === 'urgent' || firstTiming === 'short-notice') && (
+            <div className={`field full short-notice-warning${firstTiming === 'urgent' ? ' urgent' : ''}`}>⚠️ <span>{firstTiming === 'urgent' ? <>This booking is for a time within the next 8 hours. <strong>Please wait for our WhatsApp confirmation and contact us on WhatsApp if you need an urgent response.</strong></> : <>This booking is within the next 24 hours. <strong>Please wait for our WhatsApp confirmation before considering your transfer confirmed.</strong></>}</span></div>
           )}
 
           {!expanded && (
@@ -324,6 +339,7 @@ export function BookingForm({
                 <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
               </div>
               <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
+              {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>Return date and time must be <strong>after the first transfer date and time.</strong></span></div>}
               <div className="field full">
                 <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>
                 <input id={`return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="e.g. TK2011" required />
@@ -380,7 +396,7 @@ export function BookingForm({
           </label>
 
           <div className="field full">
-            <button className="btn btn-whatsapp booking-submit" type="submit"><WhatsAppIcon size={20} /> Submit & Continue on WhatsApp</button>
+            <button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid} aria-disabled={returnOrderInvalid}><WhatsAppIcon size={20} /> Submit & Continue on WhatsApp</button>
             <div className="form-note">Your booking is confirmed only after confirmation on WhatsApp. Shared shuttle coverage includes Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar.</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>

@@ -6,6 +6,7 @@ import { localePrefix, localeTownNames, localeUi, type NewLocale } from '@/lib/l
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
+import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -25,15 +26,37 @@ const airportDisplayLabels: Record<NewLocale, Record<Airport,string>> = {
 const privatePrices: Record<Airport, Record<Vehicle, number>> = { kayseri: { vito: 90, sprinter: 110 }, nevsehir: { vito: 80, sprinter: 90 } };
 const canonicalTownLabels: Record<Town, string> = { goreme:'Goreme', urgup:'Urgup', uchisar:'Uchisar', avanos:'Avanos', ortahisar:'Ortahisar', cavusin:'Cavusin' };
 
+const bookingTimingCopy: Record<NewLocale, { urgent: string; urgentStrong: string; short: string; shortStrong: string; past: string; pastStrong: string; returnOrder: string; returnOrderStrong: string }> = {
+  es: {
+    urgent: 'Esta reserva es para las próximas 8 horas.', urgentStrong: 'Espera nuestra confirmación por WhatsApp y, si necesitas una respuesta urgente, contáctanos por WhatsApp.',
+    short: 'Esta reserva es para las próximas 24 horas.', shortStrong: 'Espera nuestra confirmación por WhatsApp antes de considerar confirmado el traslado.',
+    past: 'La fecha y hora seleccionadas ya han pasado.', pastStrong: 'Elige una fecha y hora futuras.',
+    returnOrder: 'La fecha y hora de regreso deben ser', returnOrderStrong: 'posteriores a las del primer traslado.',
+  },
+  'pt-BR': {
+    urgent: 'Esta reserva é para as próximas 8 horas.', urgentStrong: 'Aguarde nossa confirmação pelo WhatsApp e, se precisar de uma resposta urgente, fale conosco pelo WhatsApp.',
+    short: 'Esta reserva é para as próximas 24 horas.', shortStrong: 'Aguarde nossa confirmação pelo WhatsApp antes de considerar o transfer confirmado.',
+    past: 'A data e o horário selecionados já passaram.', pastStrong: 'Escolha uma data e um horário futuros.',
+    returnOrder: 'A data e o horário de volta devem ser', returnOrderStrong: 'posteriores aos do primeiro transfer.',
+  },
+  ko: {
+    urgent: '선택한 시간이 8시간 이내인 긴급 예약입니다.', urgentStrong: 'WhatsApp 확인을 기다려 주시고, 빠른 답변이 필요하면 WhatsApp으로 문의해 주세요.',
+    short: '선택한 시간이 24시간 이내인 예약입니다.', shortStrong: 'WhatsApp으로 최종 확인을 받기 전에는 픽업이 확정된 것으로 간주하지 마세요.',
+    past: '선택한 날짜와 시간이 이미 지났습니다.', pastStrong: '이후 날짜와 시간을 선택해 주세요.',
+    returnOrder: '귀국 날짜와 시간은', returnOrderStrong: '첫 번째 픽업 날짜와 시간보다 이후여야 합니다.',
+  },
+  ja: {
+    urgent: '選択した時刻まで8時間以内の直前予約です。', urgentStrong: 'WhatsAppでの確認をお待ちください。お急ぎの場合はWhatsAppでお問い合わせください。',
+    short: '選択した時刻まで24時間以内のご予約です。', shortStrong: 'WhatsAppで当社から確認が届くまでは、送迎は確定していません。',
+    past: '選択した日時はすでに過ぎています。', pastStrong: '未来の日時を選択してください。',
+    returnOrder: '復路の日時は、', returnOrderStrong: '最初の送迎日時より後に設定してください。',
+  },
+};
+
 function initialTownKey(value: string): Town | '' {
   const normalized = value.trim().toLowerCase();
   const found = (Object.keys(canonicalTownLabels) as Town[]).find((key) => canonicalTownLabels[key].toLowerCase() === normalized || key === normalized);
   return found || '';
-}
-function todayInIstanbul() {
-  const parts = new Intl.DateTimeFormat('en-CA', { timeZone:'Europe/Istanbul', year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(new Date());
-  const get = (type:string) => parts.find((p) => p.type === type)?.value || '';
-  return `${get('year')}-${get('month')}-${get('day')}`;
 }
 function maskPassport(value:string, t:{notEntered:string;provided:string}) {
   const clean=value.trim(); if(!clean) return t.notEntered; if(clean.length<=4) return t.provided; return `••••${clean.slice(-4)}`;
@@ -44,8 +67,9 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
   const [transferType,setTransferType]=useState<TransferType>('shuttle'); const [journey,setJourney]=useState<Journey>('one-way'); const [direction,setDirection]=useState<Direction>(initialDirection); const [airport,setAirport]=useState<Airport>(initialAirport); const [vehicle,setVehicle]=useState<Vehicle>('vito');
   const [passengers,setPassengers]=useState(1); const [people,setPeople]=useState<Passenger[]>([{fullName:'',passport:''}]); const [destination,setDestination]=useState<Town|''>(()=>initialTownKey(initialTown)); const [hotel,setHotel]=useState('');
   const [firstTransferDate,setFirstTransferDate]=useState(''); const [firstTransferTime,setFirstTransferTime]=useState(''); const [arrivalFlight,setArrivalFlight]=useState(''); const [departureFlight,setDepartureFlight]=useState(''); const [returnTransferDate,setReturnTransferDate]=useState(''); const [returnTransferTime,setReturnTransferTime]=useState(''); const [returnFlight,setReturnFlight]=useState('');
-  const [whatsapp,setWhatsapp]=useState(''); const [notes,setNotes]=useState(''); const [confirmed,setConfirmed]=useState(false); const [status,setStatus]=useState(''); const [expanded,setExpanded]=useState(false);
-  const today=useMemo(()=>todayInIstanbul(),[]); const firstStageReady=Boolean(destination && hotel.trim() && firstTransferDate && isValidTime(firstTransferTime)); const sameDayBooking=Boolean(firstTransferDate===today && firstTransferDate);
+  const [whatsapp,setWhatsapp]=useState(''); const [notes,setNotes]=useState(''); const [confirmed,setConfirmed]=useState(false); const [status,setStatus]=useState(''); const [expanded,setExpanded]=useState(false); const [clockTick,setClockTick]=useState(()=>Date.now());
+  const timingCopy=bookingTimingCopy[locale]; const today=todayInIstanbul(clockTick); const firstTiming=getBookingTiming(firstTransferDate,firstTransferTime,clockTick); const firstStageReady=Boolean(destination && hotel.trim() && firstTransferDate && isValidTime(firstTransferTime) && firstTiming!=='incomplete' && firstTiming!=='past'); const returnOrderInvalid=Boolean(journey==='round-trip' && returnTransferDate && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate,returnTransferTime,firstTransferDate,firstTransferTime));
+  useEffect(()=>{const timer=window.setInterval(()=>setClockTick(Date.now()),60_000);return()=>window.clearInterval(timer)},[]);
   useEffect(()=>{ if(transferType==='private'){ const max=vehicle==='vito'?5:16; if(passengers>max)setPassengers(max); } },[transferType,vehicle,passengers]);
   useEffect(()=>setPeople(cur=>Array.from({length:passengers},(_,i)=>cur[i]??{fullName:'',passport:''})),[passengers]);
   useEffect(()=>{if(expanded&&!firstStageReady)setExpanded(false)},[expanded,firstStageReady]);
@@ -62,7 +86,7 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
   const firstDateLabel=journey==='round-trip'||direction==='airport-hotel'?t.arrivalDate:t.departureDate; const firstTimeLabel=journey==='round-trip'||direction==='airport-hotel'?t.arrivalTime:t.departureTime;
   function updatePassenger(index:number,field:keyof Passenger,value:string){setPeople(cur=>cur.map((p,i)=>i===index?{...p,[field]:value}:p))}
   function submit(e:FormEvent<HTMLFormElement>){
-    e.preventDefault(); if(!confirmed)return; const form=new FormData(e.currentTarget); if(String(form.get('companyWebsite')||'').trim())return;
+    e.preventDefault(); if(!confirmed)return; if(getBookingTiming(firstTransferDate,firstTransferTime)==='past'){setStatus(`${timingCopy.past} ${timingCopy.pastStrong}`);return;} if(journey==='round-trip'&&!isAfterBookingDateTime(returnTransferDate,returnTransferTime,firstTransferDate,firstTransferTime)){setStatus(`${timingCopy.returnOrder} ${timingCopy.returnOrderStrong}`);return;} const form=new FormData(e.currentTarget); if(String(form.get('companyWebsite')||'').trim())return;
     const passengerPayload=people.map((p,i)=>({number:i+1,fullName:p.fullName.trim(),passport:p.passport.trim()}));
     const details={transferType,journey,direction:canonicalDirection,airport:airportLabels[airport],vehicle:transferType==='private'?(vehicle==='vito'?'Mercedes Vito (max 5)':'Mercedes Sprinter (max 16)'):'Shared shuttle',passengers:String(passengers),destination:destination?canonicalTownLabels[destination]:'',hotel,firstTransferDate,firstTransferTime,arrivalFlight,departureFlight,returnTransferDate,returnTransferTime,returnFlight,whatsapp,passengerDetails:passengerPayload,notes,total:`EUR ${total}`,payment:'Cash to the driver',submittedAt:new Date().toISOString(),language:locale};
     const passengerLines=passengerPayload.flatMap(p=>[`${t.passenger} ${p.number}: ${p.fullName||'-'}`,`${t.passport} ${p.number}: ${p.passport||'-'}`]);
@@ -80,18 +104,19 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
       <div className="field full passenger-hotel-row"><PassengerCounter id={`passengers-loc-${compact?'c':'f'}`} label={t.passengerCount} value={passengers} max={transferType==='private'?(vehicle==='vito'?5:16):16} onChange={setPassengers}/><div className="field passenger-hotel-field"><label>{t.hotel}</label><input value={hotel} onChange={e=>setHotel(e.target.value)} placeholder={destination?`${t.fullHotelIn} ${townLabels[destination]}`:t.fullHotel} required/></div></div>
       {transferType==='private'&&<div className="field full"><label>{t.privateVehicle}</label><div className="radio-row"><label className="radio-card"><input type="radio" checked={vehicle==='vito'} onChange={()=>setVehicle('vito')}/>Vito · {capacityLabel(5)} · <strong>€{privatePrices[airport].vito}/{t.way}</strong></label><label className="radio-card"><input type="radio" checked={vehicle==='sprinter'} onChange={()=>setVehicle('sprinter')}/>Sprinter · {capacityLabel(16)} · <strong>€{privatePrices[airport].sprinter}/{t.way}</strong></label></div></div>}
       <div className="field"><label>{firstDateLabel}</label><input type="date" min={today} value={firstTransferDate} onChange={e=>setFirstTransferDate(e.target.value)} required/></div><TimeSelect idPrefix={`time-loc-${locale}-${compact?'c':'f'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime}/>
-      {sameDayBooking&&<div className="field full same-day-warning">⚠️ <span>{t.sameDay} <strong>{t.sameDayStrong}</strong></span></div>}
+      {firstTiming==='past'&&<div className="field full booking-time-error" role="alert">⚠️ <span>{timingCopy.past} <strong>{timingCopy.pastStrong}</strong></span></div>}
+      {(firstTiming==='urgent'||firstTiming==='short-notice')&&<div className={`field full short-notice-warning${firstTiming==='urgent'?' urgent':''}`}>⚠️ <span>{firstTiming==='urgent'?timingCopy.urgent:timingCopy.short} <strong>{firstTiming==='urgent'?timingCopy.urgentStrong:timingCopy.shortStrong}</strong></span></div>}
       {!expanded&&<div className="field full"><button className="btn booking-continue" type="button" disabled={!firstStageReady} aria-disabled={!firstStageReady} onClick={()=>{if(firstStageReady)setExpanded(true)}}>{t.continue} · €{total}</button><div className="form-note">{firstStageReady?t.expandReady:t.expandMissing}</div></div>}
       {expanded&&<>
         {(isArrivalOnly||journey==='round-trip')&&<div className="field"><label>{t.arrivalFlight}</label><input value={arrivalFlight} onChange={e=>setArrivalFlight(e.target.value)} placeholder={flightExample} required/></div>}
         {isDepartureOnly&&<div className="field"><label>{t.departureFlight}</label><input value={departureFlight} onChange={e=>setDepartureFlight(e.target.value)} placeholder={returnFlightExample} required/></div>}
-        {journey==='round-trip'&&<><div className="field"><label>{t.returnDate}</label><input type="date" min={firstTransferDate||today} value={returnTransferDate} onChange={e=>setReturnTransferDate(e.target.value)} required/></div><TimeSelect idPrefix={`return-time-loc-${locale}-${compact?'c':'f'}`} label={t.returnTime} value={returnTransferTime} onChange={setReturnTransferTime}/><div className="field full"><label>{t.returnFlight}</label><input value={returnFlight} onChange={e=>setReturnFlight(e.target.value)} placeholder={returnFlightExample} required/></div></>}
+        {journey==='round-trip'&&<><div className="field"><label>{t.returnDate}</label><input type="date" min={firstTransferDate||today} value={returnTransferDate} onChange={e=>setReturnTransferDate(e.target.value)} required/></div><TimeSelect idPrefix={`return-time-loc-${locale}-${compact?'c':'f'}`} label={t.returnTime} value={returnTransferTime} onChange={setReturnTransferTime}/>{returnOrderInvalid&&<div className="field full booking-time-error" role="alert">⚠️ <span>{timingCopy.returnOrder} <strong>{timingCopy.returnOrderStrong}</strong></span></div>}<div className="field full"><label>{t.returnFlight}</label><input value={returnFlight} onChange={e=>setReturnFlight(e.target.value)} placeholder={returnFlightExample} required/></div></>}
         <div className="field full"><label>{t.whatsapp}</label><input type="tel" value={whatsapp} onChange={e=>setWhatsapp(e.target.value)} placeholder={t.whatsappPlaceholder} autoComplete="tel" required/></div>
         <div className="field full passenger-block"><div className="passenger-heading"><div><strong>{t.passengerInfo}</strong><span>{t.passengerInfoNote}</span></div></div>{people.map((person,index)=><div className="passenger-row" key={index}><div className="field"><label>{t.passenger} {index+1} {t.fullName}</label><input value={person.fullName} onChange={e=>updatePassenger(index,'fullName',e.target.value)} autoComplete={index===0?'name':'off'} required/></div><div className="field"><label>{t.passport}</label><input value={person.passport} onChange={e=>updatePassenger(index,'passport',e.target.value)} autoCapitalize="characters" autoComplete="off" required/></div></div>)}</div>
         <div className="field full"><label>{t.notes}</label><textarea rows={compact?2:3} value={notes} onChange={e=>setNotes(e.target.value)} placeholder={t.notesPlaceholder}/></div>
         <div className="field full booking-summary"><div className="booking-summary-head"><strong>{t.summary}</strong><strong className="summary-total">€{total}</strong></div><dl><div><dt>{t.service}</dt><dd>{transferType==='shuttle'?t.sharedService:privateVehicleLabel(vehicle)}</dd></div><div><dt>{t.journeyLabel}</dt><dd>{journey==='round-trip'?t.roundTripLabel:t.oneWayLabel} · {visibleDirection}</dd></div><div><dt>{t.airport}</dt><dd>{airportDisplay[airport]}</dd></div><div><dt>{destinationLabel}</dt><dd>{destination?townLabels[destination]:'—'}</dd></div><div><dt>{t.hotelLabel}</dt><dd>{hotel||'—'}</dd></div><div><dt>{t.passengers}</dt><dd>{passengers}</dd></div>{people.map((person,index)=><div key={index}><dt>{t.passenger} {index+1}</dt><dd>{person.fullName||'—'} · {t.passport} {maskPassport(person.passport,t)}</dd></div>)}<div><dt>{t.payment}</dt><dd>{t.cashDriver}</dd></div></dl><p className="form-note">{t.currencyNote}</p></div>
         <label className="confirm-row field full"><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)} required/><span>{t.confirmStart} <a className="inline-link" href={`${prefix}/service-contract`} target="_blank" rel="noreferrer">{t.contract}</a>{locale==='ko'||locale==='ja'?'':' '}{t.confirmMiddle} <a className="inline-link" href={`${prefix}/privacy-policy`} target="_blank" rel="noreferrer">{t.privacy}</a>{locale==='ko'?'에 따라 처리됨을 이해합니다.':locale==='ja'?'に従って取り扱われることを理解しています。':'.'}</span></label>
-        <div className="field full"><button className="btn btn-whatsapp booking-submit" type="submit"><WhatsAppIcon size={20}/>{t.submit}</button><div className="form-note">{t.confirmedOnly}</div>{status&&<div className="form-status" aria-live="polite">{status}</div>}</div>
+        <div className="field full"><button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid} aria-disabled={returnOrderInvalid}><WhatsAppIcon size={20}/>{t.submit}</button><div className="form-note">{t.confirmedOnly}</div>{status&&<div className="form-status" aria-live="polite">{status}</div>}</div>
       </>}
     </div></form><div className="booking-agency-trust">{t.operated} <strong>Ekwo Travel &amp; Outdoor Travel Agency</strong> · TURSAB No: 7896</div>
   </div>;

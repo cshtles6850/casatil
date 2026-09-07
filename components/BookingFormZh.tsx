@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
+import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -53,11 +54,6 @@ function initialTownKey(value: string): Town | '' {
   return found || '';
 }
 
-function todayInIstanbul() {
-  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
-  return `${get('year')}-${get('month')}-${get('day')}`;
-}
 
 function maskPassport(value: string) {
   const clean = value.trim();
@@ -98,10 +94,17 @@ export function BookingFormZh({
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
   const [expanded, setExpanded] = useState(false);
-  const today = useMemo(() => todayInIstanbul(), []);
+  const [clockTick, setClockTick] = useState(() => Date.now());
+  const today = todayInIstanbul(clockTick);
   const hotelReady = hotel.trim().length > 0;
-  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime));
-  const sameDayBooking = Boolean(firstTransferDate && firstTransferDate === today);
+  const firstTiming = getBookingTiming(firstTransferDate, firstTransferTime, clockTick);
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past');
+  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime));
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (transferType !== 'private') return;
@@ -139,6 +142,14 @@ export function BookingFormZh({
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!confirmed) return;
+    if (getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
+      setStatus('所选日期和时间已过去，请选择未来的日期和时间。');
+      return;
+    }
+    if (journey === 'round-trip' && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)) {
+      setStatus('返程日期和时间必须晚于首次接送的日期和时间。');
+      return;
+    }
 
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return;
@@ -306,8 +317,12 @@ export function BookingFormZh({
 
           <TimeSelect idPrefix={`zh-time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
 
-          {sameDayBooking && (
-            <div className="field full same-day-warning">⚠️ <span>当天预订需视余位情况而定。<strong>在收到我们的 WhatsApp 确认之前，请勿将接送视为已确认。</strong></span></div>
+          {firstTiming === 'past' && (
+            <div className="field full booking-time-error" role="alert">⚠️ <span>所选日期和时间已过去。<strong>请选择未来的日期和时间。</strong></span></div>
+          )}
+
+          {(firstTiming === 'urgent' || firstTiming === 'short-notice') && (
+            <div className={`field full short-notice-warning${firstTiming === 'urgent' ? ' urgent' : ''}`}>⚠️ <span>{firstTiming === 'urgent' ? <>此预订距离所选时间不足 8 小时。<strong>请等待我们的 WhatsApp 确认；如需尽快回复，请通过 WhatsApp 联系我们。</strong></> : <>此预订距离所选时间不足 24 小时。<strong>请在收到我们的 WhatsApp 确认后，再将接送视为已确认。</strong></>}</span></div>
           )}
 
           {!expanded && (
@@ -339,6 +354,7 @@ export function BookingFormZh({
             <>
               <div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div>
               <TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} />
+              {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>返程日期和时间必须<strong>晚于首次接送的日期和时间。</strong></span></div>}
               <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>
           )}
@@ -381,7 +397,7 @@ export function BookingFormZh({
           </label>
 
           <div className="field full">
-            <button className="btn btn-whatsapp booking-submit" type="submit"><WhatsAppIcon size={20} /> 提交并继续到 WhatsApp</button>
+            <button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid} aria-disabled={returnOrderInvalid}><WhatsAppIcon size={20} /> 提交并继续到 WhatsApp</button>
             <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨。</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
