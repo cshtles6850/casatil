@@ -54,7 +54,7 @@ export default function HomePage() {
 
     <section className="home-hero"><div className="container hero-grid">
       <div className="hero-visual" aria-label="Cappadocia airport shuttle vehicles">
-        <Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="Cappadocia Airport Shuttle Mercedes Vito and Sprinter vehicles" width={1200} height={675} priority sizes="(max-width: 800px) 94vw, 48vw" />
+        <Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="Cappadocia Airport Shuttle Mercedes Vito and Sprinter vehicles" width={1200} height={675} priority fetchPriority="high" quality={70} sizes="(max-width: 800px) 94vw, 48vw" />
       </div>
       <div className="hero-copy">
         <span className="eyebrow">Kayseri ASR · Nevsehir NAV</span>

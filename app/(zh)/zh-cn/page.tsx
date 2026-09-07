@@ -54,7 +54,7 @@ export default function ChineseHomePage() {
     <JsonLd data={serviceSchema}/><JsonLd data={faqSchema}/>
 
     <section className="home-hero"><div className="container hero-grid">
-      <div className="hero-visual" aria-label="卡帕多奇亚机场接送车辆"><Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="卡帕多奇亚机场接送 Mercedes Vito 和 Sprinter" width={1200} height={675} priority sizes="(max-width: 800px) 94vw, 48vw" /></div>
+      <div className="hero-visual" aria-label="卡帕多奇亚机场接送车辆"><Image src="/cappadocia-airport-shuttle-vito-sprinter.webp" alt="卡帕多奇亚机场接送 Mercedes Vito 和 Sprinter" width={1200} height={675} priority fetchPriority="high" quality={70} sizes="(max-width: 800px) 94vw, 48vw" /></div>
       <div className="hero-copy">
         <span className="eyebrow">开塞利 ASR · 内夫谢希尔 NAV</span>
         <h1>卡帕多奇亚机场接送</h1>
