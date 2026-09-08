@@ -7,6 +7,7 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
+import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -23,11 +24,6 @@ const airportDisplayLabels: Record<Airport, string> = {
 const airportApiLabels: Record<Airport, string> = {
   kayseri: 'Kayseri Airport (ASR)',
   nevsehir: 'Nevsehir Airport (NAV)',
-};
-
-const privatePrices: Record<Airport, Record<Vehicle, number>> = {
-  kayseri: { vito: 90, sprinter: 110 },
-  nevsehir: { vito: 80, sprinter: 90 },
 };
 
 const townEnglishLabels: Record<Town, string> = {
@@ -119,9 +115,9 @@ export function BookingFormZh({
   }, [passengers]);
 
   const total = useMemo(() => {
-    const multiplier = journey === 'round-trip' ? 2 : 1;
-    if (transferType === 'shuttle') return 15 * passengers * multiplier;
-    return privatePrices[airport][vehicle] * multiplier;
+    const isRoundTrip = journey === 'round-trip';
+    if (transferType === 'shuttle') return shuttleTotal(airport, passengers, isRoundTrip);
+    return privateTotal(airport, vehicle, isRoundTrip);
   }, [transferType, journey, passengers, airport, vehicle]);
 
   const isArrivalOnly = journey === 'one-way' && direction === 'airport-hotel';
@@ -258,7 +254,7 @@ export function BookingFormZh({
           <div className="field full">
             <label>接送服务</label>
             <div className="radio-row">
-              <label className="radio-card"><input type="radio" name="serviceType" checked={transferType === 'shuttle'} onChange={() => setTransferType('shuttle')} /> 拼车 · €15/人/单程</label>
+              <label className="radio-card"><input type="radio" name="serviceType" checked={transferType === 'shuttle'} onChange={() => setTransferType('shuttle')} /> 拼车 · €{shuttleOneWayPrice(airport)}/人/单程</label>
               <label className="radio-card"><input type="radio" name="serviceType" checked={transferType === 'private'} onChange={() => setTransferType('private')} /> 私人包车</label>
             </div>
           </div>
@@ -311,8 +307,8 @@ export function BookingFormZh({
             <div className="field full">
               <label>私人车型</label>
               <div className="radio-row">
-                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'vito'} onChange={() => setVehicle('vito')} /> Vito · 最多 5 人 · <strong>€{privatePrices[airport].vito}/单程</strong></label>
-                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'sprinter'} onChange={() => setVehicle('sprinter')} /> Sprinter · 最多 16 人 · <strong>€{privatePrices[airport].sprinter}/单程</strong></label>
+                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'vito'} onChange={() => setVehicle('vito')} /> Vito · 最多 5 人 · <strong>€{privateOneWayPrice(airport, 'vito')}/单程</strong></label>
+                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'sprinter'} onChange={() => setVehicle('sprinter')} /> Sprinter · 最多 16 人 · <strong>€{privateOneWayPrice(airport, 'sprinter')}/单程</strong></label>
               </div>
             </div>
           )}

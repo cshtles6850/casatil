@@ -7,6 +7,7 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
+import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -19,11 +20,6 @@ type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 const airportLabels: Record<Airport, string> = {
   kayseri: 'Kayseri Airport (ASR)',
   nevsehir: 'Nevsehir Airport (NAV)',
-};
-
-const privatePrices: Record<Airport, Record<Vehicle, number>> = {
-  kayseri: { vito: 90, sprinter: 110 },
-  nevsehir: { vito: 80, sprinter: 90 },
 };
 
 const townLabels: Record<Town, string> = {
@@ -105,9 +101,9 @@ export function BookingForm({
   }, [passengers]);
 
   const total = useMemo(() => {
-    const multiplier = journey === 'round-trip' ? 2 : 1;
-    if (transferType === 'shuttle') return 15 * passengers * multiplier;
-    return privatePrices[airport][vehicle] * multiplier;
+    const isRoundTrip = journey === 'round-trip';
+    if (transferType === 'shuttle') return shuttleTotal(airport, passengers, isRoundTrip);
+    return privateTotal(airport, vehicle, isRoundTrip);
   }, [transferType, journey, passengers, airport, vehicle]);
 
   const isArrivalOnly = journey === 'one-way' && direction === 'airport-hotel';
@@ -240,7 +236,7 @@ export function BookingForm({
           <div className="field full">
             <label>Transfer service</label>
             <div className="radio-row">
-              <label className="radio-card"><input type="radio" name="serviceType" checked={transferType === 'shuttle'} onChange={() => setTransferType('shuttle')} /> Shuttle · €15/person/way</label>
+              <label className="radio-card"><input type="radio" name="serviceType" checked={transferType === 'shuttle'} onChange={() => setTransferType('shuttle')} /> Shuttle · €{shuttleOneWayPrice(airport)}/person/way</label>
               <label className="radio-card"><input type="radio" name="serviceType" checked={transferType === 'private'} onChange={() => setTransferType('private')} /> Private vehicle</label>
             </div>
           </div>
@@ -293,8 +289,8 @@ export function BookingForm({
             <div className="field full">
               <label>Private vehicle</label>
               <div className="radio-row">
-                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'vito'} onChange={() => setVehicle('vito')} /> Vito · max 5 · <strong>€{privatePrices[airport].vito}/way</strong></label>
-                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'sprinter'} onChange={() => setVehicle('sprinter')} /> Sprinter · max 16 · <strong>€{privatePrices[airport].sprinter}/way</strong></label>
+                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'vito'} onChange={() => setVehicle('vito')} /> Vito · max 5 · <strong>€{privateOneWayPrice(airport, 'vito')}/way</strong></label>
+                <label className="radio-card"><input type="radio" name="vehicle" checked={vehicle === 'sprinter'} onChange={() => setVehicle('sprinter')} /> Sprinter · max 16 · <strong>€{privateOneWayPrice(airport, 'sprinter')}/way</strong></label>
               </div>
             </div>
           )}

@@ -1,21 +1,22 @@
 import type { SeoPage } from './content';
+import { resolvePriceTokensDeep } from './price-content';
 export type ZhSeoPage = SeoPage;
 
 export const zhTownNames: Record<string,string> = { goreme:'格雷梅', urgup:'于尔居普', uchisar:'乌奇希萨尔', avanos:'阿瓦诺斯', ortahisar:'奥塔西萨', cavusin:'恰武辛' };
 
-export const zhPages: SeoPage[] = [
+const rawZhPages: SeoPage[] = [
   {
     "slug": "cappadocia-shuttle-transfer",
     "title": "卡帕多奇亚机场拼车｜共享机场班车",
-    "description": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与六个主要酒店区，单程 €15/人，可预订接机或送机。",
+    "description": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与六个主要酒店区，可预订接机或送机，也提供私人 Vito/Sprinter 接送。",
     "eyebrow": "共享机场班车",
     "h1": "卡帕多奇亚机场拼车接送",
-    "lead": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨的酒店。共享班车为 €15/人/单程，接机和送机根据实际航班确认。",
+    "lead": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨的酒店。当前单程价格为 ASR {{PRICE:kayseri:shuttle}}/人、NAV {{PRICE:nevsehir:shuttle}}/人，接机和送机根据实际航班确认。",
     "sections": [
       {
         "heading": "服务包含什么",
         "paragraphs": [
-          "服务包括从任一机场到住宿地的共享接送；航班、乘客资料和酒店名称会提前确认。同一班次可能还有其他已确认乘客和酒店停靠，这也是共享班车能够保持 €15/人的原因。"
+          "服务包括从任一机场到住宿地的共享接送；航班、乘客资料和酒店名称会提前确认。同一班次可能还有其他已确认乘客和酒店停靠，当前单程价格为 ASR {{PRICE:kayseri:shuttle}}/人、NAV {{PRICE:nevsehir:shuttle}}/人。"
         ]
       },
       {
@@ -40,7 +41,7 @@ export const zhPages: SeoPage[] = [
     "faq": [
       {
         "q": "卡帕多奇亚共享机场班车多少钱？",
-        "a": "从 ASR 或 NAV 到服务覆盖的酒店区域均为 €15/人/单程。"
+        "a": "从 ASR 出发为 {{PRICE:kayseri:shuttle}}/人/单程，从 NAV 出发为 {{PRICE:nevsehir:shuttle}}/人/单程。"
       },
       {
         "q": "覆盖哪两座机场？",
@@ -66,12 +67,12 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "卡帕多奇亚机场拼车｜共享机场班车",
-    "twitterDescription": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与六个主要酒店区，单程 €15/人，可预订接机或送机。"
+    "twitterDescription": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与六个主要酒店区，可预订接机或送机，也提供私人 Vito/Sprinter 接送。"
   },
   {
     "slug": "cappadocia-airport-transfer",
     "title": "卡帕多奇亚机场接送｜ASR / NAV 拼车与私人包车",
-    "description": "卡帕多奇亚机场接送：开塞利 ASR、内夫谢希尔 NAV 到六个主要酒店区。共享班车 €15/人，私人 Vito/Sprinter，支持接机与送机。",
+    "description": "卡帕多奇亚机场接送：开塞利 ASR、内夫谢希尔 NAV 往返六个主要酒店区，可选共享班车或私人 Vito/Sprinter，并通过 WhatsApp 预订。",
     "eyebrow": "机场接机与送机",
     "h1": "卡帕多奇亚机场接送",
     "lead": "卡帕多奇亚机场接送的具体路线取决于抵达机场、酒店城镇以及出行方向。先确认机场，再确认住宿城镇，之后才能匹配正确的接送路线。",
@@ -85,7 +86,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "共享班车或私人接送",
         "paragraphs": [
-          "两座机场的共享 [[班车|cappadocia-shuttle-transfer]] 都是 €15/人/单程，需要提前预订并通过 WhatsApp 确认，同一班次可能包含其他乘客和酒店停靠。[[私人接送|private-airport-transfer-cappadocia]] 使用 Vito（最多 5 人）或 Sprinter（最多 16 人），按整车计价，ASR 与 NAV 价格不同。需要比较时可查看 [[共享班车与私人接送|cappadocia-shared-shuttle-vs-private-transfer]]。"
+          "共享 [[班车|cappadocia-shuttle-transfer]] 当前为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}/人/单程，需要提前预订并通过 WhatsApp 确认，同一班次可能包含其他乘客和酒店停靠。[[私人接送|private-airport-transfer-cappadocia]] 使用 Vito（最多 5 人）或 Sprinter（最多 16 人），按整车计价，ASR 与 NAV 的价格分别管理。需要比较时可查看 [[共享班车与私人接送|cappadocia-shared-shuttle-vs-private-transfer]]。"
         ]
       },
       {
@@ -97,13 +98,13 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "抵达和离开可以使用不同机场",
         "paragraphs": [
-          "有些行程从 NAV 抵达、从 ASR 离开，也可能相反。这不属于标准的同机场往返，因为两段路线和私人接送价格不同。请通过 WhatsApp 分别提供两段航班信息，让每一段都按正确机场确认；不要把其中一座机场的价格直接套用到另一段行程。"
+          "有些行程从 NAV 抵达、从 ASR 离开，也可能相反。这不属于标准的同机场往返，因为两段路线和私人接送价格都需要按机场分别确认。请通过 WhatsApp 分别提供两段航班信息，让每一段都按正确机场确认；不要把其中一座机场的价格直接套用到另一段行程。"
         ]
       },
       {
         "heading": "团队人数与车辆容量",
         "paragraphs": [
-          "Vito 最多 5 人，Sprinter 最多 16 人。私人接送按整车计价，因此较大团队使用 Sprinter 时，人均费用有时会低于共享班车；尤其 NAV 的私人车价格更低，预订前值得按实际人数比较。"
+          "Vito 最多 5 人，Sprinter 最多 16 人。私人接送按整车计价，因此较大团队使用 Sprinter 时，人均费用有时会低于共享班车。私人车价格按机场分别管理，预订前应根据实际人数比较 ASR 与 NAV 的当前车辆价格。"
         ]
       },
       {
@@ -154,12 +155,12 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "卡帕多奇亚机场接送｜ASR / NAV 拼车与私人包车",
-    "twitterDescription": "卡帕多奇亚机场接送：开塞利 ASR、内夫谢希尔 NAV 到六个主要酒店区。共享班车 €15/人，私人 Vito/Sprinter，支持接机与送机。"
+    "twitterDescription": "卡帕多奇亚机场接送：开塞利 ASR、内夫谢希尔 NAV 往返六个主要酒店区，可选共享班车或私人 Vito/Sprinter，并通过 WhatsApp 预订。"
   },
   {
     "slug": "private-airport-transfer-cappadocia",
     "title": "卡帕多奇亚私人机场接送｜Mercedes Vito / Sprinter",
-    "description": "卡帕多奇亚私人机场接送：Vito 最多5人，Sprinter 最多16人。ASR 单程 €90/€110，NAV 单程 €80/€90，按整车收费。",
+    "description": "卡帕多奇亚私人机场接送：Vito 最多5人，Sprinter 最多16人，按整车收费。覆盖开塞利 ASR、内夫谢希尔 NAV 与主要酒店区，现金支付给司机。",
     "eyebrow": "独立车辆直达酒店",
     "h1": "卡帕多奇亚私人机场接送",
     "lead": "需要更直接的机场—酒店行程时，可选择 Mercedes Vito 或 Sprinter。私人价格按整车和机场计价，不按乘客人数收取。",
@@ -173,13 +174,13 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "Mercedes Sprinter：最多 16 位乘客",
         "paragraphs": [
-          "Sprinter 是最多 16 人的较大型私人车型。单程价格随机场不同：开塞利 €110，内夫谢希尔 €90，因此在表单中选择 ASR 或 NAV 后应再次确认总价。"
+          "Sprinter 是最多 16 人的较大型私人车型。单程价格按机场分别管理：开塞利 {{PRICE:kayseri:sprinter}}，内夫谢希尔 {{PRICE:nevsehir:sprinter}}，因此在表单中选择 ASR 或 NAV 后应再次确认总价。"
         ]
       },
       {
         "heading": "什么时候私人接送比共享班车更合适",
         "paragraphs": [
-          "私人接送更适合较大团队、较早离港、较晚抵达、行李较多的家庭、希望酒店直达，或住宿不在共享班车覆盖范围内的旅客。一两位时间较灵活的乘客通常选择 [[€15 共享班车|cappadocia-shuttle-transfer]] 更划算。"
+          "私人接送更适合较大团队、较早离港、较晚抵达、行李较多的家庭、希望酒店直达，或住宿不在共享班车覆盖范围内的旅客。一两位时间较灵活的乘客通常选择 [[共享班车|cappadocia-shuttle-transfer]] 更划算；目前 ASR 单程 {{PRICE:kayseri:shuttle}}/人，NAV 单程 {{PRICE:nevsehir:shuttle}}/人。"
         ]
       },
       {
@@ -198,19 +199,19 @@ export const zhPages: SeoPage[] = [
     "faq": [
       {
         "q": "开塞利私人 Vito 多少钱？",
-        "a": "€90/车/单程，最多 5 人。"
+        "a": "{{PRICE:kayseri:vito}}/车/单程，最多 5 人。"
       },
       {
         "q": "内夫谢希尔私人 Vito 多少钱？",
-        "a": "€80/车/单程，最多 5 人。"
+        "a": "{{PRICE:nevsehir:vito}}/车/单程，最多 5 人。"
       },
       {
         "q": "开塞利 Sprinter 多少钱？",
-        "a": "€110/车/单程，最多 16 人。"
+        "a": "{{PRICE:kayseri:sprinter}}/车/单程，最多 16 人。"
       },
       {
         "q": "内夫谢希尔 Sprinter 多少钱？",
-        "a": "€90/车/单程，最多 16 人。"
+        "a": "{{PRICE:nevsehir:sprinter}}/车/单程，最多 16 人。"
       },
       {
         "q": "往返多少钱？",
@@ -235,44 +236,44 @@ export const zhPages: SeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "卡帕多奇亚私人机场接送｜Mercedes Vito / Sprinter",
-    "twitterDescription": "卡帕多奇亚私人机场接送：Vito 最多5人，Sprinter 最多16人。ASR 单程 €90/€110，NAV 单程 €80/€90，按整车收费。"
+    "twitterDescription": "卡帕多奇亚私人机场接送：Vito 最多5人，Sprinter 最多16人，按整车收费。覆盖开塞利 ASR、内夫谢希尔 NAV 与主要酒店区，现金支付给司机。"
   },
   {
     "slug": "airport-transfer-prices",
     "title": "卡帕多奇亚机场接送价格｜拼车与私人车价目",
-    "description": "卡帕多奇亚机场接送价格：ASR/NAV 拼车 €15/人/单程；ASR Vito €90、Sprinter €110；NAV Vito €80、Sprinter €90。往返正好两倍。",
+    "description": "卡帕多奇亚机场接送价格指南：比较 ASR/NAV 共享班车、私人 Vito 与 Sprinter 的当前费用，以及单程、往返和按人/按车计价方式。",
     "eyebrow": "透明固定价格",
     "h1": "卡帕多奇亚机场接送价格",
-    "lead": "共享拼车从两座机场都是 €15/人/单程；私人车按机场和车型计价。这里把单程、往返和车辆容量一次说明清楚。",
+    "lead": "共享拼车从开塞利（ASR）为 {{PRICE:kayseri:shuttle}}/人/单程，从内夫谢希尔（NAV）为 {{PRICE:nevsehir:shuttle}}；私人车按机场和车型计价。这里把单程、往返和车辆容量一次说明清楚。",
     "sections": [
       {
         "heading": "共享班车价格",
         "paragraphs": [
-          "开塞利机场（ASR）→ 服务覆盖范围内的卡帕多奇亚酒店：**€15/人/单程**。内夫谢希尔机场（NAV）→ 服务覆盖范围内的酒店：**€15/人/单程**。酒店到机场同价，往返 €30/人。完整路线说明见 [[共享班车页面|cappadocia-shuttle-transfer]]。"
+          "开塞利机场（ASR）→ 服务覆盖范围内的卡帕多奇亚酒店：**{{PRICE:kayseri:shuttle}}/人/单程**。内夫谢希尔机场（NAV）→ 服务覆盖范围内的酒店：**{{PRICE:nevsehir:shuttle}}/人/单程**。酒店到机场按对应机场的同一单程价计算；往返为开塞利 {{PRICE:kayseri:shuttle:roundTrip}}/人、内夫谢希尔 {{PRICE:nevsehir:shuttle:roundTrip}}/人。完整路线说明见 [[共享班车页面|cappadocia-shuttle-transfer]]。"
         ]
       },
       {
         "heading": "开塞利机场私人接送价格",
         "paragraphs": [
-          "Mercedes Vito，最多 5 人：**€90 单程 / €180 往返**。Mercedes Sprinter，最多 16 人：**€110 单程 / €220 往返**。"
+          "Mercedes Vito，最多 5 人：**{{PRICE:kayseri:vito}} 单程 / {{PRICE:kayseri:vito:roundTrip}} 往返**。Mercedes Sprinter，最多 16 人：**{{PRICE:kayseri:sprinter}} 单程 / {{PRICE:kayseri:sprinter:roundTrip}} 往返**。"
         ]
       },
       {
         "heading": "内夫谢希尔机场私人接送价格",
         "paragraphs": [
-          "Mercedes Vito，最多 5 人：**€80 单程 / €160 往返**。Mercedes Sprinter，最多 16 人：**€90 单程 / €180 往返**。车型详情和适用场景见 [[私人接送页面|private-airport-transfer-cappadocia]]。"
+          "Mercedes Vito，最多 5 人：**{{PRICE:nevsehir:vito}} 单程 / {{PRICE:nevsehir:vito:roundTrip}} 往返**。Mercedes Sprinter，最多 16 人：**{{PRICE:nevsehir:sprinter}} 单程 / {{PRICE:nevsehir:sprinter:roundTrip}} 往返**。车型详情和适用场景见 [[私人接送页面|private-airport-transfer-cappadocia]]。"
         ]
       },
       {
         "heading": "按人计价与按车计价",
         "paragraphs": [
-          "共享班车按人数计价，所以人数增加时总价也增加。私人接送按整车计价，只要团队不超过车型容量：Vito 最多 5 人、Sprinter 最多 16 人。因此团队较大时，Sprinter 的人均成本有时会低于共享班车。私人价格也不是一个统一数字：NAV 为 Vito €80 / Sprinter €90，ASR 为 Vito €90 / Sprinter €110，选择机场后应再次确认总价。"
+          "共享班车按人数计价，所以人数增加时总价也增加。私人接送按整车计价，只要团队不超过车型容量：Vito 最多 5 人、Sprinter 最多 16 人。因此团队较大时，Sprinter 的人均成本有时会低于共享班车。私人价格也不是一个统一数字：NAV 为 Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}，ASR 为 Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}，选择机场后应再次确认总价。"
         ]
       },
       {
         "heading": "不同人数的价格示例",
         "paragraphs": [
-          "两人单程共享班车合计 €30；五人合计 €75；六人合计 €90，正好等于 NAV Sprinter 的单程整车价。Kayseri Vito 也是 €90，但最多 5 人，因此不能作为六人车型。比较时应把人数和车辆容量一起看，而不是只看一个标价。"
+          "以内夫谢希尔共享班车为例：两人单程合计 {{PRICE:nevsehir:shuttle:x2}}，五人合计 {{PRICE:nevsehir:shuttle:x5}}，六人合计 {{PRICE:nevsehir:shuttle:x6}}。可再与内夫谢希尔 Sprinter 每车 {{PRICE:nevsehir:sprinter}} 比较。Kayseri Vito 为 {{PRICE:kayseri:vito}}，但最多 5 人，因此不能作为六人车型。比较时应把人数和车辆容量一起看，而不是只看一个标价。"
         ]
       },
       {
@@ -284,8 +285,8 @@ export const zhPages: SeoPage[] = [
     ],
     "faq": [
       {
-        "q": "两座机场拼车都是 €15 吗？",
-        "a": "是，ASR 和 NAV 都是 €15/人/单程。"
+        "q": "两座机场目前的拼车价格分别是多少？",
+        "a": "ASR 为 {{PRICE:kayseri:shuttle}}/人/单程，NAV 为 {{PRICE:nevsehir:shuttle}}/人/单程。"
       },
       {
         "q": "儿童也按人计算吗？",
@@ -317,11 +318,11 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "6 人从 NAV 选择拼车还是 Sprinter 更便宜？",
-        "a": "6 人拼车单程也是 €90，与 NAV Sprinter 公布的整车单程价相同；这时应再比较直达、行李和车辆独立性。"
+        "a": "6 人从 NAV 乘拼车单程合计 {{PRICE:nevsehir:shuttle:x6}}；NAV Sprinter 为 {{PRICE:nevsehir:sprinter}}/车/单程。请比较当前总价、直达需求、行李和车辆独立性。"
       },
       {
-        "q": "从 ASR 切换到 NAV 后私人价格应该变化吗？",
-        "a": "应该。NAV 私人 Vito/Sprinter 是 €80/€90，ASR 是 €90/€110。"
+        "q": "从 ASR 切换到 NAV 后应使用哪组私人接送价格？",
+        "a": "应按所选机场使用对应价格：NAV 的 Vito/Sprinter 为 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR 为 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}。"
       },
       {
         "q": "如果抵达 NAV、离开 ASR，往返怎么计算？",
@@ -338,15 +339,15 @@ export const zhPages: SeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "卡帕多奇亚机场接送价格｜拼车与私人车价目",
-    "twitterDescription": "卡帕多奇亚机场接送价格：ASR/NAV 拼车 €15/人/单程；ASR Vito €90、Sprinter €110；NAV Vito €80、Sprinter €90。往返正好两倍。"
+    "twitterDescription": "卡帕多奇亚机场接送价格指南：比较 ASR/NAV 共享班车、私人 Vito 与 Sprinter 的当前费用，以及单程、往返和按人/按车计价方式。"
   },
   {
     "slug": "kayseri-airport-shuttle",
     "title": "开塞利机场班车｜卡帕多奇亚酒店接送",
-    "description": "开塞利机场（ASR）卡帕多奇亚机场班车 €15/人，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，支持往返与私人车。",
+    "description": "开塞利机场（ASR）到卡帕多奇亚酒店的共享班车与私人接送，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，可预订单程或往返。",
     "eyebrow": "ASR 共享机场班车",
     "h1": "开塞利机场到卡帕多奇亚班车",
-    "lead": "预订从开塞利 Erkilet 机场（ASR）前往服务覆盖范围内的卡帕多奇亚住宿区的 €15/人共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
+    "lead": "预订从开塞利 Erkilet 机场（ASR）前往服务覆盖范围内的卡帕多奇亚住宿区的 {{PRICE:kayseri:shuttle}}/人共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
     "sections": [
       {
         "heading": "开塞利机场班车：前往卡帕多奇亚公路距离较长的主要机场",
@@ -355,9 +356,9 @@ export const zhPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "即使从 ASR 出发，共享班车仍是 €15/人",
+        "heading": "即使从 ASR 出发，共享班车仍是 {{PRICE:kayseri:shuttle}}/人",
         "paragraphs": [
-          "开塞利共享机场班车为 **€15/人/单程**，往返 **€30/人**。ASR 距离更长也不会提高共享票价。希望独立车辆的旅客可选择 Vito €90 或 Sprinter €110/车/单程。"
+          "开塞利共享机场班车为 **{{PRICE:kayseri:shuttle}}/人/单程**，往返 **{{PRICE:kayseri:shuttle:roundTrip}}/人**。ASR 距离更长也不会提高共享票价。希望独立车辆的旅客可选择 Vito {{PRICE:kayseri:vito}} 或 Sprinter {{PRICE:kayseri:sprinter}}/车/单程。"
         ]
       },
       {
@@ -375,14 +376,14 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "返回 ASR 使用独立的酒店接车安排",
         "paragraphs": [
-          "从服务覆盖的酒店返回开塞利机场，共享班车同样为 €15/人。返程并不是把抵达时间简单倒过来；应使用真实离港航班，并结合 [[卡帕多奇亚到开塞利机场班车|cappadocia-to-kayseri-airport-shuttle]] 的信息，按实际住宿城镇确认接车时间和地点。"
+          "从服务覆盖的酒店返回开塞利机场，共享班车同样为 {{PRICE:kayseri:shuttle}}/人。返程并不是把抵达时间简单倒过来；应使用真实离港航班，并结合 [[卡帕多奇亚到开塞利机场班车|cappadocia-to-kayseri-airport-shuttle]] 的信息，按实际住宿城镇确认接车时间和地点。"
         ]
       }
     ],
     "faq": [
       {
         "q": "开塞利机场到卡帕多奇亚的共享班车多少钱？",
-        "a": "€15/人/单程，往返 €30/人。"
+        "a": "{{PRICE:kayseri:shuttle}}/人/单程，往返 {{PRICE:kayseri:shuttle:roundTrip}}/人。"
       },
       {
         "q": "ASR 到格雷梅公路多久？",
@@ -390,7 +391,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "开塞利私人接送价格是多少？",
-        "a": "Vito €90、Sprinter €110/车/单程。"
+        "a": "Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}/车/单程。"
       },
       {
         "q": "ASR 班车覆盖哪些酒店城镇？",
@@ -413,15 +414,15 @@ export const zhPages: SeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "开塞利机场班车｜卡帕多奇亚酒店接送",
-    "twitterDescription": "开塞利机场（ASR）卡帕多奇亚机场班车 €15/人，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，支持往返与私人车。"
+    "twitterDescription": "开塞利机场（ASR）到卡帕多奇亚酒店的共享班车与私人接送，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，可预订单程或往返。"
   },
   {
     "slug": "nevsehir-airport-shuttle",
     "title": "内夫谢希尔机场班车｜卡帕多奇亚酒店接送",
-    "description": "内夫谢希尔机场（NAV）卡帕多奇亚机场班车 €15/人，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，支持往返与私人车。",
+    "description": "内夫谢希尔机场（NAV）到卡帕多奇亚酒店的共享班车与私人接送，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，可预订单程或往返。",
     "eyebrow": "NAV 共享机场班车",
     "h1": "内夫谢希尔机场到卡帕多奇亚班车",
-    "lead": "预订从内夫谢希尔卡帕多奇亚机场（NAV）前往服务覆盖范围内的卡帕多奇亚住宿区的 €15/人共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
+    "lead": "预订从内夫谢希尔卡帕多奇亚机场（NAV）前往服务覆盖范围内的卡帕多奇亚住宿区的 {{PRICE:nevsehir:shuttle}}/人共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
     "sections": [
       {
         "heading": "内夫谢希尔机场班车：前往许多中部住宿区公路更短的入口",
@@ -430,9 +431,9 @@ export const zhPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "NAV 共享班车为 €15/人",
+        "heading": "NAV 共享班车为 {{PRICE:nevsehir:shuttle}}/人",
         "paragraphs": [
-          "内夫谢希尔共享机场班车为 **€15/人/单程**，往返 **€30/人**。私人接送价格低于 ASR：Vito €80、Sprinter €90/车/单程。"
+          "内夫谢希尔共享机场班车为 **{{PRICE:nevsehir:shuttle}}/人/单程**，往返 **{{PRICE:nevsehir:shuttle:roundTrip}}/人**。私人接送按机场分别定价：NAV 的 Vito 为 {{PRICE:nevsehir:vito}}、Sprinter 为 {{PRICE:nevsehir:sprinter}}/车/单程；如果两座机场的航班都合适，请同时比较 ASR 的当前车辆价格。"
         ]
       },
       {
@@ -450,7 +451,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "返回 NAV 要按酒店城镇安排，而不是使用统一接车点",
         "paragraphs": [
-          "返回内夫谢希尔机场的共享票价也是 €15/人。请使用真实离港航班，并从 [[卡帕多奇亚到内夫谢希尔机场班车|cappadocia-to-nevsehir-airport-shuttle]] 进入对应城镇路线，避免把格雷梅接车按乌奇希萨尔、阿瓦诺斯或其他区域的方式安排。"
+          "返回内夫谢希尔机场的共享票价也是 {{PRICE:nevsehir:shuttle}}/人。请使用真实离港航班，并从 [[卡帕多奇亚到内夫谢希尔机场班车|cappadocia-to-nevsehir-airport-shuttle]] 进入对应城镇路线，避免把格雷梅接车按乌奇希萨尔、阿瓦诺斯或其他区域的方式安排。"
         ]
       },
       {
@@ -463,7 +464,7 @@ export const zhPages: SeoPage[] = [
     "faq": [
       {
         "q": "内夫谢希尔机场到卡帕多奇亚的共享班车多少钱？",
-        "a": "€15/人/单程，往返 €30/人。"
+        "a": "{{PRICE:nevsehir:shuttle}}/人/单程，往返 {{PRICE:nevsehir:shuttle:roundTrip}}/人。"
       },
       {
         "q": "NAV 对格雷梅和乌奇希萨尔来说更近吗？",
@@ -471,7 +472,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "内夫谢希尔私人接送价格是多少？",
-        "a": "Vito €80、Sprinter €90/车/单程。"
+        "a": "Vito {{PRICE:nevsehir:vito}}、Sprinter {{PRICE:nevsehir:sprinter}}/车/单程。"
       },
       {
         "q": "NAV 班车像固定时刻的公共巴士吗？",
@@ -494,15 +495,15 @@ export const zhPages: SeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "内夫谢希尔机场班车｜卡帕多奇亚酒店接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）卡帕多奇亚机场班车 €15/人，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，支持往返与私人车。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到卡帕多奇亚酒店的共享班车与私人接送，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，可预订单程或往返。"
   },
   {
     "slug": "cappadocia-to-kayseri-airport-shuttle",
     "title": "卡帕多奇亚到开塞利机场｜酒店送机班车",
-    "description": "格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨、恰武辛到开塞利机场（ASR）酒店送机。拼车 €15/人，私人 Vito/Sprinter。",
+    "description": "从格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的酒店前往开塞利机场（ASR），可预订共享送机班车或私人接送。",
     "eyebrow": "卡帕多奇亚 → ASR",
     "h1": "卡帕多奇亚到开塞利机场班车",
-    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往开塞利 Erkilet 机场（ASR）的 €15/人酒店送机班车，接车点和时间根据离港航班确认。",
+    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往开塞利 Erkilet 机场（ASR）的 {{PRICE:kayseri:shuttle}}/人酒店送机班车，接车点和时间根据离港航班确认。",
     "sections": [
       {
         "heading": "前往 ASR 的送机规划要比地图距离更早开始",
@@ -525,7 +526,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "私人开塞利送机提供独立车辆",
         "paragraphs": [
-          "[[私人接送|private-airport-transfer-cappadocia]] Vito 单程 €90，最多 5 人；Sprinter €110，最多 16 人。私人服务不安排其他订单的酒店停靠，但车辆仍需要使用酒店附近安全且实际可通行的接车点。"
+          "[[私人接送|private-airport-transfer-cappadocia]] Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter {{PRICE:kayseri:sprinter}}，最多 16 人。私人服务不安排其他订单的酒店停靠，但车辆仍需要使用酒店附近安全且实际可通行的接车点。"
         ]
       },
       {
@@ -538,7 +539,7 @@ export const zhPages: SeoPage[] = [
     "faq": [
       {
         "q": "卡帕多奇亚到开塞利机场班车多少钱？",
-        "a": "€15/人/单程。"
+        "a": "{{PRICE:kayseri:shuttle}}/人/单程。"
       },
       {
         "q": "为什么不能只按直达公路时间自己计算 ASR 接车？",
@@ -550,7 +551,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "可以预订私人车辆去开塞利机场吗？",
-        "a": "可以。Vito €90 或 Sprinter €110/车/单程。"
+        "a": "可以。Vito {{PRICE:kayseri:vito}} 或 Sprinter {{PRICE:kayseri:sprinter}}/车/单程。"
       }
     ],
     "related": [
@@ -564,15 +565,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "卡帕多奇亚到开塞利机场｜酒店送机班车",
-    "twitterDescription": "格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨、恰武辛到开塞利机场（ASR）酒店送机。拼车 €15/人，私人 Vito/Sprinter。"
+    "twitterDescription": "从格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的酒店前往开塞利机场（ASR），可预订共享送机班车或私人接送。"
   },
   {
     "slug": "cappadocia-to-nevsehir-airport-shuttle",
     "title": "卡帕多奇亚到内夫谢希尔机场｜酒店送机班车",
-    "description": "格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨、恰武辛到内夫谢希尔机场（NAV）酒店送机。拼车 €15/人，私人 Vito/Sprinter。",
+    "description": "从格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的酒店前往内夫谢希尔机场（NAV），可预订共享送机班车或私人接送。",
     "eyebrow": "卡帕多奇亚 → NAV",
     "h1": "卡帕多奇亚到内夫谢希尔机场班车",
-    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往内夫谢希尔卡帕多奇亚机场（NAV）的 €15/人酒店送机班车，接车点和时间根据离港航班确认。",
+    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往内夫谢希尔卡帕多奇亚机场（NAV）的 {{PRICE:nevsehir:shuttle}}/人酒店送机班车，接车点和时间根据离港航班确认。",
     "sections": [
       {
         "heading": "NAV 更近，但酒店接车时间仍然来自航班",
@@ -595,7 +596,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "私人内夫谢希尔送机是独立车辆选择",
         "paragraphs": [
-          "[[私人接送|private-airport-transfer-cappadocia]] Vito 单程 €80，最多 5 人；Sprinter €90，最多 16 人。私人车辆不安排其他订单的酒店停靠，但最终酒店接车点仍取决于车辆能否安全进入。"
+          "[[私人接送|private-airport-transfer-cappadocia]] Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter {{PRICE:nevsehir:sprinter}}，最多 16 人。私人车辆不安排其他订单的酒店停靠，但最终酒店接车点仍取决于车辆能否安全进入。"
         ]
       },
       {
@@ -608,7 +609,7 @@ export const zhPages: SeoPage[] = [
     "faq": [
       {
         "q": "卡帕多奇亚到内夫谢希尔机场班车多少钱？",
-        "a": "€15/人/单程。"
+        "a": "{{PRICE:nevsehir:shuttle}}/人/单程。"
       },
       {
         "q": "NAV 更近，我可以自己把接车时间改晚吗？",
@@ -620,7 +621,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "可以预订私人车辆去内夫谢希尔机场吗？",
-        "a": "可以。Vito €80 或 Sprinter €90/车/单程。"
+        "a": "可以。Vito {{PRICE:nevsehir:vito}} 或 Sprinter {{PRICE:nevsehir:sprinter}}/车/单程。"
       }
     ],
     "related": [
@@ -635,7 +636,7 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "卡帕多奇亚到内夫谢希尔机场｜酒店送机班车",
-    "twitterDescription": "格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨、恰武辛到内夫谢希尔机场（NAV）酒店送机。拼车 €15/人，私人 Vito/Sprinter。"
+    "twitterDescription": "从格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的酒店前往内夫谢希尔机场（NAV），可预订共享送机班车或私人接送。"
   },
   {
     "slug": "goreme-airport-transfer",
@@ -643,7 +644,7 @@ export const zhPages: SeoPage[] = [
     "description": "格雷梅机场接送指南：比较开塞利 ASR 与内夫谢希尔 NAV，拼车与私人 Vito/Sprinter，并集中说明格雷梅酒店周边道路、住宿区域和送机信息。",
     "eyebrow": "格雷梅机场接送指南",
     "h1": "格雷梅机场接送",
-    "lead": "格雷梅可从开塞利机场（ASR）或内夫谢希尔机场（NAV）抵达。两座机场的共享班车均为 €15/人/单程，但公路时间、酒店通行和返程接车安排会随机场与方向不同。",
+    "lead": "格雷梅可从开塞利机场（ASR）或内夫谢希尔机场（NAV）抵达。共享班车为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}；公路时间、酒店通行和返程接车安排也会随机场与方向不同。",
     "sections": [
       {
         "heading": "格雷梅机场接送要先考虑洞穴酒店街道",
@@ -727,8 +728,8 @@ export const zhPages: SeoPage[] = [
     ],
     "faq": [
       {
-        "q": "从开塞利和内夫谢希尔到格雷梅，共享班车价格一样吗？",
-        "a": "一样。无论 ASR 还是 NAV，共享班车均为 €15/人/单程。公路距离不同，但共享票价相同。"
+        "q": "从开塞利和内夫谢希尔到格雷梅，共享班车分别多少钱？",
+        "a": "当前共享班车为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}/人/单程。请按机票上的实际机场，同时确认该路线的公路距离和对应价格。"
       },
       {
         "q": "可以在一次预订中同时安排抵达接机和格雷梅酒店送机吗？",
@@ -765,10 +766,10 @@ export const zhPages: SeoPage[] = [
   {
     "slug": "kayseri-airport-to-goreme-shuttle",
     "title": "开塞利机场到格雷梅班车｜共享与私人接送",
-    "description": "开塞利机场（ASR）到格雷梅约 75 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "开塞利机场（ASR）到格雷梅约 75 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "ASR → 格雷梅 机场班车",
     "h1": "开塞利机场到格雷梅班车",
-    "lead": "从开塞利机场（ASR）前往格雷梅，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从开塞利机场（ASR）前往格雷梅，可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -791,7 +792,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       },
       {
@@ -808,7 +809,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -820,15 +821,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "开塞利机场到格雷梅班车｜共享与私人接送",
-    "twitterDescription": "开塞利机场（ASR）到格雷梅约 75 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "开塞利机场（ASR）到格雷梅约 75 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "kayseri-airport-to-urgup-shuttle",
     "title": "开塞利机场到于尔居普班车｜共享与私人接送",
-    "description": "开塞利机场（ASR）到于尔居普约 70 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "开塞利机场（ASR）到于尔居普约 70 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "ASR → 于尔居普 机场班车",
     "h1": "开塞利机场到于尔居普班车",
-    "lead": "从开塞利机场（ASR）前往于尔居普，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从开塞利机场（ASR）前往于尔居普，可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -850,7 +851,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到于尔居普班车|nevsehir-airport-to-urgup-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到于尔居普班车|nevsehir-airport-to-urgup-shuttle]]。"
         ]
       }
     ],
@@ -872,15 +873,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "开塞利机场到于尔居普班车｜共享与私人接送",
-    "twitterDescription": "开塞利机场（ASR）到于尔居普约 70 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "开塞利机场（ASR）到于尔居普约 70 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "kayseri-airport-to-uchisar-shuttle",
     "title": "开塞利机场到乌奇希萨尔班车｜共享与私人接送",
-    "description": "开塞利机场（ASR）到乌奇希萨尔约 80 km，常规车程约 70–85 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "开塞利机场（ASR）到乌奇希萨尔约 80 km，常规车程约 70–85 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "ASR → 乌奇希萨尔 机场班车",
     "h1": "开塞利机场到乌奇希萨尔班车",
-    "lead": "从开塞利机场（ASR）前往乌奇希萨尔，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 80 km / 70–85 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从开塞利机场（ASR）前往乌奇希萨尔，可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 80 km / 70–85 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -902,7 +903,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到乌奇希萨尔班车|nevsehir-airport-to-uchisar-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到乌奇希萨尔班车|nevsehir-airport-to-uchisar-shuttle]]。"
         ]
       }
     ],
@@ -924,15 +925,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "开塞利机场到乌奇希萨尔班车｜共享与私人接送",
-    "twitterDescription": "开塞利机场（ASR）到乌奇希萨尔约 80 km，常规车程约 70–85 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "开塞利机场（ASR）到乌奇希萨尔约 80 km，常规车程约 70–85 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "kayseri-airport-to-avanos-shuttle",
     "title": "开塞利机场到阿瓦诺斯班车｜共享与私人接送",
-    "description": "开塞利机场（ASR）到阿瓦诺斯约 70 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "开塞利机场（ASR）到阿瓦诺斯约 70 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "ASR → 阿瓦诺斯 机场班车",
     "h1": "开塞利机场到阿瓦诺斯班车",
-    "lead": "从开塞利机场（ASR）前往阿瓦诺斯，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从开塞利机场（ASR）前往阿瓦诺斯，可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -954,7 +955,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到阿瓦诺斯班车|nevsehir-airport-to-avanos-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到阿瓦诺斯班车|nevsehir-airport-to-avanos-shuttle]]。"
         ]
       }
     ],
@@ -976,15 +977,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "开塞利机场到阿瓦诺斯班车｜共享与私人接送",
-    "twitterDescription": "开塞利机场（ASR）到阿瓦诺斯约 70 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "开塞利机场（ASR）到阿瓦诺斯约 70 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "kayseri-airport-to-ortahisar-shuttle",
     "title": "开塞利机场到奥塔西萨班车｜共享与私人接送",
-    "description": "开塞利机场（ASR）到奥塔西萨约 75 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "开塞利机场（ASR）到奥塔西萨约 75 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "ASR → 奥塔西萨 机场班车",
     "h1": "开塞利机场到奥塔西萨班车",
-    "lead": "从开塞利机场（ASR）前往奥塔西萨，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从开塞利机场（ASR）前往奥塔西萨，可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1006,7 +1007,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到奥塔西萨班车|nevsehir-airport-to-ortahisar-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到奥塔西萨班车|nevsehir-airport-to-ortahisar-shuttle]]。"
         ]
       }
     ],
@@ -1028,15 +1029,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "开塞利机场到奥塔西萨班车｜共享与私人接送",
-    "twitterDescription": "开塞利机场（ASR）到奥塔西萨约 75 km，常规车程约 60–75 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "开塞利机场（ASR）到奥塔西萨约 75 km，常规车程约 60–75 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "kayseri-airport-to-cavusin-shuttle",
     "title": "开塞利机场到恰武辛班车｜共享与私人接送",
-    "description": "开塞利机场（ASR）到恰武辛约 75 km，常规车程约 65–80 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "开塞利机场（ASR）到恰武辛约 75 km，常规车程约 65–80 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "ASR → 恰武辛 机场班车",
     "h1": "开塞利机场到恰武辛班车",
-    "lead": "从开塞利机场（ASR）前往恰武辛，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 65–80 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从开塞利机场（ASR）前往恰武辛，可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 65–80 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1058,7 +1059,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到恰武辛班车|nevsehir-airport-to-cavusin-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到恰武辛班车|nevsehir-airport-to-cavusin-shuttle]]。"
         ]
       }
     ],
@@ -1080,15 +1081,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "开塞利机场到恰武辛班车｜共享与私人接送",
-    "twitterDescription": "开塞利机场（ASR）到恰武辛约 75 km，常规车程约 65–80 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "开塞利机场（ASR）到恰武辛约 75 km，常规车程约 65–80 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "nevsehir-airport-to-goreme-shuttle",
     "title": "内夫谢希尔机场到格雷梅班车｜共享与私人接送",
-    "description": "内夫谢希尔机场（NAV）到格雷梅约 40 km，常规车程约 35–45 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "内夫谢希尔机场（NAV）到格雷梅约 40 km，常规车程约 35–45 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "NAV → 格雷梅 机场班车",
     "h1": "内夫谢希尔机场到格雷梅班车",
-    "lead": "从内夫谢希尔机场（NAV）前往格雷梅，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 40 km / 35–45 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从内夫谢希尔机场（NAV）前往格雷梅，可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 40 km / 35–45 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1111,7 +1112,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1126,7 +1127,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1138,15 +1139,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "内夫谢希尔机场到格雷梅班车｜共享与私人接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）到格雷梅约 40 km，常规车程约 35–45 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到格雷梅约 40 km，常规车程约 35–45 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "nevsehir-airport-to-urgup-shuttle",
     "title": "内夫谢希尔机场到于尔居普班车｜共享与私人接送",
-    "description": "内夫谢希尔机场（NAV）到于尔居普约 50 km，常规车程约 45–60 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "内夫谢希尔机场（NAV）到于尔居普约 50 km，常规车程约 45–60 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "NAV → 于尔居普 机场班车",
     "h1": "内夫谢希尔机场到于尔居普班车",
-    "lead": "从内夫谢希尔机场（NAV）前往于尔居普，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 50 km / 45–60 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从内夫谢希尔机场（NAV）前往于尔居普，可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 50 km / 45–60 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1162,7 +1163,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "拼车控制费用，私人车辆提供独立行程",
         "paragraphs": [
-          "一两位乘客选择共享班车可以把费用保持在较低水平。私人 Vito 单程 €80，最多 5 人；私人 Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]，也可在 [[共享班车与私人接送对比|cappadocia-shared-shuttle-vs-private-transfer]] 中比较两种服务。"
+          "一两位乘客选择共享班车可以把费用保持在较低水平。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；私人 Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]，也可在 [[共享班车与私人接送对比|cappadocia-shared-shuttle-vs-private-transfer]] 中比较两种服务。"
         ]
       }
     ],
@@ -1173,7 +1174,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1185,15 +1186,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "内夫谢希尔机场到于尔居普班车｜共享与私人接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）到于尔居普约 50 km，常规车程约 45–60 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到于尔居普约 50 km，常规车程约 45–60 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "nevsehir-airport-to-uchisar-shuttle",
     "title": "内夫谢希尔机场到乌奇希萨尔班车｜共享与私人接送",
-    "description": "内夫谢希尔机场（NAV）到乌奇希萨尔约 35 km，常规车程约 30–40 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "内夫谢希尔机场（NAV）到乌奇希萨尔约 35 km，常规车程约 30–40 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "NAV → 乌奇希萨尔 机场班车",
     "h1": "内夫谢希尔机场到乌奇希萨尔班车",
-    "lead": "从内夫谢希尔机场（NAV）前往乌奇希萨尔，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 35 km / 30–40 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从内夫谢希尔机场（NAV）前往乌奇希萨尔，可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 35 km / 30–40 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1216,7 +1217,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1227,7 +1228,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1239,15 +1240,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "内夫谢希尔机场到乌奇希萨尔班车｜共享与私人接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）到乌奇希萨尔约 35 km，常规车程约 30–40 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到乌奇希萨尔约 35 km，常规车程约 30–40 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "nevsehir-airport-to-avanos-shuttle",
     "title": "内夫谢希尔机场到阿瓦诺斯班车｜共享与私人接送",
-    "description": "内夫谢希尔机场（NAV）到阿瓦诺斯约 38 km，常规车程约 35–50 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "内夫谢希尔机场（NAV）到阿瓦诺斯约 38 km，常规车程约 35–50 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "NAV → 阿瓦诺斯 机场班车",
     "h1": "内夫谢希尔机场到阿瓦诺斯班车",
-    "lead": "从内夫谢希尔机场（NAV）前往阿瓦诺斯，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 38 km / 35–50 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从内夫谢希尔机场（NAV）前往阿瓦诺斯，可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 38 km / 35–50 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1263,7 +1264,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1274,7 +1275,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1286,15 +1287,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "内夫谢希尔机场到阿瓦诺斯班车｜共享与私人接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）到阿瓦诺斯约 38 km，常规车程约 35–50 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到阿瓦诺斯约 38 km，常规车程约 35–50 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "nevsehir-airport-to-ortahisar-shuttle",
     "title": "内夫谢希尔机场到奥塔西萨班车｜共享与私人接送",
-    "description": "内夫谢希尔机场（NAV）到奥塔西萨约 45 km，常规车程约 40–50 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "内夫谢希尔机场（NAV）到奥塔西萨约 45 km，常规车程约 40–50 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "NAV → 奥塔西萨 机场班车",
     "h1": "内夫谢希尔机场到奥塔西萨班车",
-    "lead": "从内夫谢希尔机场（NAV）前往奥塔西萨，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 45 km / 40–50 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从内夫谢希尔机场（NAV）前往奥塔西萨，可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 45 km / 40–50 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1317,7 +1318,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1328,7 +1329,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1340,15 +1341,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "内夫谢希尔机场到奥塔西萨班车｜共享与私人接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）到奥塔西萨约 45 km，常规车程约 40–50 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到奥塔西萨约 45 km，常规车程约 40–50 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "nevsehir-airport-to-cavusin-shuttle",
     "title": "内夫谢希尔机场到恰武辛班车｜共享与私人接送",
-    "description": "内夫谢希尔机场（NAV）到恰武辛约 42 km，常规车程约 40–55 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。",
+    "description": "内夫谢希尔机场（NAV）到恰武辛约 42 km，常规车程约 40–55 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。",
     "eyebrow": "NAV → 恰武辛 机场班车",
     "h1": "内夫谢希尔机场到恰武辛班车",
-    "lead": "从内夫谢希尔机场（NAV）前往恰武辛，可预订 €15/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 42 km / 40–55 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
+    "lead": "从内夫谢希尔机场（NAV）前往恰武辛，可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享班车，也可选择私人 Vito 或 Sprinter。常规公路约 42 km / 40–55 分钟，最终下车位置会根据酒店周边道路和车辆通行条件确认。",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -1370,13 +1371,13 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "如果 ASR 航班更合适，仍然可以选择开塞利机场",
         "paragraphs": [
-          "距离更长的替代路线是 [[开塞利机场到恰武辛班车|kayseri-airport-to-cavusin-shuttle]]。由于两座机场的共享班车票价相同，实际航班便利程度有时比单纯选择最短公路更重要。"
+          "距离更长的替代路线是 [[开塞利机场到恰武辛班车|kayseri-airport-to-cavusin-shuttle]]。除了公路距离，也应比较两座机场当前的共享班车价格和实际航班便利程度。"
         ]
       },
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1387,7 +1388,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1399,15 +1400,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "内夫谢希尔机场到恰武辛班车｜共享与私人接送",
-    "twitterDescription": "内夫谢希尔机场（NAV）到恰武辛约 42 km，常规车程约 40–55 分钟。共享班车 €15/人/单程，也可预订私人 Vito 或 Sprinter，并按实际酒店周边道路确认下车位置。"
+    "twitterDescription": "内夫谢希尔机场（NAV）到恰武辛约 42 km，常规车程约 40–55 分钟。可预订共享班车或私人 Vito/Sprinter，并按实际酒店周边道路确认下车位置。"
   },
   {
     "slug": "goreme-to-kayseri-airport-shuttle",
     "title": "格雷梅到开塞利机场班车｜酒店送机",
-    "description": "格雷梅到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "格雷梅到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "格雷梅 → ASR 机场班车",
     "h1": "格雷梅到开塞利机场班车",
-    "lead": "从格雷梅前往开塞利机场（ASR），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从格雷梅前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -1430,7 +1431,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1441,7 +1442,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1453,15 +1454,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "格雷梅到开塞利机场班车｜酒店送机",
-    "twitterDescription": "格雷梅到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "格雷梅到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "urgup-to-kayseri-airport-shuttle",
     "title": "于尔居普到开塞利机场班车｜酒店送机",
-    "description": "于尔居普到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "于尔居普到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "于尔居普 → ASR 机场班车",
     "h1": "于尔居普到开塞利机场班车",
-    "lead": "从于尔居普前往开塞利机场（ASR），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从于尔居普前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -1490,7 +1491,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1501,7 +1502,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1512,15 +1513,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "于尔居普到开塞利机场班车｜酒店送机",
-    "twitterDescription": "于尔居普到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "于尔居普到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "uchisar-to-kayseri-airport-shuttle",
     "title": "乌奇希萨尔到开塞利机场班车｜酒店送机",
-    "description": "乌奇希萨尔到开塞利机场（ASR）约 80 km，常规车程约 70–85 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "乌奇希萨尔到开塞利机场（ASR）约 80 km，常规车程约 70–85 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "乌奇希萨尔 → ASR 机场班车",
     "h1": "乌奇希萨尔到开塞利机场班车",
-    "lead": "从乌奇希萨尔前往开塞利机场（ASR），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 80 km / 70–85 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从乌奇希萨尔前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 80 km / 70–85 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -1543,7 +1544,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1558,7 +1559,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1569,15 +1570,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "乌奇希萨尔到开塞利机场班车｜酒店送机",
-    "twitterDescription": "乌奇希萨尔到开塞利机场（ASR）约 80 km，常规车程约 70–85 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "乌奇希萨尔到开塞利机场（ASR）约 80 km，常规车程约 70–85 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "avanos-to-kayseri-airport-shuttle",
     "title": "阿瓦诺斯到开塞利机场班车｜酒店送机",
-    "description": "阿瓦诺斯到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "阿瓦诺斯到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "阿瓦诺斯 → ASR 机场班车",
     "h1": "阿瓦诺斯到开塞利机场班车",
-    "lead": "从阿瓦诺斯前往开塞利机场（ASR），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从阿瓦诺斯前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 70 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -1595,7 +1596,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1606,7 +1607,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1617,15 +1618,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "阿瓦诺斯到开塞利机场班车｜酒店送机",
-    "twitterDescription": "阿瓦诺斯到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "阿瓦诺斯到开塞利机场（ASR）约 70 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "ortahisar-to-kayseri-airport-shuttle",
     "title": "奥塔西萨到开塞利机场班车｜酒店送机",
-    "description": "奥塔西萨到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "奥塔西萨到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "奥塔西萨 → ASR 机场班车",
     "h1": "奥塔西萨到开塞利机场班车",
-    "lead": "从奥塔西萨前往开塞利机场（ASR），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从奥塔西萨前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 60–75 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1648,7 +1649,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1659,7 +1660,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1670,15 +1671,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "奥塔西萨到开塞利机场班车｜酒店送机",
-    "twitterDescription": "奥塔西萨到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "奥塔西萨到开塞利机场（ASR）约 75 km，常规车程约 60–75 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "cavusin-to-kayseri-airport-shuttle",
     "title": "恰武辛到开塞利机场班车｜酒店送机",
-    "description": "恰武辛到开塞利机场（ASR）约 75 km，常规车程约 65–80 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "恰武辛到开塞利机场（ASR）约 75 km，常规车程约 65–80 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "恰武辛 → ASR 机场班车",
     "h1": "恰武辛到开塞利机场班车",
-    "lead": "从恰武辛前往开塞利机场（ASR），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 65–80 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从恰武辛前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 65–80 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1707,7 +1708,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1718,7 +1719,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €90，最多 5 人；Sprinter 单程 €110，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1729,15 +1730,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "恰武辛到开塞利机场班车｜酒店送机",
-    "twitterDescription": "恰武辛到开塞利机场（ASR）约 75 km，常规车程约 65–80 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "恰武辛到开塞利机场（ASR）约 75 km，常规车程约 65–80 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "goreme-to-nevsehir-airport-shuttle",
     "title": "格雷梅到内夫谢希尔机场班车｜酒店送机",
-    "description": "格雷梅到内夫谢希尔机场（NAV）约 40 km，常规车程约 35–45 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "格雷梅到内夫谢希尔机场（NAV）约 40 km，常规车程约 35–45 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "格雷梅 → NAV 机场班车",
     "h1": "格雷梅到内夫谢希尔机场班车",
-    "lead": "从格雷梅前往内夫谢希尔机场（NAV），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 40 km / 35–45 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从格雷梅前往内夫谢希尔机场（NAV），可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 40 km / 35–45 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1760,7 +1761,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1771,7 +1772,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1783,15 +1784,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "格雷梅到内夫谢希尔机场班车｜酒店送机",
-    "twitterDescription": "格雷梅到内夫谢希尔机场（NAV）约 40 km，常规车程约 35–45 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "格雷梅到内夫谢希尔机场（NAV）约 40 km，常规车程约 35–45 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "urgup-to-nevsehir-airport-shuttle",
     "title": "于尔居普到内夫谢希尔机场班车｜酒店送机",
-    "description": "于尔居普到内夫谢希尔机场（NAV）约 50 km，常规车程约 45–60 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "于尔居普到内夫谢希尔机场（NAV）约 50 km，常规车程约 45–60 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "于尔居普 → NAV 机场班车",
     "h1": "于尔居普到内夫谢希尔机场班车",
-    "lead": "从于尔居普前往内夫谢希尔机场（NAV），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 50 km / 45–60 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从于尔居普前往内夫谢希尔机场（NAV），可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 50 km / 45–60 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1814,7 +1815,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1825,7 +1826,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1837,15 +1838,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "于尔居普到内夫谢希尔机场班车｜酒店送机",
-    "twitterDescription": "于尔居普到内夫谢希尔机场（NAV）约 50 km，常规车程约 45–60 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "于尔居普到内夫谢希尔机场（NAV）约 50 km，常规车程约 45–60 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "uchisar-to-nevsehir-airport-shuttle",
     "title": "乌奇希萨尔到内夫谢希尔机场班车｜酒店送机",
-    "description": "乌奇希萨尔到内夫谢希尔机场（NAV）约 35 km，常规车程约 30–40 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "乌奇希萨尔到内夫谢希尔机场（NAV）约 35 km，常规车程约 30–40 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "乌奇希萨尔 → NAV 机场班车",
     "h1": "乌奇希萨尔到内夫谢希尔机场班车",
-    "lead": "从乌奇希萨尔前往内夫谢希尔机场（NAV），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 35 km / 30–40 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从乌奇希萨尔前往内夫谢希尔机场（NAV），可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 35 km / 30–40 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1868,7 +1869,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1883,7 +1884,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1895,15 +1896,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "乌奇希萨尔到内夫谢希尔机场班车｜酒店送机",
-    "twitterDescription": "乌奇希萨尔到内夫谢希尔机场（NAV）约 35 km，常规车程约 30–40 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "乌奇希萨尔到内夫谢希尔机场（NAV）约 35 km，常规车程约 30–40 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "avanos-to-nevsehir-airport-shuttle",
     "title": "阿瓦诺斯到内夫谢希尔机场班车｜酒店送机",
-    "description": "阿瓦诺斯到内夫谢希尔机场（NAV）约 38 km，常规车程约 35–50 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "阿瓦诺斯到内夫谢希尔机场（NAV）约 38 km，常规车程约 35–50 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "阿瓦诺斯 → NAV 机场班车",
     "h1": "阿瓦诺斯到内夫谢希尔机场班车",
-    "lead": "从阿瓦诺斯前往内夫谢希尔机场（NAV），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 38 km / 35–50 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从阿瓦诺斯前往内夫谢希尔机场（NAV），可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 38 km / 35–50 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1920,7 +1921,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1931,7 +1932,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1943,15 +1944,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "阿瓦诺斯到内夫谢希尔机场班车｜酒店送机",
-    "twitterDescription": "阿瓦诺斯到内夫谢希尔机场（NAV）约 38 km，常规车程约 35–50 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "阿瓦诺斯到内夫谢希尔机场（NAV）约 38 km，常规车程约 35–50 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "ortahisar-to-nevsehir-airport-shuttle",
     "title": "奥塔西萨到内夫谢希尔机场班车｜酒店送机",
-    "description": "奥塔西萨到内夫谢希尔机场（NAV）约 45 km，常规车程约 40–50 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "奥塔西萨到内夫谢希尔机场（NAV）约 45 km，常规车程约 40–50 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "奥塔西萨 → NAV 机场班车",
     "h1": "奥塔西萨到内夫谢希尔机场班车",
-    "lead": "从奥塔西萨前往内夫谢希尔机场（NAV），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 45 km / 40–50 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从奥塔西萨前往内夫谢希尔机场（NAV），可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 45 km / 40–50 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1974,7 +1975,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1985,7 +1986,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -1997,15 +1998,15 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "奥塔西萨到内夫谢希尔机场班车｜酒店送机",
-    "twitterDescription": "奥塔西萨到内夫谢希尔机场（NAV）约 45 km，常规车程约 40–50 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "奥塔西萨到内夫谢希尔机场（NAV）约 45 km，常规车程约 40–50 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "cavusin-to-nevsehir-airport-shuttle",
     "title": "恰武辛到内夫谢希尔机场班车｜酒店送机",
-    "description": "恰武辛到内夫谢希尔机场（NAV）约 42 km，常规车程约 40–55 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。",
+    "description": "恰武辛到内夫谢希尔机场（NAV）约 42 km，常规车程约 40–55 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "恰武辛 → NAV 机场班车",
     "h1": "恰武辛到内夫谢希尔机场班车",
-    "lead": "从恰武辛前往内夫谢希尔机场（NAV），可预订 €15/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 42 km / 40–55 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "从恰武辛前往内夫谢希尔机场（NAV），可预订 {{PRICE:nevsehir:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 42 km / 40–55 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -2028,7 +2029,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -2043,7 +2044,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 €80，最多 5 人；Sprinter 单程 €90，最多 16 人，均按整车计价。"
+        "a": "可以。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人，均按整车计价。"
       }
     ],
     "related": [
@@ -2055,12 +2056,12 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "恰武辛到内夫谢希尔机场班车｜酒店送机",
-    "twitterDescription": "恰武辛到内夫谢希尔机场（NAV）约 42 km，常规车程约 40–55 分钟。共享送机班车 €15/人/单程，也可预订私人接送，接车时间按离港航班和酒店位置确认。"
+    "twitterDescription": "恰武辛到内夫谢希尔机场（NAV）约 42 km，常规车程约 40–55 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。"
   },
   {
     "slug": "cappadocia-airport",
     "title": "卡帕多奇亚机场指南｜NAV 与 ASR 怎么选",
-    "description": "卡帕多奇亚机场指南：内夫谢希尔 NAV 与开塞利 ASR 的位置、代码、到格雷梅等地距离、€15 机场班车与私人接送。",
+    "description": "卡帕多奇亚机场指南：比较内夫谢希尔 NAV 与开塞利 ASR 的位置、代码、到格雷梅等地距离，以及共享班车和私人接送选择。",
     "eyebrow": "机场入门指南",
     "h1": "卡帕多奇亚机场：NAV、ASR 与酒店接送",
     "lead": "“Cappadocia Airport”这个名称可能指内夫谢希尔卡帕多奇亚机场（NAV），而开塞利机场（ASR）也是前往卡帕多奇亚的主要机场。预订接送时，应以机票上的机场代码为准。",
@@ -2076,14 +2077,14 @@ export const zhPages: SeoPage[] = [
         "heading": "Nevsehir Kapadokya Airport（NAV）",
         "paragraphs": [
           "NAV 到卡帕多奇亚中部的公路通常更短。常用路线参考包括：格雷梅约 **40 km / 35–45 分钟**，乌奇希萨尔 35 km / 30–40 分钟，阿瓦诺斯 38 km / 35–50 分钟，恰武辛 42 km / 40–55 分钟，奥塔西萨 45 km / 40–50 分钟，于尔居普 50 km / 45–60 分钟；共享班车停靠可能增加总时间。",
-          "[[内夫谢希尔机场班车|nevsehir-airport-shuttle]] 为 **€15/人/单程**。私人接送单程为 Vito €80（最多 5 人）或 Sprinter €90（最多 16 人）。"
+          "[[内夫谢希尔机场班车|nevsehir-airport-shuttle]] 为 **{{PRICE:nevsehir:shuttle}}/人/单程**。私人接送单程为 Vito {{PRICE:nevsehir:vito}}（最多 5 人）或 Sprinter {{PRICE:nevsehir:sprinter}}（最多 16 人）。"
         ]
       },
       {
         "heading": "Kayseri Airport（ASR）",
         "paragraphs": [
           "ASR 公路距离更长，但由于航班时间和班次选择，仍是前往卡帕多奇亚非常常用的机场。格雷梅约 **75 km / 60–75 分钟**，其他支持城镇在不含共享停靠时通常约 70–80 km。",
-          "[[开塞利机场班车|kayseri-airport-shuttle]] 同样为 **€15/人/单程**。私人单程为 Vito €90、Sprinter €110。共享票价两座机场相同，因此可以重点比较航班时间，而不用担心选择 ASR 会增加共享班车票价。"
+          "[[开塞利机场班车|kayseri-airport-shuttle]] 为 **{{PRICE:kayseri:shuttle}}/人/单程**。私人单程为 Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。选择机场时应同时比较 ASR 当前价格、航班时间和公路距离。"
         ]
       },
       {
@@ -2095,7 +2096,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "机场到酒店：共享班车或私人车辆",
         "paragraphs": [
-          "€15 共享班车是前往格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的主要性价比选择。共享服务可能包含其他乘客和酒店停靠。希望独立车辆的旅客可选择私人 Vito 或 Sprinter，私人价格按整车而不是按人计算。",
+          "共享班车是前往格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的主要性价比选择；目前 ASR 单程 {{PRICE:kayseri:shuttle}}/人，NAV 单程 {{PRICE:nevsehir:shuttle}}/人。共享服务可能包含其他乘客和酒店停靠。希望独立车辆的旅客可选择私人 Vito 或 Sprinter，私人价格按整车而不是按人计算。",
           "预订会收集机场、行程方向、航班资料、酒店、WhatsApp 联系方式，以及每笔预订所需的乘客姓名和护照资料。确认后费用以现金支付给司机。"
         ]
       },
@@ -2126,12 +2127,12 @@ export const zhPages: SeoPage[] = [
         "a": "NAV。格雷梅距 NAV 约 40 km，距 ASR 约 75 km。"
       },
       {
-        "q": "两座机场都有 €15 共享班车吗？",
-        "a": "有。服务覆盖的酒店区域的共享班车从 NAV 或 ASR 都是 €15/人/单程。"
+        "q": "两座机场都有共享班车吗？",
+        "a": "有。服务覆盖的酒店区域从 NAV 出发为 {{PRICE:nevsehir:shuttle}}/人/单程，从 ASR 出发为 {{PRICE:kayseri:shuttle}}/人/单程。"
       },
       {
         "q": "私人接送价格一样吗？",
-        "a": "不一样。NAV：Vito €80 / Sprinter €90；ASR：Vito €90 / Sprinter €110，均为单程整车价。"
+        "a": "不一样。NAV：Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}；ASR：Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}，均为单程整车价。"
       },
       {
         "q": "预订时需要哪些资料？",
@@ -2143,7 +2144,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "可以从一座机场抵达、从另一座机场离开吗？",
-        "a": "可以，但两段必须分别确认，因为路线和私人价格不同。"
+        "a": "可以，但两段必须分别确认，因为路线和私人价格都按机场确认。"
       }
     ],
     "related": [
@@ -2154,7 +2155,7 @@ export const zhPages: SeoPage[] = [
       "cappadocia-airport-transfer"
     ],
     "twitterTitle": "卡帕多奇亚机场指南｜NAV 与 ASR 怎么选",
-    "twitterDescription": "卡帕多奇亚机场指南：内夫谢希尔 NAV 与开塞利 ASR 的位置、代码、到格雷梅等地距离、€15 机场班车与私人接送。"
+    "twitterDescription": "卡帕多奇亚机场指南：比较内夫谢希尔 NAV 与开塞利 ASR 的位置、代码、到格雷梅等地距离，以及共享班车和私人接送选择。"
   },
   {
     "slug": "nearest-airport-to-cappadocia",
@@ -2173,7 +2174,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "最近不一定等于最适合",
         "paragraphs": [
-          "较短接送当然方便，但糟糕的航班时间或昂贵的转机可能抵消这个优势。应比较从出发地到酒店的完整行程，而不是只看最后的公路距离。两座机场的共享班车都是 €15/人，所以选择 ASR 不会增加共享票价。"
+          "较短接送当然方便，但糟糕的航班时间或昂贵的转机可能抵消这个优势。应比较从出发地到酒店的完整行程，而不是只看最后的公路距离。共享班车为 ASR {{PRICE:kayseri:shuttle}}/人、NAV {{PRICE:nevsehir:shuttle}}/人，也应比较当前机场价格。"
         ]
       },
       {
@@ -2201,9 +2202,9 @@ export const zhPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "NAV 私人价格更低，共享价格相同",
+        "heading": "按机场比较共享班车与私人接送价格",
         "paragraphs": [
-          "两座机场的共享票价都是 €15/人。私人接送为 NAV Vito/Sprinter €80/€90，ASR €90/€110；团队选择独立车辆时，这个差异更值得比较。"
+          "共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人、ASR {{PRICE:kayseri:shuttle}}/人。私人接送为 NAV Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}；请按实际机场比较当前总价。"
         ]
       }
     ],
@@ -2222,7 +2223,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "从 NAV 坐共享班车更便宜吗？",
-        "a": "不是。两座机场的共享班车都是 €15/人。"
+        "a": "当前共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人、ASR {{PRICE:kayseri:shuttle}}/人。"
       },
       {
         "q": "应该优先看航班时间还是公路距离？",
@@ -2245,7 +2246,7 @@ export const zhPages: SeoPage[] = [
   {
     "slug": "kayseri-or-nevsehir-airport-for-cappadocia",
     "title": "卡帕多奇亚选开塞利还是内夫谢希尔机场？",
-    "description": "开塞利 ASR 与内夫谢希尔 NAV 怎么选：比较到格雷梅等地距离、航班便利、€15 拼车和私人接送价格。",
+    "description": "开塞利 ASR 与内夫谢希尔 NAV 怎么选：比较到格雷梅等地的距离、航班便利，以及共享班车和私人接送的当前价格。",
     "eyebrow": "NAV vs ASR",
     "h1": "卡帕多奇亚：开塞利还是内夫谢希尔机场？",
     "lead": "NAV 距离更近，ASR 航班有时更方便。正确选择不是只看地图，而是把航班、酒店城镇和接送方式一起比较。",
@@ -2263,9 +2264,9 @@ export const zhPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "共享班车价格相同",
+        "heading": "按机场比较共享班车价格",
         "paragraphs": [
-          "两座机场的共享班车都是 €15/人，因此机场选择并不是共享票价的比较。私人价格不同：开塞利 Vito/Sprinter €90/€110；内夫谢希尔 €80/€90。"
+          "共享班车为开塞利 {{PRICE:kayseri:shuttle}}/人、内夫谢希尔 {{PRICE:nevsehir:shuttle}}/人。私人价格也按机场分别管理：开塞利 Vito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}；内夫谢希尔 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}。"
         ]
       },
       {
@@ -2283,7 +2284,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "更便宜或时间更好的航班可能抵消公路差距",
         "paragraphs": [
-          "如果较近的机场需要很差的转机或不方便的出发时间，节省 25 或 35 分钟公路时间未必值得。共享班车两座机场同价，因此可以比较完整行程，而不是默认更近的机场一定更便宜。"
+          "如果较近的机场需要很差的转机或不方便的出发时间，节省 25 或 35 分钟公路时间未必值得。还应比较两座机场当前的共享班车价格和完整行程，而不是默认更近的机场一定更便宜。"
         ]
       },
       {
@@ -2300,11 +2301,11 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "哪座机场的共享班车更便宜？",
-        "a": "都一样，两座机场都是 €15/人。"
+        "a": "当前为内夫谢希尔 {{PRICE:nevsehir:shuttle}}/人、开塞利 {{PRICE:kayseri:shuttle}}/人。"
       },
       {
-        "q": "哪座机场的私人接送更便宜？",
-        "a": "内夫谢希尔：Vito €80 / Sprinter €90；开塞利为 €90 / €110。"
+        "q": "两座机场的私人接送价格如何比较？",
+        "a": "当前单程整车价为：NAV Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}；ASR Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}。"
       },
       {
         "q": "开塞利仍然适合去卡帕多奇亚吗？",
@@ -2322,12 +2323,12 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "卡帕多奇亚选开塞利还是内夫谢希尔机场？",
-    "twitterDescription": "开塞利 ASR 与内夫谢希尔 NAV 怎么选：比较到格雷梅等地距离、航班便利、€15 拼车和私人接送价格。"
+    "twitterDescription": "开塞利 ASR 与内夫谢希尔 NAV 怎么选：比较到格雷梅等地的距离、航班便利，以及共享班车和私人接送的当前价格。"
   },
   {
     "slug": "cappadocia-shared-shuttle-vs-private-transfer",
     "title": "卡帕多奇亚拼车还是私人接送｜价格与适合人群",
-    "description": "卡帕多奇亚机场拼车 vs 私人接送：€15/人共享班车与 Vito/Sprinter 包车的价格、时间、酒店停靠、团队人数与行李差异。",
+    "description": "卡帕多奇亚机场拼车 vs 私人接送：比较共享班车与 Vito/Sprinter 包车的当前价格、时间、酒店停靠、团队人数与行李差异。",
     "eyebrow": "服务方式对比",
     "h1": "卡帕多奇亚拼车 vs 私人机场接送",
     "lead": "共享班车的优势是较低的人均价格；私人接送则提供独立车辆和更直接的酒店接送安排。",
@@ -2335,7 +2336,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "共享班车：更适合控制预算",
         "paragraphs": [
-          "€15/人/单程的共享班车通常是独自旅行者和情侣最低成本的提前预订机场到酒店选择。同一车辆可能还有其他乘客和多个酒店停靠。"
+          "共享班车按机场计价：ASR 为 {{PRICE:kayseri:shuttle}}/人/单程，NAV 为 {{PRICE:nevsehir:shuttle}}/人/单程。对独自旅行者和情侣来说，它通常是成本较低的提前预订机场到酒店方案；同一车辆可能还有其他乘客和多个酒店停靠。"
         ]
       },
       {
@@ -2347,7 +2348,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "价格比较",
         "paragraphs": [
-          "开塞利私人接送：Vito €90 / Sprinter €110。内夫谢希尔：Vito €80 / Sprinter €90。共享班车：两座机场都是 €15/人。往返均为单程总价的两倍。"
+          "开塞利：共享班车 {{PRICE:kayseri:shuttle}}/人，Vito {{PRICE:kayseri:vito}}，Sprinter {{PRICE:kayseri:sprinter}}。内夫谢希尔：共享班车 {{PRICE:nevsehir:shuttle}}/人，Vito {{PRICE:nevsehir:vito}}，Sprinter {{PRICE:nevsehir:sprinter}}。往返均为对应单程总价的两倍。"
         ]
       },
       {
@@ -2365,7 +2366,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "用团队人数举例更容易比较",
         "paragraphs": [
-          "一位乘客坐共享班车只需 €15，因此单纯从价格看，私人接送通常不是最省的选择。六人单程共享班车合计 €90，这已经开始与私人车型价格重叠，尤其是从 NAV 出发。人数更多时，应把 Sprinter 的整车价与共享班车的人数总价比较，而不是只看单个标价。"
+          "以内夫谢希尔（NAV）为例，一位乘客坐共享班车为 {{PRICE:nevsehir:shuttle}}，六人单程合计 {{PRICE:nevsehir:shuttle:x6}}。这个总价可能开始接近私人车型价格。人数更多时，应把 Sprinter 的整车价与共享班车的人数总价比较，而不是只看单个标价。"
         ]
       },
       {
@@ -2384,7 +2385,7 @@ export const zhPages: SeoPage[] = [
     "faq": [
       {
         "q": "共享班车就是 Cappadocia shuttle transfer 吗？",
-        "a": "是。是。这里的“共享”是指同一班次可能还有其他已确认乘客和酒店停靠。"
+        "a": "是。这里的“共享”是指同一班次可能还有其他已确认乘客和酒店停靠。"
       },
       {
         "q": "哪一种通常更快？",
@@ -2392,7 +2393,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "一个人哪种更便宜？",
-        "a": "€15 的共享班车。"
+        "a": "共享班车：ASR {{PRICE:kayseri:shuttle}}/人/单程，NAV {{PRICE:nevsehir:shuttle}}/人/单程。"
       },
       {
         "q": "大团队哪一种可能更合适？",
@@ -2413,12 +2414,12 @@ export const zhPages: SeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "卡帕多奇亚拼车还是私人接送｜价格与适合人群",
-    "twitterDescription": "卡帕多奇亚机场拼车 vs 私人接送：€15/人共享班车与 Vito/Sprinter 包车的价格、时间、酒店停靠、团队人数与行李差异。"
+    "twitterDescription": "卡帕多奇亚机场拼车 vs 私人接送：比较共享班车与 Vito/Sprinter 包车的当前价格、时间、酒店停靠、团队人数与行李差异。"
   },
   {
     "slug": "cappadocia-cave-hotel-airport-transfer",
     "title": "卡帕多奇亚洞穴酒店机场接送｜格雷梅等地拼车",
-    "description": "卡帕多奇亚洞穴酒店机场接送指南：格雷梅、乌奇希萨尔、于尔居普、奥塔西萨等洞穴酒店周边道路、行李、集合点与 €15 机场拼车。",
+    "description": "卡帕多奇亚洞穴酒店机场接送指南：了解格雷梅、乌奇希萨尔、于尔居普、奥塔西萨等洞穴酒店周边道路、行李、集合点，以及共享班车和私人接送选择。",
     "eyebrow": "洞穴酒店接送指南",
     "h1": "卡帕多奇亚洞穴酒店机场接送",
     "lead": "洞穴酒店是卡帕多奇亚住宿特色之一，但历史街巷和坡地入口让准确的住宿资料对机场接送尤其重要。",
@@ -2489,12 +2490,12 @@ export const zhPages: SeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "卡帕多奇亚洞穴酒店机场接送｜格雷梅等地拼车",
-    "twitterDescription": "卡帕多奇亚洞穴酒店机场接送指南：格雷梅、乌奇希萨尔、于尔居普、奥塔西萨等洞穴酒店周边道路、行李、集合点与 €15 机场拼车。"
+    "twitterDescription": "卡帕多奇亚洞穴酒店机场接送指南：了解格雷梅、乌奇希萨尔、于尔居普、奥塔西萨等洞穴酒店周边道路、行李、集合点，以及共享班车和私人接送选择。"
   },
   {
     "slug": "istanbul-to-cappadocia",
     "title": "伊斯坦布尔到卡帕多奇亚｜航班与机场接送指南",
-    "description": "伊斯坦布尔到卡帕多奇亚旅行指南：从 IST/SAW 飞往 ASR 或 NAV，再用 €15 机场班车前往格雷梅等酒店。",
+    "description": "伊斯坦布尔到卡帕多奇亚：从 IST/SAW 飞往 ASR 或 NAV，再预订机场班车前往格雷梅等酒店。",
     "eyebrow": "伊斯坦布尔 → 卡帕多奇亚",
     "h1": "伊斯坦布尔到卡帕多奇亚：航班与机场接送",
     "lead": "对大多数旅客来说，最实际的路线是从伊斯坦布尔飞往开塞利（ASR）或内夫谢希尔（NAV），再乘提前预订的卡帕多奇亚机场班车前往酒店。",
@@ -2508,7 +2509,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "从完整行程选择 ASR 或 NAV",
         "paragraphs": [
-          "NAV 到很多卡帕多奇亚酒店的公路距离更短；ASR 则可能有时间或票价更合适的航班，使较长的公路接送仍然值得。两座机场的共享班车都是 €15，因此应先比较航班。"
+          "NAV 到很多卡帕多奇亚酒店的公路距离更短；ASR 则可能有时间或票价更合适的航班，使较长的公路接送仍然值得。共享班车为 NAV {{PRICE:nevsehir:shuttle}}、ASR {{PRICE:kayseri:shuttle}}，因此应同时比较航班和当前价格。"
         ]
       },
       {
@@ -2557,7 +2558,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "落地后的共享班车多少钱？",
-        "a": "无论 ASR 还是 NAV，都是 €15/人。"
+        "a": "ASR 当前为 {{PRICE:kayseri:shuttle}}/人，NAV 为 {{PRICE:nevsehir:shuttle}}/人。"
       },
       {
         "q": "预订班车时要用伊斯坦布尔那一段航班号吗？",
@@ -2581,12 +2582,12 @@ export const zhPages: SeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "伊斯坦布尔到卡帕多奇亚｜航班与机场接送指南",
-    "twitterDescription": "伊斯坦布尔到卡帕多奇亚旅行指南：从 IST/SAW 飞往 ASR 或 NAV，再用 €15 机场班车前往格雷梅等酒店。"
+    "twitterDescription": "伊斯坦布尔到卡帕多奇亚：从 IST/SAW 飞往 ASR 或 NAV，再预订机场班车前往格雷梅等酒店。"
   },
   {
     "slug": "cappadocia-to-istanbul",
     "title": "卡帕多奇亚到伊斯坦布尔｜酒店送机与航班指南",
-    "description": "卡帕多奇亚到伊斯坦布尔：从格雷梅等酒店拼车前往 NAV/ASR，再飞往 IST 或 SAW。送机 €15/人，含接车时间与机场选择。",
+    "description": "卡帕多奇亚到伊斯坦布尔：从格雷梅等酒店预订送机班车前往 NAV/ASR，再飞往 IST 或 SAW，并根据航班和酒店位置安排接车时间。",
     "eyebrow": "卡帕多奇亚 → 伊斯坦布尔",
     "h1": "卡帕多奇亚到伊斯坦布尔：酒店送机与航班",
     "lead": "对大多数短途旅行者来说，返程通常是先从酒店前往内夫谢希尔机场（NAV）或开塞利机场（ASR），再搭乘航班前往伊斯坦布尔。班车只负责卡帕多奇亚酒店到机场这一段，之后由航班继续行程。",
@@ -2600,7 +2601,7 @@ export const zhPages: SeoPage[] = [
       {
         "heading": "按离港航班选择 NAV 或 ASR",
         "paragraphs": [
-          "NAV 通常离格雷梅、乌奇希萨尔和其他中部城镇更近。ASR 公路更远，但航班时间或票价可能更合适。支持城镇到两座机场的共享送机都是 **€15/人**；私人价格为 NAV Vito/Sprinter €80/€90，ASR €90/€110。",
+          "NAV 通常离格雷梅、乌奇希萨尔和其他中部城镇更近。ASR 公路更远，但航班时间或票价可能更合适。支持城镇到机场的共享送机为 **NAV {{PRICE:nevsehir:shuttle}}/人**、**ASR {{PRICE:kayseri:shuttle}}/人**；私人价格为 NAV Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}。",
           "如果还没有确定离港机场，可在订机票前比较 [[离卡帕多奇亚最近的机场|nearest-airport-to-cappadocia]] 和 [[开塞利还是内夫谢希尔机场|kayseri-or-nevsehir-airport-for-cappadocia]]。"
         ]
       },
@@ -2650,7 +2651,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "酒店到机场班车多少钱？",
-        "a": "从服务覆盖范围内的酒店城镇到 NAV 或 ASR 都是 €15/人/单程。"
+        "a": "从服务覆盖范围内的酒店城镇前往 NAV 为 {{PRICE:nevsehir:shuttle}}/人/单程，前往 ASR 为 {{PRICE:kayseri:shuttle}}/人/单程。"
       },
       {
         "q": "飞伊斯坦布尔时可以预订私人酒店送机吗？",
@@ -2658,7 +2659,7 @@ export const zhPages: SeoPage[] = [
       },
       {
         "q": "可以从与抵达时不同的机场离开吗？",
-        "a": "可以，但每一段都要正确确认，因为路线和私人价格不同。"
+        "a": "可以，但每一段都要正确确认，因为路线和私人价格都按机场确认。"
       },
       {
         "q": "卡帕多奇亚班车表单应该填写伊斯坦布尔机场代码吗？",
@@ -2673,9 +2674,11 @@ export const zhPages: SeoPage[] = [
       "kayseri-or-nevsehir-airport-for-cappadocia"
     ],
     "twitterTitle": "卡帕多奇亚到伊斯坦布尔｜酒店送机与航班指南",
-    "twitterDescription": "卡帕多奇亚到伊斯坦布尔：从格雷梅等酒店拼车前往 NAV/ASR，再飞往 IST 或 SAW。送机 €15/人，含接车时间与机场选择。"
+    "twitterDescription": "卡帕多奇亚到伊斯坦布尔：从格雷梅等酒店预订送机班车前往 NAV/ASR，再飞往 IST 或 SAW，并根据航班和酒店位置安排接车时间。"
   }
 ];
+
+export const zhPages: SeoPage[] = resolvePriceTokensDeep(rawZhPages);
 
 export const zhPageBySlug = new Map(zhPages.map((page) => [page.slug, page]));
 export function zhPrettySlug(slug:string){ return zhPageBySlug.get(slug)?.h1 || slug; }

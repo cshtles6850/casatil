@@ -15,15 +15,11 @@ export const airports = {
     name: 'Kayseri Airport',
     fullName: 'Kayseri Erkilet Airport',
     code: 'ASR',
-    vito: 90,
-    sprinter: 110,
   },
   nevsehir: {
     name: 'Nevsehir Airport',
     fullName: 'Nevsehir Kapadokya Airport',
     code: 'NAV',
-    vito: 80,
-    sprinter: 90,
   },
 } as const;
 

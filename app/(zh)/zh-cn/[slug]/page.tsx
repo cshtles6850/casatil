@@ -11,6 +11,7 @@ import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { zhPageBySlug, zhPages, zhPrettySlug, zhTownNames, type ZhSeoPage } from '@/lib/content-zh';
 import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking } from '@/lib/booking-visibility';
+import { formatEuro, lowestShuttlePrice, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return zhPages.map((page) => ({ slug: page.slug })); }
@@ -53,9 +54,9 @@ function AirportComparisonTablesZh() {
     </tbody></table></div>
     <h2>共享班车与私人接送价格</h2>
     <div className="table-scroll"><table><thead><tr><th>服务</th><th>内夫谢希尔（NAV）</th><th>开塞利（ASR）</th></tr></thead><tbody>
-      <tr><th scope="row">共享班车</th><td>€15 / 人</td><td>€15 / 人</td></tr>
-      <tr><th scope="row">私人 Vito</th><td>€80 / 车</td><td>€90 / 车</td></tr>
-      <tr><th scope="row">私人 Sprinter</th><td>€90 / 车</td><td>€110 / 车</td></tr>
+      <tr><th scope="row">共享班车</th><td>{formatEuro(shuttleOneWayPrice('nevsehir'))} / 人</td><td>{formatEuro(shuttleOneWayPrice('kayseri'))} / 人</td></tr>
+      <tr><th scope="row">私人 Vito</th><td>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / 车</td><td>{formatEuro(privateOneWayPrice('kayseri','vito'))} / 车</td></tr>
+      <tr><th scope="row">私人 Sprinter</th><td>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / 车</td><td>{formatEuro(privateOneWayPrice('kayseri','sprinter'))} / 车</td></tr>
     </tbody></table></div>
   </section>;
 }
@@ -94,11 +95,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 function RouteSummaryZh({ page }: { page: ZhSeoPage }) {
   if (!page.route) {
     return <div className="summary-box"><h3>价格与服务一览</h3>
-      <div className="summary-line"><span>机场拼车</span><strong>€15 / 人 / 单程</strong></div>
-      <div className="summary-line"><span>开塞利 Vito</span><strong>€90 / 车</strong></div>
-      <div className="summary-line"><span>开塞利 Sprinter</span><strong>€110 / 车</strong></div>
-      <div className="summary-line"><span>内夫谢希尔 Vito</span><strong>€80 / 车</strong></div>
-      <div className="summary-line"><span>内夫谢希尔 Sprinter</span><strong>€90 / 车</strong></div>
+      <div className="summary-line"><span>开塞利机场拼车</span><strong>{formatEuro(shuttleOneWayPrice('kayseri'))} / 人 / 单程</strong></div>
+      <div className="summary-line"><span>内夫谢希尔机场拼车</span><strong>{formatEuro(shuttleOneWayPrice('nevsehir'))} / 人 / 单程</strong></div>
+      <div className="summary-line"><span>开塞利 Vito</span><strong>{formatEuro(privateOneWayPrice('kayseri','vito'))} / 车</strong></div>
+      <div className="summary-line"><span>开塞利 Sprinter</span><strong>{formatEuro(privateOneWayPrice('kayseri','sprinter'))} / 车</strong></div>
+      <div className="summary-line"><span>内夫谢希尔 Vito</span><strong>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / 车</strong></div>
+      <div className="summary-line"><span>内夫谢希尔 Sprinter</span><strong>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / 车</strong></div>
       <div className="summary-line"><span>付款</span><strong>现金支付给司机</strong></div>
     </div>;
   }
@@ -115,7 +117,7 @@ function RouteQuickFactsZh({ page }: { page: ZhSeoPage }) {
     items={[
       { label: '距离', value: distance },
       { label: '参考车程', value: time },
-      { label: '价格', value: '€15 / 人' },
+      { label: '价格', value: `${formatEuro(shuttleOneWayPrice(page.route.airport))} / 人` },
     ]}
   />;
 }
@@ -162,9 +164,9 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
     provider:{'@type':'TravelAgency',name:SITE.name,url:SITE.domain},
     areaServed:serviceAreaServed(page),
     offers:page.route?[
-      {'@type':'Offer',price:'15',priceCurrency:'EUR',description:'共享机场班车，每人单程'},
-      {'@type':'Offer',price:String(airports[page.route.airport].vito),priceCurrency:'EUR',description:'私人 Mercedes Vito，单程，最多5人'},
-      {'@type':'Offer',price:String(airports[page.route.airport].sprinter),priceCurrency:'EUR',description:'私人 Mercedes Sprinter，单程，最多16人'},
+      {'@type':'Offer',price:String(shuttleOneWayPrice(page.route.airport)),priceCurrency:'EUR',description:'共享机场班车，每人单程'},
+      {'@type':'Offer',price:String(privateOneWayPrice(page.route.airport,'vito')),priceCurrency:'EUR',description:'私人 Mercedes Vito，单程，最多5人'},
+      {'@type':'Offer',price:String(privateOneWayPrice(page.route.airport,'sprinter')),priceCurrency:'EUR',description:'私人 Mercedes Sprinter，单程，最多16人'},
     ]:undefined,
   };
   const defaults=bookingDefaults(page);
@@ -211,6 +213,6 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
       </>}
     </div></section>
 
-    {hasBookingForm && <MobileBookingCta priceLabel="€15 / 人" bookLabel="立即预订" ariaLabel="快速预订" />}
+    {hasBookingForm && <MobileBookingCta priceLabel={page.route ? `${formatEuro(shuttleOneWayPrice(page.route.airport))} / 人` : `${formatEuro(lowestShuttlePrice())} / 人起`} bookLabel="立即预订" ariaLabel="快速预订" />}
   </main>;
 }

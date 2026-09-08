@@ -1,4 +1,5 @@
 import { towns } from './site';
+import { resolvePriceTokensDeep } from './price-content';
 
 export type JaContentSection = { heading: string; paragraphs: string[]; bullets?: string[] };
 export type JaFaqItem = { q: string; a: string };
@@ -13,19 +14,19 @@ export const townNamesJa: Record<keyof typeof towns, string> = {
   "cavusin": "チャウシン"
 };
 
-export const jaPages: JaSeoPage[] = [
+const rawJaPages: JaSeoPage[] = [
   {
     "slug": "cappadocia-shuttle-transfer",
     "title": "カッパドキア空港シャトル | 乗合シャトル",
     "description": "カイセリ空港（ASR）またはネヴシェヒル空港（NAV）からギョレメ、ユルギュップなどへ向かうカッパドキアの乗合空港シャトル。WhatsAppで予約できます。",
     "eyebrow": "乗合空港シャトル",
     "h1": "カッパドキア乗合空港シャトル",
-    "lead": "カッパドキアの乗合空港シャトルは、カイセリ空港（ASR）とネヴシェヒル空港（NAV）から、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルを結びます。料金は1名片道€15で、フライトに合わせて乗車・降車を手配します。",
+    "lead": "カッパドキアの乗合空港シャトルは、カイセリ空港（ASR）とネヴシェヒル空港（NAV）から、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルを結びます。現在の片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが{{PRICE:nevsehir:shuttle}}で、フライトに合わせて乗車・降車を手配します。",
     "sections": [
       {
         "heading": "サービスに含まれるもの",
         "paragraphs": [
-          "どちらの空港からでも宿泊施設まで乗合車両で移動します。フライト、乗客情報、ホテル名を事前に確認し、同じ便にほかの予約済み乗客やホテルへの立ち寄りが含まれる場合があります。こうした乗合運行により、1名€15の料金を実現しています。"
+          "どちらの空港からでも宿泊施設まで乗合車両で移動します。フライト、乗客情報、ホテル名を事前に確認し、同じ便にほかの予約済み乗客やホテルへの立ち寄りが含まれる場合があります。現在の片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが{{PRICE:nevsehir:shuttle}}です。"
         ]
       },
       {
@@ -50,7 +51,7 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カッパドキアの乗合シャトルはいくらですか？",
-        "a": "ASRまたはNAVから対象ホテルエリアまで1名片道€15です。"
+        "a": "対象ホテルエリアまで、ASRは1名片道{{PRICE:kayseri:shuttle}}、NAVは{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "どの空港に対応していますか？",
@@ -81,7 +82,7 @@ export const jaPages: JaSeoPage[] = [
   {
     "slug": "cappadocia-airport-transfer",
     "title": "カッパドキア空港送迎 | カイセリ・ネヴシェヒル",
-    "description": "カイセリ（ASR）・ネヴシェヒル（NAV）からカッパドキアへ。1名€15の乗合シャトルまたはプライベートVito/Sprinter。ホテル送迎、WhatsApp予約。",
+    "description": "カイセリ（ASR）・ネヴシェヒル（NAV）空港とカッパドキアのホテルを結ぶ乗合シャトルまたはプライベートVito/Sprinter。ホテル送迎・WhatsApp予約に対応。",
     "eyebrow": "空港送迎サービス",
     "h1": "カッパドキア空港送迎",
     "lead": "カッパドキアの空港送迎は、到着空港、ホテルのある町、移動方向によって利用するルートが変わります。まず空港を確認し、次に宿泊する町を選べば、必要な送迎が分かりやすくなります。",
@@ -95,7 +96,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "乗合シャトルまたはプライベート送迎",
         "paragraphs": [
-          "[[乗合シャトル|cappadocia-shuttle-transfer]]はどちらの空港からも1名片道€15で、事前予約後にWhatsAppで確認します。同じ運行にほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車をご希望の場合は、[[プライベート送迎|private-airport-transfer-cappadocia]]でVito（最大5名）またはSprinter（最大16名）を選択できます。料金は1名あたりではなく1台あたりで、カイセリとネヴシェヒルでは料金が異なります。どちらが合うか迷う場合は、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]で料金、対象エリア、時間の違いを比較できます。"
+          "[[乗合シャトル|cappadocia-shuttle-transfer]]は現在、カイセリ（ASR）が1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒル（NAV）が{{PRICE:nevsehir:shuttle}}で、事前予約後にWhatsAppで確認します。同じ運行にほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車をご希望の場合は、[[プライベート送迎|private-airport-transfer-cappadocia]]でVito（最大5名）またはSprinter（最大16名）を選択できます。料金は1名あたりではなく1台あたりで、カイセリとネヴシェヒルでは料金を空港別に管理しています。どちらが合うか迷う場合は、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]で料金、対象エリア、時間の違いを比較できます。"
         ]
       },
       {
@@ -107,13 +108,13 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "到着空港と出発空港が異なる場合",
         "paragraphs": [
-          "NAVに到着してASRから出発する旅程や、その逆も可能です。ただし同一空港の通常の往復とは異なり、各方向でルートとプライベート送迎料金が変わります。1つの一律料金で両方向が含まれると考えず、2便の情報をWhatsAppで送り、それぞれ正しい空港で確認を受けてください。"
+          "NAVに到着してASRから出発する旅程や、その逆も可能です。ただし同一空港の通常の往復とは異なり、各方向でルートとプライベート送迎料金を空港別に確認します。1つの一律料金で両方向が含まれると考えず、2便の情報をWhatsAppで送り、それぞれ正しい空港で確認を受けてください。"
         ]
       },
       {
         "heading": "グループ人数と車両定員",
         "paragraphs": [
-          "Vitoは最大5名、Sprinterは最大16名まで利用できます。プライベート送迎は1台あたりの料金なので、人数の多いグループではSprinterの1名あたり費用が乗合シャトルより低くなる場合があります。特にプライベート料金が低いネヴシェヒルでは、予約前に両方を比較する価値があります。"
+          "Vitoは最大5名、Sprinterは最大16名まで利用できます。プライベート送迎は1台あたりの料金なので、人数の多いグループではSprinterの1名あたり費用が乗合シャトルより低くなる場合があります。プライベート料金は空港別に設定されるため、予約前にASRとNAVの現在の車両料金を人数に合わせて比較してください。"
         ]
       },
       {
@@ -138,7 +139,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "到着と出発で別の空港を利用できますか？",
-        "a": "はい。空港ごとにルートと料金が異なるため、2便の情報をWhatsAppで送り、それぞれ別に確認してください。"
+        "a": "はい。空港ごとにルートと料金を確認する必要があるため、2便の情報をWhatsAppで送り、それぞれ別に確認してください。"
       },
       {
         "q": "ホテルにはカイセリとネヴシェヒルのどちらが近いですか？",
@@ -169,10 +170,10 @@ export const jaPages: JaSeoPage[] = [
   {
     "slug": "private-airport-transfer-cappadocia",
     "title": "カッパドキア・プライベート空港送迎 | Vito・Sprinter",
-    "description": "カッパドキアのプライベート空港送迎。カイセリ Vito €90 / Sprinter €110、ネヴシェヒル Vito €80 / Sprinter €90。最大5名または16名、現金払い。",
+    "description": "カイセリ（ASR）・ネヴシェヒル（NAV）空港からのカッパドキア・プライベート送迎。Vitoは最大5名、Sprinterは最大16名。ドライバーへ現金払い。",
     "eyebrow": "専用車",
     "h1": "カッパドキア・プライベート空港送迎",
-    "lead": "カイセリ空港：**Vito €90**、**Sprinter €110**（片道）。ネヴシェヒル空港：**Vito €80**、**Sprinter €90**。料金は1名あたりではなく1台あたりです。往復はカイセリが€180/€220、ネヴシェヒルが€160/€180です。",
+    "lead": "カイセリ空港：**Vito {{PRICE:kayseri:vito}}**、**Sprinter {{PRICE:kayseri:sprinter}}**（片道）。ネヴシェヒル空港：**Vito {{PRICE:nevsehir:vito}}**、**Sprinter {{PRICE:nevsehir:sprinter}}**。料金は1名あたりではなく1台あたりです。往復はカイセリが{{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}、ネヴシェヒルが{{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}です。",
     "sections": [
       {
         "heading": "Mercedes Vito：最大5名",
@@ -183,13 +184,13 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "Mercedes Sprinter：最大16名",
         "paragraphs": [
-          "Sprinterは最大16名まで利用できる大型のプライベート車両です。料金は空港別で、カイセリから片道€110、ネヴシェヒルから片道€90です。人数の多いグループでは、乗合シャトルより1名あたりの費用が同程度または安くなることがあります。"
+          "Sprinterは最大16名まで利用できる大型のプライベート車両です。料金は空港別で、カイセリから片道{{PRICE:kayseri:sprinter}}、ネヴシェヒルから片道{{PRICE:nevsehir:sprinter}}です。人数の多いグループでは、乗合シャトルより1名あたりの費用が同程度または安くなることがあります。"
         ]
       },
       {
-        "heading": "カイセリとネヴシェヒルで料金が異なる理由",
+        "heading": "カイセリとネヴシェヒルの料金を空港別に管理する理由",
         "paragraphs": [
-          "カイセリとネヴシェヒルは同じルートではありません。カイセリはカッパドキア中心部の多くの町から道路距離が長いため、ASRのプライベート料金は高めです。NAVではVito、Sprinterともに低い料金になります。料金を比較する前に、利用する空港を必ず確認してください。"
+          "カイセリとネヴシェヒルは同じルートではありません。道路距離や運行条件が異なるため、ASRとNAVのプライベート料金は空港ごとに別々に管理しています。比較する前に、利用する空港と現在の料金を必ず確認してください。"
         ]
       },
       {
@@ -208,19 +209,19 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カイセリ空港からプライベートVitoはいくらですか？",
-        "a": "最大5名、1台あたり片道€90です。"
+        "a": "最大5名、1台あたり片道{{PRICE:kayseri:vito}}です。"
       },
       {
         "q": "ネヴシェヒル空港からプライベートVitoはいくらですか？",
-        "a": "最大5名、1台あたり片道€80です。"
+        "a": "最大5名、1台あたり片道{{PRICE:nevsehir:vito}}です。"
       },
       {
         "q": "カイセリ空港からSprinterはいくらですか？",
-        "a": "最大16名、1台あたり片道€110です。"
+        "a": "最大16名、1台あたり片道{{PRICE:kayseri:sprinter}}です。"
       },
       {
         "q": "ネヴシェヒル空港からSprinterはいくらですか？",
-        "a": "最大16名、1台あたり片道€90です。"
+        "a": "最大16名、1台あたり片道{{PRICE:nevsehir:sprinter}}です。"
       },
       {
         "q": "往復料金はいくらですか？",
@@ -250,41 +251,41 @@ export const jaPages: JaSeoPage[] = [
   {
     "slug": "airport-transfer-prices",
     "title": "カッパドキア空港送迎料金 | シャトル・Vito・Sprinter",
-    "description": "カッパドキア空港送迎料金：乗合シャトル1名片道€15。カイセリ Vito €90 / Sprinter €110、ネヴシェヒル Vito €80 / Sprinter €90。往復は2倍。",
+    "description": "カッパドキア空港送迎の現在料金を比較。カイセリ・ネヴシェヒルの乗合シャトル、Vito、Sprinter、片道・往復の料金体系を案内します。",
     "twitterTitle": "カッパドキア空港送迎料金 | シャトル・Vito・Sprinter",
-    "twitterDescription": "乗合シャトル1名€15。カイセリ Vito €90 / Sprinter €110、ネヴシェヒル Vito €80 / Sprinter €90。",
+    "twitterDescription": "カッパドキア空港送迎の現在料金を比較。カイセリ・ネヴシェヒルの乗合シャトル、Vito、Sprinter、片道・往復の料金体系を案内します。",
     "eyebrow": "明確な料金",
     "h1": "カッパドキア空港送迎料金",
-    "lead": "乗合シャトルはどちらの空港からも1名片道€15です。プライベート送迎は1台あたりの料金で、カイセリとネヴシェヒルでは金額が異なります。",
+    "lead": "乗合シャトルはカイセリ（ASR）が1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒル（NAV）が{{PRICE:nevsehir:shuttle}}です。プライベート送迎も空港別・1台あたりの料金です。",
     "sections": [
       {
         "heading": "乗合シャトル料金",
         "paragraphs": [
-          "カイセリ空港（ASR）→ カッパドキアの対象ホテル：**1名片道€15**。ネヴシェヒル空港（NAV）→ 対象ホテル：**1名片道€15**。ホテル→空港も同額で、往復は1名€30です。詳しいルートは[[乗合シャトルページ|cappadocia-shuttle-transfer]]をご覧ください。"
+          "カイセリ空港（ASR）→ カッパドキアの対象ホテル：**1名片道{{PRICE:kayseri:shuttle}}**。ネヴシェヒル空港（NAV）→ 対象ホテル：**1名片道{{PRICE:nevsehir:shuttle}}**。ホテル→空港は同じ空港別片道料金が適用され、往復はカイセリ{{PRICE:kayseri:shuttle:roundTrip}}、ネヴシェヒル{{PRICE:nevsehir:shuttle:roundTrip}}です。詳しいルートは[[乗合シャトルページ|cappadocia-shuttle-transfer]]をご覧ください。"
         ]
       },
       {
         "heading": "カイセリ空港のプライベート料金",
         "paragraphs": [
-          "Mercedes Vito（最大5名）：**片道€90 / 往復€180**。Mercedes Sprinter（最大16名）：**片道€110 / 往復€220**。"
+          "Mercedes Vito（最大5名）：**片道{{PRICE:kayseri:vito}} / 往復{{PRICE:kayseri:vito:roundTrip}}**。Mercedes Sprinter（最大16名）：**片道{{PRICE:kayseri:sprinter}} / 往復{{PRICE:kayseri:sprinter:roundTrip}}**。"
         ]
       },
       {
         "heading": "ネヴシェヒル空港のプライベート料金",
         "paragraphs": [
-          "Mercedes Vito（最大5名）：**片道€80 / 往復€160**。Mercedes Sprinter（最大16名）：**片道€90 / 往復€180**。車両の詳細やプライベート送迎が向いているケースは[[プライベート送迎ページ|private-airport-transfer-cappadocia]]をご確認ください。"
+          "Mercedes Vito（最大5名）：**片道{{PRICE:nevsehir:vito}} / 往復{{PRICE:nevsehir:vito:roundTrip}}**。Mercedes Sprinter（最大16名）：**片道{{PRICE:nevsehir:sprinter}} / 往復{{PRICE:nevsehir:sprinter:roundTrip}}**。車両の詳細やプライベート送迎が向いているケースは[[プライベート送迎ページ|private-airport-transfer-cappadocia]]をご確認ください。"
         ]
       },
       {
         "heading": "1名あたり料金と1台あたり料金",
         "paragraphs": [
-          "乗合シャトルは1名あたりの料金なので、人数が増えると合計も増えます。プライベート送迎は、Vito最大5名・Sprinter最大16名という定員内で1台あたりの料金です。そのため、大人数では車両料金が高く見えてもSprinterの1名あたり費用が乗合シャトルを下回ることがあります。プライベート料金は空港でも変わり、NAVはVito €80 / Sprinter €90、ASRは€90 / €110です。空港を選んだ後に合計を比較してください。"
+          "乗合シャトルは1名あたりの料金なので、人数が増えると合計も増えます。プライベート送迎は、Vito最大5名・Sprinter最大16名という定員内で1台あたりの料金です。そのため、大人数では車両料金が高く見えてもSprinterの1名あたり費用が乗合シャトルを下回ることがあります。プライベート料金は空港別に管理しており、NAVはVito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}、ASRは{{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。空港を選んだ後に合計を比較してください。"
         ]
       },
       {
         "heading": "人数別の合計例",
         "paragraphs": [
-          "片道の乗合シャトルは2名で合計€30、5名で€75、6名で€90です。6名の€90はネヴシェヒル発Sprinterの片道料金と同額です。カイセリ発Vitoも€90ですが定員は5名なので6名では利用できません。見出し料金だけでなく、人数と車両定員を合わせて比較することが大切です。"
+          "ネヴシェヒル発の乗合シャトルを例にすると、片道2名で合計{{PRICE:nevsehir:shuttle:x2}}、5名で{{PRICE:nevsehir:shuttle:x5}}、6名で{{PRICE:nevsehir:shuttle:x6}}です。ネヴシェヒル発Sprinterの1台{{PRICE:nevsehir:sprinter}}と比較してください。カイセリ発Vitoは{{PRICE:kayseri:vito}}ですが定員は5名なので6名では利用できません。見出し料金だけでなく、人数と車両定員を合わせて比較することが大切です。"
         ]
       },
       {
@@ -297,27 +298,27 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カッパドキア空港シャトルはいくらですか？",
-        "a": "カイセリ、ネヴシェヒルどちらの空港からも1名片道€15です。"
+        "a": "現在はカイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "乗合シャトルの往復はいくらですか？",
-        "a": "1名€30です。"
+        "a": "往復はカイセリが1名{{PRICE:kayseri:shuttle:roundTrip}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle:roundTrip}}です。"
       },
       {
         "q": "カイセリ空港のVitoはいくらですか？",
-        "a": "片道€90、往復€180です。"
+        "a": "片道{{PRICE:kayseri:vito}}、往復{{PRICE:kayseri:vito:roundTrip}}です。"
       },
       {
         "q": "カイセリ空港のSprinterはいくらですか？",
-        "a": "片道€110、往復€220です。"
+        "a": "片道{{PRICE:kayseri:sprinter}}、往復{{PRICE:kayseri:sprinter:roundTrip}}です。"
       },
       {
         "q": "ネヴシェヒル空港のVitoはいくらですか？",
-        "a": "片道€80、往復€160です。"
+        "a": "片道{{PRICE:nevsehir:vito}}、往復{{PRICE:nevsehir:vito:roundTrip}}です。"
       },
       {
         "q": "ネヴシェヒル空港のSprinterはいくらですか？",
-        "a": "片道€90、往復€180です。"
+        "a": "片道{{PRICE:nevsehir:sprinter}}、往復{{PRICE:nevsehir:sprinter:roundTrip}}です。"
       },
       {
         "q": "プライベート料金は1名あたりですか？",
@@ -353,10 +354,10 @@ export const jaPages: JaSeoPage[] = [
   {
     "slug": "kayseri-airport-shuttle",
     "title": "カイセリ空港からカッパドキアへのシャトル | ホテル送迎",
-    "description": "カイセリ空港（ASR）からカッパドキアのホテルへ1名€15の乗合シャトル。ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシン。",
+    "description": "カイセリ空港（ASR）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンのホテルへ。乗合シャトルとプライベート送迎に対応。",
     "eyebrow": "カイセリ空港 ASR",
     "h1": "カイセリ空港からカッパドキアへのシャトル",
-    "lead": "カイセリ・エルキレト空港（ASR）からカッパドキアの対象宿泊エリアまで、1名€15の乗合シャトルを予約できます。空港での待ち合わせは到着便に合わせて手配し、WhatsAppで確認します。",
+    "lead": "カイセリ・エルキレト空港（ASR）からカッパドキアの対象宿泊エリアまで、1名{{PRICE:kayseri:shuttle}}の乗合シャトルを予約できます。空港での待ち合わせは到着便に合わせて手配し、WhatsAppで確認します。",
     "sections": [
       {
         "heading": "カイセリからカッパドキアへ：道路移動はやや長め",
@@ -379,7 +380,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "カイセリ空港のプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名で片道€90、Sprinterは最大16名で片道€110です。いずれも1台あたりの料金です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名で片道{{PRICE:kayseri:vito}}、Sprinterは最大16名で片道{{PRICE:kayseri:sprinter}}です。いずれも1台あたりの料金です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       },
       {
@@ -392,7 +393,7 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カイセリ空港からカッパドキアのシャトルはいくらですか？",
-        "a": "1名片道€15、往復€30です。"
+        "a": "1名片道{{PRICE:kayseri:shuttle}}、往復{{PRICE:kayseri:shuttle:roundTrip}}です。"
       },
       {
         "q": "カイセリ空港からギョレメまでどのくらいかかりますか？",
@@ -404,7 +405,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "プライベートVitoはいくらですか？",
-        "a": "カイセリ空港から最大5名、1台あたり片道€90です。"
+        "a": "カイセリ空港から最大5名、1台あたり片道{{PRICE:kayseri:vito}}です。"
       },
       {
         "q": "ホテルから空港への復路も予約できますか？",
@@ -423,15 +424,15 @@ export const jaPages: JaSeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "カイセリ空港シャトル | カッパドキアのホテルへ",
-    "twitterDescription": "カイセリ空港（ASR）からカッパドキア対象ホテルへ1名€15の乗合シャトル。プライベートVito・Sprinterも利用可能。"
+    "twitterDescription": "カイセリ空港（ASR）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンのホテルへ。乗合シャトルとプライベート送迎に対応。"
   },
   {
     "slug": "nevsehir-airport-shuttle",
     "title": "ネヴシェヒル空港からカッパドキアへのシャトル | 空港・ホテル送迎",
-    "description": "ネヴシェヒル空港（NAV）からカッパドキアのホテルへ。1名€15、ドライバーへ現金払い。ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサル。",
+    "description": "ネヴシェヒル空港（NAV）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルへ。乗合シャトルとプライベート送迎に対応。",
     "eyebrow": "NAV 空港シャトル",
     "h1": "ネヴシェヒル空港からカッパドキアへのシャトル",
-    "lead": "ネヴシェヒル・カッパドキア空港から対象宿泊エリアまで、1名€15の乗合シャトルを予約できます。到着便に合わせた待ち合わせ案内をWhatsAppで確認します。",
+    "lead": "ネヴシェヒル・カッパドキア空港から対象宿泊エリアまで、1名{{PRICE:nevsehir:shuttle}}の乗合シャトルを予約できます。到着便に合わせた待ち合わせ案内をWhatsAppで確認します。",
     "sections": [
       {
         "heading": "ネヴシェヒル空港：中心部の多くのホテルに近い玄関口",
@@ -440,9 +441,9 @@ export const jaPages: JaSeoPage[] = [
         ]
       },
       {
-        "heading": "NAVの乗合シャトルは1名€15",
+        "heading": "NAVの乗合シャトルは1名{{PRICE:nevsehir:shuttle}}",
         "paragraphs": [
-          "ネヴシェヒル空港の乗合シャトルは**1名片道€15**、**往復€30**です。プライベート料金はASRより低く、Vitoは片道€80、Sprinterは€90（いずれも1台あたり）です。"
+          "ネヴシェヒル空港の乗合シャトルは**1名片道{{PRICE:nevsehir:shuttle}}**、**往復{{PRICE:nevsehir:shuttle:roundTrip}}**です。プライベート料金は空港別で、NAVはVitoが片道{{PRICE:nevsehir:vito}}、Sprinterが{{PRICE:nevsehir:sprinter}}（いずれも1台あたり）です。両空港を利用できる場合はASRの現在料金も合わせて比較してください。"
         ]
       },
       {
@@ -460,7 +461,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "NAVへの復路も実際のホテル所在地に合わせます",
         "paragraphs": [
-          "ネヴシェヒル空港へ戻る乗合シャトルも1名€15です。実際の出発便と[[カッパドキアからネヴシェヒル空港へのシャトル|cappadocia-to-nevsehir-airport-shuttle]]の該当町ルートを使い、ギョレメのお迎えをウチヒサルやアヴァノスなどと同じ条件で計画しないようにします。"
+          "ネヴシェヒル空港へ戻る乗合シャトルも1名{{PRICE:nevsehir:shuttle}}です。実際の出発便と[[カッパドキアからネヴシェヒル空港へのシャトル|cappadocia-to-nevsehir-airport-shuttle]]の該当町ルートを使い、ギョレメのお迎えをウチヒサルやアヴァノスなどと同じ条件で計画しないようにします。"
         ]
       },
       {
@@ -473,7 +474,7 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "ネヴシェヒル空港からカッパドキアのシャトルはいくらですか？",
-        "a": "1名片道€15、往復€30です。"
+        "a": "1名片道{{PRICE:nevsehir:shuttle}}、往復{{PRICE:nevsehir:shuttle:roundTrip}}です。"
       },
       {
         "q": "NAVはギョレメやウチヒサルに近い空港ですか？",
@@ -481,7 +482,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "ネヴシェヒル空港のプライベート送迎料金は？",
-        "a": "Vitoは片道€80、Sprinterは€90で、いずれも1台あたりです。"
+        "a": "Vitoは片道{{PRICE:nevsehir:vito}}、Sprinterは{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりです。"
       },
       {
         "q": "NAVのシャトルは固定時刻の空港バスのように運行しますか？",
@@ -504,15 +505,15 @@ export const jaPages: JaSeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "ネヴシェヒル空港からカッパドキアへのシャトル",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルまで1名€15の乗合シャトル。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルへ。乗合シャトルとプライベート送迎に対応。"
   },
   {
     "slug": "cappadocia-to-kayseri-airport-shuttle",
     "title": "カッパドキアからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルからカイセリ空港（ASR）まで1名€15のホテル送迎。",
+    "description": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルからカイセリ空港（ASR）へ。乗合またはプライベート送迎を予約できます。",
     "eyebrow": "カッパドキア → ASR",
     "h1": "カッパドキアからカイセリ空港へのシャトル",
-    "lead": "カッパドキアの対象ホテルエリアからカイセリ・エルキレト空港まで、1名€15のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
+    "lead": "カッパドキアの対象ホテルエリアからカイセリ・エルキレト空港まで、1名{{PRICE:kayseri:shuttle}}のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
     "sections": [
       {
         "heading": "ASR出発は地図の所要時間より早めに考える必要があります",
@@ -535,7 +536,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "専用車でカイセリ空港へ",
         "paragraphs": [
-          "[[プライベート送迎|private-airport-transfer-cappadocia]]は、Vitoが最大5名で片道€90、Sprinterが最大16名で片道€110です。ほかのホテルへの乗合ピックアップはありませんが、宿泊施設側にも車両が安全に進入・停車できるお迎え場所が必要です。"
+          "[[プライベート送迎|private-airport-transfer-cappadocia]]は、Vitoが最大5名で片道{{PRICE:kayseri:vito}}、Sprinterが最大16名で片道{{PRICE:kayseri:sprinter}}です。ほかのホテルへの乗合ピックアップはありませんが、宿泊施設側にも車両が安全に進入・停車できるお迎え場所が必要です。"
         ]
       },
       {
@@ -548,7 +549,7 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カッパドキアからカイセリ空港のシャトルはいくらですか？",
-        "a": "1名片道€15です。"
+        "a": "1名片道{{PRICE:kayseri:shuttle}}です。"
       },
       {
         "q": "ASRのお迎え時刻を直行時間だけで計算してはいけないのはなぜですか？",
@@ -560,7 +561,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "カイセリ空港までプライベート車両も予約できますか？",
-        "a": "はい。Vitoは片道€90、Sprinterは€110で、いずれも1台あたりです。"
+        "a": "はい。Vitoは片道{{PRICE:kayseri:vito}}、Sprinterは{{PRICE:kayseri:sprinter}}で、いずれも1台あたりです。"
       }
     ],
     "related": [
@@ -574,15 +575,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カッパドキアからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルからカイセリ空港（ASR）へ1名€15のホテル送迎。"
+    "twitterDescription": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルからカイセリ空港（ASR）へ。乗合またはプライベート送迎を予約できます。"
   },
   {
     "slug": "cappadocia-to-nevsehir-airport-shuttle",
     "title": "カッパドキアからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルからネヴシェヒル空港（NAV）まで1名€15のホテル送迎。",
+    "description": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルからネヴシェヒル空港（NAV）へ。乗合またはプライベート送迎を予約できます。",
     "eyebrow": "カッパドキア → NAV",
     "h1": "カッパドキアからネヴシェヒル空港へのシャトル",
-    "lead": "カッパドキアの対象ホテルエリアからネヴシェヒル・カッパドキア空港まで、1名€15のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
+    "lead": "カッパドキアの対象ホテルエリアからネヴシェヒル・カッパドキア空港まで、1名{{PRICE:nevsehir:shuttle}}のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
     "sections": [
       {
         "heading": "NAVは近くても、お迎え時刻は出発便を基準にします",
@@ -605,7 +606,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "ネヴシェヒルへのプライベート出発はより直接的な選択肢",
         "paragraphs": [
-          "専用の[[プライベート送迎|private-airport-transfer-cappadocia]]は、Vitoが最大5名で片道€80、Sprinterが最大16名で片道€90です。ほかのホテルへの立ち寄りはありませんが、最終的なお迎え場所は車両が安全にアクセスできるかどうかで決まります。"
+          "専用の[[プライベート送迎|private-airport-transfer-cappadocia]]は、Vitoが最大5名で片道{{PRICE:nevsehir:vito}}、Sprinterが最大16名で片道{{PRICE:nevsehir:sprinter}}です。ほかのホテルへの立ち寄りはありませんが、最終的なお迎え場所は車両が安全にアクセスできるかどうかで決まります。"
         ]
       },
       {
@@ -618,7 +619,7 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カッパドキアからネヴシェヒル空港のシャトルはいくらですか？",
-        "a": "1名片道€15です。"
+        "a": "1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "NAVが近いので、自分で出発を遅らせても大丈夫ですか？",
@@ -630,7 +631,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "ネヴシェヒル空港までプライベート車両も予約できますか？",
-        "a": "はい。Vitoは片道€80、Sprinterは€90で、いずれも1台あたりです。"
+        "a": "はい。Vitoは片道{{PRICE:nevsehir:vito}}、Sprinterは{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりです。"
       }
     ],
     "related": [
@@ -645,12 +646,12 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カッパドキアからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルからネヴシェヒル空港（NAV）へ1名€15のホテル送迎。"
+    "twitterDescription": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルからネヴシェヒル空港（NAV）へ。乗合またはプライベート送迎を予約できます。"
   },
   {
     "slug": "goreme-airport-transfer",
     "title": "ギョレメ空港送迎 | ASR・NAVシャトル",
-    "description": "カイセリ・ネヴシェヒル空港からギョレメへ。1名€15のシャトル、プライベートVito/Sprinter、ホテルアクセス、所要時間、復路お迎え。",
+    "description": "カイセリ・ネヴシェヒル空港とギョレメを結ぶ空港送迎。乗合シャトル、プライベートVito/Sprinter、ホテルアクセス、所要時間、復路お迎えを案内。",
     "eyebrow": "ギョレメ空港送迎ガイド",
     "h1": "ギョレメ空港送迎",
     "lead": "ギョレメ滞在なら、カイセリ空港とネヴシェヒル空港を比較し、実際に利用するフライトに合った空港シャトルのルートを選びましょう。",
@@ -737,8 +738,8 @@ export const jaPages: JaSeoPage[] = [
     ],
     "faq": [
       {
-        "q": "カイセリとネヴシェヒルからギョレメまで、乗合シャトル料金は同じですか？",
-        "a": "はい。ASR、NAVどちらからでも1名片道€15です。道路距離は異なりますが乗合料金は同じです。"
+        "q": "カイセリとネヴシェヒルからギョレメまでの乗合シャトル料金はいくらですか？",
+        "a": "現在の乗合シャトルはASRから1名片道{{PRICE:kayseri:shuttle}}、NAVから{{PRICE:nevsehir:shuttle}}です。航空券に記載された空港の料金と、そのルートの道路距離を合わせて確認してください。"
       },
       {
         "q": "空港到着と帰りのギョレメホテルお迎えを1回の予約で手配できますか？",
@@ -746,7 +747,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "ギョレメの予約フォームではASRかNAVを先に選ぶ必要がありますか？",
-        "a": "はい。プライベート料金、道路距離、空港待ち合わせ、復路ルートが空港によって異なるため、航空券に記載された空港を選択してください。"
+        "a": "はい。プライベート料金は空港別に管理し、道路距離・空港待ち合わせ・復路ルートも利用空港に合わせて確認するため、航空券に記載された空港を選択してください。"
       },
       {
         "q": "シャトルはギョレメのすべての洞窟ホテル入口まで行けますか？",
@@ -770,15 +771,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ギョレメ空港送迎 | ASR・NAVシャトル",
-    "twitterDescription": "カイセリ・ネヴシェヒル空港からギョレメへ。1名€15のシャトル、プライベートVito/Sprinter、ホテルアクセスと所要時間。"
+    "twitterDescription": "カイセリ・ネヴシェヒル空港とギョレメを結ぶ空港送迎。乗合シャトル、プライベートVito/Sprinter、ホテルアクセス、所要時間、復路お迎えを案内。"
   },
   {
     "slug": "kayseri-airport-to-goreme-shuttle",
     "title": "カイセリ空港からギョレメへのシャトル | 乗合・プライベート送迎",
-    "description": "カイセリ空港（ASR）からギョレメ：1名€15の乗合シャトル、プライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。",
+    "description": "カイセリ空港（ASR）からギョレメ：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。",
     "eyebrow": "ASR → ギョレメ 空港シャトル",
     "h1": "カイセリ空港からギョレメへのシャトル",
-    "lead": "カイセリ空港（ASR）からギョレメまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約75 km、所要時間は60–75分です。ギョレメの洞窟ホテル周辺は道が狭く、車両が停車できる最寄りの降車場所に影響することがあるため、宿泊施設の正式名称が重要です。",
+    "lead": "カイセリ空港（ASR）からギョレメまでは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約75 km、所要時間は60–75分です。ギョレメの洞窟ホテル周辺は道が狭く、車両が停車できる最寄りの降車場所に影響することがあるため、宿泊施設の正式名称が重要です。",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -801,7 +802,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       },
       {
@@ -818,7 +819,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -830,15 +831,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港からギョレメへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "カイセリ空港（ASR）からギョレメ：1名€15の乗合シャトル、プライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。"
+    "twitterDescription": "カイセリ空港（ASR）からギョレメ：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。"
   },
   {
     "slug": "kayseri-airport-to-urgup-shuttle",
     "title": "カイセリ空港からユルギュップへのシャトル | 乗合・プライベート送迎",
-    "description": "カイセリ空港（ASR）からユルギュップ：1名€15の乗合シャトル、プライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。",
+    "description": "カイセリ空港（ASR）からユルギュップ：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。",
     "eyebrow": "ASR → ユルギュップ 空港シャトル",
     "h1": "カイセリ空港からユルギュップへのシャトル",
-    "lead": "カイセリ空港（ASR）からユルギュップまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約70 km、所要時間は60–75分です。ユルギュップ中心部は比較的アクセスしやすい一方、丘側の石造り・洞窟ホテルではホテルまでのアクセス方法が異なる場合があります。",
+    "lead": "カイセリ空港（ASR）からユルギュップまでは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約70 km、所要時間は60–75分です。ユルギュップ中心部は比較的アクセスしやすい一方、丘側の石造り・洞窟ホテルではホテルまでのアクセス方法が異なる場合があります。",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -860,7 +861,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。ASRではなくNAVも利用できる場合は[[ネヴシェヒル空港からユルギュップへのシャトル|nevsehir-airport-to-urgup-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。ASRではなくNAVも利用できる場合は[[ネヴシェヒル空港からユルギュップへのシャトル|nevsehir-airport-to-urgup-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -882,15 +883,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港からユルギュップへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "カイセリ空港（ASR）からユルギュップ：1名€15の乗合シャトル、プライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。"
+    "twitterDescription": "カイセリ空港（ASR）からユルギュップ：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。"
   },
   {
     "slug": "kayseri-airport-to-uchisar-shuttle",
     "title": "カイセリ空港からウチヒサルへのシャトル | 乗合・プライベート送迎",
-    "description": "カイセリ空港（ASR）からウチヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、80 km、70–85分、ホテル送迎・予約情報。",
+    "description": "カイセリ空港（ASR）からウチヒサル：乗合シャトルまたはプライベートVito/Sprinter、80 km、70–85分、ホテル送迎・予約情報。",
     "eyebrow": "ASR → ウチヒサル 空港シャトル",
     "h1": "カイセリ空港からウチヒサルへのシャトル",
-    "lead": "カイセリ空港（ASR）からウチヒサルまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約80 km、所要時間は70–85分です。ウチヒサルは坂が急で道が細い区間があるため、ホテルまでの最後のアクセスは実際の施設と車両アクセス状況によって変わります。",
+    "lead": "カイセリ空港（ASR）からウチヒサルまでは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約80 km、所要時間は70–85分です。ウチヒサルは坂が急で道が細い区間があるため、ホテルまでの最後のアクセスは実際の施設と車両アクセス状況によって変わります。",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -912,7 +913,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からウチヒサルへのシャトル|nevsehir-airport-to-uchisar-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からウチヒサルへのシャトル|nevsehir-airport-to-uchisar-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -934,15 +935,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港からウチヒサルへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "カイセリ空港（ASR）からウチヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、80 km、70–85分、ホテル送迎・予約情報。"
+    "twitterDescription": "カイセリ空港（ASR）からウチヒサル：乗合シャトルまたはプライベートVito/Sprinter、80 km、70–85分、ホテル送迎・予約情報。"
   },
   {
     "slug": "kayseri-airport-to-avanos-shuttle",
     "title": "カイセリ空港からアヴァノスへのシャトル | 乗合・プライベート送迎",
-    "description": "カイセリ空港（ASR）からアヴァノス：1名€15の乗合シャトル、プライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。",
+    "description": "カイセリ空港（ASR）からアヴァノス：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。",
     "eyebrow": "ASR → アヴァノス 空港シャトル",
     "h1": "カイセリ空港からアヴァノスへのシャトル",
-    "lead": "カイセリ空港（ASR）からアヴァノスまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約70 km、所要時間は60–75分です。アヴァノスの宿泊施設は川の周辺に広く分散しているため、正しい最終降車場所を特定するにはホテルの正式名称が重要です。",
+    "lead": "カイセリ空港（ASR）からアヴァノスまでは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約70 km、所要時間は60–75分です。アヴァノスの宿泊施設は川の周辺に広く分散しているため、正しい最終降車場所を特定するにはホテルの正式名称が重要です。",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -964,7 +965,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からアヴァノスへのシャトル|nevsehir-airport-to-avanos-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からアヴァノスへのシャトル|nevsehir-airport-to-avanos-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -986,15 +987,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港からアヴァノスへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "カイセリ空港（ASR）からアヴァノス：1名€15の乗合シャトル、プライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。"
+    "twitterDescription": "カイセリ空港（ASR）からアヴァノス：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分、ホテル送迎・予約情報。"
   },
   {
     "slug": "kayseri-airport-to-ortahisar-shuttle",
     "title": "カイセリ空港からオルタヒサルへのシャトル | 乗合・プライベート送迎",
-    "description": "カイセリ空港（ASR）からオルタヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。",
+    "description": "カイセリ空港（ASR）からオルタヒサル：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。",
     "eyebrow": "ASR → オルタヒサル 空港シャトル",
     "h1": "カイセリ空港からオルタヒサルへのシャトル",
-    "lead": "カイセリ空港（ASR）からオルタヒサルまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約75 km、所要時間は60–75分です。オルタヒサル中心部では一部の宿泊施設周辺の道が細くなるため、最後の車両アクセスは町名だけでなく実際の施設位置から確認します。",
+    "lead": "カイセリ空港（ASR）からオルタヒサルまでは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約75 km、所要時間は60–75分です。オルタヒサル中心部では一部の宿泊施設周辺の道が細くなるため、最後の車両アクセスは町名だけでなく実際の施設位置から確認します。",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1016,7 +1017,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からオルタヒサルへのシャトル|nevsehir-airport-to-ortahisar-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からオルタヒサルへのシャトル|nevsehir-airport-to-ortahisar-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -1038,15 +1039,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港からオルタヒサルへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "カイセリ空港（ASR）からオルタヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。"
+    "twitterDescription": "カイセリ空港（ASR）からオルタヒサル：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分、ホテル送迎・予約情報。"
   },
   {
     "slug": "kayseri-airport-to-cavusin-shuttle",
     "title": "カイセリ空港からチャウシンへのシャトル | 乗合・プライベート送迎",
-    "description": "カイセリ空港（ASR）からチャウシン：1名€15の乗合シャトル、プライベートVito/Sprinter、75 km、65–80分、ホテル送迎・予約情報。",
+    "description": "カイセリ空港（ASR）からチャウシン：乗合シャトルまたはプライベートVito/Sprinter、75 km、65–80分、ホテル送迎・予約情報。",
     "eyebrow": "ASR → チャウシン 空港シャトル",
     "h1": "カイセリ空港からチャウシンへのシャトル",
-    "lead": "カイセリ空港（ASR）からチャウシンまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約75 km、所要時間は65–80分です。チャウシンの宿泊施設は幹線道路沿いから古い丘の道まで分かれているため、実際の停車場所はホテルの正確な位置によって変わります。",
+    "lead": "カイセリ空港（ASR）からチャウシンまでは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約75 km、所要時間は65–80分です。チャウシンの宿泊施設は幹線道路沿いから古い丘の道まで分かれているため、実際の停車場所はホテルの正確な位置によって変わります。",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1068,7 +1069,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からチャウシンへのシャトル|nevsehir-airport-to-cavusin-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からチャウシンへのシャトル|nevsehir-airport-to-cavusin-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -1090,15 +1091,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港からチャウシンへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "カイセリ空港（ASR）からチャウシン：1名€15の乗合シャトル、プライベートVito/Sprinter、75 km、65–80分、ホテル送迎・予約情報。"
+    "twitterDescription": "カイセリ空港（ASR）からチャウシン：乗合シャトルまたはプライベートVito/Sprinter、75 km、65–80分、ホテル送迎・予約情報。"
   },
   {
     "slug": "nevsehir-airport-to-goreme-shuttle",
     "title": "ネヴシェヒル空港からギョレメへのシャトル | 乗合・プライベート送迎",
-    "description": "ネヴシェヒル空港（NAV）からギョレメ：1名€15の乗合シャトル、プライベートVito/Sprinter、40 km、35–45分、ホテル送迎・予約情報。",
+    "description": "ネヴシェヒル空港（NAV）からギョレメ：乗合シャトルまたはプライベートVito/Sprinter、40 km、35–45分、ホテル送迎・予約情報。",
     "eyebrow": "NAV → ギョレメ 空港シャトル",
     "h1": "ネヴシェヒル空港からギョレメへのシャトル",
-    "lead": "ネヴシェヒル空港（NAV）からギョレメまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約40 km、所要時間は35–45分です。ギョレメの洞窟ホテル周辺は道が狭く、車両が停車できる最寄りの降車場所に影響することがあるため、宿泊施設の正式名称が重要です。",
+    "lead": "ネヴシェヒル空港（NAV）からギョレメまでは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約40 km、所要時間は35–45分です。ギョレメの洞窟ホテル周辺は道が狭く、車両が停車できる最寄りの降車場所に影響することがあるため、宿泊施設の正式名称が重要です。",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1121,7 +1122,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1136,7 +1137,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1148,15 +1149,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ネヴシェヒル空港からギョレメへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からギョレメ：1名€15の乗合シャトル、プライベートVito/Sprinter、40 km、35–45分、ホテル送迎・予約情報。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からギョレメ：乗合シャトルまたはプライベートVito/Sprinter、40 km、35–45分、ホテル送迎・予約情報。"
   },
   {
     "slug": "nevsehir-airport-to-urgup-shuttle",
     "title": "ネヴシェヒル空港からユルギュップへのシャトル | 乗合・プライベート送迎",
-    "description": "ネヴシェヒル空港（NAV）からユルギュップ：1名€15の乗合シャトル、プライベートVito/Sprinter、50 km、45–60分、ホテル送迎・予約情報。",
+    "description": "ネヴシェヒル空港（NAV）からユルギュップ：乗合シャトルまたはプライベートVito/Sprinter、50 km、45–60分、ホテル送迎・予約情報。",
     "eyebrow": "NAV → ユルギュップ 空港シャトル",
     "h1": "ネヴシェヒル空港からユルギュップへのシャトル",
-    "lead": "ネヴシェヒル空港（NAV）からユルギュップまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約50 km、所要時間は45–60分です。ユルギュップ中心部は比較的アクセスしやすい一方、丘側の石造り・洞窟ホテルではホテルまでのアクセス方法が異なる場合があります。",
+    "lead": "ネヴシェヒル空港（NAV）からユルギュップまでは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約50 km、所要時間は45–60分です。ユルギュップ中心部は比較的アクセスしやすい一方、丘側の石造り・洞窟ホテルではホテルまでのアクセス方法が異なる場合があります。",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1172,7 +1173,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "料金重視なら乗合、専用車を希望するならプライベート送迎",
         "paragraphs": [
-          "1〜2名なら乗合シャトルで費用を抑えやすくなります。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで片道€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧いただくか、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]でサービスを比較してください。"
+          "1〜2名なら乗合シャトルで費用を抑えやすくなります。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧いただくか、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]でサービスを比較してください。"
         ]
       }
     ],
@@ -1183,7 +1184,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1195,15 +1196,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ネヴシェヒル空港からユルギュップへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からユルギュップ：1名€15の乗合シャトル、プライベートVito/Sprinter、50 km、45–60分、ホテル送迎・予約情報。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からユルギュップ：乗合シャトルまたはプライベートVito/Sprinter、50 km、45–60分、ホテル送迎・予約情報。"
   },
   {
     "slug": "nevsehir-airport-to-uchisar-shuttle",
     "title": "ネヴシェヒル空港からウチヒサルへのシャトル | 乗合・プライベート送迎",
-    "description": "ネヴシェヒル空港（NAV）からウチヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、35 km、30–40分、ホテル送迎・予約情報。",
+    "description": "ネヴシェヒル空港（NAV）からウチヒサル：乗合シャトルまたはプライベートVito/Sprinter、35 km、30–40分、ホテル送迎・予約情報。",
     "eyebrow": "NAV → ウチヒサル 空港シャトル",
     "h1": "ネヴシェヒル空港からウチヒサルへのシャトル",
-    "lead": "ネヴシェヒル空港（NAV）からウチヒサルまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約35 km、所要時間は30–40分です。ウチヒサルの丘道は急坂や細い道があるため、ホテルまでの最後のアクセスは実際の施設と車両アクセス状況によって変わります。",
+    "lead": "ネヴシェヒル空港（NAV）からウチヒサルまでは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約35 km、所要時間は30–40分です。ウチヒサルの丘道は急坂や細い道があるため、ホテルまでの最後のアクセスは実際の施設と車両アクセス状況によって変わります。",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1226,7 +1227,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1237,7 +1238,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1249,15 +1250,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ネヴシェヒル空港からウチヒサルへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からウチヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、35 km、30–40分、ホテル送迎・予約情報。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からウチヒサル：乗合シャトルまたはプライベートVito/Sprinter、35 km、30–40分、ホテル送迎・予約情報。"
   },
   {
     "slug": "nevsehir-airport-to-avanos-shuttle",
     "title": "ネヴシェヒル空港からアヴァノスへのシャトル | 乗合・プライベート送迎",
-    "description": "ネヴシェヒル空港（NAV）からアヴァノス：1名€15の乗合シャトル、プライベートVito/Sprinter、38 km、35–50分、ホテル送迎・予約情報。",
+    "description": "ネヴシェヒル空港（NAV）からアヴァノス：乗合シャトルまたはプライベートVito/Sprinter、38 km、35–50分、ホテル送迎・予約情報。",
     "eyebrow": "NAV → アヴァノス 空港シャトル",
     "h1": "ネヴシェヒル空港からアヴァノスへのシャトル",
-    "lead": "ネヴシェヒル空港（NAV）からアヴァノスまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約38 km、所要時間は35–50分です。アヴァノスの宿泊施設は川周辺の広い地域に分散しているため、正しい最終降車場所を特定するにはホテルの正式名称が重要です。",
+    "lead": "ネヴシェヒル空港（NAV）からアヴァノスまでは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約38 km、所要時間は35–50分です。アヴァノスの宿泊施設は川周辺の広い地域に分散しているため、正しい最終降車場所を特定するにはホテルの正式名称が重要です。",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1273,7 +1274,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1284,7 +1285,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1296,15 +1297,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ネヴシェヒル空港からアヴァノスへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からアヴァノス：1名€15の乗合シャトル、プライベートVito/Sprinter、38 km、35–50分、ホテル送迎・予約情報。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からアヴァノス：乗合シャトルまたはプライベートVito/Sprinter、38 km、35–50分、ホテル送迎・予約情報。"
   },
   {
     "slug": "nevsehir-airport-to-ortahisar-shuttle",
     "title": "ネヴシェヒル空港からオルタヒサルへのシャトル | 乗合・プライベート送迎",
-    "description": "ネヴシェヒル空港（NAV）からオルタヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、45 km、40–50分、ホテル送迎・予約情報。",
+    "description": "ネヴシェヒル空港（NAV）からオルタヒサル：乗合シャトルまたはプライベートVito/Sprinter、45 km、40–50分、ホテル送迎・予約情報。",
     "eyebrow": "NAV → オルタヒサル 空港シャトル",
     "h1": "ネヴシェヒル空港からオルタヒサルへのシャトル",
-    "lead": "ネヴシェヒル空港（NAV）からオルタヒサルまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約45 km、所要時間は40–50分です。オルタヒサル中心部では一部の宿泊施設周辺の道が細くなるため、最後の車両アクセスは町名だけでなく実際の施設位置から確認します。",
+    "lead": "ネヴシェヒル空港（NAV）からオルタヒサルまでは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約45 km、所要時間は40–50分です。オルタヒサル中心部では一部の宿泊施設周辺の道が細くなるため、最後の車両アクセスは町名だけでなく実際の施設位置から確認します。",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1327,7 +1328,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1338,7 +1339,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1350,15 +1351,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ネヴシェヒル空港からオルタヒサルへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からオルタヒサル：1名€15の乗合シャトル、プライベートVito/Sprinter、45 km、40–50分、ホテル送迎・予約情報。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からオルタヒサル：乗合シャトルまたはプライベートVito/Sprinter、45 km、40–50分、ホテル送迎・予約情報。"
   },
   {
     "slug": "nevsehir-airport-to-cavusin-shuttle",
     "title": "ネヴシェヒル空港からチャウシンへのシャトル | 乗合・プライベート送迎",
-    "description": "ネヴシェヒル空港（NAV）からチャウシン：1名€15の乗合シャトル、プライベートVito/Sprinter、42 km、40–55分、ホテル送迎・予約情報。",
+    "description": "ネヴシェヒル空港（NAV）からチャウシン：乗合シャトルまたはプライベートVito/Sprinter、42 km、40–55分、ホテル送迎・予約情報。",
     "eyebrow": "NAV → チャウシン 空港シャトル",
     "h1": "ネヴシェヒル空港からチャウシンへのシャトル",
-    "lead": "ネヴシェヒル空港（NAV）からチャウシンまでは、1名片道€15の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約42 km、所要時間は40–55分です。チャウシンの宿泊施設は幹線道路、旧村、谷側のエリアに分かれているため、実際の停車場所はホテルの正確な位置によって変わります。",
+    "lead": "ネヴシェヒル空港（NAV）からチャウシンまでは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトル、またはプライベートVito/Sprinterをご利用いただけます。一般的な道路距離は約42 km、所要時間は40–55分です。チャウシンの宿泊施設は幹線道路、旧村、谷側のエリアに分かれているため、実際の停車場所はホテルの正確な位置によって変わります。",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -1380,13 +1381,13 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "フライトが便利ならASRも選択肢です",
         "paragraphs": [
-          "より長いルートは[[カイセリ空港からチャウシンへのシャトル|kayseri-airport-to-cavusin-shuttle]]です。乗合料金はどちらの空港からでも同じなので、最短距離よりフライトの使いやすさを優先した方がよい場合もあります。"
+          "より長いルートは[[カイセリ空港からチャウシンへのシャトル|kayseri-airport-to-cavusin-shuttle]]です。空港別の現在の乗合料金、フライトの使いやすさ、道路距離を合わせて比較してください。"
         ]
       },
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1397,7 +1398,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1409,15 +1410,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ネヴシェヒル空港からチャウシンへのシャトル | 乗合・プライベート送迎",
-    "twitterDescription": "ネヴシェヒル空港（NAV）からチャウシン：1名€15の乗合シャトル、プライベートVito/Sprinter、42 km、40–55分、ホテル送迎・予約情報。"
+    "twitterDescription": "ネヴシェヒル空港（NAV）からチャウシン：乗合シャトルまたはプライベートVito/Sprinter、42 km、40–55分、ホテル送迎・予約情報。"
   },
   {
     "slug": "goreme-to-kayseri-airport-shuttle",
     "title": "ギョレメからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "ギョレメからカイセリ空港（ASR）：1名€15のシャトル、75 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "ギョレメからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "ギョレメ → ASR 空港シャトル",
     "h1": "ギョレメからカイセリ空港へのシャトル",
-    "lead": "ギョレメからカイセリ空港（ASR）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約75 km、所要時間は60–75分です。ギョレメの洞窟ホテルや丘道では、車両が幹線道路へ出る前に現地ピックアップ時間が加わることがあります。確定したお迎え時刻には、ほかのホテルでの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "ギョレメからカイセリ空港（ASR）へのホテルピックアップは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約75 km、所要時間は60–75分です。ギョレメの洞窟ホテルや丘道では、車両が幹線道路へ出る前に現地ピックアップ時間が加わることがあります。確定したお迎え時刻には、ほかのホテルでの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -1440,7 +1441,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1451,7 +1452,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1463,15 +1464,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ギョレメからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ギョレメからカイセリ空港（ASR）：1名€15のシャトル、75 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "ギョレメからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "urgup-to-kayseri-airport-shuttle",
     "title": "ユルギュップからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "ユルギュップからカイセリ空港（ASR）：1名€15のシャトル、70 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "ユルギュップからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "ユルギュップ → ASR 空港シャトル",
     "h1": "ユルギュップからカイセリ空港へのシャトル",
-    "lead": "ユルギュップからカイセリ空港（ASR）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約70 km、所要時間は60–75分です。ユルギュップの宿泊施設は中心部と丘側に分かれているため、空港へ向かう前の確定したピックアップ場所が重要です。お迎え時刻にはほかのホテルでの乗合ピックアップと空港到着の余裕時間も反映されています。",
+    "lead": "ユルギュップからカイセリ空港（ASR）へのホテルピックアップは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約70 km、所要時間は60–75分です。ユルギュップの宿泊施設は中心部と丘側に分かれているため、空港へ向かう前の確定したピックアップ場所が重要です。お迎え時刻にはほかのホテルでの乗合ピックアップと空港到着の余裕時間も反映されています。",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -1500,7 +1501,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1511,7 +1512,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1522,15 +1523,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ユルギュップからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ユルギュップからカイセリ空港（ASR）：1名€15のシャトル、70 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "ユルギュップからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "uchisar-to-kayseri-airport-shuttle",
     "title": "ウチヒサルからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "ウチヒサルからカイセリ空港（ASR）：1名€15のシャトル、80 km、70–85分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "ウチヒサルからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、80 km、70–85分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "ウチヒサル → ASR 空港シャトル",
     "h1": "ウチヒサルからカイセリ空港へのシャトル",
-    "lead": "ウチヒサルからカイセリ空港（ASR）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約80 km、所要時間は70–85分です。ウチヒサル上部の急で細い道では、すべてのホテル入口まで車両が直接行けず、車両が停車できるピックアップ場所が必要になることがあります。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "ウチヒサルからカイセリ空港（ASR）へのホテルピックアップは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約80 km、所要時間は70–85分です。ウチヒサル上部の急で細い道では、すべてのホテル入口まで車両が直接行けず、車両が停車できるピックアップ場所が必要になることがあります。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -1553,7 +1554,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1568,7 +1569,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1579,15 +1580,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ウチヒサルからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ウチヒサルからカイセリ空港（ASR）：1名€15のシャトル、80 km、70–85分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "ウチヒサルからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、80 km、70–85分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "avanos-to-kayseri-airport-shuttle",
     "title": "アヴァノスからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "アヴァノスからカイセリ空港（ASR）：1名€15のシャトル、70 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "アヴァノスからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "アヴァノス → ASR 空港シャトル",
     "h1": "アヴァノスからカイセリ空港へのシャトル",
-    "lead": "アヴァノスからカイセリ空港（ASR）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約70 km、所要時間は60–75分です。アヴァノスの宿泊施設は町の複数エリアに広く分散しているため、ホテルの正式名称が正しいピックアップ場所を確認するのに重要です。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "アヴァノスからカイセリ空港（ASR）へのホテルピックアップは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約70 km、所要時間は60–75分です。アヴァノスの宿泊施設は町の複数エリアに広く分散しているため、ホテルの正式名称が正しいピックアップ場所を確認するのに重要です。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -1605,7 +1606,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1616,7 +1617,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1627,15 +1628,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "アヴァノスからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "アヴァノスからカイセリ空港（ASR）：1名€15のシャトル、70 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "アヴァノスからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、70 km、60–75分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "ortahisar-to-kayseri-airport-shuttle",
     "title": "オルタヒサルからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "オルタヒサルからカイセリ空港（ASR）：1名€15のシャトル、75 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "オルタヒサルからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "オルタヒサル → ASR 空港シャトル",
     "h1": "オルタヒサルからカイセリ空港へのシャトル",
-    "lead": "オルタヒサルからカイセリ空港（ASR）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約75 km、所要時間は60–75分です。古い村の細い道がピックアップ開始時の数分に影響することがあるため、確定した集合場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "オルタヒサルからカイセリ空港（ASR）へのホテルピックアップは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約75 km、所要時間は60–75分です。古い村の細い道がピックアップ開始時の数分に影響することがあるため、確定した集合場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1658,7 +1659,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1669,7 +1670,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1680,15 +1681,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "オルタヒサルからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "オルタヒサルからカイセリ空港（ASR）：1名€15のシャトル、75 km、60–75分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "オルタヒサルからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、75 km、60–75分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "cavusin-to-kayseri-airport-shuttle",
     "title": "チャウシンからカイセリ空港へのシャトル | ホテルお迎え",
-    "description": "チャウシンからカイセリ空港（ASR）：1名€15のシャトル、75 km、65–80分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "チャウシンからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、75 km、65–80分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "チャウシン → ASR 空港シャトル",
     "h1": "チャウシンからカイセリ空港へのシャトル",
-    "lead": "チャウシンからカイセリ空港（ASR）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約75 km、所要時間は65–80分です。チャウシンの宿泊施設は幹線道路、旧村、谷側に分かれているため、確定したピックアップ場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "チャウシンからカイセリ空港（ASR）へのホテルピックアップは、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約75 km、所要時間は65–80分です。チャウシンの宿泊施設は幹線道路、旧村、谷側に分かれているため、確定したピックアップ場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1717,7 +1718,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€90、Sprinterは最大16名まで€110です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1728,7 +1729,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€90、Sprinterは最大16名まで€110で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1739,15 +1740,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "チャウシンからカイセリ空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "チャウシンからカイセリ空港（ASR）：1名€15のシャトル、75 km、65–80分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "チャウシンからカイセリ空港（ASR）：乗合シャトルまたはプライベートVito/Sprinter、75 km、65–80分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "goreme-to-nevsehir-airport-shuttle",
     "title": "ギョレメからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "ギョレメからネヴシェヒル空港（NAV）：1名€15のシャトル、40 km、35–45分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "ギョレメからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、40 km、35–45分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "ギョレメ → NAV 空港シャトル",
     "h1": "ギョレメからネヴシェヒル空港へのシャトル",
-    "lead": "ギョレメからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約40 km、所要時間は35–45分です。ギョレメの洞窟ホテルや丘道では、車両が幹線道路へ出る前に現地ピックアップ時間が加わることがあります。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "ギョレメからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約40 km、所要時間は35–45分です。ギョレメの洞窟ホテルや丘道では、車両が幹線道路へ出る前に現地ピックアップ時間が加わることがあります。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1770,7 +1771,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1781,7 +1782,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1793,15 +1794,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ギョレメからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ギョレメからネヴシェヒル空港（NAV）：1名€15のシャトル、40 km、35–45分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "ギョレメからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、40 km、35–45分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "urgup-to-nevsehir-airport-shuttle",
     "title": "ユルギュップからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "ユルギュップからネヴシェヒル空港（NAV）：1名€15のシャトル、50 km、45–60分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "ユルギュップからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、50 km、45–60分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "ユルギュップ → NAV 空港シャトル",
     "h1": "ユルギュップからネヴシェヒル空港へのシャトル",
-    "lead": "ユルギュップからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約50 km、所要時間は45–60分です。ユルギュップの宿泊施設は中心部と丘側に分かれているため、空港へ向かう前の確定ピックアップ場所が重要です。お迎え時刻にはほかのホテルでの乗合ピックアップと空港到着の余裕時間も反映されています。",
+    "lead": "ユルギュップからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約50 km、所要時間は45–60分です。ユルギュップの宿泊施設は中心部と丘側に分かれているため、空港へ向かう前の確定ピックアップ場所が重要です。お迎え時刻にはほかのホテルでの乗合ピックアップと空港到着の余裕時間も反映されています。",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1824,7 +1825,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1835,7 +1836,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1847,15 +1848,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ユルギュップからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ユルギュップからネヴシェヒル空港（NAV）：1名€15のシャトル、50 km、45–60分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "ユルギュップからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、50 km、45–60分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "uchisar-to-nevsehir-airport-shuttle",
     "title": "ウチヒサルからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "ウチヒサルからネヴシェヒル空港（NAV）：1名€15のシャトル、35 km、30–40分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "ウチヒサルからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、35 km、30–40分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "ウチヒサル → NAV 空港シャトル",
     "h1": "ウチヒサルからネヴシェヒル空港へのシャトル",
-    "lead": "ウチヒサルからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約35 km、所要時間は30–40分です。ウチヒサル上部の急で細い道では、すべてのホテル入口まで車両が直接行けず、車両が停車できるピックアップ場所が必要になることがあります。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "ウチヒサルからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約35 km、所要時間は30–40分です。ウチヒサル上部の急で細い道では、すべてのホテル入口まで車両が直接行けず、車両が停車できるピックアップ場所が必要になることがあります。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1878,7 +1879,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1893,7 +1894,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1905,15 +1906,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "ウチヒサルからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "ウチヒサルからネヴシェヒル空港（NAV）：1名€15のシャトル、35 km、30–40分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "ウチヒサルからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、35 km、30–40分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "avanos-to-nevsehir-airport-shuttle",
     "title": "アヴァノスからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "アヴァノスからネヴシェヒル空港（NAV）：1名€15のシャトル、38 km、35–50分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "アヴァノスからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、38 km、35–50分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "アヴァノス → NAV 空港シャトル",
     "h1": "アヴァノスからネヴシェヒル空港へのシャトル",
-    "lead": "アヴァノスからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約38 km、所要時間は35–50分です。アヴァノスの宿泊施設は町の複数エリアに広く分散しているため、ホテルの正式名称が正しいピックアップ場所を確認するのに重要です。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "アヴァノスからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約38 km、所要時間は35–50分です。アヴァノスの宿泊施設は町の複数エリアに広く分散しているため、ホテルの正式名称が正しいピックアップ場所を確認するのに重要です。確定したお迎え時刻には、ほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1930,7 +1931,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1941,7 +1942,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -1953,15 +1954,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "アヴァノスからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "アヴァノスからネヴシェヒル空港（NAV）：1名€15のシャトル、38 km、35–50分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "アヴァノスからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、38 km、35–50分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "ortahisar-to-nevsehir-airport-shuttle",
     "title": "オルタヒサルからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "オルタヒサルからネヴシェヒル空港（NAV）：1名€15のシャトル、45 km、40–50分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "オルタヒサルからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、45 km、40–50分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "オルタヒサル → NAV 空港シャトル",
     "h1": "オルタヒサルからネヴシェヒル空港へのシャトル",
-    "lead": "オルタヒサルからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約45 km、所要時間は40–50分です。古い村の細い道がピックアップ開始時の数分に影響することがあるため、確定した集合場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
+    "lead": "オルタヒサルからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約45 km、所要時間は40–50分です。古い村の細い道がピックアップ開始時の数分に影響することがあるため、確定した集合場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も含まれています。",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1984,7 +1985,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1995,7 +1996,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -2007,15 +2008,15 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "オルタヒサルからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "オルタヒサルからネヴシェヒル空港（NAV）：1名€15のシャトル、45 km、40–50分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "オルタヒサルからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、45 km、40–50分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "cavusin-to-nevsehir-airport-shuttle",
     "title": "チャウシンからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "description": "チャウシンからネヴシェヒル空港（NAV）：1名€15のシャトル、42 km、40–55分、ホテルお迎え、プライベートVito/Sprinter。",
+    "description": "チャウシンからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、42 km、40–55分。ホテルお迎え・予約情報を案内。",
     "eyebrow": "チャウシン → NAV 空港シャトル",
     "h1": "チャウシンからネヴシェヒル空港へのシャトル",
-    "lead": "チャウシンからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道€15の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約42 km、所要時間は40–55分です。チャウシンの宿泊施設は幹線道路、旧村、谷側のエリアに分かれているため、確定したピックアップ場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も反映されています。",
+    "lead": "チャウシンからネヴシェヒル空港（NAV）へのホテルピックアップは、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルまたはプライベートVito/Sprinterで予約できます。一般的な道路距離は約42 km、所要時間は40–55分です。チャウシンの宿泊施設は幹線道路、旧村、谷側のエリアに分かれているため、確定したピックアップ場所が重要です。お迎え時刻にはほかのホテルの乗合ピックアップと空港到着の余裕時間も反映されています。",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -2038,7 +2039,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道€80、Sprinterは最大16名まで€90です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -2053,7 +2054,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルではなく、このルートでプライベート車両を予約できますか？",
-        "a": "はい。プライベートVitoは最大5名まで片道€80、Sprinterは最大16名まで€90で、いずれも1台あたりの料金です。"
+        "a": "はい。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}で、いずれも1台あたりの料金です。"
       }
     ],
     "related": [
@@ -2065,12 +2066,12 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "チャウシンからネヴシェヒル空港へのシャトル | ホテルお迎え",
-    "twitterDescription": "チャウシンからネヴシェヒル空港（NAV）：1名€15のシャトル、42 km、40–55分、ホテルお迎え、プライベートVito/Sprinter。"
+    "twitterDescription": "チャウシンからネヴシェヒル空港（NAV）：乗合シャトルまたはプライベートVito/Sprinter、42 km、40–55分。ホテルお迎え・予約情報を案内。"
   },
   {
     "slug": "cappadocia-airport",
     "title": "カッパドキア空港ガイド | NAV・ASR・ホテルシャトル",
-    "description": "カッパドキア空港ガイド。ネヴシェヒル・カッパドキア空港（NAV）、カイセリ空港（ASR）、ギョレメ送迎、1名€15のシャトル、プライベート送迎を解説。",
+    "description": "カッパドキア空港ガイド。ネヴシェヒル・カッパドキア空港（NAV）、カイセリ空港（ASR）、ギョレメ送迎、乗合シャトルとプライベート送迎を解説。",
     "eyebrow": "空港選びガイド",
     "h1": "カッパドキア空港：NAV・ASRとホテル送迎",
     "lead": "「カッパドキア空港」という言い方はネヴシェヒル・カッパドキア空港（NAV）を指すことがありますが、カイセリ空港（ASR）もカッパドキア旅行で広く利用されています。予約では航空券に記載された空港コードを使うのが確実です。",
@@ -2086,14 +2087,14 @@ export const jaPages: JaSeoPage[] = [
         "heading": "ネヴシェヒル・カッパドキア空港（NAV）",
         "paragraphs": [
           "NAVは一般的にカッパドキア中心部への道路移動が短い空港です。乗合シャトルの立ち寄り前の目安で、ギョレメは約**40 km / 35–45分**、ウチヒサル35 km / 30–40分、アヴァノス38 km / 35–50分、チャウシン42 km / 40–55分、オルタヒサル45 km / 40–50分、ユルギュップ50 km / 45–60分です。",
-          "[[ネヴシェヒル空港シャトル|nevsehir-airport-shuttle]]は**1名片道€15**。プライベート片道はVitoが最大5名で€80、Sprinterが最大16名で€90です。"
+          "[[ネヴシェヒル空港シャトル|nevsehir-airport-shuttle]]は**1名片道{{PRICE:nevsehir:shuttle}}**。プライベート片道はVitoが最大5名で{{PRICE:nevsehir:vito}}、Sprinterが最大16名で{{PRICE:nevsehir:sprinter}}です。"
         ]
       },
       {
         "heading": "カイセリ空港（ASR）",
         "paragraphs": [
           "ASRは道路距離では遠めですが、フライト時間や便数によって旅行全体では便利になるため、カッパドキア旅行で広く利用されています。ギョレメは約**75 km / 60–75分**で、ほかの対象地域も乗合の立ち寄り前でおおむね70–80 km圏です。",
-          "[[カイセリ空港シャトル|kayseri-airport-shuttle]]も**1名片道€15**です。プライベート片道はVito €90、Sprinter €110。乗合料金が同じなので、カイセリを選んでも乗合シャトル料金が高くなることはありません。"
+          "[[カイセリ空港シャトル|kayseri-airport-shuttle]]は**1名片道{{PRICE:kayseri:shuttle}}**です。プライベート片道はVito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。ASRの現在料金とフライト時間、道路距離を合わせて比較してください。"
         ]
       },
       {
@@ -2105,7 +2106,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "空港からホテルへ：乗合シャトルまたはプライベート車両",
         "paragraphs": [
-          "1名€15の乗合シャトルは、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンへの基本サービスです。乗合のため、ほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車を希望する場合はVitoまたはSprinterを選択でき、料金は1名あたりではなく1台あたりです。",
+          "乗合シャトルは、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンへの基本的で料金を抑えやすいサービスです。現在の片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。乗合のため、ほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車を希望する場合はVitoまたはSprinterを選択でき、料金は1名あたりではなく1台あたりです。",
           "予約フォームでは空港、移動方向、フライト情報、ホテル、WhatsApp連絡先、氏名・パスポート番号を含む乗客情報を入力します。予約確認後、支払いはドライバーへ現金で行います。"
         ]
       },
@@ -2137,7 +2138,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "NAVまたはASRからの空港シャトルはいくらですか？",
-        "a": "どちらの空港からも対象ホテルエリアまで1名片道€15です。"
+        "a": "対象ホテルエリアへは、カイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "NAV Airportとは何ですか？",
@@ -2153,7 +2154,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "NAVで到着しASRから出発できますか？",
-        "a": "はい。ただしルートとプライベート料金が異なるため、2つの空港区間としてそれぞれ確認が必要です。"
+        "a": "はい。ただしルートとプライベート料金は空港別に確認する必要があるため、2つの空港区間としてそれぞれ確認が必要です。"
       }
     ],
     "related": [
@@ -2183,7 +2184,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "近い空港が必ずしも最適とは限りません",
         "paragraphs": [
-          "送迎が短いのは便利ですが、フライト時間が悪かったり乗り継ぎが高額だったりすれば、その利点は小さくなります。最後の道路距離だけでなく出発地からの全旅程を比較してください。乗合シャトルはどちらの空港からも1名€15なので、ASRを選んでも乗合料金の追加負担はありません。"
+          "送迎が短いのは便利ですが、フライト時間が悪かったり乗り継ぎが高額だったりすれば、その利点は小さくなります。最後の道路距離だけでなく出発地からの全旅程を比較してください。乗合シャトルはASR {{PRICE:kayseri:shuttle}}、NAV {{PRICE:nevsehir:shuttle}}なので、空港別の現在料金も確認してください。"
         ]
       },
       {
@@ -2211,9 +2212,9 @@ export const jaPages: JaSeoPage[] = [
         ]
       },
       {
-        "heading": "プライベート料金はNAVが低く、乗合料金は同じ",
+        "heading": "プライベート料金も乗合料金も空港別に確認",
         "paragraphs": [
-          "乗合シャトルは両空港とも1名€15です。プライベート送迎はNAVがVito/Sprinter €80/€90、ASRが€90/€110です。専用車を選ぶグループでは、この差がより重要になります。"
+          "乗合シャトルはNAVが1名{{PRICE:nevsehir:shuttle}}、ASRが{{PRICE:kayseri:shuttle}}です。プライベート送迎はNAVがVito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}、ASRが{{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。利用空港の現在料金を比較してください。"
         ]
       }
     ],
@@ -2232,11 +2233,11 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトル料金は空港で変わりますか？",
-        "a": "いいえ。NAV、ASRどちらからでも1名片道€15です。"
+        "a": "現在はNAVが1名片道{{PRICE:nevsehir:shuttle}}、ASRが{{PRICE:kayseri:shuttle}}です。"
       },
       {
-        "q": "プライベート送迎はどちらの空港が安いですか？",
-        "a": "NAVです。Vito €80、Sprinter €90で、ASRは€90/€110です。"
+        "q": "2つの空港でプライベート送迎料金はどう違いますか？",
+        "a": "現在の片道車両料金は、NAVがVito {{PRICE:nevsehir:vito}}・Sprinter {{PRICE:nevsehir:sprinter}}、ASRがVito {{PRICE:kayseri:vito}}・Sprinter {{PRICE:kayseri:sprinter}}です。"
       },
       {
         "q": "どちらの空港からも同じホテルエリアへ行けますか？",
@@ -2250,12 +2251,12 @@ export const jaPages: JaSeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "カッパドキアに最も近い空港 | NAV vs ASR",
-    "twitterDescription": "カッパドキアに近い空港を比較。ネヴシェヒルNAVとカイセリASRの距離、送迎時間、1名€15のシャトル料金。"
+    "twitterDescription": "カッパドキアに最も近い空港は？ネヴシェヒルNAVとカイセリASRの距離、送迎時間、ギョレメなどへのシャトル料金を比較。"
   },
   {
     "slug": "kayseri-or-nevsehir-airport-for-cappadocia",
     "title": "カッパドキアはカイセリ空港？ネヴシェヒル空港？",
-    "description": "カッパドキア旅行でカイセリASRとネヴシェヒルNAVを比較。ホテルまでの距離、所要時間、1名€15シャトル、プライベート料金。",
+    "description": "カッパドキア旅行でカイセリASRとネヴシェヒルNAVを比較。ホテルまでの距離、所要時間、フライトの利便性、シャトルとプライベート送迎の現在料金を確認。",
     "eyebrow": "空港比較",
     "h1": "カッパドキアはカイセリ空港とネヴシェヒル空港のどちら？",
     "lead": "道路距離ではネヴシェヒル（NAV）が多くの中心ホテルに近く、カイセリ（ASR）はより多い・便利なフライトが見つかる場合があります。ホテル所在地、航空券、送迎条件を一緒に比較しましょう。",
@@ -2273,9 +2274,9 @@ export const jaPages: JaSeoPage[] = [
         ]
       },
       {
-        "heading": "乗合シャトル料金は同じ",
+        "heading": "乗合シャトル料金は空港別",
         "paragraphs": [
-          "乗合シャトルはどちらの空港からも1名€15なので、空港比較で乗合料金の差はありません。プライベート送迎は異なり、カイセリはVito/Sprinter €90/€110、ネヴシェヒルは€80/€90です。"
+          "乗合シャトルはカイセリが1名{{PRICE:kayseri:shuttle}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle}}です。プライベート送迎料金も空港別に管理しており、カイセリはVito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}、ネヴシェヒルは{{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}です。"
         ]
       },
       {
@@ -2293,7 +2294,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "安い・時間の良い便なら道路距離の差を上回ることも",
         "paragraphs": [
-          "道路で25〜35分短くても、近い空港の乗り継ぎが悪かったり出発時刻が不便だったりすれば、そのメリットは小さくなります。乗合料金は両空港で同じなので、「近い空港が自動的に安い」と考えず、旅程全体で比較できます。"
+          "道路で25〜35分短くても、近い空港の乗り継ぎが悪かったり出発時刻が不便だったりすれば、そのメリットは小さくなります。空港別の現在の乗合料金も確認し、「近い空港が自動的に安い」と考えず旅程全体で比較してください。"
         ]
       },
       {
@@ -2310,11 +2311,11 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルはどちらの空港が安いですか？",
-        "a": "差はありません。どちらも1名€15です。"
+        "a": "現在はネヴシェヒルが1名{{PRICE:nevsehir:shuttle}}、カイセリが{{PRICE:kayseri:shuttle}}です。"
       },
       {
-        "q": "プライベート送迎はどちらが安いですか？",
-        "a": "ネヴシェヒルです。Vito €80 / Sprinter €90、カイセリは€90 / €110です。"
+        "q": "2つの空港のプライベート送迎料金をどう比較すればよいですか？",
+        "a": "現在の片道車両料金は、ネヴシェヒルがVito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}、カイセリがVito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}です。"
       },
       {
         "q": "カイセリ空港もカッパドキア旅行に向いていますか？",
@@ -2332,20 +2333,20 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カイセリ空港とネヴシェヒル空港を比較 | カッパドキア",
-    "twitterDescription": "NAVとASRのホテル距離、送迎時間、1名€15の乗合シャトル、プライベートVito/Sprinter料金を比較。"
+    "twitterDescription": "カッパドキア旅行でカイセリASRとネヴシェヒルNAVを比較。ホテルまでの距離、所要時間、フライトの利便性、シャトルとプライベート送迎の現在料金を確認。"
   },
   {
     "slug": "cappadocia-shared-shuttle-vs-private-transfer",
     "title": "カッパドキア乗合シャトル vs プライベート送迎",
-    "description": "カッパドキアの1名€15乗合シャトルとプライベートVito/Sprinterを比較。料金、定員、ホテル停車、時間、対象エリア。",
+    "description": "カッパドキアの乗合シャトルとプライベートVito/Sprinterを比較。現在料金、定員、ホテル停車、所要時間、対象エリアを確認できます。",
     "eyebrow": "サービス比較",
     "h1": "カッパドキア乗合シャトル vs プライベート送迎",
-    "lead": "少人数で料金を抑えるなら1名€15の乗合シャトル、専用車と他ホテルへの立ち寄りなしを優先するならプライベートVitoまたはSprinterが向いています。",
+    "lead": "少人数で料金を抑えるなら乗合シャトルが向いています。片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。専用車と他ホテルへの立ち寄りなしを優先するなら、プライベートVitoまたはSprinterが適しています。",
     "sections": [
       {
         "heading": "乗合シャトル：料金重視に最適",
         "paragraphs": [
-          "1名片道€15なので、乗合シャトルは1人旅やカップルにとって、事前予約できる空港→ホテル送迎の中で通常もっとも低コストです。ほかの乗客と同乗し、複数のホテルに立ち寄る場合があります。"
+          "乗合シャトルの片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。1人旅やカップルにとって、事前予約できる空港→ホテル送迎の中で通常もっとも低コストの選択肢です。ほかの乗客と同乗し、複数のホテルに立ち寄る場合があります。"
         ]
       },
       {
@@ -2357,7 +2358,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "料金比較",
         "paragraphs": [
-          "カイセリのプライベート：Vito €90 / Sprinter €110。ネヴシェヒル：Vito €80 / Sprinter €90。乗合シャトル：どちらの空港からも1名€15。往復はすべて片道合計の2倍です。"
+          "カイセリ：乗合シャトル1名{{PRICE:kayseri:shuttle}}、Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。ネヴシェヒル：乗合シャトル1名{{PRICE:nevsehir:shuttle}}、Vito {{PRICE:nevsehir:vito}}、Sprinter {{PRICE:nevsehir:sprinter}}。往復は該当する片道合計の2倍です。"
         ]
       },
       {
@@ -2375,7 +2376,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "人数別に見ると選びやすい",
         "paragraphs": [
-          "1名なら乗合シャトルは€15なので、価格だけで見ればプライベートが有利になることはほとんどありません。6名なら片道乗合の合計は€90となり、特にネヴシェヒルではプライベート車両料金と重なる水準です。大人数では、見出し料金だけでなくSprinterの1台料金と乗合の人数合計を比較してください。"
+          "ネヴシェヒル（NAV）を例にすると、1名の乗合シャトルは{{PRICE:nevsehir:shuttle}}、6名の片道合計は{{PRICE:nevsehir:shuttle:x6}}です。人数が増えるとプライベート車両料金に近づく場合があります。大人数では、見出し料金だけでなくSprinterの1台料金と乗合の人数合計を比較してください。"
         ]
       },
       {
@@ -2394,7 +2395,7 @@ export const jaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "乗合シャトルとCappadocia shuttle transferは同じですか？",
-        "a": "はい。乗合という言葉は1名€15のサービスの運行方法を表しています。"
+        "a": "はい。「乗合」は運行方法を表しています。片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "どちらが速いですか？",
@@ -2402,7 +2403,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "1名ならどちらが安いですか？",
-        "a": "1名€15の乗合シャトルです。"
+        "a": "乗合シャトルです。片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "大人数にはどちらが向いていますか？",
@@ -2423,7 +2424,7 @@ export const jaPages: JaSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "カッパドキア乗合シャトル vs プライベート送迎",
-    "twitterDescription": "1名€15の乗合シャトルと、1台あたりのVito/Sprinterを料金、定員、停車、時間、対象エリアで比較。"
+    "twitterDescription": "カッパドキアの乗合シャトルとプライベートVito/Sprinterを比較。現在料金、定員、ホテル停車、所要時間、対象エリアを確認できます。"
   },
   {
     "slug": "cappadocia-cave-hotel-airport-transfer",
@@ -2466,7 +2467,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "乗合シャトルまたはプライベートVito",
         "paragraphs": [
-          "乗合シャトルは1名€15で、その日の乗客数に応じて大型車両を使うことがあります。プライベートVitoは一部の路地で便利な場合がありますが、入口前へのアクセスを保証するものではありません。最終地点は実際の道路状況と安全に停車できるかどうかで決まります。"
+          "乗合シャトルは空港別の1名料金で、ASRは{{PRICE:kayseri:shuttle}}、NAVは{{PRICE:nevsehir:shuttle}}です。その日の乗客数に応じて大型車両を使うことがあります。プライベートVitoは一部の路地で便利な場合がありますが、入口前へのアクセスを保証するものではありません。最終地点は実際の道路状況と安全に停車できるかどうかで決まります。"
         ]
       }
     ],
@@ -2504,7 +2505,7 @@ export const jaPages: JaSeoPage[] = [
   {
     "slug": "istanbul-to-cappadocia",
     "title": "イスタンブールからカッパドキア | フライト・空港シャトルガイド",
-    "description": "イスタンブールからカッパドキアへ。IST/SAWからカイセリASRまたはネヴシェヒルNAVへ飛び、1名€15の空港シャトルでホテルへ。",
+    "description": "イスタンブールからカッパドキアへ。IST/SAWからカイセリASRまたはネヴシェヒルNAVへ飛び、予約済みの空港シャトルでホテルへ移動します。",
     "eyebrow": "フライト＋空港送迎ガイド",
     "h1": "イスタンブールからカッパドキア：フライトと空港送迎",
     "lead": "多くの旅行者にとって、イスタンブールからカイセリ（ASR）またはネヴシェヒル（NAV）へ飛び、事前予約した空港シャトルでホテルまで移動するのが現実的です。",
@@ -2518,7 +2519,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "旅程全体を見てASRかNAVを選ぶ",
         "paragraphs": [
-          "NAVは多くのカッパドキアのホテルに道路距離で近く、ASRは道路移動が長くてもフライト時間や運賃が有利な場合があります。乗合シャトル料金は両空港とも€15なので、まずフライトを比較してください。"
+          "NAVは多くのカッパドキアのホテルに道路距離で近く、ASRは道路移動が長くてもフライト時間や運賃が有利な場合があります。乗合シャトルはNAV {{PRICE:nevsehir:shuttle}}、ASR {{PRICE:kayseri:shuttle}}なので、フライトと現在料金を合わせて比較してください。"
         ]
       },
       {
@@ -2567,7 +2568,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "到着後のシャトルはいくらですか？",
-        "a": "ASRまたはNAVから1名€15です。"
+        "a": "ASRは1名{{PRICE:kayseri:shuttle}}、NAVは{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "イスタンブール出発便の便名でシャトルを予約しますか？",
@@ -2591,7 +2592,7 @@ export const jaPages: JaSeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "イスタンブールからカッパドキア：フライト・空港送迎ガイド",
-    "twitterDescription": "イスタンブール（IST/SAW）からカイセリ（ASR）またはネヴシェヒル（NAV）へ飛び、対象ホテルへ1名€15のシャトル。"
+    "twitterDescription": "イスタンブールからカッパドキアへ。IST/SAWからカイセリASRまたはネヴシェヒルNAVへ飛び、予約済みの空港シャトルでホテルへ移動します。"
   },
   {
     "slug": "cappadocia-to-istanbul",
@@ -2610,7 +2611,7 @@ export const jaPages: JaSeoPage[] = [
       {
         "heading": "出発便に合わせてNAVまたはASRを選ぶ",
         "paragraphs": [
-          "NAVは一般的にギョレメ、ウチヒサルなど中心部に近く、ASRは遠いもののフライト時間や運賃が合う場合があります。ホテル→空港の乗合シャトルはどちらも**1名€15**、プライベートVito/SprinterはNAV €80/€90、ASR €90/€110です。",
+          "NAVは一般的にギョレメ、ウチヒサルなど中心部に近く、ASRは遠いもののフライト時間や運賃が合う場合があります。ホテル→空港の乗合シャトルは**NAV 1名{{PRICE:nevsehir:shuttle}}**、**ASR {{PRICE:kayseri:shuttle}}**、プライベートVito/SprinterはNAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}、ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。",
           "まだ出発空港を決めていない場合は、航空券予約前に[[カッパドキアに最も近い空港|nearest-airport-to-cappadocia]]と[[カイセリ空港とネヴシェヒル空港|kayseri-or-nevsehir-airport-for-cappadocia]]を比較してください。"
         ]
       },
@@ -2660,7 +2661,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "ホテルから空港までのシャトルはいくらですか？",
-        "a": "対象ホテルエリアからNAVまたはASRまで1名片道€15です。"
+        "a": "対象ホテルエリアからNAVまでは1名片道{{PRICE:nevsehir:shuttle}}、ASRまでは{{PRICE:kayseri:shuttle}}です。"
       },
       {
         "q": "イスタンブール便のためにプライベートのホテル送迎も予約できますか？",
@@ -2668,7 +2669,7 @@ export const jaPages: JaSeoPage[] = [
       },
       {
         "q": "到着した空港とは別の空港から出発できますか？",
-        "a": "はい。ただしルートとプライベート料金が異なるため、各空港区間を正しく確認してください。"
+        "a": "はい。ただしルートとプライベート料金は空港別に確認する必要があるため、各空港区間を正しく確認してください。"
       },
       {
         "q": "カッパドキアのシャトルフォームにイスタンブール側の空港コードを入れますか？",
@@ -2683,9 +2684,11 @@ export const jaPages: JaSeoPage[] = [
       "cappadocia-to-kayseri-airport-shuttle"
     ],
     "twitterTitle": "カッパドキアからイスタンブール：ホテルシャトル・フライト",
-    "twitterDescription": "対象ホテルからカイセリ（ASR）またはネヴシェヒル（NAV）へ1名€15から送迎し、イスタンブールへフライト。Vito/Sprinterも利用可能。"
+    "twitterDescription": "カッパドキアからイスタンブールへ。ホテルからNAV/ASRへのシャトル、フライト計画、ギョレメの道路距離、お迎え時刻を解説。"
   }
 ];
+
+export const jaPages: JaSeoPage[] = resolvePriceTokensDeep(rawJaPages);
 
 export const jaPageBySlug = new Map(jaPages.map((page) => [page.slug, page]));
 export function jaPrettySlug(slug:string){ const page=jaPageBySlug.get(slug); return page?.h1 || slug.split('-').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(' '); }

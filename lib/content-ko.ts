@@ -1,4 +1,5 @@
 import { towns } from './site';
+import { resolvePriceTokensDeep } from './price-content';
 
 export type KoContentSection = { heading: string; paragraphs: string[]; bullets?: string[] };
 export type KoFaqItem = { q: string; a: string };
@@ -13,19 +14,19 @@ export const townNamesKo: Record<keyof typeof towns, string> = {
   "cavusin": "차우신"
 };
 
-export const koPages: KoSeoPage[] = [
+const rawKoPages: KoSeoPage[] = [
   {
     "slug": "cappadocia-shuttle-transfer",
     "title": "카파도키아 공항 셔틀 | 합승 셔틀",
     "description": "카이세리(ASR) 또는 네브셰히르(NAV) 공항에서 괴레메, 위르귀프 등으로 가는 카파도키아 합승 공항 셔틀을 예약하세요. WhatsApp 예약 가능.",
     "eyebrow": "합승 공항 셔틀",
     "h1": "카파도키아 합승 공항 셔틀",
-    "lead": "카파도키아 합승 공항 셔틀은 카이세리 공항(ASR)과 네브셰히르 공항(NAV)을 괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르의 호텔과 연결합니다. 요금은 1인 편도 €15이며, 항공편에 맞춰 픽업과 하차 일정을 확인합니다.",
+    "lead": "카파도키아 합승 공항 셔틀은 카이세리 공항(ASR)과 네브셰히르 공항(NAV)을 괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르의 호텔과 연결합니다. 현재 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}이며, 항공편에 맞춰 픽업과 하차 일정을 확인합니다.",
     "sections": [
       {
         "heading": "서비스에 포함되는 내용",
         "paragraphs": [
-          "두 공항 중 어느 곳에서든 숙소까지 합승 차량으로 이동합니다. 항공편, 승객 정보, 호텔 이름을 미리 확인하며, 같은 운행에 다른 예약 승객과 호텔 정차가 포함될 수 있습니다. 이런 합승 운행 방식으로 1인 €15의 요금을 유지합니다."
+          "두 공항 중 어느 곳에서든 숙소까지 합승 차량으로 이동합니다. 항공편, 승객 정보, 호텔 이름을 미리 확인하며, 같은 운행에 다른 예약 승객과 호텔 정차가 포함될 수 있습니다. 현재 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}입니다."
         ]
       },
       {
@@ -50,7 +51,7 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카파도키아 합승 공항 셔틀 요금은 얼마인가요?",
-        "a": "ASR 또는 NAV에서 서비스 지역의 호텔까지 1인 편도 €15입니다."
+        "a": "서비스 지역 호텔까지 ASR은 1인 편도 {{PRICE:kayseri:shuttle}}, NAV는 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "어떤 공항을 이용할 수 있나요?",
@@ -81,7 +82,7 @@ export const koPages: KoSeoPage[] = [
   {
     "slug": "cappadocia-airport-transfer",
     "title": "카파도키아 공항 픽업·샌딩 | 카이세리·네브셰히르",
-    "description": "카이세리(ASR)·네브셰히르(NAV) 공항에서 카파도키아까지: 1인 €15 셔틀 또는 프라이빗 Vito/Sprinter. 호텔 픽업·하차, WhatsApp 예약.",
+    "description": "카이세리(ASR)·네브셰히르(NAV) 공항과 카파도키아 호텔을 연결하는 합승 셔틀 또는 프라이빗 Vito/Sprinter. 호텔 픽업·하차와 WhatsApp 예약 안내.",
     "eyebrow": "공항 픽업 서비스",
     "h1": "카파도키아 공항 픽업·샌딩",
     "lead": "카파도키아 공항 픽업은 도착 공항, 호텔이 있는 지역, 이동 방향에 따라 노선이 달라집니다. 먼저 공항을 선택하고 숙소 지역을 확인하면 알맞은 경로를 정할 수 있습니다.",
@@ -95,7 +96,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "합승 셔틀 또는 프라이빗 픽업",
         "paragraphs": [
-          "[[합승 셔틀|cappadocia-shuttle-transfer]]은 두 공항 모두 1인 편도 €15이며 사전 예약 후 WhatsApp으로 확인합니다. 같은 운행에 다른 승객이나 호텔 정차가 포함될 수 있습니다. 전용 차량을 원한다면 [[프라이빗 픽업|private-airport-transfer-cappadocia]]으로 Vito(최대 5명) 또는 Sprinter(최대 16명)를 선택할 수 있으며, 요금은 인원이 아니라 차량 기준이고 공항에 따라 다릅니다. 두 옵션을 비교하고 싶다면 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 요금, 운행 지역, 시간 차이를 한눈에 확인할 수 있습니다."
+          "[[합승 셔틀|cappadocia-shuttle-transfer]]은 현재 카이세리(ASR) 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르(NAV) {{PRICE:nevsehir:shuttle}}이며 사전 예약 후 WhatsApp으로 확인합니다. 같은 운행에 다른 승객이나 호텔 정차가 포함될 수 있습니다. 전용 차량을 원한다면 [[프라이빗 픽업|private-airport-transfer-cappadocia]]으로 Vito(최대 5명) 또는 Sprinter(최대 16명)를 선택할 수 있으며, 요금은 인원이 아니라 차량 기준이며 카이세리와 네브셰히르에서 각각 별도로 관리됩니다. 두 옵션을 비교하고 싶다면 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 요금, 운행 지역, 시간 차이를 한눈에 확인할 수 있습니다."
         ]
       },
       {
@@ -107,13 +108,13 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "도착 공항과 출발 공항이 다른 경우",
         "paragraphs": [
-          "NAV로 도착하고 ASR에서 출발하거나 그 반대인 일정도 가능합니다. 다만 같은 공항 왕복으로 보지 않으며, 각 방향마다 노선과 프라이빗 요금이 다릅니다. 한 가지 요금이 두 구간을 모두 포함한다고 생각하지 말고 두 항공편을 WhatsApp으로 보내 각각 정확한 공항 기준으로 확인받으세요."
+          "NAV로 도착하고 ASR에서 출발하거나 그 반대인 일정도 가능합니다. 다만 같은 공항 왕복으로 보지 않으며, 각 방향의 노선과 프라이빗 요금은 해당 공항 기준으로 따로 확인합니다. 한 가지 요금이 두 구간을 모두 포함한다고 생각하지 말고 두 항공편을 WhatsApp으로 보내 각각 정확한 공항 기준으로 확인받으세요."
         ]
       },
       {
         "heading": "그룹 인원과 차량 정원",
         "paragraphs": [
-          "Vito는 최대 5명, Sprinter는 최대 16명까지 탑승할 수 있습니다. 프라이빗 요금은 차량당 책정되므로 큰 그룹은 Sprinter를 이용할 때 합승 셔틀보다 1인당 비용이 낮아질 수도 있습니다. 특히 프라이빗 요금이 더 낮은 네브셰히르에서는 예약 전 두 옵션을 비교해 볼 가치가 있습니다."
+          "Vito는 최대 5명, Sprinter는 최대 16명까지 탑승할 수 있습니다. 프라이빗 요금은 차량당 책정되므로 큰 그룹은 Sprinter를 이용할 때 합승 셔틀보다 1인당 비용이 낮아질 수도 있습니다. 프라이빗 요금은 공항별로 관리되므로 예약 전 ASR과 NAV의 현재 차량 요금을 인원수에 맞춰 비교하세요."
         ]
       },
       {
@@ -138,7 +139,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "한 공항으로 도착하고 다른 공항에서 출발할 수 있나요?",
-        "a": "네. 노선과 요금이 공항마다 다르므로 두 항공편을 WhatsApp으로 보내 각 구간을 따로 확인하세요."
+        "a": "네. 각 구간의 노선과 요금은 해당 공항 기준으로 확인해야 하므로 두 항공편을 WhatsApp으로 보내 각각 따로 확인하세요."
       },
       {
         "q": "제 호텔에는 카이세리와 네브셰히르 중 어느 공항이 더 가깝나요?",
@@ -169,10 +170,10 @@ export const koPages: KoSeoPage[] = [
   {
     "slug": "private-airport-transfer-cappadocia",
     "title": "카파도키아 프라이빗 공항 픽업·샌딩 | Vito·Sprinter",
-    "description": "카파도키아 프라이빗 공항 픽업: 카이세리 Vito €90 / Sprinter €110, 네브셰히르 Vito €80 / Sprinter €90. 최대 5명 또는 16명, 기사에게 현금 결제.",
+    "description": "카이세리(ASR)·네브셰히르(NAV) 공항에서 이용하는 카파도키아 프라이빗 픽업. Vito는 최대 5명, Sprinter는 최대 16명이며 기사에게 현금 결제합니다.",
     "eyebrow": "전용 차량",
     "h1": "카파도키아 프라이빗 공항 픽업·샌딩",
-    "lead": "카이세리 공항: **Vito €90**, **Sprinter €110** 편도. 네브셰히르 공항: **Vito €80**, **Sprinter €90**. 요금은 승객 1인당이 아니라 차량당입니다. 왕복은 카이세리에서 €180/€220, 네브셰히르에서 €160/€180입니다.",
+    "lead": "카이세리 공항: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}** 편도. 네브셰히르 공항: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. 요금은 승객 1인당이 아니라 차량당입니다. 왕복은 카이세리에서 {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}, 네브셰히르에서 {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}입니다.",
     "sections": [
       {
         "heading": "Mercedes Vito: 최대 5명",
@@ -183,13 +184,13 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "Mercedes Sprinter: 최대 16명",
         "paragraphs": [
-          "Sprinter는 최대 16명까지 이용할 수 있는 더 큰 프라이빗 차량입니다. 요금은 공항에 따라 달라 카이세리에서는 편도 €110, 네브셰히르에서는 €90입니다. 인원이 많은 그룹이라면 합승 셔틀보다 1인당 비용이 비슷하거나 더 낮아질 수 있습니다."
+          "Sprinter는 최대 16명까지 이용할 수 있는 더 큰 프라이빗 차량입니다. 요금은 공항별로 별도 관리되며 카이세리에서는 편도 {{PRICE:kayseri:sprinter}}, 네브셰히르에서는 {{PRICE:nevsehir:sprinter}}입니다. 인원이 많은 그룹이라면 합승 셔틀보다 1인당 비용이 비슷하거나 더 낮아질 수 있습니다."
         ]
       },
       {
-        "heading": "카이세리와 네브셰히르 요금이 다른 이유",
+        "heading": "카이세리와 네브셰히르 요금을 별도로 관리하는 이유",
         "paragraphs": [
-          "카이세리와 네브셰히르는 같은 노선이 아닙니다. 카이세리는 카파도키아 중심부 대부분의 지역에서 도로 거리가 더 길기 때문에 ASR의 프라이빗 요금이 더 높습니다. NAV에서는 Vito와 Sprinter 모두 더 낮은 요금이 적용됩니다. 요금을 비교하기 전에 선택한 공항을 꼭 확인하세요."
+          "카이세리와 네브셰히르는 같은 노선이 아닙니다. 두 공항은 도로 거리와 운영 조건이 다르므로 ASR과 NAV의 프라이빗 요금을 각각 별도로 관리합니다. 옵션을 비교하기 전에 선택한 공항과 현재 요금을 반드시 확인하세요."
         ]
       },
       {
@@ -208,19 +209,19 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카이세리에서 프라이빗 Vito는 얼마인가요?",
-        "a": "최대 5명, 차량 1대 기준 편도 €90입니다."
+        "a": "최대 5명, 차량 1대 기준 편도 {{PRICE:kayseri:vito}}입니다."
       },
       {
         "q": "네브셰히르에서 프라이빗 Vito는 얼마인가요?",
-        "a": "최대 5명, 차량 1대 기준 편도 €80입니다."
+        "a": "최대 5명, 차량 1대 기준 편도 {{PRICE:nevsehir:vito}}입니다."
       },
       {
         "q": "카이세리에서 Sprinter는 얼마인가요?",
-        "a": "최대 16명, 차량 1대 기준 편도 €110입니다."
+        "a": "최대 16명, 차량 1대 기준 편도 {{PRICE:kayseri:sprinter}}입니다."
       },
       {
         "q": "네브셰히르에서 Sprinter는 얼마인가요?",
-        "a": "최대 16명, 차량 1대 기준 편도 €90입니다."
+        "a": "최대 16명, 차량 1대 기준 편도 {{PRICE:nevsehir:sprinter}}입니다."
       },
       {
         "q": "왕복 요금은 얼마인가요?",
@@ -250,41 +251,41 @@ export const koPages: KoSeoPage[] = [
   {
     "slug": "airport-transfer-prices",
     "title": "카파도키아 공항 픽업·샌딩 요금 | 셔틀·Vito·Sprinter",
-    "description": "카파도키아 공항 픽업 요금: 합승 셔틀 1인/편도 €15. 카이세리 Vito €90, Sprinter €110. 네브셰히르 Vito €80, Sprinter €90. 왕복은 두 배.",
+    "description": "카파도키아 공항 픽업의 현재 요금을 비교하세요. 카이세리·네브셰히르 합승 셔틀과 프라이빗 Vito/Sprinter, 편도·왕복 요금 체계를 안내합니다.",
     "twitterTitle": "카파도키아 공항 픽업·샌딩 요금 | 셔틀·Vito·Sprinter",
-    "twitterDescription": "합승 셔틀 1인 €15. 카이세리 Vito €90, Sprinter €110. 네브셰히르 Vito €80, Sprinter €90. 왕복은 정확히 두 배입니다.",
+    "twitterDescription": "카파도키아 공항 픽업의 현재 요금을 비교하세요. 카이세리·네브셰히르 합승 셔틀과 프라이빗 Vito/Sprinter, 편도·왕복 요금 체계를 안내합니다.",
     "eyebrow": "명확한 요금",
     "h1": "카파도키아 공항 픽업·샌딩 요금",
-    "lead": "합승 셔틀은 두 공항 모두 1인 편도 €15입니다. 프라이빗 픽업은 차량당 요금이며 카이세리와 네브셰히르의 금액이 다릅니다.",
+    "lead": "합승 셔틀은 카이세리(ASR) 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르(NAV) {{PRICE:nevsehir:shuttle}}입니다. 프라이빗 픽업도 차량당 요금을 공항별로 따로 관리합니다.",
     "sections": [
       {
         "heading": "합승 셔틀 요금",
         "paragraphs": [
-          "카이세리 공항(ASR) → 카파도키아 서비스 지역 호텔: **1인 편도 €15**. 네브셰히르 공항(NAV) → 서비스 지역 호텔: **1인 편도 €15**. 호텔 → 공항도 같은 금액이며 왕복은 1인 €30입니다. 자세한 내용은 [[합승 셔틀 페이지|cappadocia-shuttle-transfer]]에서 확인하세요."
+          "카이세리 공항(ASR) → 카파도키아 서비스 지역 호텔: **1인 편도 {{PRICE:kayseri:shuttle}}**. 네브셰히르 공항(NAV) → 서비스 지역 호텔: **1인 편도 {{PRICE:nevsehir:shuttle}}**. 호텔 → 공항은 해당 공항의 같은 편도 요금이 적용되며, 왕복은 카이세리 {{PRICE:kayseri:shuttle:roundTrip}}, 네브셰히르 {{PRICE:nevsehir:shuttle:roundTrip}}입니다. 자세한 내용은 [[합승 셔틀 페이지|cappadocia-shuttle-transfer]]에서 확인하세요."
         ]
       },
       {
         "heading": "카이세리 공항 프라이빗 요금",
         "paragraphs": [
-          "Mercedes Vito, 최대 5명: **편도 €90 / 왕복 €180**. Mercedes Sprinter, 최대 16명: **편도 €110 / 왕복 €220**."
+          "Mercedes Vito, 최대 5명: **편도 {{PRICE:kayseri:vito}} / 왕복 {{PRICE:kayseri:vito:roundTrip}}**. Mercedes Sprinter, 최대 16명: **편도 {{PRICE:kayseri:sprinter}} / 왕복 {{PRICE:kayseri:sprinter:roundTrip}}**."
         ]
       },
       {
         "heading": "네브셰히르 공항 프라이빗 요금",
         "paragraphs": [
-          "Mercedes Vito, 최대 5명: **편도 €80 / 왕복 €160**. Mercedes Sprinter, 최대 16명: **편도 €90 / 왕복 €180**. 차량과 합승 셔틀 대비 장점을 확인하려면 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]을 참고하세요."
+          "Mercedes Vito, 최대 5명: **편도 {{PRICE:nevsehir:vito}} / 왕복 {{PRICE:nevsehir:vito:roundTrip}}**. Mercedes Sprinter, 최대 16명: **편도 {{PRICE:nevsehir:sprinter}} / 왕복 {{PRICE:nevsehir:sprinter:roundTrip}}**. 차량과 합승 셔틀 대비 장점을 확인하려면 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]을 참고하세요."
         ]
       },
       {
         "heading": "1인 요금과 차량당 요금의 차이",
         "paragraphs": [
-          "합승 셔틀은 1인당 요금이라 승객 수가 늘면 총액도 증가합니다. 프라이빗 픽업은 선택한 차량 정원 안에서 차량당 요금입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 따라서 큰 그룹은 처음 보기에는 차량 요금이 높아도 1인당 비용이 합승 셔틀보다 낮을 수 있습니다. 또한 프라이빗 요금은 하나가 아닙니다. NAV는 Vito €80, Sprinter €90이고 ASR은 €90, €110입니다. 공항을 선택한 뒤 총액을 확인하세요."
+          "합승 셔틀은 1인당 요금이라 승객 수가 늘면 총액도 증가합니다. 프라이빗 픽업은 선택한 차량 정원 안에서 차량당 요금입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 따라서 큰 그룹은 처음 보기에는 차량 요금이 높아도 1인당 비용이 합승 셔틀보다 낮을 수 있습니다. 또한 프라이빗 요금은 하나가 아닙니다. NAV는 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}이고 ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. 공항을 선택한 뒤 총액을 확인하세요."
         ]
       },
       {
         "heading": "그룹 인원별 총액 예시",
         "paragraphs": [
-          "2명이 편도 합승 셔틀을 이용하면 총 €30, 5명은 €75입니다. 6명은 편도 셔틀 총 €90으로 네브셰히르 출발 Sprinter와 같은 금액입니다. 카이세리 Vito도 €90이지만 최대 5명이라 6명 그룹에는 맞지 않습니다. 표시된 가격만 보지 말고 인원과 차량 정원을 함께 비교하세요."
+          "네브셰히르 합승 셔틀을 예로 들면 편도 2명은 총 {{PRICE:nevsehir:shuttle:x2}}, 5명은 {{PRICE:nevsehir:shuttle:x5}}, 6명은 {{PRICE:nevsehir:shuttle:x6}}입니다. 네브셰히르 Sprinter의 차량당 {{PRICE:nevsehir:sprinter}}와 함께 비교하세요. 카이세리 Vito는 {{PRICE:kayseri:vito}}이지만 최대 5명이라 6명 그룹에는 맞지 않습니다. 표시된 가격만 보지 말고 인원과 차량 정원을 함께 비교하세요."
         ]
       },
       {
@@ -297,27 +298,27 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카파도키아 공항 셔틀은 얼마인가요?",
-        "a": "카이세리와 네브셰히르 공항 모두 1인 편도 €15입니다."
+        "a": "현재 카이세리는 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르는 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "왕복 셔틀은 얼마인가요?",
-        "a": "1인 €30입니다."
+        "a": "왕복은 카이세리 1인 {{PRICE:kayseri:shuttle:roundTrip}}, 네브셰히르 {{PRICE:nevsehir:shuttle:roundTrip}}입니다."
       },
       {
         "q": "카이세리 Vito는 얼마인가요?",
-        "a": "편도 €90, 왕복 €180입니다."
+        "a": "편도 {{PRICE:kayseri:vito}}, 왕복 {{PRICE:kayseri:vito:roundTrip}}입니다."
       },
       {
         "q": "카이세리 Sprinter는 얼마인가요?",
-        "a": "편도 €110, 왕복 €220입니다."
+        "a": "편도 {{PRICE:kayseri:sprinter}}, 왕복 {{PRICE:kayseri:sprinter:roundTrip}}입니다."
       },
       {
         "q": "네브셰히르 Vito는 얼마인가요?",
-        "a": "편도 €80, 왕복 €160입니다."
+        "a": "편도 {{PRICE:nevsehir:vito}}, 왕복 {{PRICE:nevsehir:vito:roundTrip}}입니다."
       },
       {
         "q": "네브셰히르 Sprinter는 얼마인가요?",
-        "a": "편도 €90, 왕복 €180입니다."
+        "a": "편도 {{PRICE:nevsehir:sprinter}}, 왕복 {{PRICE:nevsehir:sprinter:roundTrip}}입니다."
       },
       {
         "q": "프라이빗 요금도 1인당인가요?",
@@ -353,10 +354,10 @@ export const koPages: KoSeoPage[] = [
   {
     "slug": "kayseri-airport-shuttle",
     "title": "카이세리 공항에서 카파도키아까지 셔틀 | 공항·호텔 서비스",
-    "description": "카이세리 공항(ASR)에서 카파도키아 호텔까지 합승 셔틀: 1인 €15, 기사에게 현금 결제, 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르.",
+    "description": "카이세리 공항(ASR)에서 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔까지 합승 셔틀 또는 프라이빗 픽업. 기사에게 현금 결제.",
     "eyebrow": "ASR 공항 셔틀",
     "h1": "카이세리 공항에서 카파도키아까지 셔틀",
-    "lead": "카이세리 에르킬레트 공항에서 카파도키아 서비스 지역 숙소까지 1인 €15의 합승 셔틀을 예약하세요. 항공편에 맞춘 공항 미팅 안내를 WhatsApp으로 확인합니다.",
+    "lead": "카이세리 에르킬레트 공항에서 카파도키아 서비스 지역 숙소까지 1인 {{PRICE:kayseri:shuttle}}의 합승 셔틀을 예약하세요. 항공편에 맞춘 공항 미팅 안내를 WhatsApp으로 확인합니다.",
     "sections": [
       {
         "heading": "카이세리 공항: 카파도키아까지 도로 이동이 더 긴 공항",
@@ -365,9 +366,9 @@ export const koPages: KoSeoPage[] = [
         ]
       },
       {
-        "heading": "ASR에서도 합승 셔틀 요금은 1인 €15",
+        "heading": "ASR에서도 합승 셔틀 요금은 1인 {{PRICE:kayseri:shuttle}}",
         "paragraphs": [
-          "카이세리 합승 셔틀은 **1인 편도 €15**, **왕복 €30**입니다. ASR이 더 멀어도 합승 요금은 €15로 동일합니다. 전용 차량을 원하면 Vito 편도 €90 또는 Sprinter €110을 차량당 이용할 수 있습니다."
+          "카이세리 합승 셔틀은 **1인 편도 {{PRICE:kayseri:shuttle}}**, **왕복 {{PRICE:kayseri:shuttle:roundTrip}}**입니다. ASR의 현재 요금은 공항별로 관리되므로 NAV 요금과는 별도로 확인해야 합니다. 전용 차량을 원하면 Vito 편도 {{PRICE:kayseri:vito}} 또는 Sprinter {{PRICE:kayseri:sprinter}}을 차량당 이용할 수 있습니다."
         ]
       },
       {
@@ -385,14 +386,14 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "ASR로 돌아갈 때는 별도의 픽업 계획이 필요합니다",
         "paragraphs": [
-          "서비스 지역 호텔에서 카이세리 공항으로 가는 합승 셔틀도 1인 €15입니다. 돌아가는 시간은 도착 때의 시간을 단순히 거꾸로 계산하지 않습니다. 출발 항공편과 [[카파도키아에서 카이세리 공항|cappadocia-to-kayseri-airport-shuttle]] 정보를 기준으로 실제 호텔 지역에 맞춰 픽업을 확인하세요."
+          "서비스 지역 호텔에서 카이세리 공항으로 가는 합승 셔틀도 1인 {{PRICE:kayseri:shuttle}}입니다. 돌아가는 시간은 도착 때의 시간을 단순히 거꾸로 계산하지 않습니다. 출발 항공편과 [[카파도키아에서 카이세리 공항|cappadocia-to-kayseri-airport-shuttle]] 정보를 기준으로 실제 호텔 지역에 맞춰 픽업을 확인하세요."
         ]
       }
     ],
     "faq": [
       {
         "q": "카이세리 공항에서 카파도키아까지 셔틀은 얼마인가요?",
-        "a": "1인 편도 €15, 왕복 €30입니다."
+        "a": "1인 편도 {{PRICE:kayseri:shuttle}}, 왕복 {{PRICE:kayseri:shuttle:roundTrip}}입니다."
       },
       {
         "q": "ASR에서 괴레메까지 도로로 얼마나 걸리나요?",
@@ -400,7 +401,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "카이세리 프라이빗 요금은 얼마인가요?",
-        "a": "Vito 편도 €90, Sprinter 편도 €110이며 차량당 요금입니다."
+        "a": "Vito 편도 {{PRICE:kayseri:vito}}, Sprinter 편도 {{PRICE:kayseri:sprinter}}이며 차량당 요금입니다."
       },
       {
         "q": "ASR에서 어느 숙박 지역을 운행하나요?",
@@ -423,15 +424,15 @@ export const koPages: KoSeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "카이세리 공항에서 카파도키아까지 셔틀",
-    "twitterDescription": "카이세리(ASR)에서 괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르까지 1인 €15 합승 셔틀. 기사에게 현금 결제."
+    "twitterDescription": "카이세리 공항(ASR)에서 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔까지 합승 셔틀 또는 프라이빗 픽업. 기사에게 현금 결제."
   },
   {
     "slug": "nevsehir-airport-shuttle",
     "title": "네브셰히르 공항에서 카파도키아까지 셔틀 | 공항·호텔 서비스",
-    "description": "네브셰히르 공항(NAV)에서 카파도키아 호텔까지 셔틀: 1인 €15, 기사에게 현금 결제, 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르.",
+    "description": "네브셰히르 공항(NAV)에서 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔까지 합승 셔틀 또는 프라이빗 픽업. 기사에게 현금 결제.",
     "eyebrow": "NAV 공항 셔틀",
     "h1": "네브셰히르 공항에서 카파도키아까지 셔틀",
-    "lead": "네브셰히르 카파도키아 공항에서 서비스 지역 숙소까지 1인 €15의 합승 셔틀을 예약하세요. 항공편에 맞춘 미팅 안내를 WhatsApp으로 확인합니다.",
+    "lead": "네브셰히르 카파도키아 공항에서 서비스 지역 숙소까지 1인 {{PRICE:nevsehir:shuttle}}의 합승 셔틀을 예약하세요. 항공편에 맞춘 미팅 안내를 WhatsApp으로 확인합니다.",
     "sections": [
       {
         "heading": "네브셰히르 공항: 카파도키아 중심부에 더 가까운 공항",
@@ -440,9 +441,9 @@ export const koPages: KoSeoPage[] = [
         ]
       },
       {
-        "heading": "NAV 합승 셔틀은 1인 €15",
+        "heading": "NAV 합승 셔틀은 1인 {{PRICE:nevsehir:shuttle}}",
         "paragraphs": [
-          "네브셰히르 합승 공항 셔틀은 **1인 편도 €15**, **왕복 €30**입니다. 프라이빗 요금은 ASR보다 낮아 Vito는 편도 €80, Sprinter는 €90입니다."
+          "네브셰히르 합승 공항 셔틀은 **1인 편도 {{PRICE:nevsehir:shuttle}}**, **왕복 {{PRICE:nevsehir:shuttle:roundTrip}}**입니다. 프라이빗 요금은 공항별로 관리되며, NAV는 Vito 편도 {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}입니다. 두 공항 모두 이용 가능하다면 ASR의 현재 차량 요금도 함께 비교하세요."
         ]
       },
       {
@@ -460,7 +461,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "NAV로 돌아갈 때도 실제 호텔 지역 기준으로 픽업합니다",
         "paragraphs": [
-          "네브셰히르 공항으로 돌아가는 합승 셔틀도 1인 €15입니다. 출발 항공편과 [[카파도키아에서 네브셰히르 공항까지 셔틀|cappadocia-to-nevsehir-airport-shuttle]]의 실제 지역 노선을 기준으로 픽업을 확인합니다. 괴레메 픽업을 우치히사르나 아바노스와 같은 방식으로 계획하지 않습니다."
+          "네브셰히르 공항으로 돌아가는 합승 셔틀도 1인 {{PRICE:nevsehir:shuttle}}입니다. 출발 항공편과 [[카파도키아에서 네브셰히르 공항까지 셔틀|cappadocia-to-nevsehir-airport-shuttle]]의 실제 지역 노선을 기준으로 픽업을 확인합니다. 괴레메 픽업을 우치히사르나 아바노스와 같은 방식으로 계획하지 않습니다."
         ]
       },
       {
@@ -473,7 +474,7 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "네브셰히르 공항에서 카파도키아까지 셔틀은 얼마인가요?",
-        "a": "1인 편도 €15, 왕복 €30입니다."
+        "a": "1인 편도 {{PRICE:nevsehir:shuttle}}, 왕복 {{PRICE:nevsehir:shuttle:roundTrip}}입니다."
       },
       {
         "q": "NAV가 괴레메와 우치히사르에 더 가까운 공항인가요?",
@@ -481,7 +482,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "네브셰히르 프라이빗 픽업 요금은 얼마인가요?",
-        "a": "Vito 편도 €80, Sprinter 편도 €90이며 차량당 요금입니다."
+        "a": "Vito 편도 {{PRICE:nevsehir:vito}}, Sprinter 편도 {{PRICE:nevsehir:sprinter}}이며 차량당 요금입니다."
       },
       {
         "q": "NAV 셔틀은 고정 시간표의 공항버스처럼 운행하나요?",
@@ -504,15 +505,15 @@ export const koPages: KoSeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "네브셰히르 공항에서 카파도키아까지 셔틀",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르까지 1인 €15 합승 셔틀. 기사에게 현금 결제."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔까지 합승 셔틀 또는 프라이빗 픽업. 기사에게 현금 결제."
   },
   {
     "slug": "cappadocia-to-kayseri-airport-shuttle",
     "title": "카파도키아에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르에서 카이세리 공항(ASR)까지 호텔 픽업 셔틀 1인 €15.",
+    "description": "괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔에서 카이세리 공항(ASR)까지 가는 합승 셔틀 또는 프라이빗 픽업.",
     "eyebrow": "카파도키아 → ASR",
     "h1": "카파도키아에서 카이세리 공항까지 셔틀",
-    "lead": "카파도키아 서비스 지역의 호텔에서 카이세리 에르킬레트 공항까지 1인 €15 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
+    "lead": "카파도키아 서비스 지역의 호텔에서 카이세리 에르킬레트 공항까지 1인 {{PRICE:kayseri:shuttle}} 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
     "sections": [
       {
         "heading": "ASR 출발 계획은 지도상의 거리보다 일찍 시작됩니다",
@@ -535,7 +536,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "전용 차량으로 카이세리 공항까지 이동",
         "paragraphs": [
-          "[[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 편도 €90, Sprinter 최대 16명 편도 €110입니다. 다른 호텔 픽업은 없지만 숙소에서는 차량이 안전하게 접근하고 정차할 수 있는 장소가 필요합니다."
+          "[[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 편도 {{PRICE:kayseri:vito}}, Sprinter 최대 16명 편도 {{PRICE:kayseri:sprinter}}입니다. 다른 호텔 픽업은 없지만 숙소에서는 차량이 안전하게 접근하고 정차할 수 있는 장소가 필요합니다."
         ]
       },
       {
@@ -548,7 +549,7 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카파도키아에서 카이세리 공항까지 셔틀은 얼마인가요?",
-        "a": "1인 편도 €15입니다."
+        "a": "1인 편도 {{PRICE:kayseri:shuttle}}입니다."
       },
       {
         "q": "왜 ASR 픽업 시간을 직접 도로 시간만으로 계산하면 안 되나요?",
@@ -560,7 +561,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "카이세리 공항까지 프라이빗 차량도 예약할 수 있나요?",
-        "a": "네. Vito 편도 €90 또는 Sprinter €110이며 차량당 요금입니다."
+        "a": "네. Vito 편도 {{PRICE:kayseri:vito}} 또는 Sprinter {{PRICE:kayseri:sprinter}}이며 차량당 요금입니다."
       }
     ],
     "related": [
@@ -574,15 +575,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카파도키아에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르에서 카이세리 공항(ASR)까지 1인 €15 호텔 픽업 셔틀."
+    "twitterDescription": "괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔에서 카이세리 공항(ASR)까지 가는 합승 셔틀 또는 프라이빗 픽업."
   },
   {
     "slug": "cappadocia-to-nevsehir-airport-shuttle",
     "title": "카파도키아에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르에서 네브셰히르 공항(NAV)까지 호텔 픽업 셔틀 1인 €15.",
+    "description": "괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔에서 네브셰히르 공항(NAV)까지 가는 합승 셔틀 또는 프라이빗 픽업.",
     "eyebrow": "카파도키아 → NAV",
     "h1": "카파도키아에서 네브셰히르 공항까지 셔틀",
-    "lead": "카파도키아 서비스 지역의 호텔에서 네브셰히르 카파도키아 공항까지 1인 €15 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
+    "lead": "카파도키아 서비스 지역의 호텔에서 네브셰히르 카파도키아 공항까지 1인 {{PRICE:nevsehir:shuttle}} 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
     "sections": [
       {
         "heading": "NAV는 더 가깝지만 호텔 픽업 시간은 여전히 항공편을 기준으로 합니다",
@@ -605,7 +606,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "네브셰히르 프라이빗 출발은 더 직접적인 대안입니다",
         "paragraphs": [
-          "전용 [[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 편도 €80, Sprinter 최대 16명 편도 €90입니다. 다른 호텔 픽업은 없지만 최종 만나는 지점은 여전히 차량의 안전한 접근 여부에 따라 달라집니다."
+          "전용 [[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 편도 {{PRICE:nevsehir:vito}}, Sprinter 최대 16명 편도 {{PRICE:nevsehir:sprinter}}입니다. 다른 호텔 픽업은 없지만 최종 만나는 지점은 여전히 차량의 안전한 접근 여부에 따라 달라집니다."
         ]
       },
       {
@@ -618,7 +619,7 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카파도키아에서 네브셰히르 공항까지 셔틀은 얼마인가요?",
-        "a": "1인 편도 €15입니다."
+        "a": "1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "NAV가 가까우니 제가 임의로 더 늦게 출발해도 되나요?",
@@ -630,7 +631,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "네브셰히르 공항까지 프라이빗 차량도 예약할 수 있나요?",
-        "a": "네. Vito 편도 €80 또는 Sprinter €90이며 차량당 요금입니다."
+        "a": "네. Vito 편도 {{PRICE:nevsehir:vito}} 또는 Sprinter {{PRICE:nevsehir:sprinter}}이며 차량당 요금입니다."
       }
     ],
     "related": [
@@ -645,12 +646,12 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카파도키아에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르에서 네브셰히르 공항(NAV)까지 1인 €15 호텔 픽업 셔틀."
+    "twitterDescription": "괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔에서 네브셰히르 공항(NAV)까지 가는 합승 셔틀 또는 프라이빗 픽업."
   },
   {
     "slug": "goreme-airport-transfer",
     "title": "괴레메 공항 픽업·샌딩 | ASR·NAV 셔틀",
-    "description": "카이세리·네브셰히르 공항에서 괴레메까지: 1인 €15 셔틀, 프라이빗 Vito/Sprinter, 호텔 접근, 노선 시간, 귀국 픽업 안내.",
+    "description": "카이세리·네브셰히르 공항과 괴레메를 연결하는 공항 픽업. 합승 셔틀과 프라이빗 Vito/Sprinter, 호텔 접근, 이동 시간과 귀국 픽업을 확인하세요.",
     "eyebrow": "괴레메 공항 픽업 안내",
     "h1": "괴레메 공항 픽업·샌딩",
     "lead": "괴레메 숙박 일정에 맞춰 카이세리 공항과 네브셰히르 공항을 비교한 뒤, 실제 항공편에 해당하는 셔틀 노선을 선택하세요.",
@@ -737,8 +738,8 @@ export const koPages: KoSeoPage[] = [
     ],
     "faq": [
       {
-        "q": "카이세리와 네브셰히르에서 괴레메 셔틀 요금이 같은가요?",
-        "a": "네. ASR과 NAV 모두 합승 셔틀은 1인 편도 €15입니다. 도로 거리는 다르지만 합승 요금은 같습니다."
+        "q": "카이세리와 네브셰히르에서 괴레메까지 셔틀 요금은 얼마인가요?",
+        "a": "현재 합승 셔틀은 ASR에서 1인 편도 {{PRICE:kayseri:shuttle}}, NAV에서 {{PRICE:nevsehir:shuttle}}입니다. 항공권에 표시된 공항의 요금과 해당 노선의 도로 거리를 함께 확인하세요."
       },
       {
         "q": "공항 도착과 괴레메 호텔의 출발 픽업을 한 번에 예약할 수 있나요?",
@@ -746,7 +747,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "괴레메 예약 전에 ASR 또는 NAV를 선택해야 하나요?",
-        "a": "네. 프라이빗 요금, 도로 거리, 공항 미팅, 귀국 노선이 공항에 따라 달라지므로 항공권에 표시된 공항을 선택하세요."
+        "a": "네. 프라이빗 요금은 공항별로 따로 관리되고, 도로 거리·공항 미팅·귀국 노선도 이용 공항에 맞춰 확인해야 하므로 항공권에 표시된 공항을 선택하세요."
       },
       {
         "q": "셔틀이 괴레메의 모든 동굴 호텔 문 앞까지 갈 수 있나요?",
@@ -770,15 +771,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "괴레메 공항 픽업·샌딩 | ASR·NAV 셔틀",
-    "twitterDescription": "카이세리·네브셰히르 공항에서 괴레메까지: 1인 €15 셔틀, 프라이빗 Vito/Sprinter, 호텔 접근 및 노선 시간."
+    "twitterDescription": "카이세리·네브셰히르 공항과 괴레메를 연결하는 공항 픽업. 합승 셔틀과 프라이빗 Vito/Sprinter, 호텔 접근, 이동 시간과 귀국 픽업을 확인하세요."
   },
   {
     "slug": "kayseri-airport-to-goreme-shuttle",
     "title": "카이세리 공항에서 괴레메까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "카이세리 공항(ASR)에서 괴레메: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보.",
+    "description": "카이세리 공항(ASR)에서 괴레메: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보.",
     "eyebrow": "ASR → 괴레메 공항 셔틀",
     "h1": "카이세리 공항에서 괴레메까지 셔틀",
-    "lead": "카이세리 공항(ASR)에서 괴레메까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 괴레메의 동굴호텔 골목은 마지막 차량 접근과 하차 지점에 영향을 줄 수 있으므로 예약한 숙소의 정확한 전체 이름이 중요합니다.",
+    "lead": "카이세리 공항(ASR)에서 괴레메까지는 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 괴레메의 동굴호텔 골목은 마지막 차량 접근과 하차 지점에 영향을 줄 수 있으므로 예약한 숙소의 정확한 전체 이름이 중요합니다.",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -801,7 +802,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       },
       {
@@ -818,7 +819,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -830,15 +831,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카이세리 공항에서 괴레메까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "카이세리 공항(ASR)에서 괴레메: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "카이세리 공항(ASR)에서 괴레메: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "kayseri-airport-to-urgup-shuttle",
     "title": "카이세리 공항에서 위르귀프까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "카이세리 공항(ASR)에서 위르귀프: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보.",
+    "description": "카이세리 공항(ASR)에서 위르귀프: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보.",
     "eyebrow": "ASR → 위르귀프 공항 셔틀",
     "h1": "카이세리 공항에서 위르귀프까지 셔틀",
-    "lead": "카이세리 공항(ASR)에서 위르귀프까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 위르귀프 중심부는 대체로 차량 접근이 수월하지만, 언덕에 자리한 일부 석조·동굴 숙소는 마지막 접근 방식이 달라질 수 있습니다.",
+    "lead": "카이세리 공항(ASR)에서 위르귀프까지는 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 위르귀프 중심부는 대체로 차량 접근이 수월하지만, 언덕에 자리한 일부 석조·동굴 숙소는 마지막 접근 방식이 달라질 수 있습니다.",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -860,7 +861,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. ASR 대신 NAV를 이용할 수 있다면 [[네브셰히르 공항에서 위르귀프까지 셔틀|nevsehir-airport-to-urgup-shuttle]]도 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. ASR 대신 NAV를 이용할 수 있다면 [[네브셰히르 공항에서 위르귀프까지 셔틀|nevsehir-airport-to-urgup-shuttle]]도 비교해 보세요."
         ]
       }
     ],
@@ -882,15 +883,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카이세리 공항에서 위르귀프까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "카이세리 공항(ASR)에서 위르귀프: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "카이세리 공항(ASR)에서 위르귀프: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "kayseri-airport-to-uchisar-shuttle",
     "title": "카이세리 공항에서 우치히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "카이세리 공항(ASR)에서 우치히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 80 km, 70–85분, 호텔 하차 및 예약 정보.",
+    "description": "카이세리 공항(ASR)에서 우치히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 80 km, 70–85분, 호텔 하차 및 예약 정보.",
     "eyebrow": "ASR → 우치히사르 공항 셔틀",
     "h1": "카이세리 공항에서 우치히사르까지 셔틀",
-    "lead": "카이세리 공항(ASR)에서 우치히사르까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 80 km, 주행 시간은 70–85분입니다. 우치히사르는 언덕길이 가파르고 좁은 구간이 있어 마지막 호텔 접근은 실제 숙소 위치와 차량 진입 가능 여부에 따라 달라집니다.",
+    "lead": "카이세리 공항(ASR)에서 우치히사르까지는 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 80 km, 주행 시간은 70–85분입니다. 우치히사르는 언덕길이 가파르고 좁은 구간이 있어 마지막 호텔 접근은 실제 숙소 위치와 차량 진입 가능 여부에 따라 달라집니다.",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -912,7 +913,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV를 이용할 수 있다면 [[네브셰히르 공항에서 우치히사르까지 셔틀|nevsehir-airport-to-uchisar-shuttle]]도 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV를 이용할 수 있다면 [[네브셰히르 공항에서 우치히사르까지 셔틀|nevsehir-airport-to-uchisar-shuttle]]도 비교해 보세요."
         ]
       }
     ],
@@ -934,15 +935,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카이세리 공항에서 우치히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "카이세리 공항(ASR)에서 우치히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 80 km, 70–85분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "카이세리 공항(ASR)에서 우치히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 80 km, 70–85분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "kayseri-airport-to-avanos-shuttle",
     "title": "카이세리 공항에서 아바노스까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "카이세리 공항(ASR)에서 아바노스: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보.",
+    "description": "카이세리 공항(ASR)에서 아바노스: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보.",
     "eyebrow": "ASR → 아바노스 공항 셔틀",
     "h1": "카이세리 공항에서 아바노스까지 셔틀",
-    "lead": "카이세리 공항(ASR)에서 아바노스까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 아바노스의 숙소는 강 주변의 넓은 지역에 흩어져 있어 정확한 호텔 이름이 있어야 올바른 최종 하차 지점을 확인하기 쉽습니다.",
+    "lead": "카이세리 공항(ASR)에서 아바노스까지는 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 아바노스의 숙소는 강 주변의 넓은 지역에 흩어져 있어 정확한 호텔 이름이 있어야 올바른 최종 하차 지점을 확인하기 쉽습니다.",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -964,7 +965,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 아바노스까지 셔틀|nevsehir-airport-to-avanos-shuttle]]과 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 아바노스까지 셔틀|nevsehir-airport-to-avanos-shuttle]]과 비교해 보세요."
         ]
       }
     ],
@@ -986,15 +987,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카이세리 공항에서 아바노스까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "카이세리 공항(ASR)에서 아바노스: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "카이세리 공항(ASR)에서 아바노스: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "kayseri-airport-to-ortahisar-shuttle",
     "title": "카이세리 공항에서 오르타히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "카이세리 공항(ASR)에서 오르타히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보.",
+    "description": "카이세리 공항(ASR)에서 오르타히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보.",
     "eyebrow": "ASR → 오르타히사르 공항 셔틀",
     "h1": "카이세리 공항에서 오르타히사르까지 셔틀",
-    "lead": "카이세리 공항(ASR)에서 오르타히사르까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 오르타히사르 마을 중심부의 일부 숙소 도로는 좁아지므로 마지막 차량 접근은 마을 이름만이 아니라 실제 숙소 위치를 기준으로 확인합니다.",
+    "lead": "카이세리 공항(ASR)에서 오르타히사르까지는 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 오르타히사르 마을 중심부의 일부 숙소 도로는 좁아지므로 마지막 차량 접근은 마을 이름만이 아니라 실제 숙소 위치를 기준으로 확인합니다.",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1016,7 +1017,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 오르타히사르까지 셔틀|nevsehir-airport-to-ortahisar-shuttle]]과 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 오르타히사르까지 셔틀|nevsehir-airport-to-ortahisar-shuttle]]과 비교해 보세요."
         ]
       }
     ],
@@ -1038,15 +1039,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카이세리 공항에서 오르타히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "카이세리 공항(ASR)에서 오르타히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "카이세리 공항(ASR)에서 오르타히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "kayseri-airport-to-cavusin-shuttle",
     "title": "카이세리 공항에서 차우신까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "카이세리 공항(ASR)에서 차우신: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 75 km, 65–80분, 호텔 하차 및 예약 정보.",
+    "description": "카이세리 공항(ASR)에서 차우신: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 65–80분, 호텔 하차 및 예약 정보.",
     "eyebrow": "ASR → 차우신 공항 셔틀",
     "h1": "카이세리 공항에서 차우신까지 셔틀",
-    "lead": "카이세리 공항(ASR)에서 차우신까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 65–80분입니다. 차우신의 숙소는 큰길 주변부터 오래된 언덕길까지 분포해 있어 실제 정차 지점은 정확한 호텔 위치에 따라 달라집니다.",
+    "lead": "카이세리 공항(ASR)에서 차우신까지는 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 65–80분입니다. 차우신의 숙소는 큰길 주변부터 오래된 언덕길까지 분포해 있어 실제 정차 지점은 정확한 호텔 위치에 따라 달라집니다.",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1068,7 +1069,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 차우신까지 셔틀|nevsehir-airport-to-cavusin-shuttle]]과 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 차우신까지 셔틀|nevsehir-airport-to-cavusin-shuttle]]과 비교해 보세요."
         ]
       }
     ],
@@ -1090,15 +1091,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카이세리 공항에서 차우신까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "카이세리 공항(ASR)에서 차우신: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 75 km, 65–80분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "카이세리 공항(ASR)에서 차우신: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 65–80분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "nevsehir-airport-to-goreme-shuttle",
     "title": "네브셰히르 공항에서 괴레메까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "네브셰히르 공항(NAV)에서 괴레메: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 40 km, 35–45분, 호텔 하차 및 예약 정보.",
+    "description": "네브셰히르 공항(NAV)에서 괴레메: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 40 km, 35–45분, 호텔 하차 및 예약 정보.",
     "eyebrow": "NAV → 괴레메 공항 셔틀",
     "h1": "네브셰히르 공항에서 괴레메까지 셔틀",
-    "lead": "네브셰히르 공항(NAV)에서 괴레메까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 40 km, 주행 시간은 35–45분입니다. 괴레메의 동굴호텔 골목은 마지막 차량 접근과 하차 지점에 영향을 줄 수 있으므로 숙소의 정확한 전체 이름이 중요합니다.",
+    "lead": "네브셰히르 공항(NAV)에서 괴레메까지는 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 40 km, 주행 시간은 35–45분입니다. 괴레메의 동굴호텔 골목은 마지막 차량 접근과 하차 지점에 영향을 줄 수 있으므로 숙소의 정확한 전체 이름이 중요합니다.",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1121,7 +1122,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1136,7 +1137,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1148,15 +1149,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "네브셰히르 공항에서 괴레메까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 괴레메: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 40 km, 35–45분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 괴레메: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 40 km, 35–45분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "nevsehir-airport-to-urgup-shuttle",
     "title": "네브셰히르 공항에서 위르귀프까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "네브셰히르 공항(NAV)에서 위르귀프: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 50 km, 45–60분, 호텔 하차 및 예약 정보.",
+    "description": "네브셰히르 공항(NAV)에서 위르귀프: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 50 km, 45–60분, 호텔 하차 및 예약 정보.",
     "eyebrow": "NAV → 위르귀프 공항 셔틀",
     "h1": "네브셰히르 공항에서 위르귀프까지 셔틀",
-    "lead": "네브셰히르 공항(NAV)에서 위르귀프까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 50 km, 주행 시간은 45–60분입니다. 위르귀프 중심부는 대체로 접근이 수월하지만, 언덕의 일부 석조·동굴 숙소는 마지막 접근 방식이 달라질 수 있습니다.",
+    "lead": "네브셰히르 공항(NAV)에서 위르귀프까지는 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 50 km, 주행 시간은 45–60분입니다. 위르귀프 중심부는 대체로 접근이 수월하지만, 언덕의 일부 석조·동굴 숙소는 마지막 접근 방식이 달라질 수 있습니다.",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1172,7 +1173,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "가격을 중시하면 합승 셔틀, 단독 이동을 원하면 프라이빗 차량",
         "paragraphs": [
-          "1~2명이라면 합승 셔틀이 비용을 낮추는 데 유리합니다. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 편도 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하거나 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 두 서비스를 비교해 보세요."
+          "1~2명이라면 합승 셔틀이 비용을 낮추는 데 유리합니다. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하거나 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 두 서비스를 비교해 보세요."
         ]
       }
     ],
@@ -1183,7 +1184,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1195,15 +1196,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "네브셰히르 공항에서 위르귀프까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 위르귀프: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 50 km, 45–60분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 위르귀프: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 50 km, 45–60분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "nevsehir-airport-to-uchisar-shuttle",
     "title": "네브셰히르 공항에서 우치히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "네브셰히르 공항(NAV)에서 우치히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 35 km, 30–40분, 호텔 하차 및 예약 정보.",
+    "description": "네브셰히르 공항(NAV)에서 우치히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 35 km, 30–40분, 호텔 하차 및 예약 정보.",
     "eyebrow": "NAV → 우치히사르 공항 셔틀",
     "h1": "네브셰히르 공항에서 우치히사르까지 셔틀",
-    "lead": "네브셰히르 공항(NAV)에서 우치히사르까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 35 km, 주행 시간은 30–40분입니다. 우치히사르의 언덕길은 가파르거나 좁을 수 있어 마지막 호텔 접근은 실제 숙소와 차량 진입 가능 여부에 따라 달라집니다.",
+    "lead": "네브셰히르 공항(NAV)에서 우치히사르까지는 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 35 km, 주행 시간은 30–40분입니다. 우치히사르의 언덕길은 가파르거나 좁을 수 있어 마지막 호텔 접근은 실제 숙소와 차량 진입 가능 여부에 따라 달라집니다.",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1226,7 +1227,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1237,7 +1238,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1249,15 +1250,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "네브셰히르 공항에서 우치히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 우치히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 35 km, 30–40분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 우치히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 35 km, 30–40분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "nevsehir-airport-to-avanos-shuttle",
     "title": "네브셰히르 공항에서 아바노스까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "네브셰히르 공항(NAV)에서 아바노스: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 38 km, 35–50분, 호텔 하차 및 예약 정보.",
+    "description": "네브셰히르 공항(NAV)에서 아바노스: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 38 km, 35–50분, 호텔 하차 및 예약 정보.",
     "eyebrow": "NAV → 아바노스 공항 셔틀",
     "h1": "네브셰히르 공항에서 아바노스까지 셔틀",
-    "lead": "네브셰히르 공항(NAV)에서 아바노스까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 38 km, 주행 시간은 35–50분입니다. 아바노스의 숙소는 강 주변의 넓은 지역에 흩어져 있어 정확한 호텔 이름이 있어야 올바른 최종 하차 지점을 확인하기 쉽습니다.",
+    "lead": "네브셰히르 공항(NAV)에서 아바노스까지는 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 38 km, 주행 시간은 35–50분입니다. 아바노스의 숙소는 강 주변의 넓은 지역에 흩어져 있어 정확한 호텔 이름이 있어야 올바른 최종 하차 지점을 확인하기 쉽습니다.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1273,7 +1274,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1284,7 +1285,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1296,15 +1297,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "네브셰히르 공항에서 아바노스까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 아바노스: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 38 km, 35–50분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 아바노스: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 38 km, 35–50분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "nevsehir-airport-to-ortahisar-shuttle",
     "title": "네브셰히르 공항에서 오르타히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "네브셰히르 공항(NAV)에서 오르타히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 45 km, 40–50분, 호텔 하차 및 예약 정보.",
+    "description": "네브셰히르 공항(NAV)에서 오르타히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 45 km, 40–50분, 호텔 하차 및 예약 정보.",
     "eyebrow": "NAV → 오르타히사르 공항 셔틀",
     "h1": "네브셰히르 공항에서 오르타히사르까지 셔틀",
-    "lead": "네브셰히르 공항(NAV)에서 오르타히사르까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 45 km, 주행 시간은 40–50분입니다. 오르타히사르 중심부의 일부 숙소 도로는 좁아지므로 마지막 차량 접근은 마을 이름만이 아니라 실제 숙소를 기준으로 확인합니다.",
+    "lead": "네브셰히르 공항(NAV)에서 오르타히사르까지는 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 45 km, 주행 시간은 40–50분입니다. 오르타히사르 중심부의 일부 숙소 도로는 좁아지므로 마지막 차량 접근은 마을 이름만이 아니라 실제 숙소를 기준으로 확인합니다.",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1327,7 +1328,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1338,7 +1339,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1350,15 +1351,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "네브셰히르 공항에서 오르타히사르까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 오르타히사르: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 45 km, 40–50분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 오르타히사르: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 45 km, 40–50분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "nevsehir-airport-to-cavusin-shuttle",
     "title": "네브셰히르 공항에서 차우신까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "description": "네브셰히르 공항(NAV)에서 차우신: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 42 km, 40–55분, 호텔 하차 및 예약 정보.",
+    "description": "네브셰히르 공항(NAV)에서 차우신: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 42 km, 40–55분, 호텔 하차 및 예약 정보.",
     "eyebrow": "NAV → 차우신 공항 셔틀",
     "h1": "네브셰히르 공항에서 차우신까지 셔틀",
-    "lead": "네브셰히르 공항(NAV)에서 차우신까지는 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 42 km, 주행 시간은 40–55분입니다. 차우신의 숙소는 큰길, 오래된 마을, 계곡 쪽 구역에 걸쳐 있어 실제 정차 지점은 정확한 호텔 위치에 따라 달라집니다.",
+    "lead": "네브셰히르 공항(NAV)에서 차우신까지는 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 이동할 수 있습니다. 일반적인 도로 거리는 약 42 km, 주행 시간은 40–55분입니다. 차우신의 숙소는 큰길, 오래된 마을, 계곡 쪽 구역에 걸쳐 있어 실제 정차 지점은 정확한 호텔 위치에 따라 달라집니다.",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -1380,13 +1381,13 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "항공편이 더 좋다면 ASR도 여전히 대안입니다",
         "paragraphs": [
-          "더 긴 선택지는 [[카이세리 공항에서 차우신까지 셔틀|kayseri-airport-to-cavusin-shuttle]]입니다. 합승 요금은 두 공항 모두 동일하므로 최단 도로 거리보다 항공편 시간이 더 중요한 경우도 있습니다."
+          "더 긴 선택지는 [[카이세리 공항에서 차우신까지 셔틀|kayseri-airport-to-cavusin-shuttle]]입니다. 공항별 현재 합승 요금과 항공편 편의성, 도로 거리를 함께 비교하세요."
         ]
       },
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1397,7 +1398,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1409,15 +1410,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "네브셰히르 공항에서 차우신까지 셔틀 | 합승 셔틀·프라이빗 픽업",
-    "twitterDescription": "네브셰히르 공항(NAV)에서 차우신: 1인 €15 합승 셔틀, 프라이빗 Vito/Sprinter, 42 km, 40–55분, 호텔 하차 및 예약 정보."
+    "twitterDescription": "네브셰히르 공항(NAV)에서 차우신: 합승 셔틀 또는 프라이빗 Vito/Sprinter, 42 km, 40–55분, 호텔 하차 및 예약 정보."
   },
   {
     "slug": "goreme-to-kayseri-airport-shuttle",
     "title": "괴레메에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "괴레메에서 카이세리 공항(ASR): 1인 €15 셔틀, 75 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "괴레메에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "괴레메 → ASR 공항 셔틀",
     "h1": "괴레메에서 카이세리 공항까지 셔틀",
-    "lead": "괴레메에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 괴레메의 동굴호텔과 언덕길 때문에 차량이 큰길로 나가기 전 현지 픽업 시간이 더 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔의 합승 픽업과 공항 도착 여유 시간도 반영되어 있으므로 그 시간을 따르세요.",
+    "lead": "괴레메에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 괴레메의 동굴호텔과 언덕길 때문에 차량이 큰길로 나가기 전 현지 픽업 시간이 더 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔의 합승 픽업과 공항 도착 여유 시간도 반영되어 있으므로 그 시간을 따르세요.",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -1440,7 +1441,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1451,7 +1452,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1463,15 +1464,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "괴레메에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "괴레메에서 카이세리 공항(ASR): 1인 €15 셔틀, 75 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "괴레메에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "urgup-to-kayseri-airport-shuttle",
     "title": "위르귀프에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "위르귀프에서 카이세리 공항(ASR): 1인 €15 셔틀, 70 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "위르귀프에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "위르귀프 → ASR 공항 셔틀",
     "h1": "위르귀프에서 카이세리 공항까지 셔틀",
-    "lead": "위르귀프에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 위르귀프 숙소는 중심 도로와 언덕 구역에 걸쳐 있어 공항으로 출발하기 전 정확한 픽업 지점이 중요합니다. 확정 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "위르귀프에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 위르귀프 숙소는 중심 도로와 언덕 구역에 걸쳐 있어 공항으로 출발하기 전 정확한 픽업 지점이 중요합니다. 확정 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -1500,7 +1501,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1511,7 +1512,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1522,15 +1523,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "위르귀프에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "위르귀프에서 카이세리 공항(ASR): 1인 €15 셔틀, 70 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "위르귀프에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "uchisar-to-kayseri-airport-shuttle",
     "title": "우치히사르에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "우치히사르에서 카이세리 공항(ASR): 1인 €15 셔틀, 80 km, 70–85분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "우치히사르에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 80 km, 70–85분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "우치히사르 → ASR 공항 셔틀",
     "h1": "우치히사르에서 카이세리 공항까지 셔틀",
-    "lead": "우치히사르에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 80 km, 주행 시간은 70–85분입니다. 우치히사르의 가파른 상부 마을길 때문에 모든 호텔 문 앞까지 차량이 바로 접근하지 못하고 차량이 접근하기 쉬운 픽업 지점이 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "우치히사르에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 80 km, 주행 시간은 70–85분입니다. 우치히사르의 가파른 상부 마을길 때문에 모든 호텔 문 앞까지 차량이 바로 접근하지 못하고 차량이 접근하기 쉬운 픽업 지점이 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -1553,7 +1554,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1568,7 +1569,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1579,15 +1580,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "우치히사르에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "우치히사르에서 카이세리 공항(ASR): 1인 €15 셔틀, 80 km, 70–85분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "우치히사르에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 80 km, 70–85분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "avanos-to-kayseri-airport-shuttle",
     "title": "아바노스에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "아바노스에서 카이세리 공항(ASR): 1인 €15 셔틀, 70 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "아바노스에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "아바노스 → ASR 공항 셔틀",
     "h1": "아바노스에서 카이세리 공항까지 셔틀",
-    "lead": "아바노스에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 아바노스의 숙소는 여러 구역에 넓게 퍼져 있어 정확한 호텔 이름이 올바른 픽업 지점을 확인하는 데 중요합니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "아바노스에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 70 km, 주행 시간은 60–75분입니다. 아바노스의 숙소는 여러 구역에 넓게 퍼져 있어 정확한 호텔 이름이 올바른 픽업 지점을 확인하는 데 중요합니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -1605,7 +1606,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1616,7 +1617,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1627,15 +1628,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "아바노스에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "아바노스에서 카이세리 공항(ASR): 1인 €15 셔틀, 70 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "아바노스에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 70 km, 60–75분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "ortahisar-to-kayseri-airport-shuttle",
     "title": "오르타히사르에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "오르타히사르에서 카이세리 공항(ASR): 1인 €15 셔틀, 75 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "오르타히사르에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "오르타히사르 → ASR 공항 셔틀",
     "h1": "오르타히사르에서 카이세리 공항까지 셔틀",
-    "lead": "오르타히사르에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 오래된 마을의 좁은 도로가 픽업 시작 구간에 영향을 줄 수 있어 확정된 만남 지점이 중요합니다. 확정 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "오르타히사르에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 60–75분입니다. 오래된 마을의 좁은 도로가 픽업 시작 구간에 영향을 줄 수 있어 확정된 만남 지점이 중요합니다. 확정 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1658,7 +1659,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1669,7 +1670,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1680,15 +1681,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "오르타히사르에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "오르타히사르에서 카이세리 공항(ASR): 1인 €15 셔틀, 75 km, 60–75분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "오르타히사르에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 60–75분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "cavusin-to-kayseri-airport-shuttle",
     "title": "차우신에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "description": "차우신에서 카이세리 공항(ASR): 1인 €15 셔틀, 75 km, 65–80분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "차우신에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 65–80분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "차우신 → ASR 공항 셔틀",
     "h1": "차우신에서 카이세리 공항까지 셔틀",
-    "lead": "차우신에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 65–80분입니다. 차우신의 숙소는 큰길, 오래된 마을, 계곡 쪽에 나뉘어 있어 확정된 픽업 지점이 중요합니다. 확정 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "차우신에서 카이세리 공항(ASR)으로 가는 호텔 픽업은 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 75 km, 주행 시간은 65–80분입니다. 차우신의 숙소는 큰길, 오래된 마을, 계곡 쪽에 나뉘어 있어 확정된 픽업 지점이 중요합니다. 확정 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1717,7 +1718,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1728,7 +1729,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €90, Sprinter는 최대 16명까지 €110이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1739,15 +1740,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "차우신에서 카이세리 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "차우신에서 카이세리 공항(ASR): 1인 €15 셔틀, 75 km, 65–80분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "차우신에서 카이세리 공항(ASR): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 75 km, 65–80분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "goreme-to-nevsehir-airport-shuttle",
     "title": "괴레메에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "괴레메에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 40 km, 35–45분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "괴레메에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 40 km, 35–45분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "괴레메 → NAV 공항 셔틀",
     "h1": "괴레메에서 네브셰히르 공항까지 셔틀",
-    "lead": "괴레메에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 40 km, 주행 시간은 35–45분입니다. 괴레메의 동굴호텔과 언덕길 때문에 차량이 큰길로 나가기 전 현지 픽업 시간이 더 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔의 합승 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "괴레메에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 40 km, 주행 시간은 35–45분입니다. 괴레메의 동굴호텔과 언덕길 때문에 차량이 큰길로 나가기 전 현지 픽업 시간이 더 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔의 합승 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1770,7 +1771,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1781,7 +1782,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1793,15 +1794,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "괴레메에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "괴레메에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 40 km, 35–45분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "괴레메에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 40 km, 35–45분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "urgup-to-nevsehir-airport-shuttle",
     "title": "위르귀프에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "위르귀프에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 50 km, 45–60분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "위르귀프에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 50 km, 45–60분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "위르귀프 → NAV 공항 셔틀",
     "h1": "위르귀프에서 네브셰히르 공항까지 셔틀",
-    "lead": "위르귀프에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 50 km, 주행 시간은 45–60분입니다. 위르귀프의 숙소는 중심 도로와 언덕 구역에 걸쳐 있어 공항으로 출발하기 전 확정된 픽업 지점이 중요합니다. 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "위르귀프에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 50 km, 주행 시간은 45–60분입니다. 위르귀프의 숙소는 중심 도로와 언덕 구역에 걸쳐 있어 공항으로 출발하기 전 확정된 픽업 지점이 중요합니다. 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1824,7 +1825,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1835,7 +1836,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1847,15 +1848,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "위르귀프에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "위르귀프에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 50 km, 45–60분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "위르귀프에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 50 km, 45–60분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "uchisar-to-nevsehir-airport-shuttle",
     "title": "우치히사르에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "우치히사르에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 35 km, 30–40분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "우치히사르에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 35 km, 30–40분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "우치히사르 → NAV 공항 셔틀",
     "h1": "우치히사르에서 네브셰히르 공항까지 셔틀",
-    "lead": "우치히사르에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 35 km, 주행 시간은 30–40분입니다. 우치히사르 상부의 가파른 골목 때문에 모든 호텔 문 앞까지 차량이 바로 접근하지 못하고 차량이 접근하기 쉬운 픽업 지점이 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "우치히사르에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 35 km, 주행 시간은 30–40분입니다. 우치히사르 상부의 가파른 골목 때문에 모든 호텔 문 앞까지 차량이 바로 접근하지 못하고 차량이 접근하기 쉬운 픽업 지점이 필요할 수 있습니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1878,7 +1879,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1893,7 +1894,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1905,15 +1906,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "우치히사르에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "우치히사르에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 35 km, 30–40분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "우치히사르에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 35 km, 30–40분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "avanos-to-nevsehir-airport-shuttle",
     "title": "아바노스에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "아바노스에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 38 km, 35–50분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "아바노스에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 38 km, 35–50분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "아바노스 → NAV 공항 셔틀",
     "h1": "아바노스에서 네브셰히르 공항까지 셔틀",
-    "lead": "아바노스에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 38 km, 주행 시간은 35–50분입니다. 아바노스 숙소는 여러 구역에 넓게 퍼져 있어 정확한 호텔 이름이 올바른 픽업 지점을 확인하는 데 중요합니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "아바노스에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 38 km, 주행 시간은 35–50분입니다. 아바노스 숙소는 여러 구역에 넓게 퍼져 있어 정확한 호텔 이름이 올바른 픽업 지점을 확인하는 데 중요합니다. 확정된 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1930,7 +1931,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1941,7 +1942,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -1953,15 +1954,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "아바노스에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "아바노스에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 38 km, 35–50분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "아바노스에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 38 km, 35–50분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "ortahisar-to-nevsehir-airport-shuttle",
     "title": "오르타히사르에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "오르타히사르에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 45 km, 40–50분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "오르타히사르에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 45 km, 40–50분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "오르타히사르 → NAV 공항 셔틀",
     "h1": "오르타히사르에서 네브셰히르 공항까지 셔틀",
-    "lead": "오르타히사르에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 45 km, 주행 시간은 40–50분입니다. 오래된 마을의 좁은 도로가 픽업 시작 구간에 영향을 줄 수 있어 확정된 만남 지점이 중요합니다. 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "오르타히사르에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 45 km, 주행 시간은 40–50분입니다. 오래된 마을의 좁은 도로가 픽업 시작 구간에 영향을 줄 수 있어 확정된 만남 지점이 중요합니다. 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1984,7 +1985,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1995,7 +1996,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -2007,15 +2008,15 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "오르타히사르에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "오르타히사르에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 45 km, 40–50분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "오르타히사르에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 45 km, 40–50분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "cavusin-to-nevsehir-airport-shuttle",
     "title": "차우신에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "description": "차우신에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 42 km, 40–55분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션.",
+    "description": "차우신에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 42 km, 40–55분, 호텔 픽업 및 예약 정보.",
     "eyebrow": "차우신 → NAV 공항 셔틀",
     "h1": "차우신에서 네브셰히르 공항까지 셔틀",
-    "lead": "차우신에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 €15의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 42 km, 주행 시간은 40–55분입니다. 차우신 숙소는 큰길, 오래된 마을, 계곡 쪽 구역에 나뉘어 있어 확정된 픽업 지점이 중요합니다. 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
+    "lead": "차우신에서 네브셰히르 공항(NAV)으로 가는 호텔 픽업은 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀 또는 프라이빗 Vito/Sprinter로 예약할 수 있습니다. 일반적인 도로 거리는 약 42 km, 주행 시간은 40–55분입니다. 차우신 숙소는 큰길, 오래된 마을, 계곡 쪽 구역에 나뉘어 있어 확정된 픽업 지점이 중요합니다. 픽업 시간에는 다른 호텔 픽업과 공항 도착 여유 시간도 반영됩니다.",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -2038,7 +2039,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -2053,7 +2054,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "합승 셔틀 대신 이 노선에서 프라이빗 차량을 예약할 수 있나요?",
-        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 €80, Sprinter는 최대 16명까지 €90이며 모두 차량당 요금입니다."
+        "a": "네. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}이며 모두 차량당 요금입니다."
       }
     ],
     "related": [
@@ -2065,12 +2066,12 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "차우신에서 네브셰히르 공항까지 셔틀 | 호텔 픽업",
-    "twitterDescription": "차우신에서 네브셰히르 공항(NAV): 1인 €15 셔틀, 42 km, 40–55분, 호텔 픽업 및 프라이빗 Vito/Sprinter 옵션."
+    "twitterDescription": "차우신에서 네브셰히르 공항(NAV): 합승 셔틀 또는 프라이빗 Vito/Sprinter, 42 km, 40–55분, 호텔 픽업 및 예약 정보."
   },
   {
     "slug": "cappadocia-airport",
     "title": "카파도키아 공항 안내 | NAV·ASR·호텔 셔틀",
-    "description": "카파도키아 공항 안내: 네브셰히르 카파도키아 공항(NAV), 카이세리 공항(ASR), 괴레메 픽업, 1인 €15 셔틀과 프라이빗 옵션.",
+    "description": "카파도키아 공항 안내: 네브셰히르 카파도키아 공항(NAV), 카이세리 공항(ASR), 괴레메 픽업, 합승 셔틀과 프라이빗 옵션을 비교합니다.",
     "eyebrow": "카파도키아 공항 안내",
     "h1": "카파도키아 공항: NAV, ASR와 호텔 픽업",
     "lead": "‘카파도키아 공항’이라는 표현은 네브셰히르 카파도키아 공항(NAV)을 가리킬 수 있지만, 카이세리 공항(ASR)도 카파도키아 여행에 널리 이용됩니다. 예약할 때는 항공권에 표시된 실제 공항 코드가 가장 중요합니다.",
@@ -2086,14 +2087,14 @@ export const koPages: KoSeoPage[] = [
         "heading": "네브셰히르 카파도키아 공항(NAV)",
         "paragraphs": [
           "NAV는 일반적으로 카파도키아 중심부까지의 도로 이동이 더 짧습니다. 합승 셔틀 정차 전 기준으로 괴레메는 약 **40 km / 35–45분**, 우치히사르 35 km / 30–40분, 아바노스 38 km / 35–50분, 차우신 42 km / 40–55분, 오르타히사르 45 km / 40–50분, 위르귀프 50 km / 45–60분입니다.",
-          "[[네브셰히르 공항 셔틀|nevsehir-airport-shuttle]]은 **1인 편도 €15**입니다. 프라이빗 편도 요금은 Vito 최대 5명 €80, Sprinter 최대 16명 €90입니다."
+          "[[네브셰히르 공항 셔틀|nevsehir-airport-shuttle]]은 **1인 편도 {{PRICE:nevsehir:shuttle}}**입니다. 프라이빗 편도 요금은 Vito 최대 5명 {{PRICE:nevsehir:vito}}, Sprinter 최대 16명 {{PRICE:nevsehir:sprinter}}입니다."
         ]
       },
       {
         "heading": "카이세리 공항(ASR)",
         "paragraphs": [
           "ASR은 도로상 더 멀지만 항공편 시간과 좌석 상황에 따라 전체 여행에서는 더 좋은 선택이 될 수 있어 카파도키아 여행에 널리 이용됩니다. 괴레메는 약 **75 km / 60–75분**이며 다른 서비스 지역도 다른 호텔 정차 전 기준으로 대체로 70–80 km 범위입니다.",
-          "[[카이세리 공항 셔틀|kayseri-airport-shuttle]]도 **1인 편도 €15**입니다. 프라이빗 편도는 Vito €90, Sprinter €110입니다. 합승 셔틀 요금이 두 공항에서 같기 때문에 카이세리를 선택한다고 셔틀 요금이 더 비싸지는 않습니다."
+          "[[카이세리 공항 셔틀|kayseri-airport-shuttle]]은 **1인 편도 {{PRICE:kayseri:shuttle}}**입니다. 프라이빗 편도는 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. ASR의 현재 요금과 항공편 시간, 도로 거리를 함께 비교하세요."
         ]
       },
       {
@@ -2105,7 +2106,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "공항에서 호텔: 합승 셔틀 또는 프라이빗 차량",
         "paragraphs": [
-          "1인 €15 셔틀은 괴레메, 위르귀프, 우치히사르, 아바노스, 오르타히사르, 차우신으로 가는 가장 경제적인 기본 옵션입니다. 합승 서비스이므로 다른 승객과 호텔 정차가 포함될 수 있습니다. 전용 차량을 원하면 Vito 또는 Sprinter를 선택할 수 있으며 프라이빗 요금은 1인당이 아니라 차량당입니다.",
+          "합승 셔틀은 괴레메, 위르귀프, 우치히사르, 아바노스, 오르타히사르, 차우신으로 가는 경제적인 기본 옵션입니다. 현재 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV 1인 {{PRICE:nevsehir:shuttle}}입니다. 합승 서비스이므로 다른 승객과 호텔 정차가 포함될 수 있습니다. 전용 차량을 원하면 Vito 또는 Sprinter를 선택할 수 있으며 프라이빗 요금은 1인당이 아니라 차량당입니다.",
           "예약 요청에는 공항, 이동 방향, 항공편 정보, 호텔, WhatsApp 연락처, 승객 이름과 모든 예약에 필요한 여권 번호를 입력합니다. 예약 확인 후 기사에게 현금으로 결제합니다."
         ]
       },
@@ -2137,7 +2138,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "NAV 또는 ASR에서 셔틀 요금은 얼마인가요?",
-        "a": "두 공항 모두 서비스 지역의 중심 호텔까지 1인 편도 €15입니다."
+        "a": "카이세리는 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르는 {{PRICE:nevsehir:shuttle}}이며 두 공항 모두 서비스 지역의 중심 호텔을 운행합니다."
       },
       {
         "q": "NAV Airport는 무슨 뜻인가요?",
@@ -2153,7 +2154,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "NAV로 도착하고 ASR에서 출발할 수 있나요?",
-        "a": "네. 다만 노선과 프라이빗 요금이 다르므로 두 공항 구간을 각각 정확히 확인해야 합니다."
+        "a": "네. 다만 노선과 프라이빗 요금은 공항별로 확인해야 하므로 두 공항 구간을 각각 정확히 확인해야 합니다."
       }
     ],
     "related": [
@@ -2183,7 +2184,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "가장 가까운 공항이 항상 가장 좋은 것은 아닙니다",
         "paragraphs": [
-          "도로 이동이 짧은 것은 장점이지만, 불편한 항공편 시간이나 비싼 연결편이 그 장점을 상쇄할 수 있습니다. 마지막 도로 거리만 보지 말고 출발지부터 전체 여정을 비교하세요. 합승 셔틀은 두 공항 모두 1인 €15라 ASR을 선택한다고 셔틀 요금이 올라가지는 않습니다."
+          "도로 이동이 짧은 것은 장점이지만, 불편한 항공편 시간이나 비싼 연결편이 그 장점을 상쇄할 수 있습니다. 마지막 도로 거리만 보지 말고 출발지부터 전체 여정을 비교하세요. 합승 셔틀은 ASR {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}로 공항별 현재 요금도 함께 비교하세요."
         ]
       },
       {
@@ -2211,9 +2212,9 @@ export const koPages: KoSeoPage[] = [
         ]
       },
       {
-        "heading": "프라이빗은 네브셰히르가 더 저렴하고, 합승 셔틀은 같은 요금입니다",
+        "heading": "공항별 합승 셔틀과 프라이빗 요금 비교",
         "paragraphs": [
-          "합승 셔틀은 두 공항 모두 1인 €15입니다. 프라이빗 요금은 NAV에서 Vito/Sprinter €80/€90, ASR에서 €90/€110입니다. 전용 차량을 원하는 가족이나 그룹에게는 이 차이가 더 중요할 수 있습니다."
+          "합승 셔틀은 NAV 1인 {{PRICE:nevsehir:shuttle}}, ASR {{PRICE:kayseri:shuttle}}입니다. 프라이빗 요금은 NAV에서 Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}, ASR에서 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}입니다. 선택한 공항의 현재 총액을 비교하세요."
         ]
       }
     ],
@@ -2232,7 +2233,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "NAV에서 셔틀이 더 저렴한가요?",
-        "a": "아니요. 합승 셔틀은 두 공항 모두 1인 €15입니다."
+        "a": "현재 합승 셔틀은 카이세리 {{PRICE:kayseri:shuttle}}, 네브셰히르 {{PRICE:nevsehir:shuttle}}/인입니다."
       },
       {
         "q": "우치히사르에 가장 가까운 공항은 어디인가요?",
@@ -2255,10 +2256,10 @@ export const koPages: KoSeoPage[] = [
   {
     "slug": "kayseri-or-nevsehir-airport-for-cappadocia",
     "title": "카파도키아는 카이세리 vs 네브셰히르? | ASR·NAV 비교",
-    "description": "카파도키아 여행에서 카이세리와 네브셰히르 중 어느 공항이 좋을까요? 괴레메 거리, 항공편, 1인 €15 셔틀, 프라이빗 요금을 비교하세요.",
+    "description": "카파도키아 여행에서 카이세리와 네브셰히르 중 어느 공항이 좋은지 거리, 항공편 편의성, 셔틀과 프라이빗 픽업의 현재 요금으로 비교하세요.",
     "eyebrow": "공항 비교",
     "h1": "카파도키아: 카이세리 또는 네브셰히르 공항",
-    "lead": "네브셰히르는 일반적으로 도로상 더 가깝고, 카이세리는 더 편리한 항공편이 있을 때 전체 여행에서 더 나을 수 있습니다. 합승 셔틀은 두 공항 모두 1인 €15이므로 전체 일정을 기준으로 비교하는 것이 좋습니다.",
+    "lead": "네브셰히르는 일반적으로 도로상 더 가깝고, 카이세리는 더 편리한 항공편이 있을 때 전체 여행에서 더 나을 수 있습니다. 합승 셔틀은 NAV {{PRICE:nevsehir:shuttle}}, ASR {{PRICE:kayseri:shuttle}}/인이므로 전체 일정과 현재 요금을 함께 비교하세요.",
     "sections": [
       {
         "heading": "가장 큰 차이는 도로 거리입니다",
@@ -2273,15 +2274,15 @@ export const koPages: KoSeoPage[] = [
         ]
       },
       {
-        "heading": "합승 셔틀은 두 공항 모두 1인 €15",
+        "heading": "공항별 합승 셔틀 요금 비교",
         "paragraphs": [
-          "NAV와 ASR의 합승 셔틀 요금은 동일하게 **1인 편도 €15**입니다. 따라서 합승 셔틀 비용 차이 없이 항공편과 도로 거리를 기준으로 공항을 선택할 수 있습니다."
+          "NAV 합승 셔틀은 **1인 편도 {{PRICE:nevsehir:shuttle}}**, ASR은 **{{PRICE:kayseri:shuttle}}**입니다. 항공편, 도로 거리와 함께 공항별 현재 요금을 비교하세요."
         ]
       },
       {
-        "heading": "프라이빗 요금은 네브셰히르가 더 낮습니다",
+        "heading": "공항별 프라이빗 요금 비교",
         "paragraphs": [
-          "NAV는 Vito €80, Sprinter €90 편도이며 ASR은 Vito €90, Sprinter €110입니다. 가족이나 그룹이 전용 차량을 원한다면 이 차이가 합승 셔틀 이용자보다 더 중요합니다."
+          "NAV는 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}} 편도이며 ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. 가족이나 그룹이 전용 차량을 원한다면 이 차이가 합승 셔틀 이용자보다 더 중요합니다."
         ]
       },
       {
@@ -2293,7 +2294,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "도착과 출발에 다른 공항을 사용할 수도 있습니다",
         "paragraphs": [
-          "NAV로 도착하고 ASR에서 출발하거나 반대로 이용할 수 있습니다. 이 경우 각 구간을 공항별 별도 이동으로 보고 확인해야 합니다. 노선, 픽업 시간, 프라이빗 요금이 다르므로 두 항공편을 모두 보내주세요."
+          "NAV로 도착하고 ASR에서 출발하거나 반대로 이용할 수 있습니다. 이 경우 각 구간을 공항별 별도 이동으로 보고 확인해야 합니다. 노선, 픽업 시간, 프라이빗 요금은 공항별로 확인해야 하므로 두 항공편을 모두 보내주세요."
         ]
       },
       {
@@ -2310,11 +2311,11 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "카이세리에서 셔틀이 더 비싼가요?",
-        "a": "아니요. 합승 셔틀은 두 공항 모두 1인 편도 €15입니다."
+        "a": "현재 합승 셔틀은 카이세리 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
-        "q": "프라이빗 픽업은 어느 공항이 더 저렴한가요?",
-        "a": "네브셰히르입니다. Vito €80, Sprinter €90이며 카이세리는 €90, €110입니다."
+        "q": "두 공항의 프라이빗 픽업 요금은 어떻게 비교하나요?",
+        "a": "현재 편도 차량 요금은 NAV가 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}이고, ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다."
       },
       {
         "q": "한 공항으로 도착하고 다른 공항에서 출발할 수 있나요?",
@@ -2332,32 +2333,32 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카파도키아는 카이세리 vs 네브셰히르? | ASR·NAV 비교",
-    "twitterDescription": "카이세리(ASR)와 네브셰히르(NAV)의 거리, 항공편, 1인 €15 셔틀, 프라이빗 요금을 비교하세요."
+    "twitterDescription": "카파도키아 여행에서 카이세리와 네브셰히르 중 어느 공항이 좋은지 거리, 항공편 편의성, 셔틀과 프라이빗 픽업의 현재 요금으로 비교하세요."
   },
   {
     "slug": "cappadocia-shared-shuttle-vs-private-transfer",
     "title": "카파도키아 합승 공항 셔틀 vs 프라이빗 픽업",
-    "description": "카파도키아 합승 공항 셔틀과 프라이빗 픽업 비교: 1인 €15 또는 차량당 Vito/Sprinter, 정원, 정차, 시간, 서비스 지역.",
+    "description": "카파도키아 합승 공항 셔틀과 프라이빗 픽업을 비교하세요. 현재 요금, Vito/Sprinter, 정원, 호텔 정차, 이동 시간과 서비스 지역을 안내합니다.",
     "eyebrow": "옵션 비교",
     "h1": "카파도키아 합승 공항 셔틀 vs 프라이빗 픽업",
-    "lead": "합승 셔틀은 1인 편도 €15의 경제적인 옵션입니다. 프라이빗 픽업은 차량당 요금이며, 전용 차량을 원하거나 인원이 많고 다른 호텔 정차를 줄이고 싶은 여행자에게 적합합니다.",
+    "lead": "합승 셔틀은 공항별 요금이 적용되는 경제적인 옵션으로, 편도 기준 ASR은 1인 {{PRICE:kayseri:shuttle}}, NAV는 {{PRICE:nevsehir:shuttle}}입니다. 프라이빗 픽업은 차량당 요금이며, 전용 차량을 원하거나 인원이 많고 다른 호텔 정차를 줄이고 싶은 여행자에게 적합합니다.",
     "sections": [
       {
         "heading": "합승 셔틀은 어떻게 운행하나요?",
         "paragraphs": [
-          "합승 셔틀은 항공편과 호텔 방향이 맞는 확정 승객을 함께 배정합니다. 같은 차량에 다른 승객이 있고 여러 숙소에 정차할 수 있습니다. 요금은 카이세리와 네브셰히르 모두 **1인 편도 €15**입니다."
+          "합승 셔틀은 항공편과 호텔 방향이 맞는 확정 승객을 함께 배정합니다. 같은 차량에 다른 승객이 있고 여러 숙소에 정차할 수 있습니다. 요금은 카이세리 **1인 편도 {{PRICE:kayseri:shuttle}}**, 네브셰히르 **{{PRICE:nevsehir:shuttle}}**입니다."
         ]
       },
       {
         "heading": "프라이빗 픽업은 어떻게 다른가요?",
         "paragraphs": [
-          "프라이빗 픽업은 예약한 그룹만을 위한 전용 차량입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 요금은 1인당이 아니라 차량당이며 편도 기준 카이세리 €90/€110, 네브셰히르 €80/€90입니다."
+          "프라이빗 픽업은 예약한 그룹만을 위한 전용 차량입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 요금은 1인당이 아니라 차량당이며 편도 기준 카이세리 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}, 네브셰히르 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}입니다."
         ]
       },
       {
         "heading": "합승 셔틀이 더 잘 맞는 경우",
         "paragraphs": [
-          "1~2명 또는 차량 공유를 괜찮아하는 소규모 그룹은 합승 셔틀이 대체로 가장 경제적입니다. 두 공항에서 요금이 동일하다는 점도 장점입니다."
+          "1~2명 또는 차량 공유를 괜찮아하는 소규모 그룹은 합승 셔틀이 대체로 가장 경제적입니다. 다만 ASR과 NAV 요금은 별도로 관리되므로 예약할 공항의 현재 요금을 확인하세요."
         ]
       },
       {
@@ -2381,7 +2382,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "총요금은 그룹 인원에 따라 달라집니다",
         "paragraphs": [
-          "합승 셔틀은 1인 €15에 승객 수와 구간 수를 곱합니다. 프라이빗은 선택한 차량 정원 안에서 차량 요금을 적용합니다. 왕복은 정확히 편도 요금의 두 배입니다."
+          "합승 셔틀은 선택한 공항의 1인 편도 요금(ASR {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}})에 승객 수와 구간 수를 곱합니다. 프라이빗은 선택한 차량 정원 안에서 차량 요금을 적용합니다. 왕복은 정확히 편도 요금의 두 배입니다."
         ]
       },
       {
@@ -2394,7 +2395,7 @@ export const koPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "1명이 이용할 때 가장 저렴한 옵션은 무엇인가요?",
-        "a": "대부분 1인 편도 €15의 합승 셔틀이 가장 저렴합니다."
+        "a": "대부분 합승 셔틀이 가장 저렴하며, 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "프라이빗 픽업도 1인당 요금인가요?",
@@ -2423,7 +2424,7 @@ export const koPages: KoSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "카파도키아 합승 공항 셔틀 vs 프라이빗 픽업",
-    "twitterDescription": "1인 €15 합승 셔틀과 차량당 Vito/Sprinter 프라이빗 픽업의 정원, 정차, 시간, 서비스 지역을 비교하세요."
+    "twitterDescription": "카파도키아 합승 공항 셔틀과 프라이빗 픽업을 비교하세요. 현재 요금, Vito/Sprinter, 정원, 호텔 정차, 이동 시간과 서비스 지역을 안내합니다."
   },
   {
     "slug": "cappadocia-cave-hotel-airport-transfer",
@@ -2466,7 +2467,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "합승 셔틀 또는 프라이빗 Vito",
         "paragraphs": [
-          "합승 셔틀은 1인 €15이고 당일 승객 수에 따라 더 큰 차량을 사용할 수 있습니다. 프라이빗 Vito가 일부 골목에서는 더 편리할 수 있지만 문 앞 접근을 보장하지는 않습니다. 최종 지점은 실제 도로와 안전한 정차 가능 여부에 따라 결정됩니다."
+          "합승 셔틀은 1인 기준으로 공항별 요금이 적용되며(ASR {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}), 당일 승객 수에 따라 더 큰 차량을 사용할 수 있습니다. 프라이빗 Vito가 일부 골목에서는 더 편리할 수 있지만 문 앞 접근을 보장하지는 않습니다. 최종 지점은 실제 도로와 안전한 정차 가능 여부에 따라 결정됩니다."
         ]
       }
     ],
@@ -2504,7 +2505,7 @@ export const koPages: KoSeoPage[] = [
   {
     "slug": "istanbul-to-cappadocia",
     "title": "이스탄불에서 카파도키아 | 항공편·공항 셔틀 안내",
-    "description": "이스탄불에서 카파도키아: IST/SAW에서 카이세리 ASR 또는 네브셰히르 NAV로 비행 후 1인 €15 공항 셔틀로 호텔까지 이동.",
+    "description": "이스탄불에서 카파도키아로 이동할 때 IST/SAW에서 카이세리 ASR 또는 네브셰히르 NAV로 비행한 뒤 예약한 공항 셔틀로 호텔까지 이동하세요.",
     "eyebrow": "항공편 + 픽업 가이드",
     "h1": "이스탄불에서 카파도키아: 항공편과 공항 픽업",
     "lead": "대부분의 여행자는 이스탄불에서 카이세리(ASR) 또는 네브셰히르(NAV)로 비행한 뒤 사전 예약한 공항 셔틀로 호텔까지 이동하는 것이 가장 효율적입니다.",
@@ -2518,7 +2519,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "전체 일정을 기준으로 ASR 또는 NAV를 선택하세요",
         "paragraphs": [
-          "NAV는 많은 카파도키아 호텔에 도로상 더 가깝고, ASR은 더 긴 도로 이동을 감수할 만큼 항공편 시간이나 운임이 좋을 수 있습니다. 합승 셔틀은 두 공항 모두 €15이므로 먼저 항공편을 비교하세요."
+          "NAV는 많은 카파도키아 호텔에 도로상 더 가깝고, ASR은 더 긴 도로 이동을 감수할 만큼 항공편 시간이나 운임이 좋을 수 있습니다. 합승 셔틀은 NAV {{PRICE:nevsehir:shuttle}}, ASR {{PRICE:kayseri:shuttle}}이므로 항공편과 현재 요금을 함께 비교하세요."
         ]
       },
       {
@@ -2567,7 +2568,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "도착 후 셔틀 요금은 얼마인가요?",
-        "a": "ASR 또는 NAV에서 1인 €15입니다."
+        "a": "ASR은 1인 {{PRICE:kayseri:shuttle}}, NAV는 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "이스탄불 출발 항공편 번호로 셔틀을 예약하나요?",
@@ -2591,7 +2592,7 @@ export const koPages: KoSeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "이스탄불에서 카파도키아: 항공편·공항 픽업 안내",
-    "twitterDescription": "이스탄불(IST/SAW)에서 카이세리(ASR) 또는 네브셰히르(NAV)로 비행 후 서비스 지역 호텔까지 1인 €15 셔틀."
+    "twitterDescription": "이스탄불에서 카파도키아로 이동할 때 IST/SAW에서 카이세리 ASR 또는 네브셰히르 NAV로 비행한 뒤 예약한 공항 셔틀로 호텔까지 이동하세요."
   },
   {
     "slug": "cappadocia-to-istanbul",
@@ -2610,7 +2611,7 @@ export const koPages: KoSeoPage[] = [
       {
         "heading": "출발 항공편을 기준으로 NAV 또는 ASR를 선택하세요",
         "paragraphs": [
-          "NAV는 괴레메, 우치히사르 등 중심 지역에 일반적으로 더 가깝습니다. ASR은 더 멀지만 더 좋은 항공편 시간이나 운임이 있을 수 있습니다. 호텔 → 공항 합승 셔틀은 두 공항 모두 **1인 €15**이며, 프라이빗 Vito/Sprinter 요금은 NAV €80/€90, ASR €90/€110입니다.",
+          "NAV는 괴레메, 우치히사르 등 중심 지역에 일반적으로 더 가깝습니다. ASR은 더 멀지만 더 좋은 항공편 시간이나 운임이 있을 수 있습니다. 호텔 → 공항 합승 셔틀은 **NAV 1인 {{PRICE:nevsehir:shuttle}}**, **ASR {{PRICE:kayseri:shuttle}}**이며, 프라이빗 Vito/Sprinter 요금은 NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}, ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}입니다.",
           "아직 출발 공항을 정하지 않았다면 항공권 구매 전에 [[카파도키아에서 가장 가까운 공항|nearest-airport-to-cappadocia]]과 [[카이세리 또는 네브셰히르 공항|kayseri-or-nevsehir-airport-for-cappadocia]]을 비교하세요."
         ]
       },
@@ -2660,7 +2661,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "호텔에서 공항까지 셔틀은 얼마인가요?",
-        "a": "서비스 지역 호텔에서 NAV 또는 ASR까지 1인 편도 €15입니다."
+        "a": "서비스 지역 호텔에서 NAV까지는 1인 편도 {{PRICE:nevsehir:shuttle}}, ASR까지는 {{PRICE:kayseri:shuttle}}입니다."
       },
       {
         "q": "이스탄불행 항공편을 위해 프라이빗 호텔 픽업을 예약할 수 있나요?",
@@ -2668,7 +2669,7 @@ export const koPages: KoSeoPage[] = [
       },
       {
         "q": "도착할 때와 다른 공항에서 출발할 수 있나요?",
-        "a": "네. 다만 노선과 프라이빗 요금이 다르므로 각 공항 구간을 정확히 확인해야 합니다."
+        "a": "네. 다만 노선과 프라이빗 요금은 공항별로 확인해야 하므로 각 공항 구간을 정확히 확인해야 합니다."
       },
       {
         "q": "카파도키아 셔틀 양식에 이스탄불 공항 코드를 넣어야 하나요?",
@@ -2683,9 +2684,11 @@ export const koPages: KoSeoPage[] = [
       "cappadocia-to-kayseri-airport-shuttle"
     ],
     "twitterTitle": "카파도키아에서 이스탄불: 호텔 셔틀·항공편",
-    "twitterDescription": "서비스 지역 호텔에서 카이세리(ASR) 또는 네브셰히르(NAV)까지 1인 €15부터 픽업 후 이스탄불행 항공편 이용. 프라이빗 Vito/Sprinter 가능."
+    "twitterDescription": "카파도키아에서 이스탄불: 호텔에서 NAV 또는 ASR로 셔틀, 항공편 계획, 도로 거리와 공항 픽업 시간 안내."
   }
 ];
+
+export const koPages: KoSeoPage[] = resolvePriceTokensDeep(rawKoPages);
 
 export const koPageBySlug = new Map(koPages.map((page) => [page.slug, page]));
 export function koPrettySlug(slug:string){ const page=koPageBySlug.get(slug); return page?.h1 || slug.split('-').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(' '); }

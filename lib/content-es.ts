@@ -1,4 +1,5 @@
 import { towns } from './site';
+import { resolvePriceTokensDeep } from './price-content';
 
 export type EsContentSection = { heading: string; paragraphs: string[]; bullets?: string[] };
 export type EsFaqItem = { q: string; a: string };
@@ -13,19 +14,19 @@ export const townNamesEs: Record<keyof typeof towns, string> = {
   "cavusin": "Cavusin"
 };
 
-export const esPages: EsSeoPage[] = [
+const rawEsPages: EsSeoPage[] = [
   {
     "slug": "cappadocia-shuttle-transfer",
     "title": "Shuttle en Capadocia | Traslado compartido desde el aeropuerto",
     "description": "Reserva un shuttle compartido en Capadocia desde Kayseri (ASR) o Nevsehir (NAV) a Goreme, Urgup y otras zonas. Reserva por WhatsApp.",
     "eyebrow": "Shuttle compartido desde el aeropuerto",
     "h1": "Shuttle compartido en Capadocia",
-    "lead": "El shuttle compartido de Capadocia conecta los aeropuertos de Kayseri (ASR) y Nevsehir (NAV) con hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. La tarifa es de €15 por persona y trayecto, con recogida y llegada coordinadas según tu vuelo.",
+    "lead": "El shuttle compartido de Capadocia conecta los aeropuertos de Kayseri (ASR) y Nevsehir (NAV) con hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. La tarifa de ida es de {{PRICE:kayseri:shuttle}} por persona desde Kayseri y {{PRICE:nevsehir:shuttle}} desde Nevsehir, con recogida y llegada coordinadas según tu vuelo.",
     "sections": [
       {
         "heading": "Qué incluye",
         "paragraphs": [
-          "El servicio incluye un trayecto compartido desde cualquiera de los dos aeropuertos hasta tu alojamiento. El vuelo, los datos de los pasajeros y el nombre del hotel se confirman con antelación. En el mismo servicio puede haber otros pasajeros confirmados y paradas en otros hoteles; así es posible mantener la tarifa en €15 por persona."
+          "El servicio incluye un trayecto compartido desde cualquiera de los dos aeropuertos hasta tu alojamiento. El vuelo, los datos de los pasajeros y el nombre del hotel se confirman con antelación. En el mismo servicio puede haber otros pasajeros confirmados y paradas en otros hoteles; la tarifa actual de ida es de {{PRICE:kayseri:shuttle}} por persona desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV."
         ]
       },
       {
@@ -50,7 +51,7 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿Cuánto cuesta el shuttle compartido en Capadocia?",
-        "a": "€15 por persona y trayecto desde ASR o NAV hasta las zonas de hotel incluidas en el servicio."
+        "a": "Desde ASR cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto; desde NAV, {{PRICE:nevsehir:shuttle}} hasta las zonas de hotel incluidas en el servicio."
       },
       {
         "q": "¿Qué aeropuertos están incluidos?",
@@ -81,7 +82,7 @@ export const esPages: EsSeoPage[] = [
   {
     "slug": "cappadocia-airport-transfer",
     "title": "Traslado del aeropuerto a Capadocia | Kayseri y Nevsehir",
-    "description": "Traslado a Capadocia desde Kayseri (ASR) y Nevsehir (NAV): shuttle €15 o Vito/Sprinter privado. Recogida y llegada al hotel. Reserva por WhatsApp.",
+    "description": "Traslado a Capadocia desde Kayseri (ASR) y Nevsehir (NAV): shuttle compartido o Vito/Sprinter privado, con recogida y llegada al hotel. Reserva por WhatsApp.",
     "eyebrow": "Servicio de traslado desde el aeropuerto",
     "h1": "Traslado del aeropuerto a Capadocia",
     "lead": "Un traslado de aeropuerto en Capadocia cambia según el aeropuerto de llegada, la localidad del hotel y el sentido del viaje. Empieza por elegir el aeropuerto y después la zona del alojamiento; a partir de ahí se define la ruta correcta.",
@@ -95,7 +96,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Shuttle compartido o traslado privado",
         "paragraphs": [
-          "El [[shuttle compartido|cappadocia-shuttle-transfer]] cuesta €15 por persona y trayecto desde cualquiera de los dos aeropuertos, con reserva previa y confirmación por WhatsApp. En el mismo servicio puede haber otros pasajeros y paradas en diferentes hoteles. Si quieres un vehículo exclusivo, el [[traslado privado|private-airport-transfer-cappadocia]] se realiza con Vito (hasta 5 pasajeros) o Sprinter (hasta 16), con precio por vehículo y tarifas distintas para Kayseri y Nevsehir. Si estás comparando ambas opciones, consulta [[shuttle compartido frente a traslado privado|cappadocia-shared-shuttle-vs-private-transfer]] para ver precio, cobertura y tiempos lado a lado."
+          "El [[shuttle compartido|cappadocia-shuttle-transfer]] cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto desde Kayseri (ASR) y {{PRICE:nevsehir:shuttle}} desde Nevsehir (NAV), con reserva previa y confirmación por WhatsApp. En el mismo servicio puede haber otros pasajeros y paradas en diferentes hoteles. Si quieres un vehículo exclusivo, el [[traslado privado|private-airport-transfer-cappadocia]] se realiza con Vito (hasta 5 pasajeros) o Sprinter (hasta 16), con precio por vehículo y tarifas gestionadas por separado para Kayseri y Nevsehir. Si estás comparando ambas opciones, consulta [[shuttle compartido frente a traslado privado|cappadocia-shared-shuttle-vs-private-transfer]] para ver precio, cobertura y tiempos lado a lado."
         ]
       },
       {
@@ -113,7 +114,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Tamaño del grupo y capacidad del vehículo",
         "paragraphs": [
-          "Un Vito admite hasta 5 pasajeros y un Sprinter hasta 16. Los traslados privados se cobran por vehículo, por lo que en grupos grandes el coste por persona de un Sprinter puede ser inferior al del shuttle. Conviene comparar ambas opciones antes de reservar, especialmente desde Nevsehir, donde las tarifas privadas son más bajas."
+          "Un Vito admite hasta 5 pasajeros y un Sprinter hasta 16. Los traslados privados se cobran por vehículo, por lo que en grupos grandes el coste por persona de un Sprinter puede ser inferior al del shuttle. Como las tarifas privadas se gestionan por aeropuerto, conviene comparar los precios actuales de ASR y NAV para el grupo antes de reservar."
         ]
       },
       {
@@ -138,7 +139,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo llegar por un aeropuerto y salir por el otro?",
-        "a": "Sí. Envía ambos vuelos por WhatsApp para confirmar cada sentido por separado, ya que la ruta y el precio cambian según el aeropuerto."
+        "a": "Sí. Envía ambos vuelos por WhatsApp para confirmar cada sentido por separado, ya que la ruta y el precio se confirman según el aeropuerto correspondiente."
       },
       {
         "q": "¿Qué aeropuerto está más cerca de mi hotel, Kayseri o Nevsehir?",
@@ -169,10 +170,10 @@ export const esPages: EsSeoPage[] = [
   {
     "slug": "private-airport-transfer-cappadocia",
     "title": "Traslado privado en Capadocia | Vito y Sprinter",
-    "description": "Traslado privado en Capadocia: Kayseri Vito €90 / Sprinter €110; Nevsehir Vito €80 / Sprinter €90. Hasta 5 o 16 pasajeros. Pago en efectivo al conductor.",
+    "description": "Traslado privado en Capadocia desde Kayseri (ASR) y Nevsehir (NAV), con Vito para hasta 5 pasajeros o Sprinter para hasta 16. Pago en efectivo al conductor.",
     "eyebrow": "Vehículo exclusivo",
     "h1": "Traslado privado desde el Aeropuerto en Capadocia",
-    "lead": "Aeropuerto de Kayseri: **Vito €90**, **Sprinter €110** por trayecto. Aeropuerto de Nevsehir: **Vito €80**, **Sprinter €90**. Son precios por vehículo, no por pasajero. Ida y vuelta: €180/€220 desde Kayseri y €160/€180 desde Nevsehir.",
+    "lead": "Aeropuerto de Kayseri: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}** por trayecto. Aeropuerto de Nevsehir: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. Son precios por vehículo, no por pasajero. Ida y vuelta: {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}} desde Kayseri y {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}} desde Nevsehir.",
     "sections": [
       {
         "heading": "Mercedes Vito: hasta 5 pasajeros",
@@ -183,13 +184,13 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Mercedes Sprinter: hasta 16 pasajeros",
         "paragraphs": [
-          "El Sprinter es la opción privada de mayor capacidad para grupos de hasta 16 personas. El precio cambia según el aeropuerto: €110 desde Kayseri y €90 desde Nevsehir por trayecto. Comprueba el total después de seleccionar ASR o NAV en el formulario de reserva."
+          "El Sprinter es la opción privada de mayor capacidad para grupos de hasta 16 personas. El precio se gestiona por aeropuerto: {{PRICE:kayseri:sprinter}} desde Kayseri y {{PRICE:nevsehir:sprinter}} desde Nevsehir por trayecto. Comprueba el total después de seleccionar ASR o NAV en el formulario de reserva."
         ]
       },
       {
         "heading": "Cuándo conviene más un traslado privado que el shuttle",
         "paragraphs": [
-          "El traslado privado resulta especialmente útil para grupos grandes, salidas tempranas, llegadas tardías, familias con más equipaje, viajeros que prefieren una ruta directa al hotel o alojamientos fuera del área del shuttle compartido. Para una o dos personas con horarios flexibles, el [[shuttle de €15|cappadocia-shuttle-transfer]] suele ofrecer mejor relación calidad-precio."
+          "El traslado privado resulta especialmente útil para grupos grandes, salidas tempranas, llegadas tardías, familias con más equipaje, viajeros que prefieren una ruta directa al hotel o alojamientos fuera del área del shuttle compartido. Para una o dos personas con horarios flexibles, el [[shuttle compartido|cappadocia-shuttle-transfer]] suele ofrecer mejor relación calidad-precio; la tarifa actual por trayecto es de {{PRICE:kayseri:shuttle}} desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV."
         ]
       },
       {
@@ -208,19 +209,19 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿Cuánto cuesta un Vito privado desde Kayseri?",
-        "a": "€90 por trayecto y vehículo, para hasta 5 pasajeros."
+        "a": "{{PRICE:kayseri:vito}} por trayecto y vehículo, para hasta 5 pasajeros."
       },
       {
         "q": "¿Cuánto cuesta un Vito privado desde Nevsehir?",
-        "a": "€80 por trayecto y vehículo, para hasta 5 pasajeros."
+        "a": "{{PRICE:nevsehir:vito}} por trayecto y vehículo, para hasta 5 pasajeros."
       },
       {
         "q": "¿Cuánto cuesta un Sprinter desde Kayseri?",
-        "a": "€110 por trayecto y vehículo, para hasta 16 pasajeros."
+        "a": "{{PRICE:kayseri:sprinter}} por trayecto y vehículo, para hasta 16 pasajeros."
       },
       {
         "q": "¿Cuánto cuesta un Sprinter desde Nevsehir?",
-        "a": "€90 por trayecto y vehículo, para hasta 16 pasajeros."
+        "a": "{{PRICE:nevsehir:sprinter}} por trayecto y vehículo, para hasta 16 pasajeros."
       },
       {
         "q": "¿Cuánto cuesta ida y vuelta?",
@@ -250,41 +251,41 @@ export const esPages: EsSeoPage[] = [
   {
     "slug": "airport-transfer-prices",
     "title": "Precios de traslado en Capadocia | Shuttle, Vito y Sprinter",
-    "description": "Precios de traslado en Capadocia: shuttle €15/persona/trayecto. Kayseri Vito €90, Sprinter €110. Nevsehir Vito €80, Sprinter €90. Ida y vuelta al doble.",
+    "description": "Consulta los precios actuales de traslado en Capadocia para shuttle compartido, Vito y Sprinter desde Kayseri y Nevsehir. Opciones de ida y vuelta.",
     "twitterTitle": "Precios de traslado en Capadocia | Shuttle, Vito y Sprinter",
-    "twitterDescription": "Shuttle €15/persona. Kayseri Vito €90, Sprinter €110. Nevsehir Vito €80, Sprinter €90. Ida y vuelta exactamente al doble.",
+    "twitterDescription": "Consulta los precios actuales de traslado en Capadocia para shuttle compartido, Vito y Sprinter desde Kayseri y Nevsehir. Opciones de ida y vuelta.",
     "eyebrow": "Tarifas claras",
     "h1": "Precios de traslado desde el Aeropuerto en Capadocia",
-    "lead": "El shuttle cuesta €15 por persona y trayecto desde ambos aeropuertos. Los traslados privados se cobran por vehículo y tienen tarifas diferentes en Kayseri y Nevsehir.",
+    "lead": "El shuttle compartido cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto desde Kayseri (ASR) y {{PRICE:nevsehir:shuttle}} desde Nevsehir (NAV). Los traslados privados se cobran por vehículo y también varían según el aeropuerto.",
     "sections": [
       {
         "heading": "Precio del shuttle compartido",
         "paragraphs": [
-          "Aeropuerto de Kayseri (ASR) → hoteles incluidos en Capadocia: **€15 por persona y trayecto**. Aeropuerto de Nevsehir (NAV) → hoteles incluidos: **€15 por persona y trayecto**. Del hotel al aeropuerto cuesta lo mismo. Ida y vuelta son €30 por persona. Consulta todos los detalles en la [[página del shuttle|cappadocia-shuttle-transfer]]."
+          "Aeropuerto de Kayseri (ASR) → hoteles incluidos en Capadocia: **{{PRICE:kayseri:shuttle}} por persona y trayecto**. Aeropuerto de Nevsehir (NAV) → hoteles incluidos: **{{PRICE:nevsehir:shuttle}} por persona y trayecto**. Del hotel al aeropuerto se aplica la misma tarifa específica de ese aeropuerto. Ida y vuelta son {{PRICE:kayseri:shuttle:roundTrip}} desde Kayseri y {{PRICE:nevsehir:shuttle:roundTrip}} desde Nevsehir por persona. Consulta todos los detalles en la [[página del shuttle|cappadocia-shuttle-transfer]]."
         ]
       },
       {
         "heading": "Precios privados desde el Aeropuerto de Kayseri",
         "paragraphs": [
-          "Mercedes Vito, máximo 5 pasajeros: **€90 ida / €180 ida y vuelta**. Mercedes Sprinter, máximo 16 pasajeros: **€110 ida / €220 ida y vuelta**."
+          "Mercedes Vito, máximo 5 pasajeros: **{{PRICE:kayseri:vito}} ida / {{PRICE:kayseri:vito:roundTrip}} ida y vuelta**. Mercedes Sprinter, máximo 16 pasajeros: **{{PRICE:kayseri:sprinter}} ida / {{PRICE:kayseri:sprinter:roundTrip}} ida y vuelta**."
         ]
       },
       {
         "heading": "Precios privados desde el Aeropuerto de Nevsehir",
         "paragraphs": [
-          "Mercedes Vito, máximo 5 pasajeros: **€80 ida / €160 ida y vuelta**. Mercedes Sprinter, máximo 16 pasajeros: **€90 ida / €180 ida y vuelta**. Consulta la [[página de traslado privado|private-airport-transfer-cappadocia]] para ver los vehículos y cuándo puede convenir más un servicio privado que el shuttle."
+          "Mercedes Vito, máximo 5 pasajeros: **{{PRICE:nevsehir:vito}} ida / {{PRICE:nevsehir:vito:roundTrip}} ida y vuelta**. Mercedes Sprinter, máximo 16 pasajeros: **{{PRICE:nevsehir:sprinter}} ida / {{PRICE:nevsehir:sprinter:roundTrip}} ida y vuelta**. Consulta la [[página de traslado privado|private-airport-transfer-cappadocia]] para ver los vehículos y cuándo puede convenir más un servicio privado que el shuttle."
         ]
       },
       {
         "heading": "Precio por persona frente a precio por vehículo",
         "paragraphs": [
-          "El total del shuttle aumenta con el número de pasajeros porque se cobra por persona. El traslado privado se cobra por vehículo, siempre que el grupo quepa en la categoría elegida: Vito hasta 5 personas y Sprinter hasta 16. Por eso, para un grupo grande un Sprinter puede resultar más económico por persona que el shuttle, aunque su precio por vehículo parezca mayor a primera vista. Además, no existe una única tarifa privada: al elegir NAV, Vito cuesta €80 y Sprinter €90; con ASR, €90 y €110. Revisa el total después de seleccionar el aeropuerto."
+          "El total del shuttle aumenta con el número de pasajeros porque se cobra por persona. El traslado privado se cobra por vehículo, siempre que el grupo quepa en la categoría elegida: Vito hasta 5 personas y Sprinter hasta 16. Por eso, para un grupo grande un Sprinter puede resultar más económico por persona que el shuttle, aunque su precio por vehículo parezca mayor a primera vista. Además, no existe una única tarifa privada: al elegir NAV, Vito cuesta {{PRICE:nevsehir:vito}} y Sprinter {{PRICE:nevsehir:sprinter}}; con ASR, {{PRICE:kayseri:vito}} y {{PRICE:kayseri:sprinter}}. Revisa el total después de seleccionar el aeropuerto."
         ]
       },
       {
         "heading": "Ejemplos de total según el tamaño del grupo",
         "paragraphs": [
-          "Dos personas en un shuttle de ida pagan €30 en total. Cinco personas, €75. Seis personas pagan €90 en un shuttle de ida, el mismo precio que un Sprinter desde Nevsehir. El Vito de Kayseri también cuesta €90, pero admite un máximo de 5 pasajeros, así que no sirve para un grupo de seis. Hay que comparar el tamaño del grupo y la capacidad del vehículo, no solo el precio destacado."
+          "Por ejemplo, en el shuttle de Nevsehir dos personas pagan {{PRICE:nevsehir:shuttle:x2}} en total por un trayecto, cinco pagan {{PRICE:nevsehir:shuttle:x5}} y seis pagan {{PRICE:nevsehir:shuttle:x6}}. Compáralo con un Sprinter desde Nevsehir por {{PRICE:nevsehir:sprinter}} por vehículo. El Vito de Kayseri cuesta {{PRICE:kayseri:vito}}, pero admite un máximo de 5 pasajeros, así que no sirve para un grupo de seis. Hay que comparar el tamaño del grupo y la capacidad del vehículo, no solo el precio destacado."
         ]
       },
       {
@@ -297,27 +298,27 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿Cuánto cuesta el shuttle del aeropuerto en Capadocia?",
-        "a": "€15 por persona y trayecto desde los aeropuertos de Kayseri y Nevsehir."
+        "a": "Kayseri cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto; Nevsehir, {{PRICE:nevsehir:shuttle}}."
       },
       {
         "q": "¿Cuánto cuesta el shuttle de ida y vuelta?",
-        "a": "€30 por persona."
+        "a": "Ida y vuelta cuesta {{PRICE:kayseri:shuttle:roundTrip}} por persona desde Kayseri y {{PRICE:nevsehir:shuttle:roundTrip}} desde Nevsehir."
       },
       {
         "q": "¿Cuánto cuesta el Vito desde Kayseri?",
-        "a": "€90 ida; €180 ida y vuelta."
+        "a": "{{PRICE:kayseri:vito}} ida; {{PRICE:kayseri:vito:roundTrip}} ida y vuelta."
       },
       {
         "q": "¿Cuánto cuesta el Sprinter desde Kayseri?",
-        "a": "€110 ida; €220 ida y vuelta."
+        "a": "{{PRICE:kayseri:sprinter}} ida; {{PRICE:kayseri:sprinter:roundTrip}} ida y vuelta."
       },
       {
         "q": "¿Cuánto cuesta el Vito desde Nevsehir?",
-        "a": "€80 ida; €160 ida y vuelta."
+        "a": "{{PRICE:nevsehir:vito}} ida; {{PRICE:nevsehir:vito:roundTrip}} ida y vuelta."
       },
       {
         "q": "¿Cuánto cuesta el Sprinter desde Nevsehir?",
-        "a": "€90 ida; €180 ida y vuelta."
+        "a": "{{PRICE:nevsehir:sprinter}} ida; {{PRICE:nevsehir:sprinter:roundTrip}} ida y vuelta."
       },
       {
         "q": "¿Los precios privados son por persona?",
@@ -353,10 +354,10 @@ export const esPages: EsSeoPage[] = [
   {
     "slug": "kayseri-airport-shuttle",
     "title": "Shuttle del Aeropuerto de Kayseri a Capadocia | Hoteles y aeropuerto",
-    "description": "Shuttle desde el Aeropuerto de Kayseri (ASR) a hoteles de Capadocia: €15 por persona, pago al conductor, Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar.",
+    "description": "Shuttle desde el Aeropuerto de Kayseri (ASR) a hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. Compartido o privado; pago al conductor.",
     "eyebrow": "Shuttle desde ASR",
     "h1": "Shuttle del Aeropuerto de Kayseri a Capadocia",
-    "lead": "Reserva el shuttle compartido de €15 por persona desde el Aeropuerto de Kayseri Erkilet hasta alojamientos incluidos en Capadocia, con los detalles del encuentro coordinados según tu vuelo y confirmados por WhatsApp.",
+    "lead": "Reserva el shuttle compartido de {{PRICE:kayseri:shuttle}} por persona desde el Aeropuerto de Kayseri Erkilet hasta alojamientos incluidos en Capadocia, con los detalles del encuentro coordinados según tu vuelo y confirmados por WhatsApp.",
     "sections": [
       {
         "heading": "Shuttle desde Kayseri: la puerta de entrada por carretera más larga a Capadocia",
@@ -365,9 +366,9 @@ export const esPages: EsSeoPage[] = [
         ]
       },
       {
-        "heading": "La tarifa compartida sigue siendo €15 desde ASR",
+        "heading": "La tarifa compartida sigue siendo {{PRICE:kayseri:shuttle}} desde ASR",
         "paragraphs": [
-          "El shuttle compartido desde Kayseri cuesta **€15 por persona y trayecto** y **€30 ida y vuelta**. La tarifa se mantiene en €15 aunque ASR esté más lejos. Quien prefiera un vehículo exclusivo puede elegir Vito por €90 o Sprinter por €110 por trayecto y vehículo."
+          "El shuttle compartido desde Kayseri cuesta **{{PRICE:kayseri:shuttle}} por persona y trayecto** y **{{PRICE:kayseri:shuttle:roundTrip}} ida y vuelta**. La tarifa se mantiene en {{PRICE:kayseri:shuttle}} aunque ASR esté más lejos. Quien prefiera un vehículo exclusivo puede elegir Vito por {{PRICE:kayseri:vito}} o Sprinter por {{PRICE:kayseri:sprinter}} por trayecto y vehículo."
         ]
       },
       {
@@ -385,14 +386,14 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "El regreso a ASR tiene su propio plan de recogida",
         "paragraphs": [
-          "La tarifa compartida de €15 también se aplica desde los hoteles incluidos hasta el Aeropuerto de Kayseri. El regreso no es simplemente el horario de llegada al revés: utiliza el vuelo de salida y la información de [[Capadocia al Aeropuerto de Kayseri|cappadocia-to-kayseri-airport-shuttle]], y ajusta la recogida a la localidad real de tu hotel."
+          "La tarifa compartida de {{PRICE:kayseri:shuttle}} también se aplica desde los hoteles incluidos hasta el Aeropuerto de Kayseri. El regreso no es simplemente el horario de llegada al revés: utiliza el vuelo de salida y la información de [[Capadocia al Aeropuerto de Kayseri|cappadocia-to-kayseri-airport-shuttle]], y ajusta la recogida a la localidad real de tu hotel."
         ]
       }
     ],
     "faq": [
       {
         "q": "¿Cuánto cuesta el shuttle del Aeropuerto de Kayseri a Capadocia?",
-        "a": "€15 por persona y trayecto; ida y vuelta cuesta €30 por persona."
+        "a": "{{PRICE:kayseri:shuttle}} por persona y trayecto; ida y vuelta cuesta {{PRICE:kayseri:shuttle:roundTrip}} por persona."
       },
       {
         "q": "¿Cuánto se tarda por carretera de ASR a Goreme?",
@@ -400,7 +401,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Cuáles son los precios privados desde Kayseri?",
-        "a": "Vito €90 y Sprinter €110 por trayecto y vehículo."
+        "a": "Vito {{PRICE:kayseri:vito}} y Sprinter {{PRICE:kayseri:sprinter}} por trayecto y vehículo."
       },
       {
         "q": "¿Qué localidades hoteleras cubre el servicio desde ASR?",
@@ -423,15 +424,15 @@ export const esPages: EsSeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Capadocia",
-    "twitterDescription": "Shuttle compartido por €15 por persona desde Kayseri (ASR) a Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. Pago en efectivo al conductor."
+    "twitterDescription": "Shuttle desde el Aeropuerto de Kayseri (ASR) a hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. Compartido o privado; pago al conductor."
   },
   {
     "slug": "nevsehir-airport-shuttle",
     "title": "Shuttle del Aeropuerto de Nevsehir a Capadocia | Hoteles y aeropuerto",
-    "description": "Shuttle desde el Aeropuerto de Nevsehir (NAV) a hoteles de Capadocia: €15 por persona, pago al conductor, Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar.",
+    "description": "Shuttle desde el Aeropuerto de Nevsehir (NAV) a hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. Compartido o privado; pago al conductor.",
     "eyebrow": "Shuttle desde NAV",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Capadocia",
-    "lead": "Reserva el shuttle compartido de €15 por persona desde el Aeropuerto Nevsehir Kapadokya hasta alojamientos incluidos en Capadocia, con los detalles del encuentro coordinados según tu vuelo y confirmados por WhatsApp.",
+    "lead": "Reserva el shuttle compartido de {{PRICE:nevsehir:shuttle}} por persona desde el Aeropuerto Nevsehir Kapadokya hasta alojamientos incluidos en Capadocia, con los detalles del encuentro coordinados según tu vuelo y confirmados por WhatsApp.",
     "sections": [
       {
         "heading": "Shuttle desde Nevsehir: la opción por carretera más corta para muchas zonas centrales",
@@ -440,9 +441,9 @@ export const esPages: EsSeoPage[] = [
         ]
       },
       {
-        "heading": "El shuttle compartido desde NAV cuesta €15 por persona",
+        "heading": "El shuttle compartido desde NAV cuesta {{PRICE:nevsehir:shuttle}} por persona",
         "paragraphs": [
-          "El shuttle compartido desde Nevsehir cuesta **€15 por persona y trayecto** y **€30 ida y vuelta**. Las tarifas privadas son más bajas que desde ASR: Vito €80 y Sprinter €90 por trayecto y vehículo."
+          "El shuttle compartido desde Nevsehir cuesta **{{PRICE:nevsehir:shuttle}} por persona y trayecto** y **{{PRICE:nevsehir:shuttle:roundTrip}} ida y vuelta**. Las tarifas privadas se gestionan por aeropuerto: desde NAV, Vito cuesta {{PRICE:nevsehir:vito}} y Sprinter {{PRICE:nevsehir:sprinter}} por trayecto y vehículo. Si ambos aeropuertos encajan con tus vuelos, compara también los importes actuales de ASR."
         ]
       },
       {
@@ -460,7 +461,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "El regreso a NAV depende de la localidad del hotel",
         "paragraphs": [
-          "La tarifa compartida de regreso al Aeropuerto de Nevsehir es de €15 por persona. Utiliza el vuelo real de salida y la ruta correspondiente de [[Capadocia al Aeropuerto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]] para que una recogida en Goreme no se planifique igual que una en Uchisar, Avanos u otra zona hotelera."
+          "La tarifa compartida de regreso al Aeropuerto de Nevsehir es de {{PRICE:nevsehir:shuttle}} por persona. Utiliza el vuelo real de salida y la ruta correspondiente de [[Capadocia al Aeropuerto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]] para que una recogida en Goreme no se planifique igual que una en Uchisar, Avanos u otra zona hotelera."
         ]
       },
       {
@@ -473,7 +474,7 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿Cuánto cuesta el shuttle del Aeropuerto de Nevsehir a Capadocia?",
-        "a": "€15 por persona y trayecto; ida y vuelta cuesta €30 por persona."
+        "a": "{{PRICE:nevsehir:shuttle}} por persona y trayecto; ida y vuelta cuesta {{PRICE:nevsehir:shuttle:roundTrip}} por persona."
       },
       {
         "q": "¿NAV está más cerca de Goreme y Uchisar?",
@@ -481,7 +482,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Cuáles son los precios privados desde Nevsehir?",
-        "a": "Vito €80 y Sprinter €90 por trayecto y vehículo."
+        "a": "Vito {{PRICE:nevsehir:vito}} y Sprinter {{PRICE:nevsehir:sprinter}} por trayecto y vehículo."
       },
       {
         "q": "¿El shuttle de NAV funciona como un autobús público con horario fijo?",
@@ -504,15 +505,15 @@ export const esPages: EsSeoPage[] = [
       "cappadocia-shared-shuttle-vs-private-transfer"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Capadocia",
-    "twitterDescription": "Shuttle compartido por €15 por persona desde Nevsehir (NAV) a Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. Pago en efectivo al conductor."
+    "twitterDescription": "Shuttle desde el Aeropuerto de Nevsehir (NAV) a hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar. Compartido o privado; pago al conductor."
   },
   {
     "slug": "cappadocia-to-kayseri-airport-shuttle",
     "title": "Shuttle de Capadocia al Aeropuerto de Kayseri | Recogida en hotel",
-    "description": "Shuttle desde hoteles de Capadocia al Aeropuerto de Kayseri (ASR): €15 por persona desde Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar.",
+    "description": "Shuttle desde hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar al Aeropuerto de Kayseri (ASR), con recogida compartida o privada.",
     "eyebrow": "Capadocia → ASR",
     "h1": "Shuttle de Capadocia al Aeropuerto de Kayseri",
-    "lead": "Reserva el shuttle de €15 desde las localidades incluidas en Capadocia hasta el Aeropuerto de Kayseri Erkilet, con el punto y la hora de recogida confirmados según tu vuelo de salida.",
+    "lead": "Reserva el shuttle de {{PRICE:kayseri:shuttle}} desde las localidades incluidas en Capadocia hasta el Aeropuerto de Kayseri Erkilet, con el punto y la hora de recogida confirmados según tu vuelo de salida.",
     "sections": [
       {
         "heading": "Para salir hacia ASR hay que planificar antes de lo que sugiere la distancia del mapa",
@@ -535,7 +536,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado a Kayseri para una salida exclusiva",
         "paragraphs": [
-          "Un Vito [[privado|private-airport-transfer-cappadocia]] cuesta €90 por trayecto para hasta 5 pasajeros y un Sprinter €110 para hasta 16. El servicio privado evita las recogidas de otros hoteles, aunque el vehículo sigue necesitando un punto de recogida seguro y accesible junto al alojamiento."
+          "Un Vito [[privado|private-airport-transfer-cappadocia]] cuesta {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y un Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. El servicio privado evita las recogidas de otros hoteles, aunque el vehículo sigue necesitando un punto de recogida seguro y accesible junto al alojamiento."
         ]
       },
       {
@@ -548,7 +549,7 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿Cuánto cuesta el shuttle de Capadocia al Aeropuerto de Kayseri?",
-        "a": "€15 por persona y trayecto."
+        "a": "{{PRICE:kayseri:shuttle}} por persona y trayecto."
       },
       {
         "q": "¿Por qué no debo calcular la recogida para ASR solo con el tiempo directo por carretera?",
@@ -560,7 +561,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado al Aeropuerto de Kayseri?",
-        "a": "Sí. Vito €90 o Sprinter €110 por trayecto y vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} o Sprinter {{PRICE:kayseri:sprinter}} por trayecto y vehículo."
       }
     ],
     "related": [
@@ -574,15 +575,15 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Capadocia al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel al aeropuerto por €15 desde Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar al Aeropuerto de Kayseri (ASR)."
+    "twitterDescription": "Shuttle desde hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar al Aeropuerto de Kayseri (ASR), con recogida compartida o privada."
   },
   {
     "slug": "cappadocia-to-nevsehir-airport-shuttle",
     "title": "Shuttle de Capadocia al Aeropuerto de Nevsehir | Recogida en hotel",
-    "description": "Shuttle desde hoteles de Capadocia al Aeropuerto de Nevsehir (NAV): €15 por persona desde Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar.",
+    "description": "Shuttle desde hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar al Aeropuerto de Nevsehir (NAV), con recogida compartida o privada.",
     "eyebrow": "Capadocia → NAV",
     "h1": "Shuttle de Capadocia al Aeropuerto de Nevsehir",
-    "lead": "Reserva el shuttle de €15 desde las localidades incluidas en Capadocia hasta el Aeropuerto Nevsehir Kapadokya, con el punto y la hora de recogida confirmados según tu vuelo de salida.",
+    "lead": "Reserva el shuttle de {{PRICE:nevsehir:shuttle}} desde las localidades incluidas en Capadocia hasta el Aeropuerto Nevsehir Kapadokya, con el punto y la hora de recogida confirmados según tu vuelo de salida.",
     "sections": [
       {
         "heading": "NAV está más cerca, pero la hora de recogida sigue dependiendo del vuelo",
@@ -605,7 +606,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "El traslado privado a Nevsehir es la alternativa directa",
         "paragraphs": [
-          "Un Vito [[privado|private-airport-transfer-cappadocia]] cuesta €80 por trayecto para hasta 5 pasajeros y un Sprinter €90 para hasta 16. Evita recogidas de otros hoteles, aunque el punto final de encuentro sigue dependiendo del acceso seguro del vehículo."
+          "Un Vito [[privado|private-airport-transfer-cappadocia]] cuesta {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y un Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Evita recogidas de otros hoteles, aunque el punto final de encuentro sigue dependiendo del acceso seguro del vehículo."
         ]
       },
       {
@@ -618,7 +619,7 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿Cuánto cuesta el shuttle de Capadocia al Aeropuerto de Nevsehir?",
-        "a": "€15 por persona y trayecto."
+        "a": "{{PRICE:nevsehir:shuttle}} por persona y trayecto."
       },
       {
         "q": "¿Puedo salir más tarde solo porque NAV está más cerca?",
@@ -630,7 +631,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado al Aeropuerto de Nevsehir?",
-        "a": "Sí. Vito €80 o Sprinter €90 por trayecto y vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} o Sprinter {{PRICE:nevsehir:sprinter}} por trayecto y vehículo."
       }
     ],
     "related": [
@@ -645,12 +646,12 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Capadocia al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel al aeropuerto por €15 desde Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar al Aeropuerto de Nevsehir (NAV)."
+    "twitterDescription": "Shuttle desde hoteles de Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar al Aeropuerto de Nevsehir (NAV), con recogida compartida o privada."
   },
   {
     "slug": "goreme-airport-transfer",
     "title": "Traslado al Aeropuerto desde Goreme | Shuttle ASR y NAV",
-    "description": "Traslado de Goreme desde los aeropuertos de Kayseri y Nevsehir. Shuttle €15, Vito/Sprinter privado, acceso al hotel, tiempos de ruta y recogida de regreso.",
+    "description": "Traslado de Goreme desde los aeropuertos de Kayseri y Nevsehir. Compara shuttle compartido, Vito/Sprinter privado, acceso al hotel, tiempos y regreso.",
     "eyebrow": "Guía de traslado en Goreme",
     "h1": "Traslado del aeropuerto a Goreme",
     "lead": "Compara Kayseri y Nevsehir para una estancia en Goreme y utiliza después la ruta de shuttle correspondiente al aeropuerto de tu vuelo.",
@@ -737,8 +738,8 @@ export const esPages: EsSeoPage[] = [
     ],
     "faq": [
       {
-        "q": "¿El shuttle desde Kayseri y Nevsehir tiene el mismo precio para Goreme?",
-        "a": "Sí. El shuttle compartido cuesta €15 por persona y trayecto desde ASR o NAV. Cambia la distancia por carretera, pero no la tarifa compartida."
+        "q": "¿Cuánto cuesta el shuttle a Goreme desde Kayseri y Nevsehir?",
+        "a": "El shuttle compartido cuesta actualmente {{PRICE:kayseri:shuttle}} por persona y trayecto desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV. Comprueba la tarifa del aeropuerto de tu billete junto con la distancia por carretera de esa ruta."
       },
       {
         "q": "¿Puedo reservar en una sola solicitud la llegada al aeropuerto y la recogida en Goreme para el vuelo de regreso?",
@@ -770,7 +771,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Traslado al Aeropuerto desde Goreme | Shuttle ASR y NAV",
-    "twitterDescription": "Traslado de Goreme desde Kayseri y Nevsehir: shuttle €15, Vito/Sprinter privado, acceso al hotel y tiempos de ruta."
+    "twitterDescription": "Traslado de Goreme desde los aeropuertos de Kayseri y Nevsehir. Compara shuttle compartido, Vito/Sprinter privado, acceso al hotel, tiempos y regreso."
   },
   {
     "slug": "kayseri-airport-to-goreme-shuttle",
@@ -778,7 +779,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Kayseri (ASR) a Goreme: shuttle compartido, Vito/Sprinter privado, 75 km, 60–75 min, llegada al hotel y datos de reserva.",
     "eyebrow": "ASR → Goreme",
     "h1": "Shuttle del Aeropuerto de Kayseri a Goreme",
-    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Goreme en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 75 km, con un tiempo de conducción aproximado de 60–75 minutos. Las calles de hoteles cueva de Goreme pueden afectar al punto final de llegada, por lo que es importante indicar el nombre completo del alojamiento.",
+    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Goreme en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 75 km, con un tiempo de conducción aproximado de 60–75 minutos. Las calles de hoteles cueva de Goreme pueden afectar al punto final de llegada, por lo que es importante indicar el nombre completo del alojamiento.",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -801,7 +802,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "¿Prefieres un vehículo exclusivo? El Vito privado cuesta €90 por trayecto para hasta 5 pasajeros y el Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para ver todos los detalles."
+          "¿Prefieres un vehículo exclusivo? El Vito privado cuesta {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y el Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para ver todos los detalles."
         ]
       },
       {
@@ -818,7 +819,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado para esta ruta en lugar del shuttle compartido?",
-        "a": "Sí. Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -830,7 +831,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Goreme | Compartido y privado",
-    "twitterDescription": "Kayseri (ASR) a Goreme: shuttle compartido €15 o Vito/Sprinter privado, 75 km, 60–75 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Kayseri (ASR) a Goreme: shuttle compartido, Vito/Sprinter privado, 75 km, 60–75 min, llegada al hotel y datos de reserva."
   },
   {
     "slug": "kayseri-airport-to-urgup-shuttle",
@@ -838,7 +839,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Kayseri (ASR) a Urgup: shuttle compartido, Vito/Sprinter privado, 70 km, 60–75 min, llegada al hotel y datos de reserva.",
     "eyebrow": "ASR → Urgup",
     "h1": "Shuttle del Aeropuerto de Kayseri a Urgup",
-    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Urgup en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. El centro de Urgup suele ser fácil de alcanzar, aunque algunos hoteles de piedra y cueva en zonas elevadas pueden requerir un acceso final diferente.",
+    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Urgup en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. El centro de Urgup suele ser fácil de alcanzar, aunque algunos hoteles de piedra y cueva en zonas elevadas pueden requerir un acceso final diferente.",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -860,7 +861,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "¿Prefieres un vehículo exclusivo? Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Urgup|nevsehir-airport-to-urgup-shuttle]]."
+          "¿Prefieres un vehículo exclusivo? Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Urgup|nevsehir-airport-to-urgup-shuttle]]."
         ]
       }
     ],
@@ -882,7 +883,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Urgup | Compartido y privado",
-    "twitterDescription": "Kayseri (ASR) a Urgup: shuttle €15 o Vito/Sprinter privado, 70 km, 60–75 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Kayseri (ASR) a Urgup: shuttle compartido, Vito/Sprinter privado, 70 km, 60–75 min, llegada al hotel y datos de reserva."
   },
   {
     "slug": "kayseri-airport-to-uchisar-shuttle",
@@ -890,7 +891,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Kayseri (ASR) a Uchisar: shuttle compartido, Vito/Sprinter privado, 80 km, 70–85 min, llegada al hotel y reserva.",
     "eyebrow": "ASR → Uchisar",
     "h1": "Shuttle del Aeropuerto de Kayseri a Uchisar",
-    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Uchisar en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 80 km y el trayecto suele durar 70–85 minutos. Las calles de Uchisar pueden ser empinadas o estrechas, por lo que el acceso final depende del hotel exacto y de las condiciones para el vehículo.",
+    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Uchisar en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 80 km y el trayecto suele durar 70–85 minutos. Las calles de Uchisar pueden ser empinadas o estrechas, por lo que el acceso final depende del hotel exacto y de las condiciones para el vehículo.",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -912,7 +913,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Uchisar|nevsehir-airport-to-uchisar-shuttle]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Uchisar|nevsehir-airport-to-uchisar-shuttle]]."
         ]
       }
     ],
@@ -934,7 +935,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Uchisar | Compartido y privado",
-    "twitterDescription": "Kayseri (ASR) a Uchisar: shuttle €15 o Vito/Sprinter privado, 80 km, 70–85 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Kayseri (ASR) a Uchisar: shuttle compartido, Vito/Sprinter privado, 80 km, 70–85 min, llegada al hotel y reserva."
   },
   {
     "slug": "kayseri-airport-to-avanos-shuttle",
@@ -942,7 +943,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Kayseri (ASR) a Avanos: shuttle compartido, Vito/Sprinter privado, 70 km, 60–75 min, llegada al hotel y reserva.",
     "eyebrow": "ASR → Avanos",
     "h1": "Shuttle del Aeropuerto de Kayseri a Avanos",
-    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Avanos en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. Los alojamientos de Avanos están repartidos por una zona más amplia junto al río, por lo que el nombre completo del hotel ayuda a identificar la parada correcta.",
+    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Avanos en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. Los alojamientos de Avanos están repartidos por una zona más amplia junto al río, por lo que el nombre completo del hotel ayuda a identificar la parada correcta.",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -964,7 +965,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Avanos|nevsehir-airport-to-avanos-shuttle]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Avanos|nevsehir-airport-to-avanos-shuttle]]."
         ]
       }
     ],
@@ -986,7 +987,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Avanos | Compartido y privado",
-    "twitterDescription": "Kayseri (ASR) a Avanos: shuttle €15 o Vito/Sprinter privado, 70 km, 60–75 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Kayseri (ASR) a Avanos: shuttle compartido, Vito/Sprinter privado, 70 km, 60–75 min, llegada al hotel y reserva."
   },
   {
     "slug": "kayseri-airport-to-ortahisar-shuttle",
@@ -994,7 +995,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Kayseri (ASR) a Ortahisar: shuttle compartido, Vito/Sprinter privado, 75 km, 60–75 min, llegada al hotel y reserva.",
     "eyebrow": "ASR → Ortahisar",
     "h1": "Shuttle del Aeropuerto de Kayseri a Ortahisar",
-    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Ortahisar en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 60–75 minutos. Algunas calles se estrechan cerca del centro del pueblo, por lo que el acceso final se confirma según el alojamiento exacto y no solo por el nombre de Ortahisar.",
+    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Ortahisar en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 60–75 minutos. Algunas calles se estrechan cerca del centro del pueblo, por lo que el acceso final se confirma según el alojamiento exacto y no solo por el nombre de Ortahisar.",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1016,7 +1017,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Ortahisar|nevsehir-airport-to-ortahisar-shuttle]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Ortahisar|nevsehir-airport-to-ortahisar-shuttle]]."
         ]
       }
     ],
@@ -1038,7 +1039,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Ortahisar | Compartido y privado",
-    "twitterDescription": "Kayseri (ASR) a Ortahisar: shuttle €15 o Vito/Sprinter privado, 75 km, 60–75 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Kayseri (ASR) a Ortahisar: shuttle compartido, Vito/Sprinter privado, 75 km, 60–75 min, llegada al hotel y reserva."
   },
   {
     "slug": "kayseri-airport-to-cavusin-shuttle",
@@ -1046,7 +1047,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Kayseri (ASR) a Cavusin: shuttle compartido, Vito/Sprinter privado, 75 km, 65–80 min, llegada al hotel y reserva.",
     "eyebrow": "ASR → Cavusin",
     "h1": "Shuttle del Aeropuerto de Kayseri a Cavusin",
-    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Cavusin en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 65–80 minutos. Los alojamientos se reparten entre la carretera principal y calles antiguas de la ladera, por lo que la parada accesible depende del hotel exacto.",
+    "lead": "Viaja del Aeropuerto de Kayseri (ASR) a Cavusin en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 65–80 minutos. Los alojamientos se reparten entre la carretera principal y calles antiguas de la ladera, por lo que la parada accesible depende del hotel exacto.",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1068,7 +1069,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Cavusin|nevsehir-airport-to-cavusin-shuttle]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]. Si prefieres NAV, compara [[Shuttle del Aeropuerto de Nevsehir a Cavusin|nevsehir-airport-to-cavusin-shuttle]]."
         ]
       }
     ],
@@ -1090,7 +1091,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Kayseri a Cavusin | Compartido y privado",
-    "twitterDescription": "Kayseri (ASR) a Cavusin: shuttle €15 o Vito/Sprinter privado, 75 km, 65–80 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Kayseri (ASR) a Cavusin: shuttle compartido, Vito/Sprinter privado, 75 km, 65–80 min, llegada al hotel y reserva."
   },
   {
     "slug": "nevsehir-airport-to-goreme-shuttle",
@@ -1098,7 +1099,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Nevsehir (NAV) a Goreme: shuttle compartido, Vito/Sprinter privado, 40 km, 35–45 min, llegada al hotel y reserva.",
     "eyebrow": "NAV → Goreme",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Goreme",
-    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Goreme en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 40 km y el trayecto suele durar 35–45 minutos. Las calles de hoteles cueva pueden afectar al punto final de llegada, por lo que es importante indicar el nombre completo del alojamiento.",
+    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Goreme en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 40 km y el trayecto suele durar 35–45 minutos. Las calles de hoteles cueva pueden afectar al punto final de llegada, por lo que es importante indicar el nombre completo del alojamiento.",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1121,7 +1122,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles."
         ]
       }
     ],
@@ -1136,7 +1137,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1148,7 +1149,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Goreme | Compartido y privado",
-    "twitterDescription": "Nevsehir (NAV) a Goreme: shuttle €15 o Vito/Sprinter privado, 40 km, 35–45 min y llegada al hotel."
+    "twitterDescription": "Aeropuerto de Nevsehir (NAV) a Goreme: shuttle compartido, Vito/Sprinter privado, 40 km, 35–45 min, llegada al hotel y reserva."
   },
   {
     "slug": "nevsehir-airport-to-urgup-shuttle",
@@ -1156,7 +1157,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Nevsehir (NAV) a Urgup: shuttle compartido, Vito/Sprinter privado, 50 km, 45–60 min, llegada al hotel y reserva.",
     "eyebrow": "NAV → Urgup",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Urgup",
-    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Urgup en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 50 km y el trayecto suele durar 45–60 minutos. El centro de Urgup suele ser accesible, aunque algunos hoteles de piedra y cueva en laderas pueden requerir un acceso distinto.",
+    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Urgup en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 50 km y el trayecto suele durar 45–60 minutos. El centro de Urgup suele ser accesible, aunque algunos hoteles de piedra y cueva en laderas pueden requerir un acceso distinto.",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1172,7 +1173,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Shuttle para ahorrar, vehículo privado para un trayecto exclusivo",
         "paragraphs": [
-          "Para una o dos personas, el shuttle mantiene bajo el coste. Un Vito privado cuesta €80 por trayecto para hasta 5 pasajeros y un Sprinter privado €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] o compara ambas opciones en [[Shuttle compartido frente a traslado privado|cappadocia-shared-shuttle-vs-private-transfer]]."
+          "Para una o dos personas, el shuttle mantiene bajo el coste. Un Vito privado cuesta {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y un Sprinter privado {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] o compara ambas opciones en [[Shuttle compartido frente a traslado privado|cappadocia-shared-shuttle-vs-private-transfer]]."
         ]
       }
     ],
@@ -1183,7 +1184,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1195,7 +1196,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Urgup | Compartido y privado",
-    "twitterDescription": "Nevsehir (NAV) a Urgup: shuttle €15 o Vito/Sprinter privado, 50 km, 45–60 min y traslado al hotel."
+    "twitterDescription": "Aeropuerto de Nevsehir (NAV) a Urgup: shuttle compartido, Vito/Sprinter privado, 50 km, 45–60 min, llegada al hotel y reserva."
   },
   {
     "slug": "nevsehir-airport-to-uchisar-shuttle",
@@ -1203,7 +1204,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Nevsehir (NAV) a Uchisar: shuttle compartido, Vito/Sprinter privado, 35 km, 30–40 min, llegada al hotel y reserva.",
     "eyebrow": "NAV → Uchisar",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Uchisar",
-    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Uchisar en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 35 km y el trayecto suele durar 30–40 minutos. Las calles de Uchisar pueden ser empinadas o estrechas, por lo que el acceso final depende del alojamiento exacto.",
+    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Uchisar en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 35 km y el trayecto suele durar 30–40 minutos. Las calles de Uchisar pueden ser empinadas o estrechas, por lo que el acceso final depende del alojamiento exacto.",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1226,7 +1227,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1237,7 +1238,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1249,7 +1250,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Uchisar | Compartido y privado",
-    "twitterDescription": "Nevsehir (NAV) a Uchisar: shuttle €15 o Vito/Sprinter privado, 35 km, 30–40 min y traslado al hotel."
+    "twitterDescription": "Aeropuerto de Nevsehir (NAV) a Uchisar: shuttle compartido, Vito/Sprinter privado, 35 km, 30–40 min, llegada al hotel y reserva."
   },
   {
     "slug": "nevsehir-airport-to-avanos-shuttle",
@@ -1257,7 +1258,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Nevsehir (NAV) a Avanos: shuttle compartido, Vito/Sprinter privado, 38 km, 35–50 min, llegada al hotel y reserva.",
     "eyebrow": "NAV → Avanos",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Avanos",
-    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Avanos en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 38 km y el trayecto suele durar 35–50 minutos. Los alojamientos están repartidos por una zona amplia junto al río, por lo que conviene indicar el nombre completo del hotel.",
+    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Avanos en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 38 km y el trayecto suele durar 35–50 minutos. Los alojamientos están repartidos por una zona amplia junto al río, por lo que conviene indicar el nombre completo del hotel.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1273,7 +1274,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles."
         ]
       }
     ],
@@ -1284,7 +1285,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1296,7 +1297,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Avanos | Compartido y privado",
-    "twitterDescription": "Nevsehir (NAV) a Avanos: shuttle €15 o Vito/Sprinter privado, 38 km, 35–50 min y traslado al hotel."
+    "twitterDescription": "Aeropuerto de Nevsehir (NAV) a Avanos: shuttle compartido, Vito/Sprinter privado, 38 km, 35–50 min, llegada al hotel y reserva."
   },
   {
     "slug": "nevsehir-airport-to-ortahisar-shuttle",
@@ -1304,7 +1305,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Nevsehir (NAV) a Ortahisar: shuttle compartido, Vito/Sprinter privado, 45 km, 40–50 min, llegada al hotel y reserva.",
     "eyebrow": "NAV → Ortahisar",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Ortahisar",
-    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Ortahisar en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 45 km y el trayecto suele durar 40–50 minutos. Algunas calles se estrechan cerca del centro, por lo que el acceso final se confirma según el alojamiento exacto.",
+    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Ortahisar en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 45 km y el trayecto suele durar 40–50 minutos. Algunas calles se estrechan cerca del centro, por lo que el acceso final se confirma según el alojamiento exacto.",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1327,7 +1328,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1338,7 +1339,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1350,7 +1351,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Ortahisar | Compartido y privado",
-    "twitterDescription": "Nevsehir (NAV) a Ortahisar desde €15 por persona. Vito y Sprinter privados disponibles. Unos 45 km / 40–50 minutos."
+    "twitterDescription": "Aeropuerto de Nevsehir (NAV) a Ortahisar: shuttle compartido, Vito/Sprinter privado, 45 km, 40–50 min, llegada al hotel y reserva."
   },
   {
     "slug": "nevsehir-airport-to-cavusin-shuttle",
@@ -1358,7 +1359,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Aeropuerto de Nevsehir (NAV) a Cavusin: shuttle compartido, Vito/Sprinter privado, 42 km, 40–55 min, llegada al hotel y reserva.",
     "eyebrow": "NAV → Cavusin",
     "h1": "Shuttle del Aeropuerto de Nevsehir a Cavusin",
-    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Cavusin en shuttle compartido por €15 por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 42 km y el trayecto suele durar 40–55 minutos. Los alojamientos de Cavusin se reparten entre la carretera principal y calles antiguas de la ladera, por lo que la parada accesible depende del hotel exacto.",
+    "lead": "Viaja del Aeropuerto de Nevsehir (NAV) a Cavusin en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto, o elige un Vito o Sprinter privado. La distancia habitual es de unos 42 km y el trayecto suele durar 40–55 minutos. Los alojamientos de Cavusin se reparten entre la carretera principal y calles antiguas de la ladera, por lo que la parada accesible depende del hotel exacto.",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -1380,13 +1381,13 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "ASR sigue siendo una alternativa si el vuelo encaja mejor",
         "paragraphs": [
-          "La opción más larga es [[Shuttle del Aeropuerto de Kayseri a Cavusin|kayseri-airport-to-cavusin-shuttle]]. Como la tarifa compartida es la misma desde ambos aeropuertos, la comodidad del vuelo puede ser más importante que escoger la carretera más corta."
+          "La opción más larga es [[Shuttle del Aeropuerto de Kayseri a Cavusin|kayseri-airport-to-cavusin-shuttle]]. Como la tarifa compartida se gestiona por separado para ASR y NAV, conviene comparar el precio actual junto con la comodidad del vuelo y la distancia por carretera."
         ]
       },
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]] para todos los detalles."
         ]
       }
     ],
@@ -1397,7 +1398,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1409,7 +1410,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle del Aeropuerto de Nevsehir a Cavusin | Compartido y privado",
-    "twitterDescription": "Nevsehir (NAV) a Cavusin desde €15 por persona. Vito y Sprinter privados disponibles. Unos 42 km / 40–55 minutos."
+    "twitterDescription": "Aeropuerto de Nevsehir (NAV) a Cavusin: shuttle compartido, Vito/Sprinter privado, 42 km, 40–55 min, llegada al hotel y reserva."
   },
   {
     "slug": "goreme-to-kayseri-airport-shuttle",
@@ -1417,7 +1418,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Goreme al Aeropuerto de Kayseri (ASR) en shuttle compartido o traslado privado; unos 75 km y 60–75 min.",
     "eyebrow": "Goreme → ASR",
     "h1": "Shuttle de Goreme al Aeropuerto de Kayseri",
-    "lead": "La recogida en hotel desde Goreme al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 60–75 minutos. Las calles de hoteles cueva y laderas de Goreme pueden añadir tiempo local antes de llegar a la carretera principal. Sigue la hora confirmada, que también contempla otras recogidas y el margen de llegada al aeropuerto.",
+    "lead": "La recogida en hotel desde Goreme al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 60–75 minutos. Las calles de hoteles cueva y laderas de Goreme pueden añadir tiempo local antes de llegar a la carretera principal. Sigue la hora confirmada, que también contempla otras recogidas y el margen de llegada al aeropuerto.",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -1440,7 +1441,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1451,7 +1452,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1463,7 +1464,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Goreme al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Goreme a Kayseri (ASR) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 75 km / 60–75 minutos."
+    "twitterDescription": "Recogida en hotel de Goreme al Aeropuerto de Kayseri (ASR) en shuttle compartido o traslado privado; unos 75 km y 60–75 min."
   },
   {
     "slug": "urgup-to-kayseri-airport-shuttle",
@@ -1471,7 +1472,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Urgup al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 70 km y 60–75 min.",
     "eyebrow": "Urgup → ASR",
     "h1": "Shuttle de Urgup al Aeropuerto de Kayseri",
-    "lead": "La recogida desde Urgup al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. Los alojamientos de Urgup se reparten entre el centro y zonas en pendiente, así que el punto confirmado importa antes de iniciar la carretera al aeropuerto. Sigue la hora confirmada, que contempla también otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Urgup al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. Los alojamientos de Urgup se reparten entre el centro y zonas en pendiente, así que el punto confirmado importa antes de iniciar la carretera al aeropuerto. Sigue la hora confirmada, que contempla también otras recogidas y el margen de llegada.",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -1500,7 +1501,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1511,7 +1512,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1522,7 +1523,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Urgup al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Urgup a Kayseri (ASR) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 70 km / 60–75 minutos."
+    "twitterDescription": "Recogida en hotel de Urgup al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 70 km y 60–75 min."
   },
   {
     "slug": "uchisar-to-kayseri-airport-shuttle",
@@ -1530,7 +1531,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Uchisar al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 80 km y 70–85 min.",
     "eyebrow": "Uchisar → ASR",
     "h1": "Shuttle de Uchisar al Aeropuerto de Kayseri",
-    "lead": "La recogida desde Uchisar al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 80 km y el trayecto suele durar 70–85 minutos. Las calles empinadas de la parte alta pueden requerir un punto de recogida accesible en vez de acceso directo a todas las puertas. Sigue la hora confirmada, que contempla otras recogidas y el margen del aeropuerto.",
+    "lead": "La recogida desde Uchisar al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 80 km y el trayecto suele durar 70–85 minutos. Las calles empinadas de la parte alta pueden requerir un punto de recogida accesible en vez de acceso directo a todas las puertas. Sigue la hora confirmada, que contempla otras recogidas y el margen del aeropuerto.",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -1553,7 +1554,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1568,7 +1569,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1579,7 +1580,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Uchisar al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Uchisar a Kayseri (ASR) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 80 km / 70–85 minutos."
+    "twitterDescription": "Recogida en hotel de Uchisar al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 80 km y 70–85 min."
   },
   {
     "slug": "avanos-to-kayseri-airport-shuttle",
@@ -1587,7 +1588,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Avanos al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 70 km y 60–75 min.",
     "eyebrow": "Avanos → ASR",
     "h1": "Shuttle de Avanos al Aeropuerto de Kayseri",
-    "lead": "La recogida desde Avanos al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. Los alojamientos de Avanos están repartidos por diferentes zonas, por lo que el nombre completo del hotel ayuda a confirmar el punto correcto. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada al aeropuerto.",
+    "lead": "La recogida desde Avanos al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 70 km y el trayecto suele durar 60–75 minutos. Los alojamientos de Avanos están repartidos por diferentes zonas, por lo que el nombre completo del hotel ayuda a confirmar el punto correcto. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada al aeropuerto.",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -1605,7 +1606,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1616,7 +1617,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1627,7 +1628,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Avanos al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Avanos a Kayseri (ASR) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 70 km / 60–75 minutos."
+    "twitterDescription": "Recogida en hotel de Avanos al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 70 km y 60–75 min."
   },
   {
     "slug": "ortahisar-to-kayseri-airport-shuttle",
@@ -1635,7 +1636,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Ortahisar al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 60–75 min.",
     "eyebrow": "Ortahisar → ASR",
     "h1": "Shuttle de Ortahisar al Aeropuerto de Kayseri",
-    "lead": "La recogida desde Ortahisar al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 60–75 minutos. Las calles estrechas del casco antiguo pueden afectar a los primeros minutos, por lo que el punto confirmado es importante. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Ortahisar al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 60–75 minutos. Las calles estrechas del casco antiguo pueden afectar a los primeros minutos, por lo que el punto confirmado es importante. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1658,7 +1659,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1669,7 +1670,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1680,7 +1681,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Ortahisar al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Ortahisar a Kayseri (ASR) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 75 km / 60–75 minutos."
+    "twitterDescription": "Recogida en hotel de Ortahisar al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 60–75 min."
   },
   {
     "slug": "cavusin-to-kayseri-airport-shuttle",
@@ -1688,7 +1689,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 65–80 min.",
     "eyebrow": "Cavusin → ASR",
     "h1": "Shuttle de Cavusin al Aeropuerto de Kayseri",
-    "lead": "La recogida desde Cavusin al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 65–80 minutos. Los alojamientos pueden estar junto a la carretera principal, cerca del pueblo antiguo o hacia los valles, por lo que importa el punto confirmado. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Cavusin al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 65–80 minutos. Los alojamientos pueden estar junto a la carretera principal, cerca del pueblo antiguo o hacia los valles, por lo que importa el punto confirmado. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1717,7 +1718,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1728,7 +1729,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €90 por trayecto para hasta 5 pasajeros y Sprinter €110 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:kayseri:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1739,7 +1740,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Cavusin al Aeropuerto de Kayseri | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Cavusin a Kayseri (ASR) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 75 km / 65–80 minutos."
+    "twitterDescription": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 65–80 min."
   },
   {
     "slug": "goreme-to-nevsehir-airport-shuttle",
@@ -1747,7 +1748,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Goreme al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 40 km y 35–45 min.",
     "eyebrow": "Goreme → NAV",
     "h1": "Shuttle de Goreme al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Goreme al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 40 km y el trayecto suele durar 35–45 minutos. Las calles de hoteles cueva y laderas pueden añadir tiempo local antes de llegar a la carretera principal. Sigue la hora confirmada, que contempla otras recogidas y el margen del aeropuerto.",
+    "lead": "La recogida desde Goreme al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 40 km y el trayecto suele durar 35–45 minutos. Las calles de hoteles cueva y laderas pueden añadir tiempo local antes de llegar a la carretera principal. Sigue la hora confirmada, que contempla otras recogidas y el margen del aeropuerto.",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1770,7 +1771,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1781,7 +1782,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1793,7 +1794,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Goreme al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Goreme a Nevsehir (NAV) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 40 km / 35–45 minutos."
+    "twitterDescription": "Recogida en hotel de Goreme al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 40 km y 35–45 min."
   },
   {
     "slug": "urgup-to-nevsehir-airport-shuttle",
@@ -1801,7 +1802,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Urgup al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 50 km y 45–60 min.",
     "eyebrow": "Urgup → NAV",
     "h1": "Shuttle de Urgup al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Urgup al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 50 km y el trayecto suele durar 45–60 minutos. Los alojamientos se reparten entre el centro y zonas en pendiente, por lo que importa el punto confirmado antes de iniciar el trayecto. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Urgup al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 50 km y el trayecto suele durar 45–60 minutos. Los alojamientos se reparten entre el centro y zonas en pendiente, por lo que importa el punto confirmado antes de iniciar el trayecto. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1824,7 +1825,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1835,7 +1836,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1847,7 +1848,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Urgup al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Urgup a Nevsehir (NAV) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 50 km / 45–60 minutos."
+    "twitterDescription": "Recogida en hotel de Urgup al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 50 km y 45–60 min."
   },
   {
     "slug": "uchisar-to-nevsehir-airport-shuttle",
@@ -1855,7 +1856,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Uchisar al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 35 km y 30–40 min.",
     "eyebrow": "Uchisar → NAV",
     "h1": "Shuttle de Uchisar al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Uchisar al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 35 km y el trayecto suele durar 30–40 minutos. Las calles empinadas de la parte alta pueden requerir un punto de recogida accesible en lugar de acceso directo a cada puerta. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Uchisar al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 35 km y el trayecto suele durar 30–40 minutos. Las calles empinadas de la parte alta pueden requerir un punto de recogida accesible en lugar de acceso directo a cada puerta. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1878,7 +1879,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1893,7 +1894,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1905,7 +1906,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Uchisar al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Uchisar a Nevsehir (NAV) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 35 km / 30–40 minutos."
+    "twitterDescription": "Recogida en hotel de Uchisar al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 35 km y 30–40 min."
   },
   {
     "slug": "avanos-to-nevsehir-airport-shuttle",
@@ -1913,7 +1914,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Avanos al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 38 km y 35–50 min.",
     "eyebrow": "Avanos → NAV",
     "h1": "Shuttle de Avanos al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Avanos al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 38 km y el trayecto suele durar 35–50 minutos. Los alojamientos de Avanos están repartidos por distintas zonas, por lo que el nombre completo del hotel ayuda a confirmar el punto correcto. Sigue la hora confirmada, que también contempla otras recogidas y el margen de llegada al aeropuerto.",
+    "lead": "La recogida desde Avanos al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 38 km y el trayecto suele durar 35–50 minutos. Los alojamientos de Avanos están repartidos por distintas zonas, por lo que el nombre completo del hotel ayuda a confirmar el punto correcto. Sigue la hora confirmada, que también contempla otras recogidas y el margen de llegada al aeropuerto.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1930,7 +1931,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1941,7 +1942,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -1953,7 +1954,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Avanos al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Avanos a Nevsehir (NAV) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 38 km / 35–50 minutos."
+    "twitterDescription": "Recogida en hotel de Avanos al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 38 km y 35–50 min."
   },
   {
     "slug": "ortahisar-to-nevsehir-airport-shuttle",
@@ -1961,7 +1962,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Ortahisar al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 45 km y 40–50 min.",
     "eyebrow": "Ortahisar → NAV",
     "h1": "Shuttle de Ortahisar al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Ortahisar al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 45 km y el trayecto suele durar 40–50 minutos. Las calles estrechas del casco antiguo pueden afectar a los primeros minutos de la recogida, por lo que el punto confirmado es importante. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Ortahisar al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 45 km y el trayecto suele durar 40–50 minutos. Las calles estrechas del casco antiguo pueden afectar a los primeros minutos de la recogida, por lo que el punto confirmado es importante. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1984,7 +1985,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -1995,7 +1996,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -2007,7 +2008,7 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Ortahisar al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Ortahisar a Nevsehir (NAV) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 45 km / 40–50 minutos."
+    "twitterDescription": "Recogida en hotel de Ortahisar al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 45 km y 40–50 min."
   },
   {
     "slug": "cavusin-to-nevsehir-airport-shuttle",
@@ -2015,7 +2016,7 @@ export const esPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Cavusin al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 42 km y 40–55 min.",
     "eyebrow": "Cavusin → NAV",
     "h1": "Shuttle de Cavusin al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Cavusin al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por €15 por persona o en Vito/Sprinter privado. La distancia habitual es de unos 42 km y el trayecto suele durar 40–55 minutos. Los alojamientos pueden estar junto a la carretera principal, en el pueblo antiguo o hacia los valles, por lo que importa el punto confirmado. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "La recogida desde Cavusin al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona o en Vito/Sprinter privado. La distancia habitual es de unos 42 km y el trayecto suele durar 40–55 minutos. Los alojamientos pueden estar junto a la carretera principal, en el pueblo antiguo o hacia los valles, por lo que importa el punto confirmado. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -2038,7 +2039,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Traslado privado para esta ruta",
         "paragraphs": [
-          "Vito privado €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Vito privado {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
         ]
       }
     ],
@@ -2053,7 +2054,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito €80 por trayecto para hasta 5 pasajeros y Sprinter €90 para hasta 16, ambos por vehículo."
+        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} para hasta 16, ambos por vehículo."
       }
     ],
     "related": [
@@ -2065,12 +2066,12 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Cavusin al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Shuttle de hotel en Cavusin a Nevsehir (NAV) desde €15 por persona. Vito y Sprinter privados disponibles. Unos 42 km / 40–55 minutos."
+    "twitterDescription": "Recogida en hotel de Cavusin al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 42 km y 40–55 min."
   },
   {
     "slug": "cappadocia-airport",
     "title": "Guía de Aeropuertos de Capadocia | NAV, ASR y shuttle",
-    "description": "Guía de aeropuertos de Capadocia: Nevsehir Kapadokya (NAV), Kayseri (ASR), traslados a Goreme, shuttle €15 y opciones privadas.",
+    "description": "Guía de aeropuertos de Capadocia: Nevsehir Kapadokya (NAV), Kayseri (ASR), traslados a Goreme, shuttle compartido y opciones privadas.",
     "eyebrow": "Guía de aeropuertos",
     "h1": "Aeropuertos de Capadocia: NAV, ASR y traslados a hoteles",
     "lead": "La expresión “Aeropuerto de Capadocia” puede referirse al Aeropuerto Nevsehir Kapadokya (NAV), aunque el Aeropuerto de Kayseri (ASR) también se utiliza ampliamente para viajar a Capadocia. Para reservar, lo importante es el código de aeropuerto que aparece en tu billete.",
@@ -2086,14 +2087,14 @@ export const esPages: EsSeoPage[] = [
         "heading": "Aeropuerto Nevsehir Kapadokya (NAV)",
         "paragraphs": [
           "NAV suele ofrecer el traslado por carretera más corto a la zona central de Capadocia. Las estimaciones publicadas incluyen Goreme, unos **40 km / 35–45 minutos**; Uchisar 35 km / 30–40 minutos; Avanos 38 km / 35–50 minutos; Cavusin 42 km / 40–55 minutos; Ortahisar 45 km / 40–50 minutos y Urgup 50 km / 45–60 minutos, antes de posibles paradas compartidas.",
-          "El [[shuttle del Aeropuerto de Nevsehir|nevsehir-airport-shuttle]] cuesta **€15 por persona y trayecto**. El traslado privado de ida cuesta €80 en Vito para hasta 5 pasajeros o €90 en Sprinter para hasta 16."
+          "El [[shuttle del Aeropuerto de Nevsehir|nevsehir-airport-shuttle]] cuesta **{{PRICE:nevsehir:shuttle}} por persona y trayecto**. El traslado privado de ida cuesta {{PRICE:nevsehir:vito}} en Vito para hasta 5 pasajeros o {{PRICE:nevsehir:sprinter}} en Sprinter para hasta 16."
         ]
       },
       {
         "heading": "Aeropuerto de Kayseri (ASR)",
         "paragraphs": [
           "ASR está más lejos por carretera, pero se utiliza mucho para Capadocia porque el horario y la disponibilidad de vuelos pueden hacer que sea la mejor opción para el viaje completo. Goreme está a unos **75 km / 60–75 minutos**, y las demás localidades incluidas suelen quedar en el rango de 70–80 km antes de paradas compartidas.",
-          "El [[shuttle del Aeropuerto de Kayseri|kayseri-airport-shuttle]] también cuesta **€15 por persona y trayecto**. El traslado privado de ida cuesta €90 en Vito o €110 en Sprinter. Como la tarifa del shuttle es la misma, puedes comparar vuelos sin pagar más por elegir Kayseri en el servicio compartido."
+          "El [[shuttle del Aeropuerto de Kayseri|kayseri-airport-shuttle]] cuesta **{{PRICE:kayseri:shuttle}} por persona y trayecto**. El traslado privado de ida cuesta {{PRICE:kayseri:vito}} en Vito o {{PRICE:kayseri:sprinter}} en Sprinter. Compara la tarifa actual de ASR con la de NAV junto con los horarios de vuelo y la distancia por carretera."
         ]
       },
       {
@@ -2105,7 +2106,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Del aeropuerto al hotel: shuttle o vehículo privado",
         "paragraphs": [
-          "El shuttle de €15 es la opción principal de bajo coste para Goreme, Urgup, Uchisar, Avanos, Ortahisar y Cavusin. Es compartido, por lo que puede incluir otros pasajeros y paradas en distintos hoteles. Quien quiera un vehículo exclusivo puede elegir Vito o Sprinter privado; las tarifas privadas son por vehículo y no por persona.",
+          "El shuttle compartido es la opción principal de bajo coste para Goreme, Urgup, Uchisar, Avanos, Ortahisar y Cavusin. La tarifa actual por trayecto es de {{PRICE:kayseri:shuttle}} desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV. Al ser compartido, puede incluir otros pasajeros y paradas en distintos hoteles. Quien quiera un vehículo exclusivo puede elegir Vito o Sprinter privado; las tarifas privadas son por vehículo y no por persona.",
           "La solicitud de reserva recoge aeropuerto, sentido del viaje, datos del vuelo, hotel, contacto de WhatsApp y datos de pasajeros, incluidos los números de pasaporte necesarios para cada reserva. El pago se realiza en efectivo al conductor después de la confirmación."
         ]
       },
@@ -2137,7 +2138,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Cuánto cuesta el shuttle desde NAV o ASR?",
-        "a": "€15 por persona y trayecto desde cualquiera de los dos aeropuertos hasta las zonas hoteleras centrales incluidas."
+        "a": "Desde Kayseri (ASR) cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto; desde Nevsehir (NAV), {{PRICE:nevsehir:shuttle}} hasta las zonas hoteleras centrales incluidas."
       },
       {
         "q": "¿Qué significa NAV Airport?",
@@ -2153,7 +2154,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo llegar por NAV y salir por ASR?",
-        "a": "Sí, pero debe confirmarse como dos trayectos específicos de aeropuerto porque la ruta y el precio privado son diferentes."
+        "a": "Sí, pero debe confirmarse como dos trayectos específicos de aeropuerto porque la ruta y el precio privado se verifican por separado para cada aeropuerto."
       }
     ],
     "related": [
@@ -2183,7 +2184,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "El más cercano no siempre es el mejor",
         "paragraphs": [
-          "Un traslado corto ayuda, pero un mal horario o una conexión cara pueden anular esa ventaja. Compara el viaje completo desde tu origen, no solo los últimos kilómetros por carretera. El shuttle cuesta €15 por persona desde ambos aeropuertos, así que elegir ASR no supone un suplemento en la tarifa compartida."
+          "Un traslado corto ayuda, pero un mal horario o una conexión cara pueden anular esa ventaja. Compara el viaje completo desde tu origen, no solo los últimos kilómetros por carretera. El shuttle cuesta {{PRICE:kayseri:shuttle}} por persona desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV."
         ]
       },
       {
@@ -2211,9 +2212,9 @@ export const esPages: EsSeoPage[] = [
         ]
       },
       {
-        "heading": "El traslado privado es más barato desde Nevsehir; el shuttle cuesta lo mismo",
+        "heading": "Compara el shuttle y el traslado privado por aeropuerto",
         "paragraphs": [
-          "El shuttle cuesta €15 por persona desde ambos aeropuertos. El privado cuesta €80/€90 desde NAV para Vito/Sprinter y €90/€110 desde ASR. Esta diferencia es más relevante para grupos que quieren un vehículo exclusivo."
+          "El shuttle cuesta {{PRICE:nevsehir:shuttle}} por persona desde NAV y {{PRICE:kayseri:shuttle}} desde ASR. El privado cuesta {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}} desde NAV para Vito/Sprinter y {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}} desde ASR. Compara los importes actuales del aeropuerto elegido."
         ]
       }
     ],
@@ -2232,7 +2233,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿El shuttle es más barato desde NAV?",
-        "a": "No. El shuttle compartido cuesta €15 por persona desde cualquiera de los dos aeropuertos."
+        "a": "No necesariamente. El shuttle compartido cuesta actualmente {{PRICE:kayseri:shuttle}} por persona desde Kayseri y {{PRICE:nevsehir:shuttle}} desde Nevsehir."
       },
       {
         "q": "¿Debo elegir por horario de vuelo o por distancia?",
@@ -2273,9 +2274,9 @@ export const esPages: EsSeoPage[] = [
         ]
       },
       {
-        "heading": "El precio del shuttle es el mismo",
+        "heading": "Compara el precio del shuttle por aeropuerto",
         "paragraphs": [
-          "El shuttle compartido cuesta €15 por persona desde cualquiera de los dos aeropuertos, así que la comparación no depende de una tarifa compartida distinta. El privado sí cambia: Kayseri Vito/Sprinter €90/€110; Nevsehir €80/€90."
+          "El shuttle compartido cuesta {{PRICE:kayseri:shuttle}} por persona desde Kayseri y {{PRICE:nevsehir:shuttle}} desde Nevsehir. Las tarifas privadas también se consultan por aeropuerto: Kayseri Vito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}; Nevsehir {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}."
         ]
       },
       {
@@ -2293,7 +2294,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Un vuelo más barato o mejor programado puede compensar la diferencia por carretera",
         "paragraphs": [
-          "Ahorrar 25 o 35 minutos de carretera no siempre compensa si el aeropuerto más cercano exige una mala conexión o una salida incómoda. Como el shuttle cuesta lo mismo desde ambos, puedes comparar el itinerario completo sin asumir que el aeropuerto más cercano será automáticamente más barato."
+          "Ahorrar 25 o 35 minutos de carretera no siempre compensa si el aeropuerto más cercano exige una mala conexión o una salida incómoda. Compara el itinerario completo junto con la tarifa actual del shuttle de cada aeropuerto, sin asumir que el aeropuerto más cercano será automáticamente más barato."
         ]
       },
       {
@@ -2310,11 +2311,11 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Qué aeropuerto tiene el shuttle más barato?",
-        "a": "Ninguno; ambos cuestan €15 por persona."
+        "a": "Kayseri cuesta {{PRICE:kayseri:shuttle}} por persona y Nevsehir {{PRICE:nevsehir:shuttle}}; compara la tarifa actual de cada aeropuerto."
       },
       {
-        "q": "¿Qué aeropuerto tiene el traslado privado más barato?",
-        "a": "Nevsehir: Vito €80 / Sprinter €90, frente a Kayseri €90 / €110."
+        "q": "¿Cómo se comparan los precios del traslado privado entre los dos aeropuertos?",
+        "a": "Los precios actuales por vehículo y trayecto son NAV: Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}; ASR: Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}."
       },
       {
         "q": "¿Kayseri sigue siendo una buena opción para Capadocia?",
@@ -2332,12 +2333,12 @@ export const esPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "¿Kayseri o Nevsehir para Capadocia? | NAV vs ASR",
-    "twitterDescription": "Compara Kayseri (ASR) y Nevsehir (NAV) por distancia a cada localidad, tiempo, shuttle de €15 y precios privados."
+    "twitterDescription": "Compara Kayseri ASR y Nevsehir NAV: tiempos por carretera, precios de shuttle y privado, distancias a Goreme y qué aeropuerto encaja mejor."
   },
   {
     "slug": "cappadocia-shared-shuttle-vs-private-transfer",
     "title": "Shuttle compartido vs traslado privado en Capadocia | Precio y tiempo",
-    "description": "Compara shuttle compartido y traslado privado en Capadocia: €15/persona, precios Vito/Sprinter, paradas, tiempos, tamaño del grupo y cobertura.",
+    "description": "Compara shuttle compartido y traslado privado en Capadocia: precios actuales, Vito/Sprinter, paradas, tiempos, tamaño del grupo y cobertura.",
     "eyebrow": "Comparación de servicios",
     "h1": "Shuttle compartido o traslado privado en Capadocia",
     "lead": "El shuttle compartido destaca por su bajo precio por persona; el traslado privado ofrece un vehículo exclusivo y un recorrido más directo al hotel.",
@@ -2345,7 +2346,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Shuttle compartido: la mejor opción para ahorrar",
         "paragraphs": [
-          "A €15 por persona y trayecto, el shuttle suele ser la opción pre-reservada más económica para viajeros solos y parejas. Puede llevar a otros pasajeros y realizar varias paradas en hoteles."
+          "La tarifa del shuttle depende del aeropuerto: {{PRICE:kayseri:shuttle}} por persona y trayecto desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV. Para viajeros solos y parejas suele ser la opción pre-reservada más económica. Puede llevar a otros pasajeros y realizar varias paradas en hoteles."
         ]
       },
       {
@@ -2357,7 +2358,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Comparación de precios",
         "paragraphs": [
-          "Privado desde Kayseri: Vito €90 / Sprinter €110. Desde Nevsehir: Vito €80 / Sprinter €90. Shuttle compartido: €15 por persona desde cualquiera de los dos aeropuertos. Ida y vuelta duplica todos los precios de ida."
+          "Privado desde Kayseri: Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}. Desde Nevsehir: Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}. Shuttle compartido: {{PRICE:kayseri:shuttle}} por persona desde Kayseri y {{PRICE:nevsehir:shuttle}} desde Nevsehir. Ida y vuelta duplica todos los precios de ida."
         ]
       },
       {
@@ -2375,7 +2376,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Los ejemplos por tamaño del grupo aclaran la elección",
         "paragraphs": [
-          "Una persona paga €15 en shuttle, por lo que un privado rara vez gana por precio puro. Un grupo de seis paga €90 en total por un shuttle de ida; ahí empieza a solaparse con las tarifas privadas, especialmente desde Nevsehir. Para grupos grandes, compara el precio por vehículo del Sprinter con el total por persona del shuttle."
+          "Tomando Nevsehir como ejemplo, una persona paga {{PRICE:nevsehir:shuttle}} en shuttle y seis personas pagan {{PRICE:nevsehir:shuttle:x6}} en total por un trayecto; ahí empieza a solaparse con las tarifas privadas, especialmente desde Nevsehir. Para grupos grandes, compara el precio por vehículo del Sprinter con el total por persona del shuttle."
         ]
       },
       {
@@ -2394,7 +2395,7 @@ export const esPages: EsSeoPage[] = [
     "faq": [
       {
         "q": "¿El shuttle compartido es lo mismo que Cappadocia shuttle transfer?",
-        "a": "Sí. “Compartido” describe cómo funciona el servicio de €15."
+        "a": "Sí. “Compartido” describe cómo funciona el servicio; la tarifa por trayecto es de {{PRICE:kayseri:shuttle}} desde ASR y {{PRICE:nevsehir:shuttle}} desde NAV."
       },
       {
         "q": "¿Cuál es más rápido?",
@@ -2402,7 +2403,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Cuál es más barato para una persona?",
-        "a": "El shuttle compartido por €15."
+        "a": "El shuttle compartido: {{PRICE:kayseri:shuttle}} por persona desde ASR o {{PRICE:nevsehir:shuttle}} desde NAV."
       },
       {
         "q": "¿Qué opción puede ser mejor para un grupo grande?",
@@ -2504,7 +2505,7 @@ export const esPages: EsSeoPage[] = [
   {
     "slug": "istanbul-to-cappadocia",
     "title": "Estambul a Capadocia | Vuelos y shuttle del aeropuerto",
-    "description": "Estambul a Capadocia: vuela de IST/SAW a Kayseri ASR o Nevsehir NAV y continúa en shuttle de €15 hasta tu hotel en Capadocia.",
+    "description": "Estambul a Capadocia: vuela de IST/SAW a Kayseri ASR o Nevsehir NAV y continúa con un shuttle de aeropuerto reservado hasta tu hotel en Capadocia.",
     "eyebrow": "Guía de vuelo + traslado",
     "h1": "Estambul a Capadocia: vuelo y traslado desde el aeropuerto",
     "lead": "Para la mayoría de los visitantes, la ruta práctica es volar desde Estambul a Kayseri (ASR) o Nevsehir (NAV) y continuar después con un shuttle reservado con antelación hasta el hotel.",
@@ -2518,7 +2519,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Elige ASR o NAV según el itinerario completo",
         "paragraphs": [
-          "NAV está más cerca por carretera de muchos hoteles; ASR puede tener un horario o una tarifa de vuelo que compense el trayecto terrestre más largo. El shuttle cuesta €15 desde cualquiera de los dos, así que compara primero el vuelo."
+          "NAV está más cerca por carretera de muchos hoteles; ASR puede tener un horario o una tarifa de vuelo que compense el trayecto terrestre más largo. El shuttle cuesta {{PRICE:nevsehir:shuttle}} por persona desde NAV y {{PRICE:kayseri:shuttle}} desde ASR, así que compara el vuelo y la tarifa actual."
         ]
       },
       {
@@ -2567,7 +2568,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Cuánto cuesta el shuttle después de aterrizar?",
-        "a": "€15 por persona desde ASR o NAV."
+        "a": "Desde ASR cuesta {{PRICE:kayseri:shuttle}} por persona y desde NAV {{PRICE:nevsehir:shuttle}}."
       },
       {
         "q": "¿Debo reservar el shuttle con mi número de vuelo de Estambul?",
@@ -2591,7 +2592,7 @@ export const esPages: EsSeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "Estambul a Capadocia: vuelo y traslado desde el aeropuerto",
-    "twitterDescription": "Vuela de Estambul (IST/SAW) a Kayseri (ASR) o Nevsehir (NAV) y continúa en shuttle de €15 hasta tu hotel en una localidad incluida."
+    "twitterDescription": "Estambul a Capadocia: vuela de IST/SAW a Kayseri ASR o Nevsehir NAV y continúa con un shuttle de aeropuerto reservado hasta tu hotel en Capadocia."
   },
   {
     "slug": "cappadocia-to-istanbul",
@@ -2610,7 +2611,7 @@ export const esPages: EsSeoPage[] = [
       {
         "heading": "Elige NAV o ASR según el vuelo de salida",
         "paragraphs": [
-          "NAV suele estar más cerca de Goreme, Uchisar y otras localidades centrales. ASR está más lejos, pero puede ofrecer un horario o una tarifa mejores. El shuttle compartido del hotel al aeropuerto cuesta **€15 por persona** a cualquiera de los dos; los precios privados son NAV €80/€90 y ASR €90/€110 para Vito/Sprinter.",
+          "NAV suele estar más cerca de Goreme, Uchisar y otras localidades centrales. ASR está más lejos, pero puede ofrecer un horario o una tarifa mejores. El shuttle compartido del hotel al aeropuerto cuesta **{{PRICE:nevsehir:shuttle}} por persona hacia NAV** y **{{PRICE:kayseri:shuttle}} hacia ASR**; los precios privados son NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}} y ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}} para Vito/Sprinter.",
           "Si todavía no has elegido aeropuerto de salida, compara [[Aeropuerto más cercano a Capadocia|nearest-airport-to-cappadocia]] y [[Kayseri o Nevsehir para Capadocia|kayseri-or-nevsehir-airport-for-cappadocia]] antes de reservar el vuelo."
         ]
       },
@@ -2660,7 +2661,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Cuánto cuesta el shuttle del hotel al aeropuerto?",
-        "a": "€15 por persona y trayecto a NAV o ASR desde las localidades hoteleras incluidas."
+        "a": "Desde las localidades hoteleras incluidas, el shuttle cuesta {{PRICE:nevsehir:shuttle}} por persona y trayecto hacia NAV y {{PRICE:kayseri:shuttle}} hacia ASR."
       },
       {
         "q": "¿Puedo reservar un traslado privado del hotel para el vuelo a Estambul?",
@@ -2668,7 +2669,7 @@ export const esPages: EsSeoPage[] = [
       },
       {
         "q": "¿Puedo salir por un aeropuerto diferente al de llegada?",
-        "a": "Sí, pero cada tramo debe confirmarse correctamente porque la ruta y el precio privado cambian."
+        "a": "Sí, pero cada tramo debe confirmarse correctamente porque la ruta y el precio privado se confirman según el aeropuerto."
       },
       {
         "q": "¿Debo introducir el código del aeropuerto de Estambul en el formulario del shuttle?",
@@ -2683,9 +2684,11 @@ export const esPages: EsSeoPage[] = [
       "cappadocia-to-kayseri-airport-shuttle"
     ],
     "twitterTitle": "Capadocia a Estambul: shuttle desde el hotel y vuelo",
-    "twitterDescription": "Recogida en hoteles de las localidades incluidas hacia Kayseri (ASR) o Nevsehir (NAV) desde €15 por persona y después vuelo a Estambul."
+    "twitterDescription": "Guía Capadocia a Estambul: recogida en hotel hacia NAV o ASR, planificación del vuelo, distancia por carretera y horarios de recogida."
   }
 ];
+
+export const esPages: EsSeoPage[] = resolvePriceTokensDeep(rawEsPages);
 
 export const esPageBySlug = new Map(esPages.map((page) => [page.slug, page]));
 export function esPrettySlug(slug:string){ const page=esPageBySlug.get(slug); return page?.h1 || slug.split('-').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(' '); }

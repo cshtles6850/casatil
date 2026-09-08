@@ -8,6 +8,7 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
+import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -24,7 +25,6 @@ const airportDisplayLabels: Record<NewLocale, Record<Airport,string>> = {
   ko:{kayseri:'카이세리 공항 (ASR)',nevsehir:'네브셰히르 공항 (NAV)'},
   ja:{kayseri:'カイセリ空港（ASR）',nevsehir:'ネヴシェヒル空港（NAV）'},
 };
-const privatePrices: Record<Airport, Record<Vehicle, number>> = { kayseri: { vito: 90, sprinter: 110 }, nevsehir: { vito: 80, sprinter: 90 } };
 const canonicalTownLabels: Record<Town, string> = { goreme:'Goreme', urgup:'Urgup', uchisar:'Uchisar', avanos:'Avanos', ortahisar:'Ortahisar', cavusin:'Cavusin' };
 
 const bookingTimingCopy: Record<NewLocale, { urgent: string; urgentStrong: string; short: string; shortStrong: string; past: string; pastStrong: string; returnOrder: string; returnOrderStrong: string }> = {
@@ -74,7 +74,7 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
   useEffect(()=>{ if(transferType==='private'){ const max=vehicle==='vito'?5:16; if(passengers>max)setPassengers(max); } },[transferType,vehicle,passengers]);
   useEffect(()=>setPeople(cur=>Array.from({length:passengers},(_,i)=>cur[i]??{fullName:'',passport:''})),[passengers]);
   useEffect(()=>{if(expanded&&!firstStageReady)setExpanded(false)},[expanded,firstStageReady]);
-  const total=useMemo(()=>{const m=journey==='round-trip'?2:1; return transferType==='shuttle'?15*passengers*m:privatePrices[airport][vehicle]*m},[transferType,journey,passengers,airport,vehicle]);
+  const total=useMemo(()=>{const isRoundTrip=journey==='round-trip'; return transferType==='shuttle'?shuttleTotal(airport,passengers,isRoundTrip):privateTotal(airport,vehicle,isRoundTrip)},[transferType,journey,passengers,airport,vehicle]);
   const isArrivalOnly=journey==='one-way'&&direction==='airport-hotel'; const isDepartureOnly=journey==='one-way'&&direction==='hotel-airport';
   const canonicalDirection=journey==='round-trip'?'Airport ⇄ Hotel':direction==='airport-hotel'?'Airport → Hotel':'Hotel → Airport';
   const visibleDirection=journey==='round-trip'?`${t.airportHotel.split('→')[0].trim()} ⇄ ${t.airportHotel.split('→')[1].trim()}`:direction==='airport-hotel'?t.airportHotel:t.hotelAirport;
@@ -84,6 +84,7 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
   const flightExample=locale==='es'?'p. ej. TK2010':locale==='pt-BR'?'ex.: TK2010':locale==='ko'?'예: TK2010':'例：TK2010';
   const returnFlightExample=locale==='es'?'p. ej. TK2011':locale==='pt-BR'?'ex.: TK2011':locale==='ko'?'예: TK2011':'例：TK2011';
   const privateVehicleLabel=(v:'vito'|'sprinter')=>`${t.privateTransfer} · Mercedes ${v==='vito'?'Vito':'Sprinter'} · ${capacityLabel(v==='vito'?5:16)}`;
+  const shuttlePriceLabel=locale==='ko'?`${t.shuttleOption} · 1${localeUi[locale].dynamic.person}/${t.way} €${shuttleOneWayPrice(airport)}`:locale==='ja'?`${t.shuttleOption} · 1${localeUi[locale].dynamic.person}/${t.way} €${shuttleOneWayPrice(airport)}`:`${t.shuttleOption} · €${shuttleOneWayPrice(airport)}/${localeUi[locale].dynamic.person}/${t.way}`;
   const firstDateLabel=journey==='round-trip'||direction==='airport-hotel'?t.arrivalDate:t.departureDate; const firstTimeLabel=journey==='round-trip'||direction==='airport-hotel'?t.arrivalTime:t.departureTime;
   function updatePassenger(index:number,field:keyof Passenger,value:string){setPeople(cur=>cur.map((p,i)=>i===index?{...p,[field]:value}:p))}
   function submit(e:FormEvent<HTMLFormElement>){
@@ -98,13 +99,13 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
   }
   return <div className={`booking-card${compact?' booking-card-compact':''}`}><div className="section-head booking-head"><div className="kicker">{t.kicker}</div><h2>{t.heading}</h2><p>{t.intro}</p></div>
     <form onSubmit={submit}><input className="hp-field" tabIndex={-1} autoComplete="off" name="companyWebsite" aria-hidden="true"/><div className="form-grid">
-      <div className="field full"><label>{t.transferService}</label><div className="radio-row"><label className="radio-card"><input type="radio" name="serviceType" checked={transferType==='shuttle'} onChange={()=>setTransferType('shuttle')}/>{t.shuttleOption}</label><label className="radio-card"><input type="radio" name="serviceType" checked={transferType==='private'} onChange={()=>setTransferType('private')}/>{t.privateOption}</label></div></div>
+      <div className="field full"><label>{t.transferService}</label><div className="radio-row"><label className="radio-card"><input type="radio" name="serviceType" checked={transferType==='shuttle'} onChange={()=>setTransferType('shuttle')}/>{shuttlePriceLabel}</label><label className="radio-card"><input type="radio" name="serviceType" checked={transferType==='private'} onChange={()=>setTransferType('private')}/>{t.privateOption}</label></div></div>
       <div className="field full"><label>{t.journey}</label><div className="radio-row"><label className="radio-card"><input type="radio" name="journey" checked={journey==='one-way'} onChange={()=>setJourney('one-way')}/>{t.oneWay}</label><label className="radio-card"><input type="radio" name="journey" checked={journey==='round-trip'} onChange={()=>setJourney('round-trip')}/>{t.roundTrip}</label></div></div>
       {journey==='one-way'&&<div className="field full"><label>{t.direction}</label><div className="radio-row"><label className="radio-card"><input type="radio" name="direction" checked={direction==='airport-hotel'} onChange={()=>setDirection('airport-hotel')}/>{t.airportHotel}</label><label className="radio-card"><input type="radio" name="direction" checked={direction==='hotel-airport'} onChange={()=>setDirection('hotel-airport')}/>{t.hotelAirport}</label></div></div>}
       <div className="field full"><label htmlFor={`airport-loc-${compact?'c':'f'}`}>{t.airport}</label><select id={`airport-loc-${compact?'c':'f'}`} value={airport} onChange={e=>setAirport(e.target.value as Airport)}><option value="kayseri">{airportDisplay.kayseri}</option><option value="nevsehir">{airportDisplay.nevsehir}</option></select></div>
       <div className="field full"><label htmlFor={`destination-loc-${compact?'c':'f'}`}>{destinationLabel}</label><select id={`destination-loc-${compact?'c':'f'}`} value={destination} onChange={e=>setDestination(e.target.value as Town|'')} required><option value="">{t.selectTown}</option>{(Object.keys(canonicalTownLabels) as Town[]).map(key=><option key={key} value={key}>{townLabels[key]}</option>)}</select></div>
       <div className="field full passenger-hotel-row"><PassengerCounter id={`passengers-loc-${compact?'c':'f'}`} label={t.passengerCount} value={passengers} max={transferType==='private'?(vehicle==='vito'?5:16):16} onChange={setPassengers}/><div className="field passenger-hotel-field"><label>{t.hotel}</label><input value={hotel} onChange={e=>setHotel(e.target.value)} placeholder={destination?`${t.fullHotelIn} ${townLabels[destination]}`:t.fullHotel} required/></div></div>
-      {transferType==='private'&&<div className="field full"><label>{t.privateVehicle}</label><div className="radio-row"><label className="radio-card"><input type="radio" checked={vehicle==='vito'} onChange={()=>setVehicle('vito')}/>Vito · {capacityLabel(5)} · <strong>€{privatePrices[airport].vito}/{t.way}</strong></label><label className="radio-card"><input type="radio" checked={vehicle==='sprinter'} onChange={()=>setVehicle('sprinter')}/>Sprinter · {capacityLabel(16)} · <strong>€{privatePrices[airport].sprinter}/{t.way}</strong></label></div></div>}
+      {transferType==='private'&&<div className="field full"><label>{t.privateVehicle}</label><div className="radio-row"><label className="radio-card"><input type="radio" checked={vehicle==='vito'} onChange={()=>setVehicle('vito')}/>Vito · {capacityLabel(5)} · <strong>€{privateOneWayPrice(airport,'vito')}/{t.way}</strong></label><label className="radio-card"><input type="radio" checked={vehicle==='sprinter'} onChange={()=>setVehicle('sprinter')}/>Sprinter · {capacityLabel(16)} · <strong>€{privateOneWayPrice(airport,'sprinter')}/{t.way}</strong></label></div></div>}
       <div className="field"><label>{firstDateLabel}</label><input type="date" min={today} value={firstTransferDate} onChange={e=>setFirstTransferDate(e.target.value)} required/></div><TimeSelect idPrefix={`time-loc-${locale}-${compact?'c':'f'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime}/>
       {firstTiming==='past'&&<div className="field full booking-time-error" role="alert">⚠️ <span>{timingCopy.past} <strong>{timingCopy.pastStrong}</strong></span></div>}
       {(firstTiming==='urgent'||firstTiming==='short-notice')&&<div className={`field full short-notice-warning${firstTiming==='urgent'?' urgent':''}`}>⚠️ <span>{firstTiming==='urgent'?timingCopy.urgent:timingCopy.short} <strong>{firstTiming==='urgent'?timingCopy.urgentStrong:timingCopy.shortStrong}</strong></span></div>}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SITE } from '@/lib/site';
+import { privateTotal, shuttleTotal, type AirportPriceKey, type PrivateVehicleKey } from '@/lib/prices';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -53,16 +54,23 @@ function normalizePassengers(value: unknown): Passenger[] {
 }
 
 function expectedTotal(data: { transferType: string; journey: string; airport: string; vehicle: string; passengerCount: number }) {
-  const multiplier = data.journey === 'round-trip' ? 2 : 1;
-  if (data.transferType === 'shuttle') return 15 * data.passengerCount * multiplier;
-  const isKayseri = data.airport.includes('(ASR)');
-  const isNevsehir = data.airport.includes('(NAV)');
-  if (!isKayseri && !isNevsehir) return null;
-  const isVito = data.vehicle.includes('Vito');
-  const isSprinter = data.vehicle.includes('Sprinter');
-  if (!isVito && !isSprinter) return null;
-  const oneWay = isKayseri ? (isVito ? 90 : 110) : (isVito ? 80 : 90);
-  return oneWay * multiplier;
+  const airport: AirportPriceKey | null = data.airport.includes('(ASR)')
+    ? 'kayseri'
+    : data.airport.includes('(NAV)')
+      ? 'nevsehir'
+      : null;
+  if (!airport) return null;
+
+  const isRoundTrip = data.journey === 'round-trip';
+  if (data.transferType === 'shuttle') return shuttleTotal(airport, data.passengerCount, isRoundTrip);
+
+  const vehicle: PrivateVehicleKey | null = data.vehicle.includes('Vito')
+    ? 'vito'
+    : data.vehicle.includes('Sprinter')
+      ? 'sprinter'
+      : null;
+  if (!vehicle) return null;
+  return privateTotal(airport, vehicle, isRoundTrip);
 }
 
 export async function POST(request: NextRequest) {

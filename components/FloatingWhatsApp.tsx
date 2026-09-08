@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 type Props = {
@@ -8,115 +8,80 @@ type Props = {
   ariaLabel: string;
 };
 
-const HERO_COLLISION_MARGIN = 24;
+const MOBILE_MEDIA = '(max-width: 820px)';
+const COLLISION_TARGETS = '#booking .booking-card, .hero-actions, .trust-row';
 
 type VisualState = {
   ready: boolean;
   collapsed: boolean;
 };
 
-function rectsOverlap(a: DOMRect, b: DOMRect) {
-  return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
-}
-
-function expandRect(rect: DOMRect, margin: number) {
-  return new DOMRect(
-    rect.left - margin,
-    rect.top - margin,
-    rect.width + margin * 2,
-    rect.height + margin * 2,
-  );
-}
-
 export function FloatingWhatsApp({ href, ariaLabel }: Props) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const expandedSizeRef = useRef({ width: 0, height: 0 });
   const [visualState, setVisualState] = useState<VisualState>({
     ready: false,
     collapsed: false,
   });
+  useEffect(() => {
+    const media = window.matchMedia(MOBILE_MEDIA);
+    let observer: IntersectionObserver | null = null;
+    const visibleTargets = new Set<Element>();
 
-  useLayoutEffect(() => {
-    const button = ref.current;
-    if (!button) return;
+    const disconnectObserver = () => {
+      observer?.disconnect();
+      observer = null;
+      visibleTargets.clear();
+    };
 
-    let frame = 0;
+    const setup = () => {
+      disconnectObserver();
 
-    const shouldCollapse = () => {
-      // Desktop: keep the full WhatsApp pill visible at all times.
-      // The collision/collapse behaviour is only needed on mobile, where
-      // screen space is limited and the floating control can overlap UI.
-      if (window.innerWidth > 820) return false;
-
-      const currentRect = button.getBoundingClientRect();
-      if (!expandedSizeRef.current.width) {
-        expandedSizeRef.current = { width: currentRect.width, height: currentRect.height };
+      // Desktop always keeps the full WhatsApp pill visible. No geometry reads,
+      // scroll listeners or resize loops are needed for the desktop state.
+      if (!media.matches) {
+        setVisualState({ ready: true, collapsed: false });
+        return;
       }
 
-      const { width, height } = expandedSizeRef.current;
-      const expandedRect = new DOMRect(
-        currentRect.right - width,
-        currentRect.bottom - height,
-        width,
-        height,
-      );
+      const targets = Array.from(document.querySelectorAll<HTMLElement>(COLLISION_TARGETS));
 
-      // Condition A: collapse whenever the booking form is visible in the viewport.
-      const bookingForm = document.querySelector<HTMLElement>('#booking .booking-card');
-      const bookingInView = bookingForm
-        ? (() => {
-            const rect = bookingForm.getBoundingClientRect();
-            return rect.bottom > 0 && rect.top < window.innerHeight;
-          })()
-        : false;
+      // Pages without a booking/hero collision target can show the full mobile pill.
+      if (!targets.length || !('IntersectionObserver' in window)) {
+        setVisualState({ ready: true, collapsed: false });
+        return;
+      }
 
-      // Condition B: at the hero, collapse if the expanded pill would cover a
-      // hero CTA button or the trust/checkmark row, including the safety margin.
-      const heroTargets = Array.from(
-        document.querySelectorAll<HTMLElement>('.hero-actions .btn, .trust-row'),
-      );
-      const heroWouldBeCovered = heroTargets.some((target) => {
-        const rect = target.getBoundingClientRect();
-        const targetInView =
-          rect.bottom > -HERO_COLLISION_MARGIN &&
-          rect.top < window.innerHeight + HERO_COLLISION_MARGIN;
-        return targetInView && rectsOverlap(expandedRect, expandRect(rect, HERO_COLLISION_MARGIN));
-      });
+      // Keep the control hidden until the observer reports the initial mobile
+      // collision state, preventing an expanded-pill flash during hydration.
+      setVisualState({ ready: false, collapsed: false });
 
-      return bookingInView || heroWouldBeCovered;
+      // IntersectionObserver is asynchronous and browser-managed, avoiding the
+      // forced synchronous layout caused by geometry reads on scroll.
+      observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visibleTargets.add(entry.target);
+          else visibleTargets.delete(entry.target);
+        }
+
+        const collapsed = visibleTargets.size > 0;
+        setVisualState({ ready: true, collapsed });
+      }, { threshold: 0 });
+
+      for (const target of targets) {
+        observer.observe(target);
+      }
     };
 
-    // Critical initial-load check: measure the expanded pill and determine its
-    // correct state synchronously in a layout effect, before making it visible.
-    // This prevents a one-frame flash of the expanded label over the hero CTA.
-    const initialCollapsed = shouldCollapse();
-    setVisualState({ ready: true, collapsed: initialCollapsed });
-
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const nextCollapsed = shouldCollapse();
-        setVisualState((current) =>
-          current.collapsed === nextCollapsed
-            ? current
-            : { ready: true, collapsed: nextCollapsed },
-        );
-      });
-    };
-
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    setup();
+    media.addEventListener('change', setup);
 
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
+      media.removeEventListener('change', setup);
+      disconnectObserver();
     };
   }, []);
 
   return (
     <a
-      ref={ref}
       className={`floating-whatsapp${visualState.ready ? ' is-ready' : ' is-initializing'}${visualState.collapsed ? ' is-collapsed' : ''}`}
       href={href}
       target="_blank"

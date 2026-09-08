@@ -11,6 +11,7 @@ import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { pageBySlug, pages, prettySlug, type SeoPage } from '@/lib/content';
 import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking } from '@/lib/booking-visibility';
+import { formatEuro, lowestShuttlePrice, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return pages.map((page) => ({ slug: page.slug })); }
@@ -53,9 +54,9 @@ function AirportComparisonTables() {
     </tbody></table></div>
     <h2>Shared Shuttle & Private Transfer Prices</h2>
     <div className="table-scroll"><table><thead><tr><th>Service</th><th>Nevsehir (NAV)</th><th>Kayseri (ASR)</th></tr></thead><tbody>
-      <tr><th scope="row">Shared shuttle</th><td>€15 / person</td><td>€15 / person</td></tr>
-      <tr><th scope="row">Private Vito</th><td>€80 / vehicle</td><td>€90 / vehicle</td></tr>
-      <tr><th scope="row">Private Sprinter</th><td>€90 / vehicle</td><td>€110 / vehicle</td></tr>
+      <tr><th scope="row">Shared shuttle</th><td>{formatEuro(shuttleOneWayPrice('nevsehir'))} / person</td><td>{formatEuro(shuttleOneWayPrice('kayseri'))} / person</td></tr>
+      <tr><th scope="row">Private Vito</th><td>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / vehicle</td><td>{formatEuro(privateOneWayPrice('kayseri','vito'))} / vehicle</td></tr>
+      <tr><th scope="row">Private Sprinter</th><td>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / vehicle</td><td>{formatEuro(privateOneWayPrice('kayseri','sprinter'))} / vehicle</td></tr>
     </tbody></table></div>
   </section>;
 }
@@ -85,11 +86,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 function RouteSummary({ page }: { page: SeoPage }) {
   if (!page.route) {
     return <div className="summary-box"><h3>Transfer at a glance</h3>
-      <div className="summary-line"><span>Shuttle</span><strong>€15 / person / way</strong></div>
-      <div className="summary-line"><span>Kayseri Vito</span><strong>€90 / vehicle</strong></div>
-      <div className="summary-line"><span>Kayseri Sprinter</span><strong>€110 / vehicle</strong></div>
-      <div className="summary-line"><span>Nevsehir Vito</span><strong>€80 / vehicle</strong></div>
-      <div className="summary-line"><span>Nevsehir Sprinter</span><strong>€90 / vehicle</strong></div>
+      <div className="summary-line"><span>Kayseri shuttle</span><strong>{formatEuro(shuttleOneWayPrice('kayseri'))} / person / way</strong></div>
+      <div className="summary-line"><span>Nevsehir shuttle</span><strong>{formatEuro(shuttleOneWayPrice('nevsehir'))} / person / way</strong></div>
+      <div className="summary-line"><span>Kayseri Vito</span><strong>{formatEuro(privateOneWayPrice('kayseri','vito'))} / vehicle</strong></div>
+      <div className="summary-line"><span>Kayseri Sprinter</span><strong>{formatEuro(privateOneWayPrice('kayseri','sprinter'))} / vehicle</strong></div>
+      <div className="summary-line"><span>Nevsehir Vito</span><strong>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / vehicle</strong></div>
+      <div className="summary-line"><span>Nevsehir Sprinter</span><strong>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / vehicle</strong></div>
       <div className="summary-line"><span>Payment</span><strong>Cash to driver</strong></div>
     </div>;
   }
@@ -106,7 +108,7 @@ function RouteQuickFacts({ page }: { page: SeoPage }) {
     items={[
       { label: 'Distance', value: distance },
       { label: 'Travel Time', value: time },
-      { label: 'Price', value: '€15 / person' },
+      { label: 'Price', value: `${formatEuro(shuttleOneWayPrice(page.route.airport))} / person` },
     ]}
   />;
 }
@@ -153,9 +155,9 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
     provider: { '@type': 'TravelAgency', name: SITE.name, url: SITE.domain },
     areaServed: serviceAreaServed(page),
     offers: page.route ? [
-      { '@type': 'Offer', price: '15', priceCurrency: 'EUR', description: 'Shared shuttle per person, one way' },
-      { '@type': 'Offer', price: String(airports[page.route.airport].vito), priceCurrency: 'EUR', description: 'Private Mercedes Vito, one way, up to 5 passengers' },
-      { '@type': 'Offer', price: String(airports[page.route.airport].sprinter), priceCurrency: 'EUR', description: 'Private Mercedes Sprinter, one way, up to 16 passengers' },
+      { '@type': 'Offer', price: String(shuttleOneWayPrice(page.route.airport)), priceCurrency: 'EUR', description: 'Shared shuttle per person, one way' },
+      { '@type': 'Offer', price: String(privateOneWayPrice(page.route.airport,'vito')), priceCurrency: 'EUR', description: 'Private Mercedes Vito, one way, up to 5 passengers' },
+      { '@type': 'Offer', price: String(privateOneWayPrice(page.route.airport,'sprinter')), priceCurrency: 'EUR', description: 'Private Mercedes Sprinter, one way, up to 16 passengers' },
     ] : undefined,
   };
   const defaults = bookingDefaults(page);
@@ -209,6 +211,6 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
       </>}
     </div></section>
 
-    {hasBookingForm && <MobileBookingCta priceLabel="€15 / person" bookLabel="Book Now" ariaLabel="Quick booking" />}
+    {hasBookingForm && <MobileBookingCta priceLabel={page.route ? `${formatEuro(shuttleOneWayPrice(page.route.airport))} / person` : `From ${formatEuro(lowestShuttlePrice())} / person`} bookLabel="Book Now" ariaLabel="Quick booking" />}
   </main>;
 }
