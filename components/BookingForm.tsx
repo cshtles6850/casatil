@@ -1,7 +1,8 @@
 'use client';
 
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { SITE } from '@/lib/site';
+import { generateBookingId } from '@/lib/booking-id';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
@@ -79,6 +80,7 @@ export function BookingForm({
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
+  const bookingIdRef = useRef<string | null>(null);
   const [expanded, setExpanded] = useState(false);
   const [clockTick, setClockTick] = useState(() => Date.now());
   const today = todayInIstanbul(clockTick);
@@ -140,6 +142,9 @@ export function BookingForm({
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return; // honeypot
 
+    const bookingId = bookingIdRef.current ?? generateBookingId(SITE.bookingCode);
+    bookingIdRef.current = bookingId;
+
     const passengerPayload = people.map((person, index) => ({
       number: index + 1,
       fullName: person.fullName.trim(),
@@ -147,6 +152,7 @@ export function BookingForm({
     }));
 
     const details = {
+      bookingId,
       transferType,
       journey,
       direction: resolvedDirection,
@@ -178,6 +184,7 @@ export function BookingForm({
 
     const lines = [
       'Booking request.',
+      `Booking ID: ${bookingId}`,
       '',
       `Service: ${transferType === 'shuttle' ? 'Shared Airport Shuttle' : 'Private Airport Transfer'}`,
       `Journey: ${journey === 'round-trip' ? 'Round Trip' : 'One Way'}`,

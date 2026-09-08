@@ -1,7 +1,8 @@
 'use client';
 
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { SITE } from '@/lib/site';
+import { generateBookingId } from '@/lib/booking-id';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
@@ -93,6 +94,7 @@ export function BookingFormZh({
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
+  const bookingIdRef = useRef<string | null>(null);
   const [expanded, setExpanded] = useState(false);
   const [clockTick, setClockTick] = useState(() => Date.now());
   const today = todayInIstanbul(clockTick);
@@ -154,6 +156,9 @@ export function BookingFormZh({
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return;
 
+    const bookingId = bookingIdRef.current ?? generateBookingId(SITE.bookingCode);
+    bookingIdRef.current = bookingId;
+
     const passengerPayload = people.map((person, index) => ({
       number: index + 1,
       fullName: person.fullName.trim(),
@@ -167,6 +172,7 @@ export function BookingFormZh({
     const vehicleZh = vehicle === 'vito' ? 'Mercedes Vito（最多5人）' : 'Mercedes Sprinter（最多16人）';
 
     const details = {
+      bookingId,
       language: 'zh-CN',
       transferType,
       journey,
@@ -198,6 +204,7 @@ export function BookingFormZh({
 
     const lines = [
       '机场接送预订请求。',
+      `Booking ID: ${bookingId}`,
       '',
       `服务：${serviceZh}`,
       `行程：${journey === 'round-trip' ? '往返' : '单程'}`,

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { SITE } from '@/lib/site';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -6,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 type Passenger = { number?: number; fullName?: string; passport?: string };
 type RawBooking = {
-  transferType?: unknown; journey?: unknown; direction?: unknown; airport?: unknown; vehicle?: unknown;
+  bookingId?: unknown; transferType?: unknown; journey?: unknown; direction?: unknown; airport?: unknown; vehicle?: unknown;
   passengers?: unknown; destination?: unknown; hotel?: unknown; firstTransferDate?: unknown; firstTransferTime?: unknown; arrivalFlight?: unknown;
   departureFlight?: unknown; returnTransferDate?: unknown; returnTransferTime?: unknown; returnFlight?: unknown; whatsapp?: unknown;
   passengerDetails?: unknown; notes?: unknown; total?: unknown; payment?: unknown; website?: unknown; companyWebsite?: unknown;
@@ -76,6 +77,7 @@ export async function POST(request: NextRequest) {
   const passengers = normalizePassengers(raw.passengerDetails);
   const passengerCount = Number.parseInt(clean(raw.passengers, 3), 10);
   const data = {
+    bookingId: clean(raw.bookingId, 32),
     transferType: clean(raw.transferType, 30), journey: clean(raw.journey, 30), direction: clean(raw.direction, 60),
     airport: clean(raw.airport, 80), vehicle: clean(raw.vehicle, 80), passengerCount, destination: clean(raw.destination, 40),
     hotel: clean(raw.hotel, 240), firstTransferDate: clean(raw.firstTransferDate, 30), firstTransferTime: clean(raw.firstTransferTime, 10), arrivalFlight: clean(raw.arrivalFlight, 50),
@@ -84,6 +86,7 @@ export async function POST(request: NextRequest) {
     language: clean(raw.language ?? raw.locale, 20) || 'en', submittedAt: clean(raw.submittedAt, 80),
   };
 
+  const validBookingId = new RegExp(`^${SITE.bookingCode}-\\d{4}-[A-HJ-NP-Z2-9]{4}$`).test(data.bookingId);
   const validTransferType = data.transferType === 'shuttle' || data.transferType === 'private';
   const validJourney = data.journey === 'one-way' || data.journey === 'round-trip';
   const validAirport = data.airport === 'Kayseri Airport (ASR)' || data.airport === 'Nevsehir Airport (NAV)';
@@ -99,7 +102,7 @@ export async function POST(request: NextRequest) {
   const validTime = /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.firstTransferTime);
   const validFutureOrToday = validDate && data.firstTransferDate >= todayInIstanbul();
   const isVito = data.vehicle === 'Mercedes Vito (max 5)';
-  if (!validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !validFutureOrToday || !data.whatsapp || !data.hotel) {
+  if (!validBookingId || !validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !validFutureOrToday || !data.whatsapp || !data.hotel) {
     return reply({ ok: false, error: 'missing-or-invalid-fields' }, 400);
   }
   if (data.journey === 'round-trip' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate) || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.returnTransferTime))) return reply({ ok: false, error: 'missing-return-fields' }, 400);
@@ -131,6 +134,7 @@ export async function POST(request: NextRequest) {
     : '';
 
   const mainRows: Array<[string, string]> = [
+    ['Booking ID', data.bookingId],
     ['Language', data.language],
     ['Transfer Type', journeyLabel],
     ['Service', serviceLabel],
@@ -167,12 +171,18 @@ export async function POST(request: NextRequest) {
   const finalHtmlRows = finalRows.map(([label, value]) => `<tr><td style="padding:8px;border-bottom:1px solid #eee"><strong>${escapeHtml(label)}</strong></td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`).join('');
   const textPassengers = passengers.map((p) => `Passenger ${p.number}: ${p.fullName}\nPassport: ${p.passport}`).join('\n');
   const text = `Booking request.\n\n${mainRows.map(([label, value]) => `${label}: ${value}`).join('\n')}\n${textPassengers}\n${finalRows.map(([label, value]) => `${label}: ${value}`).join('\n')}`;
+  const airportCode = data.airport.includes('(ASR)') ? 'ASR' : 'NAV';
+  const routeLabel = data.journey === 'one-way' && data.direction === 'Hotel → Airport'
+    ? `${data.destination} → ${airportCode}`
+    : `${airportCode} → ${data.destination}`;
+  const leadPassenger = (passengers[0]?.fullName || 'Booking').slice(0, 80);
+  const subject = `[${data.bookingId}] ${leadPassenger} | ${routeLabel}`;
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from, to: [to], subject: `New Booking · ${data.airport} · ${journeyLabel}`, text,
+      from, to: [to], subject, text,
       html: `<h2>Booking request.</h2><table style="border-collapse:collapse;width:100%">${regularRows}${passengerRows}${finalHtmlRows}</table><p style="color:#666;font-size:12px">Passenger passport information is included because it is required for the reservation. Handle this email securely and do not forward it unnecessarily.</p>`,
     }),
   });
