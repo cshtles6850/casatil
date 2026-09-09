@@ -6,6 +6,7 @@ import { generateBookingId } from '@/lib/booking-id';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
+import { NumericDateInput } from './NumericDateInput';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 
@@ -297,7 +298,7 @@ export function BookingForm({
 
           <div className="field">
             <label htmlFor={`date-${compact ? 'compact' : 'full'}`}>{firstDateLabel}</label>
-            <input id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" min={today} value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
+            <NumericDateInput id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" min={today} value={firstTransferDate} onChange={setFirstTransferDate} required ariaLabel={firstDateLabel} />
           </div>
 
           <TimeSelect idPrefix={`time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
@@ -340,7 +341,7 @@ export function BookingForm({
               <div className="field full return-datetime-row">
                 <div className="field">
                   <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
-                  <input id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required />
+                  <NumericDateInput id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="Return flight date" />
                 </div>
                 <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
               </div>

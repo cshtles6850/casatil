@@ -652,3 +652,64 @@ p { margin-top: 0; }
   .language-switcher-desktop { display: none; }
   .language-switcher-mobile { display: block; }
 }
+
+/* Locale-independent numeric date display. The native picker remains the input,
+   but the visible value is always DD/MM/YYYY so device language cannot render
+   month names such as "set." or "sept." inside the booking form. */
+.numeric-date-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #d4daeb;
+  border-radius: 11px;
+  background: #fff;
+  overflow: hidden;
+}
+.numeric-date-input:focus-within {
+  border-color: var(--sea);
+  box-shadow: 0 0 0 3px rgba(102,115,199,.10);
+}
+.numeric-date-display {
+  width: 100%;
+  padding: 10px 11px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.numeric-date-display.is-placeholder { color: #7c8498; }
+.field .numeric-date-native {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 46px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 11px;
+  opacity: .001;
+  cursor: pointer;
+}
+.field .numeric-date-native:focus {
+  border: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+@media (max-width: 820px) {
+  .mobile-booking-cta.is-hidden-for-booking {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(calc(100% + 24px));
+    transition: opacity 140ms ease, transform 180ms ease, visibility 0s linear 180ms;
+  }
+  .mobile-booking-cta:not(.is-hidden-for-booking) {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 140ms ease, transform 180ms ease;
+  }
+}

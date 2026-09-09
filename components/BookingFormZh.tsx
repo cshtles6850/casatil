@@ -6,6 +6,7 @@ import { generateBookingId } from '@/lib/booking-id';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { TimeSelect, isValidTime } from './TimeSelect';
 import { PassengerCounter } from './PassengerCounter';
+import { NumericDateInput } from './NumericDateInput';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 
@@ -315,7 +316,7 @@ export function BookingFormZh({
 
           <div className="field">
             <label htmlFor={`zh-date-${compact ? 'compact' : 'full'}`}>{firstDateLabel}</label>
-            <input id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" type="date" min={today} value={firstTransferDate} onChange={(e) => setFirstTransferDate(e.target.value)} required />
+            <NumericDateInput id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" min={today} value={firstTransferDate} onChange={setFirstTransferDate} required ariaLabel={firstDateLabel} />
           </div>
 
           <TimeSelect idPrefix={`zh-time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
@@ -355,7 +356,7 @@ export function BookingFormZh({
 
           {journey === 'round-trip' && (
             <>
-              <div className="field full return-datetime-row"><div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><input id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" type="date" min={firstTransferDate || today} value={returnTransferDate} onChange={(e) => setReturnTransferDate(e.target.value)} required /></div><TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} /></div>
+              <div className="field full return-datetime-row"><div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><NumericDateInput id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="返程航班日期" /></div><TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} /></div>
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>返程日期和时间必须<strong>晚于首次接送的日期和时间。</strong></span></div>}
               <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>
