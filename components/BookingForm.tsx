@@ -224,7 +224,7 @@ export function BookingForm({
   }
 
   return (
-    <div className={`booking-card${compact ? ' booking-card-compact' : ''}`}>
+    <div id="booking-form" className={`booking-card${compact ? ' booking-card-compact' : ''}`}>
       <div className="section-head booking-head">
         <div className="kicker">BOOK YOUR TRANSFER</div>
         <h2>One way or round trip</h2>

@@ -242,7 +242,7 @@ export function BookingFormZh({
   }
 
   return (
-    <div className={`booking-card${compact ? ' booking-card-compact' : ''}`}>
+    <div id="booking-form" className={`booking-card${compact ? ' booking-card-compact' : ''}`}>
       <div className="section-head booking-head">
         <div className="kicker">预订机场接送</div>
         <h2>选择单程或往返</h2>

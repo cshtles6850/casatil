@@ -26,7 +26,7 @@ export function MobileBookingCta({ priceLabel, bookLabel, ariaLabel }: Props) {
         return;
       }
 
-      const bookingCard = document.querySelector<HTMLElement>('#booking .booking-card');
+      const bookingCard = document.querySelector<HTMLElement>('#booking-form');
       if (!bookingCard || !('IntersectionObserver' in window)) {
         setHiddenForBooking(false);
         return;
@@ -58,9 +58,8 @@ export function MobileBookingCta({ priceLabel, bookLabel, ariaLabel }: Props) {
       <span className="mobile-booking-price">{priceLabel}</span>
       <a
         className="mobile-booking-button"
-        href="#booking"
+        href="#booking-form"
         tabIndex={hiddenForBooking ? -1 : undefined}
-        onClick={() => setHiddenForBooking(true)}
       >
         {bookLabel}
       </a>
