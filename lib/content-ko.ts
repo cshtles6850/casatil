@@ -21,12 +21,12 @@ const rawKoPages: KoSeoPage[] = [
     "description": "카이세리(ASR) 또는 네브셰히르(NAV) 공항에서 괴레메, 위르귀프 등으로 가는 카파도키아 합승 공항 셔틀을 예약하세요. WhatsApp 예약 가능.",
     "eyebrow": "합승 공항 셔틀",
     "h1": "카파도키아 합승 공항 셔틀",
-    "lead": "카파도키아 합승 공항 셔틀은 카이세리 공항(ASR)과 네브셰히르 공항(NAV)을 괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르의 호텔과 연결합니다. 현재 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}이며, 항공편에 맞춰 픽업과 하차 일정을 확인합니다.",
+    "lead": "카파도키아 합승 공항 셔틀은 카이세리 공항(ASR)과 네브셰히르 공항(NAV)을 괴레메, 위르귀프, 우치히사르, 아바노스, 차우신, 오르타히사르의 호텔과 연결합니다. 현재 요금은 ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}}이며, 항공편에 맞춰 픽업과 하차 일정을 확인합니다.",
     "sections": [
       {
         "heading": "서비스에 포함되는 내용",
         "paragraphs": [
-          "두 공항 중 어느 곳에서든 숙소까지 합승 차량으로 이동합니다. 항공편, 승객 정보, 호텔 이름을 미리 확인하며, 같은 운행에 다른 예약 승객과 호텔 정차가 포함될 수 있습니다. 현재 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}입니다."
+          "두 공항 중 어느 곳에서든 숙소까지 합승 차량으로 이동합니다. 항공편, 승객 정보, 호텔 이름을 미리 확인하며, 같은 운행에 다른 예약 승객과 호텔 정차가 포함될 수 있습니다. 현재 요금은 ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
         ]
       },
       {
@@ -51,7 +51,7 @@ const rawKoPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카파도키아 합승 공항 셔틀 요금은 얼마인가요?",
-        "a": "서비스 지역 호텔까지 ASR은 1인 편도 {{PRICE:kayseri:shuttle}}, NAV는 {{PRICE:nevsehir:shuttle}}입니다."
+        "a": "서비스 지역 호텔까지 ASR은 1인 편도 {{PRICE:kayseri:shuttle}}, NAV는 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "어떤 공항을 이용할 수 있나요?",
@@ -96,7 +96,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "합승 셔틀 또는 프라이빗 픽업",
         "paragraphs": [
-          "[[합승 셔틀|cappadocia-shuttle-transfer]]은 현재 카이세리(ASR) 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르(NAV) {{PRICE:nevsehir:shuttle}}이며 사전 예약 후 WhatsApp으로 확인합니다. 같은 운행에 다른 승객이나 호텔 정차가 포함될 수 있습니다. 전용 차량을 원한다면 [[프라이빗 픽업|private-airport-transfer-cappadocia]]으로 Vito(최대 5명) 또는 Sprinter(최대 16명)를 선택할 수 있으며, 요금은 인원이 아니라 차량 기준이며 카이세리와 네브셰히르에서 각각 별도로 관리됩니다. 두 옵션을 비교하고 싶다면 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 요금, 운행 지역, 시간 차이를 한눈에 확인할 수 있습니다."
+          "[[합승 셔틀|cappadocia-shuttle-transfer]]은 현재 카이세리(ASR) 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르(NAV) 1인 편도 {{PRICE:nevsehir:shuttle}}이며 사전 예약 후 WhatsApp으로 확인합니다. 같은 운행에 다른 승객이나 호텔 정차가 포함될 수 있습니다. 전용 차량을 원한다면 [[프라이빗 픽업|private-airport-transfer-cappadocia]]으로 Vito(최대 5명) 또는 Sprinter(최대 16명)를 선택할 수 있으며, 요금은 인원이 아니라 차량 기준이며 카이세리와 네브셰히르에서 각각 별도로 관리됩니다. 두 옵션을 비교하고 싶다면 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 요금, 운행 지역, 시간 차이를 한눈에 확인할 수 있습니다."
         ]
       },
       {
@@ -173,7 +173,7 @@ const rawKoPages: KoSeoPage[] = [
     "description": "카이세리(ASR)·네브셰히르(NAV) 공항에서 이용하는 카파도키아 프라이빗 픽업. Vito는 최대 5명, Sprinter는 최대 16명이며 기사에게 현금 결제합니다.",
     "eyebrow": "전용 차량",
     "h1": "카파도키아 프라이빗 공항 픽업·샌딩",
-    "lead": "카이세리 공항: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}** 편도. 네브셰히르 공항: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. 요금은 승객 1인당이 아니라 차량당입니다. 왕복은 카이세리에서 {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}, 네브셰히르에서 {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}입니다.",
+    "lead": "카이세리 공항 차량 1대당 편도: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}**. 네브셰히르 공항 차량 1대당 편도: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. 차량 1대당 왕복은 카이세리 Vito/Sprinter {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}, 네브셰히르 Vito/Sprinter {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}입니다.",
     "sections": [
       {
         "heading": "Mercedes Vito: 최대 5명",
@@ -184,7 +184,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "Mercedes Sprinter: 최대 16명",
         "paragraphs": [
-          "Sprinter는 최대 16명까지 이용할 수 있는 더 큰 프라이빗 차량입니다. 요금은 공항별로 별도 관리되며 카이세리에서는 편도 {{PRICE:kayseri:sprinter}}, 네브셰히르에서는 {{PRICE:nevsehir:sprinter}}입니다. 인원이 많은 그룹이라면 합승 셔틀보다 1인당 비용이 비슷하거나 더 낮아질 수 있습니다."
+          "Sprinter는 최대 16명까지 이용할 수 있는 더 큰 프라이빗 차량입니다. 요금은 공항별로 별도 관리되며 카이세리에서는 차량 1대당 편도 {{PRICE:kayseri:sprinter}}, 네브셰히르에서는 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 인원이 많은 그룹이라면 합승 셔틀보다 1인당 비용이 비슷하거나 더 낮아질 수 있습니다."
         ]
       },
       {
@@ -202,7 +202,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "예약, 승객 정보와 결제",
         "paragraphs": [
-          "프라이빗 픽업 확인을 위해 항공편 번호, 숙소 전체 이름, 승객 이름, 여권 번호, WhatsApp 연락처를 입력하세요. 결제는 기사에게 현금으로 합니다. 요금은 EUR 기준이며, 예약 시 확인한 환율에 따라 USD 또는 TRY 현금 결제도 가능합니다."
+          "프라이빗 픽업 확인을 위해 항공편 번호, 숙소 전체 이름, 승객 이름, 여권 번호, WhatsApp 연락처를 입력하세요. 결제는 기사에게 현금으로 합니다. 요금은 EUR 기준이며, 결제 시점의 환율에 따라 USD 또는 TRY 현금 결제도 가능합니다."
         ]
       }
     ],
@@ -256,30 +256,30 @@ const rawKoPages: KoSeoPage[] = [
     "twitterDescription": "카파도키아 공항 픽업의 현재 요금을 비교하세요. 카이세리·네브셰히르 합승 셔틀과 프라이빗 Vito/Sprinter, 편도·왕복 요금 체계를 안내합니다.",
     "eyebrow": "명확한 요금",
     "h1": "카파도키아 공항 픽업·샌딩 요금",
-    "lead": "합승 셔틀은 카이세리(ASR) 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르(NAV) {{PRICE:nevsehir:shuttle}}입니다. 프라이빗 픽업도 차량당 요금을 공항별로 따로 관리합니다.",
+    "lead": "합승 셔틀은 카이세리(ASR) 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르(NAV) 1인 편도 {{PRICE:nevsehir:shuttle}}입니다. 프라이빗 픽업도 차량당 요금을 공항별로 따로 관리합니다.",
     "sections": [
       {
         "heading": "합승 셔틀 요금",
         "paragraphs": [
-          "카이세리 공항(ASR) → 카파도키아 서비스 지역 호텔: **1인 편도 {{PRICE:kayseri:shuttle}}**. 네브셰히르 공항(NAV) → 서비스 지역 호텔: **1인 편도 {{PRICE:nevsehir:shuttle}}**. 호텔 → 공항은 해당 공항의 같은 편도 요금이 적용되며, 왕복은 카이세리 {{PRICE:kayseri:shuttle:roundTrip}}, 네브셰히르 {{PRICE:nevsehir:shuttle:roundTrip}}입니다. 자세한 내용은 [[합승 셔틀 페이지|cappadocia-shuttle-transfer]]에서 확인하세요."
+          "카이세리 공항(ASR) → 카파도키아 서비스 지역 호텔: **1인 편도 {{PRICE:kayseri:shuttle}}**. 네브셰히르 공항(NAV) → 서비스 지역 호텔: **1인 편도 {{PRICE:nevsehir:shuttle}}**. 호텔 → 공항은 해당 공항의 같은 편도 요금이 적용되며, 왕복은 카이세리 1인 {{PRICE:kayseri:shuttle:roundTrip}}, 네브셰히르 1인 {{PRICE:nevsehir:shuttle:roundTrip}}입니다. 자세한 내용은 [[합승 셔틀 페이지|cappadocia-shuttle-transfer]]에서 확인하세요."
         ]
       },
       {
         "heading": "카이세리 공항 프라이빗 요금",
         "paragraphs": [
-          "Mercedes Vito, 최대 5명: **편도 {{PRICE:kayseri:vito}} / 왕복 {{PRICE:kayseri:vito:roundTrip}}**. Mercedes Sprinter, 최대 16명: **편도 {{PRICE:kayseri:sprinter}} / 왕복 {{PRICE:kayseri:sprinter:roundTrip}}**."
+          "Mercedes Vito, 최대 5명: **차량 1대 기준 편도 {{PRICE:kayseri:vito}} / 왕복 {{PRICE:kayseri:vito:roundTrip}}**. Mercedes Sprinter, 최대 16명: **차량 1대 기준 편도 {{PRICE:kayseri:sprinter}} / 왕복 {{PRICE:kayseri:sprinter:roundTrip}}**."
         ]
       },
       {
         "heading": "네브셰히르 공항 프라이빗 요금",
         "paragraphs": [
-          "Mercedes Vito, 최대 5명: **편도 {{PRICE:nevsehir:vito}} / 왕복 {{PRICE:nevsehir:vito:roundTrip}}**. Mercedes Sprinter, 최대 16명: **편도 {{PRICE:nevsehir:sprinter}} / 왕복 {{PRICE:nevsehir:sprinter:roundTrip}}**. 차량과 합승 셔틀 대비 장점을 확인하려면 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]을 참고하세요."
+          "Mercedes Vito, 최대 5명: **차량 1대 기준 편도 {{PRICE:nevsehir:vito}} / 왕복 {{PRICE:nevsehir:vito:roundTrip}}**. Mercedes Sprinter, 최대 16명: **차량 1대 기준 편도 {{PRICE:nevsehir:sprinter}} / 왕복 {{PRICE:nevsehir:sprinter:roundTrip}}**. 차량과 합승 셔틀 대비 장점을 확인하려면 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]을 참고하세요."
         ]
       },
       {
         "heading": "1인 요금과 차량당 요금의 차이",
         "paragraphs": [
-          "합승 셔틀은 1인당 요금이라 승객 수가 늘면 총액도 증가합니다. 프라이빗 픽업은 선택한 차량 정원 안에서 차량당 요금입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 따라서 큰 그룹은 처음 보기에는 차량 요금이 높아도 1인당 비용이 합승 셔틀보다 낮을 수 있습니다. 또한 프라이빗 요금은 하나가 아닙니다. NAV는 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}이고 ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. 공항을 선택한 뒤 총액을 확인하세요."
+          "합승 셔틀은 1인당 요금이라 승객 수가 늘면 총액도 증가합니다. 프라이빗 픽업은 선택한 차량 정원 안에서 차량당 요금입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 따라서 큰 그룹은 처음 보기에는 차량 요금이 높아도 1인당 비용이 합승 셔틀보다 낮을 수 있습니다. 또한 프라이빗 편도 요금은 하나가 아닙니다. NAV는 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}이고 ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. 공항을 선택한 뒤 총액을 확인하세요."
         ]
       },
       {
@@ -291,34 +291,34 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "결제, 통화와 예약 정보",
         "paragraphs": [
-          "요금은 EUR로 표시하며 기사에게 현금으로 결제합니다. 예약 시 확인한 환율로 USD 또는 TRY 현금 결제도 가능합니다. 왕복은 패키지 할인 없이 편도 요금 두 번의 합계입니다. 예약에는 항공편 번호, 호텔, 승객 이름과 여권 번호가 필요하며 WhatsApp으로 정보를 확인한 뒤 예약이 확정됩니다. 호텔 접근이 특이하거나 서로 다른 공항을 이용하는 경우, 또는 합승 셔틀의 기본 서비스 범위를 벗어난 요청에서는 특히 정확한 정보가 중요합니다."
+          "요금은 EUR로 표시하며 기사에게 현금으로 결제합니다. 결제 시점의 환율로 USD 또는 TRY 현금 결제도 가능합니다. 왕복은 패키지 할인 없이 편도 요금 두 번의 합계입니다. 예약에는 항공편 번호, 호텔, 승객 이름과 여권 번호가 필요하며 WhatsApp으로 정보를 확인한 뒤 예약이 확정됩니다. 호텔 접근이 특이하거나 서로 다른 공항을 이용하는 경우, 또는 합승 셔틀의 기본 서비스 범위를 벗어난 요청에서는 특히 정확한 정보가 중요합니다."
         ]
       }
     ],
     "faq": [
       {
         "q": "카파도키아 공항 셔틀은 얼마인가요?",
-        "a": "현재 카이세리는 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르는 {{PRICE:nevsehir:shuttle}}입니다."
+        "a": "현재 카이세리는 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르는 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "왕복 셔틀은 얼마인가요?",
-        "a": "왕복은 카이세리 1인 {{PRICE:kayseri:shuttle:roundTrip}}, 네브셰히르 {{PRICE:nevsehir:shuttle:roundTrip}}입니다."
+        "a": "왕복은 카이세리 1인 {{PRICE:kayseri:shuttle:roundTrip}}, 네브셰히르 1인 {{PRICE:nevsehir:shuttle:roundTrip}}입니다."
       },
       {
         "q": "카이세리 Vito는 얼마인가요?",
-        "a": "편도 {{PRICE:kayseri:vito}}, 왕복 {{PRICE:kayseri:vito:roundTrip}}입니다."
+        "a": "차량 1대 기준 편도 {{PRICE:kayseri:vito}}, 왕복 {{PRICE:kayseri:vito:roundTrip}}입니다."
       },
       {
         "q": "카이세리 Sprinter는 얼마인가요?",
-        "a": "편도 {{PRICE:kayseri:sprinter}}, 왕복 {{PRICE:kayseri:sprinter:roundTrip}}입니다."
+        "a": "차량 1대 기준 편도 {{PRICE:kayseri:sprinter}}, 왕복 {{PRICE:kayseri:sprinter:roundTrip}}입니다."
       },
       {
         "q": "네브셰히르 Vito는 얼마인가요?",
-        "a": "편도 {{PRICE:nevsehir:vito}}, 왕복 {{PRICE:nevsehir:vito:roundTrip}}입니다."
+        "a": "차량 1대 기준 편도 {{PRICE:nevsehir:vito}}, 왕복 {{PRICE:nevsehir:vito:roundTrip}}입니다."
       },
       {
         "q": "네브셰히르 Sprinter는 얼마인가요?",
-        "a": "편도 {{PRICE:nevsehir:sprinter}}, 왕복 {{PRICE:nevsehir:sprinter:roundTrip}}입니다."
+        "a": "차량 1대 기준 편도 {{PRICE:nevsehir:sprinter}}, 왕복 {{PRICE:nevsehir:sprinter:roundTrip}}입니다."
       },
       {
         "q": "프라이빗 요금도 1인당인가요?",
@@ -330,7 +330,7 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "q": "USD 또는 TRY로 결제할 수 있나요?",
-        "a": "네. 예약 시 확인한 환율로 USD 또는 TRY 현금 결제를 협의할 수 있습니다."
+        "a": "네. 결제 시점의 환율로 USD 또는 TRY 현금 결제를 협의할 수 있습니다."
       },
       {
         "q": "현금 결제여도 여권 번호가 필요한가요?",
@@ -357,7 +357,7 @@ const rawKoPages: KoSeoPage[] = [
     "description": "카이세리 공항(ASR)에서 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔까지 합승 셔틀 또는 프라이빗 픽업. 기사에게 현금 결제.",
     "eyebrow": "ASR 공항 셔틀",
     "h1": "카이세리 공항에서 카파도키아까지 셔틀",
-    "lead": "카이세리 에르킬레트 공항에서 카파도키아 서비스 지역 숙소까지 1인 {{PRICE:kayseri:shuttle}}의 합승 셔틀을 예약하세요. 항공편에 맞춘 공항 미팅 안내를 WhatsApp으로 확인합니다.",
+    "lead": "카이세리 에르킬레트 공항에서 카파도키아 서비스 지역 숙소까지 1인 편도 {{PRICE:kayseri:shuttle}}의 합승 셔틀을 예약하세요. 항공편에 맞춘 공항 미팅 안내를 WhatsApp으로 확인합니다.",
     "sections": [
       {
         "heading": "카이세리 공항: 카파도키아까지 도로 이동이 더 긴 공항",
@@ -366,9 +366,9 @@ const rawKoPages: KoSeoPage[] = [
         ]
       },
       {
-        "heading": "ASR에서도 합승 셔틀 요금은 1인 {{PRICE:kayseri:shuttle}}",
+        "heading": "ASR에서도 합승 셔틀 요금은 1인 편도 {{PRICE:kayseri:shuttle}}",
         "paragraphs": [
-          "카이세리 합승 셔틀은 **1인 편도 {{PRICE:kayseri:shuttle}}**, **왕복 {{PRICE:kayseri:shuttle:roundTrip}}**입니다. ASR의 현재 요금은 공항별로 관리되므로 NAV 요금과는 별도로 확인해야 합니다. 전용 차량을 원하면 Vito 편도 {{PRICE:kayseri:vito}} 또는 Sprinter {{PRICE:kayseri:sprinter}}을 차량당 이용할 수 있습니다."
+          "카이세리 합승 셔틀은 **1인 편도 {{PRICE:kayseri:shuttle}}**, **1인 왕복 {{PRICE:kayseri:shuttle:roundTrip}}**입니다. ASR의 현재 요금은 공항별로 관리되므로 NAV 요금과는 별도로 확인해야 합니다. 전용 차량을 원하면 Vito 편도 {{PRICE:kayseri:vito}} 또는 Sprinter {{PRICE:kayseri:sprinter}}을 차량당 이용할 수 있습니다."
         ]
       },
       {
@@ -386,14 +386,14 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "ASR로 돌아갈 때는 별도의 픽업 계획이 필요합니다",
         "paragraphs": [
-          "서비스 지역 호텔에서 카이세리 공항으로 가는 합승 셔틀도 1인 {{PRICE:kayseri:shuttle}}입니다. 돌아가는 시간은 도착 때의 시간을 단순히 거꾸로 계산하지 않습니다. 출발 항공편과 [[카파도키아에서 카이세리 공항|cappadocia-to-kayseri-airport-shuttle]] 정보를 기준으로 실제 호텔 지역에 맞춰 픽업을 확인하세요."
+          "서비스 지역 호텔에서 카이세리 공항으로 가는 합승 셔틀도 1인 편도 {{PRICE:kayseri:shuttle}}입니다. 돌아가는 시간은 도착 때의 시간을 단순히 거꾸로 계산하지 않습니다. 출발 항공편과 [[카파도키아에서 카이세리 공항|cappadocia-to-kayseri-airport-shuttle]] 정보를 기준으로 실제 호텔 지역에 맞춰 픽업을 확인하세요."
         ]
       }
     ],
     "faq": [
       {
         "q": "카이세리 공항에서 카파도키아까지 셔틀은 얼마인가요?",
-        "a": "1인 편도 {{PRICE:kayseri:shuttle}}, 왕복 {{PRICE:kayseri:shuttle:roundTrip}}입니다."
+        "a": "1인 편도 {{PRICE:kayseri:shuttle}}, 1인 왕복 {{PRICE:kayseri:shuttle:roundTrip}}입니다."
       },
       {
         "q": "ASR에서 괴레메까지 도로로 얼마나 걸리나요?",
@@ -432,7 +432,7 @@ const rawKoPages: KoSeoPage[] = [
     "description": "네브셰히르 공항(NAV)에서 괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔까지 합승 셔틀 또는 프라이빗 픽업. 기사에게 현금 결제.",
     "eyebrow": "NAV 공항 셔틀",
     "h1": "네브셰히르 공항에서 카파도키아까지 셔틀",
-    "lead": "네브셰히르 카파도키아 공항에서 서비스 지역 숙소까지 1인 {{PRICE:nevsehir:shuttle}}의 합승 셔틀을 예약하세요. 항공편에 맞춘 미팅 안내를 WhatsApp으로 확인합니다.",
+    "lead": "네브셰히르 카파도키아 공항에서 서비스 지역 숙소까지 1인 편도 {{PRICE:nevsehir:shuttle}}의 합승 셔틀을 예약하세요. 항공편에 맞춘 미팅 안내를 WhatsApp으로 확인합니다.",
     "sections": [
       {
         "heading": "네브셰히르 공항: 카파도키아 중심부에 더 가까운 공항",
@@ -441,9 +441,9 @@ const rawKoPages: KoSeoPage[] = [
         ]
       },
       {
-        "heading": "NAV 합승 셔틀은 1인 {{PRICE:nevsehir:shuttle}}",
+        "heading": "NAV 합승 셔틀은 1인 편도 {{PRICE:nevsehir:shuttle}}",
         "paragraphs": [
-          "네브셰히르 합승 공항 셔틀은 **1인 편도 {{PRICE:nevsehir:shuttle}}**, **왕복 {{PRICE:nevsehir:shuttle:roundTrip}}**입니다. 프라이빗 요금은 공항별로 관리되며, NAV는 Vito 편도 {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}입니다. 두 공항 모두 이용 가능하다면 ASR의 현재 차량 요금도 함께 비교하세요."
+          "네브셰히르 합승 공항 셔틀은 **1인 편도 {{PRICE:nevsehir:shuttle}}**, **1인 왕복 {{PRICE:nevsehir:shuttle:roundTrip}}**입니다. 프라이빗 요금은 공항별로 관리되며, NAV는 Vito 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 두 공항 모두 이용 가능하다면 ASR의 현재 차량 요금도 함께 비교하세요."
         ]
       },
       {
@@ -461,7 +461,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "NAV로 돌아갈 때도 실제 호텔 지역 기준으로 픽업합니다",
         "paragraphs": [
-          "네브셰히르 공항으로 돌아가는 합승 셔틀도 1인 {{PRICE:nevsehir:shuttle}}입니다. 출발 항공편과 [[카파도키아에서 네브셰히르 공항까지 셔틀|cappadocia-to-nevsehir-airport-shuttle]]의 실제 지역 노선을 기준으로 픽업을 확인합니다. 괴레메 픽업을 우치히사르나 아바노스와 같은 방식으로 계획하지 않습니다."
+          "네브셰히르 공항으로 돌아가는 합승 셔틀도 1인 편도 {{PRICE:nevsehir:shuttle}}입니다. 출발 항공편과 [[카파도키아에서 네브셰히르 공항까지 셔틀|cappadocia-to-nevsehir-airport-shuttle]]의 실제 지역 노선을 기준으로 픽업을 확인합니다. 괴레메 픽업을 우치히사르나 아바노스와 같은 방식으로 계획하지 않습니다."
         ]
       },
       {
@@ -474,7 +474,7 @@ const rawKoPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "네브셰히르 공항에서 카파도키아까지 셔틀은 얼마인가요?",
-        "a": "1인 편도 {{PRICE:nevsehir:shuttle}}, 왕복 {{PRICE:nevsehir:shuttle:roundTrip}}입니다."
+        "a": "1인 편도 {{PRICE:nevsehir:shuttle}}, 1인 왕복 {{PRICE:nevsehir:shuttle:roundTrip}}입니다."
       },
       {
         "q": "NAV가 괴레메와 우치히사르에 더 가까운 공항인가요?",
@@ -513,7 +513,7 @@ const rawKoPages: KoSeoPage[] = [
     "description": "괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔에서 카이세리 공항(ASR)까지 가는 합승 셔틀 또는 프라이빗 픽업.",
     "eyebrow": "카파도키아 → ASR",
     "h1": "카파도키아에서 카이세리 공항까지 셔틀",
-    "lead": "카파도키아 서비스 지역의 호텔에서 카이세리 에르킬레트 공항까지 1인 {{PRICE:kayseri:shuttle}} 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
+    "lead": "카파도키아 서비스 지역의 호텔에서 카이세리 에르킬레트 공항까지 1인 편도 {{PRICE:kayseri:shuttle}} 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
     "sections": [
       {
         "heading": "ASR 출발 계획은 지도상의 거리보다 일찍 시작됩니다",
@@ -536,7 +536,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "전용 차량으로 카이세리 공항까지 이동",
         "paragraphs": [
-          "[[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 편도 {{PRICE:kayseri:vito}}, Sprinter 최대 16명 편도 {{PRICE:kayseri:sprinter}}입니다. 다른 호텔 픽업은 없지만 숙소에서는 차량이 안전하게 접근하고 정차할 수 있는 장소가 필요합니다."
+          "[[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter 최대 16명 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 다른 호텔 픽업은 없지만 숙소에서는 차량이 안전하게 접근하고 정차할 수 있는 장소가 필요합니다."
         ]
       },
       {
@@ -583,7 +583,7 @@ const rawKoPages: KoSeoPage[] = [
     "description": "괴레메·위르귀프·우치히사르·아바노스·차우신·오르타히사르 호텔에서 네브셰히르 공항(NAV)까지 가는 합승 셔틀 또는 프라이빗 픽업.",
     "eyebrow": "카파도키아 → NAV",
     "h1": "카파도키아에서 네브셰히르 공항까지 셔틀",
-    "lead": "카파도키아 서비스 지역의 호텔에서 네브셰히르 카파도키아 공항까지 1인 {{PRICE:nevsehir:shuttle}} 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
+    "lead": "카파도키아 서비스 지역의 호텔에서 네브셰히르 카파도키아 공항까지 1인 편도 {{PRICE:nevsehir:shuttle}} 셔틀을 예약하세요. 픽업 장소와 시간은 실제 출발 항공편을 기준으로 확인합니다.",
     "sections": [
       {
         "heading": "NAV는 더 가깝지만 호텔 픽업 시간은 여전히 항공편을 기준으로 합니다",
@@ -606,7 +606,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "네브셰히르 프라이빗 출발은 더 직접적인 대안입니다",
         "paragraphs": [
-          "전용 [[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 편도 {{PRICE:nevsehir:vito}}, Sprinter 최대 16명 편도 {{PRICE:nevsehir:sprinter}}입니다. 다른 호텔 픽업은 없지만 최종 만나는 지점은 여전히 차량의 안전한 접근 여부에 따라 달라집니다."
+          "전용 [[프라이빗 픽업|private-airport-transfer-cappadocia]]은 Vito 최대 5명 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter 최대 16명 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 다른 호텔 픽업은 없지만 최종 만나는 지점은 여전히 차량의 안전한 접근 여부에 따라 달라집니다."
         ]
       },
       {
@@ -739,7 +739,7 @@ const rawKoPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "카이세리와 네브셰히르에서 괴레메까지 셔틀 요금은 얼마인가요?",
-        "a": "현재 합승 셔틀은 ASR에서 1인 편도 {{PRICE:kayseri:shuttle}}, NAV에서 {{PRICE:nevsehir:shuttle}}입니다. 항공권에 표시된 공항의 요금과 해당 노선의 도로 거리를 함께 확인하세요."
+        "a": "현재 합승 셔틀은 ASR에서 1인 편도 {{PRICE:kayseri:shuttle}}, NAV에서 1인 편도 {{PRICE:nevsehir:shuttle}}입니다. 항공권에 표시된 공항의 요금과 해당 노선의 도로 거리를 함께 확인하세요."
       },
       {
         "q": "공항 도착과 괴레메 호텔의 출발 픽업을 한 번에 예약할 수 있나요?",
@@ -802,7 +802,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       },
       {
@@ -861,7 +861,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. ASR 대신 NAV를 이용할 수 있다면 [[네브셰히르 공항에서 위르귀프까지 셔틀|nevsehir-airport-to-urgup-shuttle]]도 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. ASR 대신 NAV를 이용할 수 있다면 [[네브셰히르 공항에서 위르귀프까지 셔틀|nevsehir-airport-to-urgup-shuttle]]도 비교해 보세요."
         ]
       }
     ],
@@ -913,7 +913,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV를 이용할 수 있다면 [[네브셰히르 공항에서 우치히사르까지 셔틀|nevsehir-airport-to-uchisar-shuttle]]도 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV를 이용할 수 있다면 [[네브셰히르 공항에서 우치히사르까지 셔틀|nevsehir-airport-to-uchisar-shuttle]]도 비교해 보세요."
         ]
       }
     ],
@@ -965,7 +965,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 아바노스까지 셔틀|nevsehir-airport-to-avanos-shuttle]]과 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 아바노스까지 셔틀|nevsehir-airport-to-avanos-shuttle]]과 비교해 보세요."
         ]
       }
     ],
@@ -1017,7 +1017,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 오르타히사르까지 셔틀|nevsehir-airport-to-ortahisar-shuttle]]과 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 오르타히사르까지 셔틀|nevsehir-airport-to-ortahisar-shuttle]]과 비교해 보세요."
         ]
       }
     ],
@@ -1069,7 +1069,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 차우신까지 셔틀|nevsehir-airport-to-cavusin-shuttle]]과 비교해 보세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요. NAV도 가능하다면 [[네브셰히르 공항에서 차우신까지 셔틀|nevsehir-airport-to-cavusin-shuttle]]과 비교해 보세요."
         ]
       }
     ],
@@ -1122,7 +1122,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1173,7 +1173,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "가격을 중시하면 합승 셔틀, 단독 이동을 원하면 프라이빗 차량",
         "paragraphs": [
-          "1~2명이라면 합승 셔틀이 비용을 낮추는 데 유리합니다. 프라이빗 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하거나 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 두 서비스를 비교해 보세요."
+          "1~2명이라면 합승 셔틀이 비용을 낮추는 데 유리합니다. 프라이빗 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하거나 [[합승 셔틀과 프라이빗 픽업 비교|cappadocia-shared-shuttle-vs-private-transfer]]에서 두 서비스를 비교해 보세요."
         ]
       }
     ],
@@ -1227,7 +1227,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1274,7 +1274,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1328,7 +1328,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1387,7 +1387,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1441,7 +1441,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1501,7 +1501,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1554,7 +1554,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1606,7 +1606,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1659,7 +1659,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1718,7 +1718,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1771,7 +1771,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1825,7 +1825,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1879,7 +1879,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1931,7 +1931,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -1985,7 +1985,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -2039,7 +2039,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "이 노선의 프라이빗 공항 픽업",
         "paragraphs": [
-          "전용 차량을 원한다면 Vito는 최대 5명까지 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
+          "전용 차량을 원한다면 Vito는 최대 5명까지 차량 1대당 편도 {{PRICE:nevsehir:vito}}, Sprinter는 최대 16명까지 차량 1대당 편도 {{PRICE:nevsehir:sprinter}}입니다. 자세한 내용은 [[프라이빗 공항 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       }
     ],
@@ -2080,21 +2080,21 @@ const rawKoPages: KoSeoPage[] = [
         "heading": "카파도키아 공항은 어느 공항인가요?",
         "paragraphs": [
           "네브셰히르 카파도키아 공항의 IATA 코드는 **NAV**이며 공식 명칭에 Kapadokya/Cappadocia가 들어갑니다. 하지만 여행 계획에서는 ‘카파도키아 공항’이 실제로 지역을 이용하는 두 관문, 즉 NAV와 카이세리 공항 **ASR**을 넓게 지칭하기도 합니다. 그래서 호텔 픽업을 예약할 때는 ‘카파도키아’라는 지역명만 쓰기보다 항공권의 공항 코드를 사용해야 합니다.",
-          "아직 항공편을 고르는 중이라면 항공권 구매 전에 [[카파도키아에서 가장 가까운 공항|nearest-airport-to-cappadocia]]과 [[카이세리 또는 네브셰히르 공항 비교|kayseri-or-nevsehir-airport-for-cappadocia]]를 확인하세요."
+          "아직 항공편을 고르는 중이라면 항공권 구매 전에 [[카파도키아에서 가장 가까운 공항|nearest-airport-to-cappadocia]]과 [[카이세리 또는 네브셰히르 공항 비교|kayseri-or-nevsehir-airport-for-cappadocia]]를 확인하세요. 이스탄불에서 국내선을 타고 오는 일정이라면 [[이스탄불에서 카파도키아|istanbul-to-cappadocia]]에서 항공편과 도착 후 공항 이동이 어떻게 이어지는지 확인할 수 있습니다."
         ]
       },
       {
         "heading": "네브셰히르 카파도키아 공항(NAV)",
         "paragraphs": [
           "NAV는 일반적으로 카파도키아 중심부까지의 도로 이동이 더 짧습니다. 합승 셔틀 정차 전 기준으로 괴레메는 약 **40 km / 35–45분**, 우치히사르 35 km / 30–40분, 아바노스 38 km / 35–50분, 차우신 42 km / 40–55분, 오르타히사르 45 km / 40–50분, 위르귀프 50 km / 45–60분입니다.",
-          "[[네브셰히르 공항 셔틀|nevsehir-airport-shuttle]]은 **1인 편도 {{PRICE:nevsehir:shuttle}}**입니다. 프라이빗 편도 요금은 Vito 최대 5명 {{PRICE:nevsehir:vito}}, Sprinter 최대 16명 {{PRICE:nevsehir:sprinter}}입니다."
+          "[[네브셰히르 공항 셔틀|nevsehir-airport-shuttle]]은 **1인 편도 {{PRICE:nevsehir:shuttle}}**입니다. 프라이빗 차량 1대당 편도 요금은 Vito 최대 5명 {{PRICE:nevsehir:vito}}, Sprinter 최대 16명 {{PRICE:nevsehir:sprinter}}입니다."
         ]
       },
       {
         "heading": "카이세리 공항(ASR)",
         "paragraphs": [
           "ASR은 도로상 더 멀지만 항공편 시간과 좌석 상황에 따라 전체 여행에서는 더 좋은 선택이 될 수 있어 카파도키아 여행에 널리 이용됩니다. 괴레메는 약 **75 km / 60–75분**이며 다른 서비스 지역도 다른 호텔 정차 전 기준으로 대체로 70–80 km 범위입니다.",
-          "[[카이세리 공항 셔틀|kayseri-airport-shuttle]]은 **1인 편도 {{PRICE:kayseri:shuttle}}**입니다. 프라이빗 편도는 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. ASR의 현재 요금과 항공편 시간, 도로 거리를 함께 비교하세요."
+          "[[카이세리 공항 셔틀|kayseri-airport-shuttle]]은 **1인 편도 {{PRICE:kayseri:shuttle}}**입니다. 프라이빗 차량 1대당 편도는 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. ASR의 현재 요금과 항공편 시간, 도로 거리를 함께 비교하세요."
         ]
       },
       {
@@ -2106,7 +2106,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "공항에서 호텔: 합승 셔틀 또는 프라이빗 차량",
         "paragraphs": [
-          "합승 셔틀은 괴레메, 위르귀프, 우치히사르, 아바노스, 오르타히사르, 차우신으로 가는 경제적인 기본 옵션입니다. 현재 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV 1인 {{PRICE:nevsehir:shuttle}}입니다. 합승 서비스이므로 다른 승객과 호텔 정차가 포함될 수 있습니다. 전용 차량을 원하면 Vito 또는 Sprinter를 선택할 수 있으며 프라이빗 요금은 1인당이 아니라 차량당입니다.",
+          "합승 셔틀은 괴레메, 위르귀프, 우치히사르, 아바노스, 오르타히사르, 차우신으로 가는 경제적인 기본 옵션입니다. 현재 요금은 ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}}입니다. 합승 서비스이므로 다른 승객과 호텔 정차가 포함될 수 있습니다. 전용 차량을 원하면 Vito 또는 Sprinter를 선택할 수 있으며 프라이빗 요금은 1인당이 아니라 차량당입니다. 서비스 전체 구성이 궁금하면 [[카파도키아 공항 픽업|cappadocia-airport-transfer]]을, 공항별 현재 요금 구조를 한곳에서 비교하려면 [[공항 픽업 요금|airport-transfer-prices]]을 확인하세요.",
           "예약 요청에는 공항, 이동 방향, 항공편 정보, 호텔, WhatsApp 연락처, 승객 이름과 모든 예약에 필요한 여권 번호를 입력합니다. 예약 확인 후 기사에게 현금으로 결제합니다."
         ]
       },
@@ -2138,7 +2138,7 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "q": "NAV 또는 ASR에서 셔틀 요금은 얼마인가요?",
-        "a": "카이세리는 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르는 {{PRICE:nevsehir:shuttle}}이며 두 공항 모두 서비스 지역의 중심 호텔을 운행합니다."
+        "a": "카이세리는 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르는 1인 편도 {{PRICE:nevsehir:shuttle}}이며 두 공항 모두 서비스 지역의 중심 호텔을 운행합니다."
       },
       {
         "q": "NAV Airport는 무슨 뜻인가요?",
@@ -2184,7 +2184,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "가장 가까운 공항이 항상 가장 좋은 것은 아닙니다",
         "paragraphs": [
-          "도로 이동이 짧은 것은 장점이지만, 불편한 항공편 시간이나 비싼 연결편이 그 장점을 상쇄할 수 있습니다. 마지막 도로 거리만 보지 말고 출발지부터 전체 여정을 비교하세요. 합승 셔틀은 ASR {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}로 공항별 현재 요금도 함께 비교하세요."
+          "도로 이동이 짧은 것은 장점이지만, 불편한 항공편 시간이나 비싼 연결편이 그 장점을 상쇄할 수 있습니다. 마지막 도로 거리만 보지 말고 출발지부터 전체 여정을 비교하세요. 합승 셔틀은 ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}}로 공항별 현재 요금도 함께 비교하세요."
         ]
       },
       {
@@ -2214,7 +2214,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "공항별 합승 셔틀과 프라이빗 요금 비교",
         "paragraphs": [
-          "합승 셔틀은 NAV 1인 {{PRICE:nevsehir:shuttle}}, ASR {{PRICE:kayseri:shuttle}}입니다. 프라이빗 요금은 NAV에서 Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}, ASR에서 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}입니다. 선택한 공항의 현재 총액을 비교하세요."
+          "합승 셔틀은 NAV 1인 편도 {{PRICE:nevsehir:shuttle}}, ASR 1인 편도 {{PRICE:kayseri:shuttle}}입니다. 프라이빗 요금은 차량 1대당 편도 기준으로 NAV에서 Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}, ASR에서 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}입니다. 선택한 공항의 현재 총액을 비교하세요."
         ]
       }
     ],
@@ -2233,7 +2233,7 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "q": "NAV에서 셔틀이 더 저렴한가요?",
-        "a": "현재 합승 셔틀은 카이세리 {{PRICE:kayseri:shuttle}}, 네브셰히르 {{PRICE:nevsehir:shuttle}}/인입니다."
+        "a": "현재 합승 셔틀은 카이세리 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "우치히사르에 가장 가까운 공항은 어디인가요?",
@@ -2259,30 +2259,30 @@ const rawKoPages: KoSeoPage[] = [
     "description": "카파도키아 여행에서 카이세리와 네브셰히르 중 어느 공항이 좋은지 거리, 항공편 편의성, 셔틀과 프라이빗 픽업의 현재 요금으로 비교하세요.",
     "eyebrow": "공항 비교",
     "h1": "카파도키아: 카이세리 또는 네브셰히르 공항",
-    "lead": "네브셰히르는 일반적으로 도로상 더 가깝고, 카이세리는 더 편리한 항공편이 있을 때 전체 여행에서 더 나을 수 있습니다. 합승 셔틀은 NAV {{PRICE:nevsehir:shuttle}}, ASR {{PRICE:kayseri:shuttle}}/인이므로 전체 일정과 현재 요금을 함께 비교하세요.",
+    "lead": "네브셰히르는 일반적으로 도로상 더 가깝고, 카이세리는 더 편리한 항공편이 있을 때 전체 여행에서 더 나을 수 있습니다. 합승 셔틀은 NAV 1인 편도 {{PRICE:nevsehir:shuttle}}, ASR 1인 편도 {{PRICE:kayseri:shuttle}}이므로 전체 일정과 현재 요금을 함께 비교하세요.",
     "sections": [
       {
         "heading": "가장 큰 차이는 도로 거리입니다",
         "paragraphs": [
-          "NAV는 괴레메, 우치히사르와 카파도키아 중심부 대부분에 더 가깝습니다. ASR은 이 지역까지 도로 이동이 더 깁니다. 다만 숙소 지역에 따라 차이가 달라지므로 ‘카파도키아’라는 하나의 일반 거리보다 실제 호텔 지역을 기준으로 비교해야 합니다."
+          "NAV는 괴레메, 우치히사르와 카파도키아 중심부 대부분에 더 가깝습니다. ASR은 이 지역까지 도로 이동이 더 깁니다. 다만 숙소 지역에 따라 차이가 달라지므로 ‘카파도키아’라는 하나의 일반 거리보다 실제 호텔 지역을 기준으로 비교해야 합니다. 공항별 서비스는 [[네브셰히르 공항 셔틀|nevsehir-airport-shuttle]]과 [[카이세리 공항 셔틀|kayseri-airport-shuttle]]에서 각각 확인할 수 있습니다."
         ]
       },
       {
         "heading": "항공편 시간과 요금이 NAV의 거리 이점을 넘어설 수 있습니다",
         "paragraphs": [
-          "카이세리로 가는 직항편이나 훨씬 좋은 시간이 있다면 착륙 후 도로 이동이 길더라도 전체 여행은 더 간단할 수 있습니다. NAV가 불편한 연결, 긴 대기, 훨씬 비싼 요금을 요구한다면 도로 거리 차이는 결정적이지 않을 수 있습니다."
+          "카이세리로 가는 직항편이나 훨씬 좋은 시간이 있다면 착륙 후 도로 이동이 길더라도 전체 여행은 더 간단할 수 있습니다. NAV가 불편한 연결, 긴 대기, 훨씬 비싼 요금을 요구한다면 도로 거리 차이는 결정적이지 않을 수 있습니다. [[카파도키아 공항 가이드|cappadocia-airport]]에서는 여행 계획에 NAV와 ASR 두 코드가 함께 등장하는 이유를 설명합니다."
         ]
       },
       {
         "heading": "공항별 합승 셔틀 요금 비교",
         "paragraphs": [
-          "NAV 합승 셔틀은 **1인 편도 {{PRICE:nevsehir:shuttle}}**, ASR은 **{{PRICE:kayseri:shuttle}}**입니다. 항공편, 도로 거리와 함께 공항별 현재 요금을 비교하세요."
+          "NAV 합승 셔틀은 **1인 편도 {{PRICE:nevsehir:shuttle}}**, ASR은 **1인 편도 {{PRICE:kayseri:shuttle}}**입니다. 항공편, 도로 거리와 함께 공항별 현재 요금을 비교하세요."
         ]
       },
       {
         "heading": "공항별 프라이빗 요금 비교",
         "paragraphs": [
-          "NAV는 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}} 편도이며 ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다. 가족이나 그룹이 전용 차량을 원한다면 이 차이가 합승 셔틀 이용자보다 더 중요합니다."
+          "NAV는 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}로 차량 1대당 편도 요금이며, ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}로 차량 1대당 편도 요금입니다. 가족이나 그룹이 전용 차량을 원한다면 이 차이가 합승 셔틀 이용자보다 더 중요합니다."
         ]
       },
       {
@@ -2311,11 +2311,11 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "q": "카이세리에서 셔틀이 더 비싼가요?",
-        "a": "현재 합승 셔틀은 카이세리 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르 {{PRICE:nevsehir:shuttle}}입니다."
+        "a": "현재 합승 셔틀은 카이세리 1인 편도 {{PRICE:kayseri:shuttle}}, 네브셰히르 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "두 공항의 프라이빗 픽업 요금은 어떻게 비교하나요?",
-        "a": "현재 편도 차량 요금은 NAV가 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}이고, ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다."
+        "a": "현재 차량 1대당 편도 요금은 NAV가 Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}이고, ASR은 Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}입니다."
       },
       {
         "q": "한 공항으로 도착하고 다른 공항에서 출발할 수 있나요?",
@@ -2341,24 +2341,24 @@ const rawKoPages: KoSeoPage[] = [
     "description": "카파도키아 합승 공항 셔틀과 프라이빗 픽업을 비교하세요. 현재 요금, Vito/Sprinter, 정원, 호텔 정차, 이동 시간과 서비스 지역을 안내합니다.",
     "eyebrow": "옵션 비교",
     "h1": "카파도키아 합승 공항 셔틀 vs 프라이빗 픽업",
-    "lead": "합승 셔틀은 공항별 요금이 적용되는 경제적인 옵션으로, 편도 기준 ASR은 1인 {{PRICE:kayseri:shuttle}}, NAV는 {{PRICE:nevsehir:shuttle}}입니다. 프라이빗 픽업은 차량당 요금이며, 전용 차량을 원하거나 인원이 많고 다른 호텔 정차를 줄이고 싶은 여행자에게 적합합니다.",
+    "lead": "합승 셔틀은 공항별 요금이 적용되는 경제적인 옵션으로, ASR은 1인 편도 {{PRICE:kayseri:shuttle}}, NAV는 1인 편도 {{PRICE:nevsehir:shuttle}}입니다. 프라이빗 픽업은 차량당 요금이며, 전용 차량을 원하거나 인원이 많고 다른 호텔 정차를 줄이고 싶은 여행자에게 적합합니다.",
     "sections": [
       {
         "heading": "합승 셔틀은 어떻게 운행하나요?",
         "paragraphs": [
-          "합승 셔틀은 항공편과 호텔 방향이 맞는 확정 승객을 함께 배정합니다. 같은 차량에 다른 승객이 있고 여러 숙소에 정차할 수 있습니다. 요금은 카이세리 **1인 편도 {{PRICE:kayseri:shuttle}}**, 네브셰히르 **{{PRICE:nevsehir:shuttle}}**입니다."
+          "합승 셔틀은 항공편과 호텔 방향이 맞는 확정 승객을 함께 배정합니다. 같은 차량에 다른 승객이 있고 여러 숙소에 정차할 수 있습니다. 요금은 카이세리 **1인 편도 {{PRICE:kayseri:shuttle}}**, 네브셰히르 **1인 편도 {{PRICE:nevsehir:shuttle}}**입니다. 예약 방식은 [[카파도키아 합승 셔틀|cappadocia-shuttle-transfer]] 서비스 페이지에서 자세히 확인할 수 있습니다."
         ]
       },
       {
         "heading": "프라이빗 픽업은 어떻게 다른가요?",
         "paragraphs": [
-          "프라이빗 픽업은 예약한 그룹만을 위한 전용 차량입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 요금은 1인당이 아니라 차량당이며 편도 기준 카이세리 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}, 네브셰히르 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}입니다."
+          "프라이빗 픽업은 예약한 그룹만을 위한 전용 차량입니다. Vito는 최대 5명, Sprinter는 최대 16명입니다. 요금은 1인당이 아니라 차량당이며 편도 기준 카이세리 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}, 네브셰히르 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}입니다. 전용 차량의 정원과 이용 방식은 [[카파도키아 프라이빗 픽업|private-airport-transfer-cappadocia]]에서 확인하세요."
         ]
       },
       {
         "heading": "합승 셔틀이 더 잘 맞는 경우",
         "paragraphs": [
-          "1~2명 또는 차량 공유를 괜찮아하는 소규모 그룹은 합승 셔틀이 대체로 가장 경제적입니다. 다만 ASR과 NAV 요금은 별도로 관리되므로 예약할 공항의 현재 요금을 확인하세요."
+          "1~2명 또는 차량 공유를 괜찮아하는 소규모 그룹은 합승 셔틀이 대체로 가장 경제적입니다. 다만 ASR과 NAV 요금은 별도로 관리되므로 예약할 공항의 현재 요금을 확인하세요. [[공항 픽업 요금|airport-transfer-prices]] 페이지에는 같은 공항별 요금 구조가 한곳에 정리되어 있습니다."
         ]
       },
       {
@@ -2382,7 +2382,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "총요금은 그룹 인원에 따라 달라집니다",
         "paragraphs": [
-          "합승 셔틀은 선택한 공항의 1인 편도 요금(ASR {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}})에 승객 수와 구간 수를 곱합니다. 프라이빗은 선택한 차량 정원 안에서 차량 요금을 적용합니다. 왕복은 정확히 편도 요금의 두 배입니다."
+          "합승 셔틀은 선택한 공항의 요금(ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}})에 승객 수와 구간 수를 곱합니다. 프라이빗은 선택한 차량 정원 안에서 차량 요금을 적용합니다. 왕복은 정확히 편도 요금의 두 배입니다."
         ]
       },
       {
@@ -2395,7 +2395,7 @@ const rawKoPages: KoSeoPage[] = [
     "faq": [
       {
         "q": "1명이 이용할 때 가장 저렴한 옵션은 무엇인가요?",
-        "a": "대부분 합승 셔틀이 가장 저렴하며, 편도 요금은 ASR 1인 {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}입니다."
+        "a": "대부분 합승 셔틀이 가장 저렴하며, 현재 요금은 ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "프라이빗 픽업도 1인당 요금인가요?",
@@ -2467,7 +2467,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "합승 셔틀 또는 프라이빗 Vito",
         "paragraphs": [
-          "합승 셔틀은 1인 기준으로 공항별 요금이 적용되며(ASR {{PRICE:kayseri:shuttle}}, NAV {{PRICE:nevsehir:shuttle}}), 당일 승객 수에 따라 더 큰 차량을 사용할 수 있습니다. 프라이빗 Vito가 일부 골목에서는 더 편리할 수 있지만 문 앞 접근을 보장하지는 않습니다. 최종 지점은 실제 도로와 안전한 정차 가능 여부에 따라 결정됩니다."
+          "합승 셔틀은 1인 기준으로 공항별 요금이 적용되며(ASR 1인 편도 {{PRICE:kayseri:shuttle}}, NAV 1인 편도 {{PRICE:nevsehir:shuttle}}), 당일 승객 수에 따라 더 큰 차량을 사용할 수 있습니다. 프라이빗 Vito가 일부 골목에서는 더 편리할 수 있지만 문 앞 접근을 보장하지는 않습니다. 최종 지점은 실제 도로와 안전한 정차 가능 여부에 따라 결정됩니다."
         ]
       }
     ],
@@ -2519,7 +2519,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "전체 일정을 기준으로 ASR 또는 NAV를 선택하세요",
         "paragraphs": [
-          "NAV는 많은 카파도키아 호텔에 도로상 더 가깝고, ASR은 더 긴 도로 이동을 감수할 만큼 항공편 시간이나 운임이 좋을 수 있습니다. 합승 셔틀은 NAV {{PRICE:nevsehir:shuttle}}, ASR {{PRICE:kayseri:shuttle}}이므로 항공편과 현재 요금을 함께 비교하세요."
+          "NAV는 많은 카파도키아 호텔에 도로상 더 가깝고, ASR은 더 긴 도로 이동을 감수할 만큼 항공편 시간이나 운임이 좋을 수 있습니다. 합승 셔틀은 NAV 1인 편도 {{PRICE:nevsehir:shuttle}}, ASR 1인 편도 {{PRICE:kayseri:shuttle}}이므로 항공편과 현재 요금을 함께 비교하세요."
         ]
       },
       {
@@ -2568,7 +2568,7 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "q": "도착 후 셔틀 요금은 얼마인가요?",
-        "a": "ASR은 1인 {{PRICE:kayseri:shuttle}}, NAV는 {{PRICE:nevsehir:shuttle}}입니다."
+        "a": "ASR은 1인 편도 {{PRICE:kayseri:shuttle}}, NAV는 1인 편도 {{PRICE:nevsehir:shuttle}}입니다."
       },
       {
         "q": "이스탄불 출발 항공편 번호로 셔틀을 예약하나요?",
@@ -2611,7 +2611,7 @@ const rawKoPages: KoSeoPage[] = [
       {
         "heading": "출발 항공편을 기준으로 NAV 또는 ASR를 선택하세요",
         "paragraphs": [
-          "NAV는 괴레메, 우치히사르 등 중심 지역에 일반적으로 더 가깝습니다. ASR은 더 멀지만 더 좋은 항공편 시간이나 운임이 있을 수 있습니다. 호텔 → 공항 합승 셔틀은 **NAV 1인 {{PRICE:nevsehir:shuttle}}**, **ASR {{PRICE:kayseri:shuttle}}**이며, 프라이빗 Vito/Sprinter 요금은 NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}, ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}입니다.",
+          "NAV는 괴레메, 우치히사르 등 중심 지역에 일반적으로 더 가깝습니다. ASR은 더 멀지만 더 좋은 항공편 시간이나 운임이 있을 수 있습니다. 호텔 → 공항 합승 셔틀은 **NAV 1인 편도 {{PRICE:nevsehir:shuttle}}**, **ASR 1인 편도 {{PRICE:kayseri:shuttle}}**이며, 프라이빗 Vito/Sprinter 요금은 차량 1대당 편도 기준으로 NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}, ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}입니다.",
           "아직 출발 공항을 정하지 않았다면 항공권 구매 전에 [[카파도키아에서 가장 가까운 공항|nearest-airport-to-cappadocia]]과 [[카이세리 또는 네브셰히르 공항|kayseri-or-nevsehir-airport-for-cappadocia]]을 비교하세요."
         ]
       },
@@ -2661,7 +2661,7 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "q": "호텔에서 공항까지 셔틀은 얼마인가요?",
-        "a": "서비스 지역 호텔에서 NAV까지는 1인 편도 {{PRICE:nevsehir:shuttle}}, ASR까지는 {{PRICE:kayseri:shuttle}}입니다."
+        "a": "서비스 지역 호텔에서 NAV까지는 1인 편도 {{PRICE:nevsehir:shuttle}}, ASR까지는 1인 편도 {{PRICE:kayseri:shuttle}}입니다."
       },
       {
         "q": "이스탄불행 항공편을 위해 프라이빗 호텔 픽업을 예약할 수 있나요?",

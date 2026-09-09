@@ -17,12 +17,12 @@ const rawPages: SeoPage[] = [
     "description": "Book Cappadocia shuttle transfer from Kayseri (ASR) or Nevsehir (NAV) to Goreme, Urgup & more. Shared airport shuttle with WhatsApp booking.",
     "eyebrow": "Shared Airport Shuttle",
     "h1": "Cappadocia Shuttle Transfer",
-    "lead": "Cappadocia shuttle transfer is the shared airport shuttle connecting Kayseri Airport (ASR) and Nevsehir Airport (NAV) with hotels in Goreme, Urgup, Uchisar, Avanos, Cavusin, and Ortahisar. The one-way fare is {{PRICE:kayseri:shuttle}} per person for Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} for Nevsehir (NAV), with pickup and drop-off scheduled around your flight.",
+    "lead": "Cappadocia shuttle transfer is the shared airport shuttle connecting Kayseri Airport (ASR) and Nevsehir Airport (NAV) with hotels in Goreme, Urgup, Uchisar, Avanos, Cavusin, and Ortahisar. The fare is {{PRICE:kayseri:shuttle}} per person one way for Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} per person one way for Nevsehir (NAV), with pickup and drop-off scheduled around your flight.",
     "sections": [
       {
         "heading": "What's Included",
         "paragraphs": [
-          "The service covers a shared ride from either airport to your accommodation, with your flight, passenger details, and hotel name confirmed in advance. Other confirmed passengers and hotel stops may be part of the same run. The current one-way fare is {{PRICE:kayseri:shuttle}} per person from ASR and {{PRICE:nevsehir:shuttle}} from NAV."
+          "The service covers a shared ride from either airport to your accommodation, with your flight, passenger details, and hotel name confirmed in advance. Other confirmed passengers and hotel stops may be part of the same run. The current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV."
         ]
       },
       {
@@ -47,7 +47,7 @@ const rawPages: SeoPage[] = [
     "faq": [
       {
         "q": "How much is the shared Cappadocia shuttle transfer?",
-        "a": "Kayseri Airport (ASR) is {{PRICE:kayseri:shuttle}} per person one way and Nevsehir Airport (NAV) is {{PRICE:nevsehir:shuttle}} to supported hotel areas."
+        "a": "Kayseri Airport (ASR) is {{PRICE:kayseri:shuttle}} per person one way and Nevsehir Airport (NAV) is {{PRICE:nevsehir:shuttle}} per person one way to supported hotel areas."
       },
       {
         "q": "Which airports are covered?",
@@ -92,7 +92,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Shared Shuttle or Private Transfer",
         "paragraphs": [
-          "The shared [[shuttle|cappadocia-shuttle-transfer]] is {{PRICE:kayseri:shuttle}} per person each way from Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} from Nevsehir (NAV), pre-booked and confirmed on WhatsApp — other passengers and hotel stops may be part of the same run. For a dedicated vehicle, [[private transfer|private-airport-transfer-cappadocia]] uses a Vito (up to 5 passengers) or Sprinter (up to 16), priced per vehicle rather than per person, with Kayseri and Nevsehir priced separately. If you're weighing the two, the full [[shared shuttle vs private transfer|cappadocia-shared-shuttle-vs-private-transfer]] comparison breaks down price, coverage, and timing side by side."
+          "The shared [[shuttle|cappadocia-shuttle-transfer]] is {{PRICE:kayseri:shuttle}} per person one way from Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} per person one way from Nevsehir (NAV), pre-booked and confirmed on WhatsApp — other passengers and hotel stops may be part of the same run. For a dedicated vehicle, [[private transfer|private-airport-transfer-cappadocia]] uses a Vito (up to 5 passengers) or Sprinter (up to 16), priced per vehicle rather than per person, with Kayseri and Nevsehir priced separately. If you're weighing the two, the full [[shared shuttle vs private transfer|cappadocia-shared-shuttle-vs-private-transfer]] comparison breaks down price, coverage, and timing side by side."
         ]
       },
       {
@@ -169,7 +169,7 @@ const rawPages: SeoPage[] = [
     "description": "Private Cappadocia airport transfer from Kayseri (ASR) or Nevsehir (NAV): Vito for up to 5 passengers or Sprinter for up to 16, with cash payment to the driver.",
     "eyebrow": "Dedicated vehicle",
     "h1": "Cappadocia Private Airport Transfer",
-    "lead": "Kayseri Airport: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}** one way. Nevsehir Airport: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. These are per vehicle, not per passenger. Round trip is {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}} from Kayseri and {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}} from Nevsehir.",
+    "lead": "Kayseri Airport, per vehicle one way: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}**. Nevsehir Airport, per vehicle one way: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. Round trip per vehicle: Kayseri Vito/Sprinter {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}; Nevsehir Vito/Sprinter {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}.",
     "sections": [
       {
         "heading": "Mercedes Vito: up to 5 passengers",
@@ -180,13 +180,13 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Mercedes Sprinter: up to 16 passengers",
         "paragraphs": [
-          "Sprinter is the larger private option for groups up to 16. The price is managed separately by airport — {{PRICE:kayseri:sprinter}} from Kayseri and {{PRICE:nevsehir:sprinter}} from Nevsehir, one way — so double-check the total once you select ASR or NAV in the booking form."
+          "Sprinter is the larger private option for groups up to 16. The one-way price per vehicle is managed separately by airport — {{PRICE:kayseri:sprinter}} from Kayseri and {{PRICE:nevsehir:sprinter}} from Nevsehir — so double-check the total once you select ASR or NAV in the booking form."
         ]
       },
       {
         "heading": "When Private Makes More Sense Than Shuttle",
         "paragraphs": [
-          "Private transfer suits larger groups, early departures, late arrivals, families with more luggage, travelers who want a direct hotel route, or accommodation outside the shared-shuttle area. For one or two flexible travelers, the [[shared shuttle|cappadocia-shuttle-transfer]] is often better value; the current one-way fare is {{PRICE:kayseri:shuttle}} from ASR and {{PRICE:nevsehir:shuttle}} from NAV."
+          "Private transfer suits larger groups, early departures, late arrivals, families with more luggage, travelers who want a direct hotel route, or accommodation outside the shared-shuttle area. For one or two flexible travelers, the [[shared shuttle|cappadocia-shuttle-transfer]] is often better value; the current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV."
         ]
       },
       {
@@ -252,30 +252,30 @@ const rawPages: SeoPage[] = [
     "twitterDescription": "Compare current Cappadocia airport transfer prices for shared shuttle, private Vito and Sprinter from Kayseri and Nevsehir. One-way and round-trip options.",
     "eyebrow": "Clear price matrix",
     "h1": "Cappadocia Airport Transfer Prices",
-    "lead": "Kayseri Airport (ASR) shared shuttle is {{PRICE:kayseri:shuttle}} per person per way; Nevsehir Airport (NAV) is {{PRICE:nevsehir:shuttle}}. Private prices are per vehicle and are managed separately for Kayseri and Nevsehir.",
+    "lead": "Kayseri Airport (ASR) shared shuttle is {{PRICE:kayseri:shuttle}} per person one way; Nevsehir Airport (NAV) is {{PRICE:nevsehir:shuttle}} per person one way. Private prices are per vehicle and are managed separately for Kayseri and Nevsehir.",
     "sections": [
       {
         "heading": "Shared Shuttle Price",
         "paragraphs": [
-          "Kayseri Airport (ASR) → supported Cappadocia hotels: **{{PRICE:kayseri:shuttle}} per person one way**. Nevsehir Airport (NAV) → supported hotels: **{{PRICE:nevsehir:shuttle}} per person one way**. Hotel-to-airport uses the same airport-specific one-way fare. Round trip is {{PRICE:kayseri:shuttle:roundTrip}} from Kayseri and {{PRICE:nevsehir:shuttle:roundTrip}} from Nevsehir per person. Full route details are on the [[shuttle page|cappadocia-shuttle-transfer]]."
+          "Kayseri Airport (ASR) → supported Cappadocia hotels: **{{PRICE:kayseri:shuttle}} per person one way**. Nevsehir Airport (NAV) → supported hotels: **{{PRICE:nevsehir:shuttle}} per person one way**. Hotel-to-airport uses the same airport-specific one-way fare. Round trip is {{PRICE:kayseri:shuttle:roundTrip}} per person from Kayseri and {{PRICE:nevsehir:shuttle:roundTrip}} per person from Nevsehir. Full route details are on the [[shuttle page|cappadocia-shuttle-transfer]]."
         ]
       },
       {
         "heading": "Kayseri Airport Private Prices",
         "paragraphs": [
-          "Mercedes Vito, max 5 passengers: **{{PRICE:kayseri:vito}} one way / {{PRICE:kayseri:vito:roundTrip}} round trip**. Mercedes Sprinter, max 16 passengers: **{{PRICE:kayseri:sprinter}} one way / {{PRICE:kayseri:sprinter:roundTrip}} round trip**."
+          "Mercedes Vito, max 5 passengers: **{{PRICE:kayseri:vito}} per vehicle one way / {{PRICE:kayseri:vito:roundTrip}} per vehicle round trip**. Mercedes Sprinter, max 16 passengers: **{{PRICE:kayseri:sprinter}} per vehicle one way / {{PRICE:kayseri:sprinter:roundTrip}} per vehicle round trip**."
         ]
       },
       {
         "heading": "Nevsehir Airport Private Prices",
         "paragraphs": [
-          "Mercedes Vito, max 5 passengers: **{{PRICE:nevsehir:vito}} one way / {{PRICE:nevsehir:vito:roundTrip}} round trip**. Mercedes Sprinter, max 16 passengers: **{{PRICE:nevsehir:sprinter}} one way / {{PRICE:nevsehir:sprinter:roundTrip}} round trip**. See the [[private transfer page|private-airport-transfer-cappadocia]] for vehicle details and when private makes more sense than shuttle."
+          "Mercedes Vito, max 5 passengers: **{{PRICE:nevsehir:vito}} per vehicle one way / {{PRICE:nevsehir:vito:roundTrip}} per vehicle round trip**. Mercedes Sprinter, max 16 passengers: **{{PRICE:nevsehir:sprinter}} per vehicle one way / {{PRICE:nevsehir:sprinter:roundTrip}} per vehicle round trip**. See the [[private transfer page|private-airport-transfer-cappadocia]] for vehicle details and when private makes more sense than shuttle."
         ]
       },
       {
         "heading": "Per Person vs Per Vehicle",
         "paragraphs": [
-          "The shuttle total increases with passenger count because it's priced per person. Private transfer is priced per vehicle rather than per passenger, as long as the group fits the selected vehicle — Vito up to 5, Sprinter up to 16 — which is why Sprinter can beat the shuttle for a larger group even though its single-vehicle price looks higher at first glance. Private prices also aren't one flat number: selecting NAV brings Vito to {{PRICE:nevsehir:vito}} and Sprinter to {{PRICE:nevsehir:sprinter}}, while ASR brings them to {{PRICE:kayseri:vito}} and {{PRICE:kayseri:sprinter}}, so check the total again after picking the airport."
+          "The shuttle total increases with passenger count because it's priced per person. Private transfer is priced per vehicle rather than per passenger, as long as the group fits the selected vehicle — Vito up to 5, Sprinter up to 16 — which is why Sprinter can beat the shuttle for a larger group even though its single-vehicle price looks higher at first glance. One-way private prices also aren't one flat number: selecting NAV brings Vito to {{PRICE:nevsehir:vito}} and Sprinter to {{PRICE:nevsehir:sprinter}}, while ASR brings them to {{PRICE:kayseri:vito}} and {{PRICE:kayseri:sprinter}}, so check the total again after picking the airport."
         ]
       },
       {
@@ -287,34 +287,34 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Payment, Currency and Booking Details",
         "paragraphs": [
-          "Prices are published in EUR and payment is made in cash to the driver; USD or TRY cash is also possible using the exchange rate confirmed for the booking. Round trip is simply two one-way journeys at the published rate — no separate package price. The booking still needs flight number, hotel, passenger names and passport numbers, and is confirmed once these reservation details are checked on WhatsApp — this matters especially for unusual hotel access, mixed-airport itineraries, or requests outside the standard shared-shuttle coverage."
+          "Prices are published in EUR and payment is made in cash to the driver; USD or TRY cash is also possible using the current exchange rate at the time of payment. Round trip is simply two one-way journeys at the published rate — no separate package price. The booking still needs flight number, hotel, passenger names and passport numbers, and is confirmed once these reservation details are checked on WhatsApp — this matters especially for unusual hotel access, mixed-airport itineraries, or requests outside the standard shared-shuttle coverage."
         ]
       }
     ],
     "faq": [
       {
         "q": "How much is Cappadocia airport shuttle?",
-        "a": "Kayseri Airport is {{PRICE:kayseri:shuttle}} per person each way; Nevsehir Airport is {{PRICE:nevsehir:shuttle}}."
+        "a": "Kayseri Airport is {{PRICE:kayseri:shuttle}} per person one way; Nevsehir Airport is {{PRICE:nevsehir:shuttle}} per person one way."
       },
       {
         "q": "How much is shuttle round trip?",
-        "a": "Kayseri round trip is {{PRICE:kayseri:shuttle:roundTrip}} per person; Nevsehir round trip is {{PRICE:nevsehir:shuttle:roundTrip}}."
+        "a": "Kayseri round trip is {{PRICE:kayseri:shuttle:roundTrip}} per person; Nevsehir round trip is {{PRICE:nevsehir:shuttle:roundTrip}} per person."
       },
       {
         "q": "How much is Kayseri Airport Vito?",
-        "a": "{{PRICE:kayseri:vito}} one way; {{PRICE:kayseri:vito:roundTrip}} round trip."
+        "a": "{{PRICE:kayseri:vito}} per vehicle one way; {{PRICE:kayseri:vito:roundTrip}} per vehicle round trip."
       },
       {
         "q": "How much is Kayseri Airport Sprinter?",
-        "a": "{{PRICE:kayseri:sprinter}} one way; {{PRICE:kayseri:sprinter:roundTrip}} round trip."
+        "a": "{{PRICE:kayseri:sprinter}} per vehicle one way; {{PRICE:kayseri:sprinter:roundTrip}} per vehicle round trip."
       },
       {
         "q": "How much is Nevsehir Airport Vito?",
-        "a": "{{PRICE:nevsehir:vito}} one way; {{PRICE:nevsehir:vito:roundTrip}} round trip."
+        "a": "{{PRICE:nevsehir:vito}} per vehicle one way; {{PRICE:nevsehir:vito:roundTrip}} per vehicle round trip."
       },
       {
         "q": "How much is Nevsehir Airport Sprinter?",
-        "a": "{{PRICE:nevsehir:sprinter}} one way; {{PRICE:nevsehir:sprinter:roundTrip}} round trip."
+        "a": "{{PRICE:nevsehir:sprinter}} per vehicle one way; {{PRICE:nevsehir:sprinter:roundTrip}} per vehicle round trip."
       },
       {
         "q": "Are private prices per person?",
@@ -326,7 +326,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "Can I pay USD or TRY?",
-        "a": "Cash payment can be arranged in USD or TRY using the current exchange rate confirmed for the booking."
+        "a": "Cash payment can be arranged in USD or TRY using the current exchange rate at the time of payment."
       },
       {
         "q": "Are passport numbers required even though payment is cash?",
@@ -353,7 +353,7 @@ const rawPages: SeoPage[] = [
     "description": "Kayseri Airport (ASR) shuttle to Cappadocia hotels in Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar. Shared shuttle and private transfer; cash to driver.",
     "eyebrow": "ASR shuttle service",
     "h1": "Kayseri Airport Shuttle to Cappadocia",
-    "lead": "Book the {{PRICE:kayseri:shuttle}} per person shared shuttle from Kayseri Erkilet Airport to supported Cappadocia accommodation, with flight-based meeting details confirmed on WhatsApp.",
+    "lead": "Book the {{PRICE:kayseri:shuttle}} per person one way shared shuttle from Kayseri Erkilet Airport to supported Cappadocia accommodation, with flight-based meeting details confirmed on WhatsApp.",
     "sections": [
       {
         "heading": "Kayseri Airport shuttle: the longer road gateway to Cappadocia",
@@ -362,9 +362,9 @@ const rawPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "The shared fare stays {{PRICE:kayseri:shuttle}} even from ASR",
+        "heading": "The shared fare stays {{PRICE:kayseri:shuttle}} per person one way even from ASR",
         "paragraphs": [
-          "The Kayseri shared airport shuttle is **{{PRICE:kayseri:shuttle}} per person one way** and **{{PRICE:kayseri:shuttle:roundTrip}} round trip**. The fare remains {{PRICE:kayseri:shuttle}} even though ASR is farther away. Travelers who prefer a dedicated vehicle can choose Vito {{PRICE:kayseri:vito}} or Sprinter {{PRICE:kayseri:sprinter}} one way per vehicle."
+          "The Kayseri shared airport shuttle is **{{PRICE:kayseri:shuttle}} per person one way** and **{{PRICE:kayseri:shuttle:roundTrip}} per person round trip**. The fare remains {{PRICE:kayseri:shuttle}} per person one way even though ASR is farther away. Travelers who prefer a dedicated vehicle can choose Vito {{PRICE:kayseri:vito}} or Sprinter {{PRICE:kayseri:sprinter}} one way per vehicle."
         ]
       },
       {
@@ -382,7 +382,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Return to ASR Uses a Separate Hotel-Pickup Plan",
         "paragraphs": [
-          "The {{PRICE:kayseri:shuttle}} shared fare also applies from supported hotels back to Kayseri Airport. The return is not a reversed arrival timetable: use the outbound flight and [[Cappadocia to Kayseri Airport shuttle|cappadocia-to-kayseri-airport-shuttle]] details, then match the pickup plan to the actual hotel town."
+          "The shared fare from supported hotels back to Kayseri Airport is also {{PRICE:kayseri:shuttle}} per person one way. The return is not a reversed arrival timetable: use the outbound flight and [[Cappadocia to Kayseri Airport shuttle|cappadocia-to-kayseri-airport-shuttle]] details, then match the pickup plan to the actual hotel town."
         ]
       }
     ],
@@ -428,7 +428,7 @@ const rawPages: SeoPage[] = [
     "description": "Nevsehir Airport (NAV) shuttle to Cappadocia hotels in Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar. Shared shuttle and private transfer; cash to driver.",
     "eyebrow": "NAV shuttle service",
     "h1": "Nevsehir Airport Shuttle to Cappadocia",
-    "lead": "Book the {{PRICE:nevsehir:shuttle}} per person shared shuttle from Nevsehir Kapadokya Airport to supported Cappadocia accommodation, with flight-based meeting details confirmed on WhatsApp.",
+    "lead": "Book the {{PRICE:nevsehir:shuttle}} per person one way shared shuttle from Nevsehir Kapadokya Airport to supported Cappadocia accommodation, with flight-based meeting details confirmed on WhatsApp.",
     "sections": [
       {
         "heading": "Nevsehir Airport Shuttle: The Shorter Road Gateway for Many Central Stays",
@@ -437,9 +437,9 @@ const rawPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "NAV Shared Shuttle Is {{PRICE:nevsehir:shuttle}} Per Person",
+        "heading": "NAV Shared Shuttle Is {{PRICE:nevsehir:shuttle}} Per Person One Way",
         "paragraphs": [
-          "The Nevsehir shared airport shuttle is **{{PRICE:nevsehir:shuttle}} per person one way** and **{{PRICE:nevsehir:shuttle:roundTrip}} round trip**. Private pricing is airport-specific: from NAV, Vito is {{PRICE:nevsehir:vito}} and Sprinter {{PRICE:nevsehir:sprinter}} one way per vehicle. Compare the current ASR rates separately if both airports work for your flights."
+          "The Nevsehir shared airport shuttle is **{{PRICE:nevsehir:shuttle}} per person one way** and **{{PRICE:nevsehir:shuttle:roundTrip}} per person round trip**. Private pricing is airport-specific: from NAV, Vito is {{PRICE:nevsehir:vito}} and Sprinter {{PRICE:nevsehir:sprinter}} one way per vehicle. Compare the current ASR rates separately if both airports work for your flights."
         ]
       },
       {
@@ -457,7 +457,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Return to NAV Uses the Hotel Town, Not a Generic Pickup",
         "paragraphs": [
-          "The shared fare back to Nevsehir Airport is {{PRICE:nevsehir:shuttle}} per person. Use the actual departure flight and the relevant town route from [[Cappadocia to Nevsehir Airport shuttle|cappadocia-to-nevsehir-airport-shuttle]] so a Goreme pickup isn't planned the same way as Uchisar, Avanos or another hotel area."
+          "The shared fare back to Nevsehir Airport is {{PRICE:nevsehir:shuttle}} per person one way. Use the actual departure flight and the relevant town route from [[Cappadocia to Nevsehir Airport shuttle|cappadocia-to-nevsehir-airport-shuttle]] so a Goreme pickup isn't planned the same way as Uchisar, Avanos or another hotel area."
         ]
       },
       {
@@ -509,7 +509,7 @@ const rawPages: SeoPage[] = [
     "description": "Cappadocia hotel to Kayseri Airport (ASR) shuttle from Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar. Shared or private hotel pickup.",
     "eyebrow": "Cappadocia → ASR",
     "h1": "Cappadocia to Kayseri Airport Shuttle",
-    "lead": "Book the {{PRICE:kayseri:shuttle}} hotel-to-airport shuttle from supported Cappadocia towns to Kayseri Erkilet Airport, with the pickup point and timing confirmed from your departure flight.",
+    "lead": "Book the hotel-to-airport shuttle from supported Cappadocia towns to Kayseri Erkilet Airport for {{PRICE:kayseri:shuttle}} per person one way, with the pickup point and timing confirmed from your departure flight.",
     "sections": [
       {
         "heading": "ASR Departure Planning Starts Earlier Than the Map Distance Suggests",
@@ -532,7 +532,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Kayseri Pickup for a Dedicated Departure",
         "paragraphs": [
-          "A [[private|private-airport-transfer-cappadocia]] Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers and Sprinter {{PRICE:kayseri:sprinter}} for up to 16. Private service removes unrelated hotel collections, but the vehicle still needs a safe, accessible pickup point at the property."
+          "A [[private|private-airport-transfer-cappadocia]] Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. Private service removes unrelated hotel collections, but the vehicle still needs a safe, accessible pickup point at the property."
         ]
       },
       {
@@ -579,7 +579,7 @@ const rawPages: SeoPage[] = [
     "description": "Cappadocia hotel to Nevsehir Airport (NAV) shuttle from Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar. Shared or private hotel pickup.",
     "eyebrow": "Cappadocia → NAV",
     "h1": "Cappadocia to Nevsehir Airport Shuttle",
-    "lead": "Book the {{PRICE:nevsehir:shuttle}} hotel-to-airport shuttle from supported Cappadocia towns to Nevsehir Kapadokya Airport, with the pickup point and timing confirmed from your departure flight.",
+    "lead": "Book the hotel-to-airport shuttle from supported Cappadocia towns to Nevsehir Kapadokya Airport for {{PRICE:nevsehir:shuttle}} per person one way, with the pickup point and timing confirmed from your departure flight.",
     "sections": [
       {
         "heading": "NAV Is Closer, But the Hotel Pickup Still Comes From the Flight",
@@ -602,7 +602,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Nevsehir Departure Is the Direct Alternative",
         "paragraphs": [
-          "A dedicated [[private|private-airport-transfer-cappadocia]] Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers and Sprinter {{PRICE:nevsehir:sprinter}} for up to 16. It avoids unrelated hotel pickups, while the final hotel meeting point still depends on safe vehicle access."
+          "A dedicated [[private|private-airport-transfer-cappadocia]] Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. It avoids unrelated hotel pickups, while the final hotel meeting point still depends on safe vehicle access."
         ]
       },
       {
@@ -735,7 +735,7 @@ const rawPages: SeoPage[] = [
     "faq": [
       {
         "q": "What are the Goreme shuttle fares from Kayseri and Nevsehir?",
-        "a": "Current shared-shuttle fares are {{PRICE:kayseri:shuttle}} per person each way from ASR and {{PRICE:nevsehir:shuttle}} from NAV. Check the fare for the airport on your ticket together with the road distance for that route."
+        "a": "Current shared-shuttle fares are {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV. Check the fare for the airport on your ticket together with the road distance for that route."
       },
       {
         "q": "Can I arrange the airport arrival and Goreme hotel pickup for departure in one booking?",
@@ -798,7 +798,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       },
       {
@@ -857,7 +857,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Urgup Shuttle|nevsehir-airport-to-urgup-shuttle]]."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Urgup Shuttle|nevsehir-airport-to-urgup-shuttle]]."
         ]
       }
     ],
@@ -909,7 +909,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Uchisar Shuttle|nevsehir-airport-to-uchisar-shuttle]]."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Uchisar Shuttle|nevsehir-airport-to-uchisar-shuttle]]."
         ]
       }
     ],
@@ -961,7 +961,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Avanos Shuttle|nevsehir-airport-to-avanos-shuttle]]."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Avanos Shuttle|nevsehir-airport-to-avanos-shuttle]]."
         ]
       }
     ],
@@ -1013,7 +1013,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Ortahisar Shuttle|nevsehir-airport-to-ortahisar-shuttle]]."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Ortahisar Shuttle|nevsehir-airport-to-ortahisar-shuttle]]."
         ]
       }
     ],
@@ -1065,7 +1065,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Cavusin Shuttle|nevsehir-airport-to-cavusin-shuttle]]."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details. If you prefer NAV instead of ASR, compare [[Nevsehir Airport to Cavusin Shuttle|nevsehir-airport-to-cavusin-shuttle]]."
         ]
       }
     ],
@@ -1118,7 +1118,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1169,7 +1169,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Shuttle for Value, Private Vehicle for a Dedicated Run",
         "paragraphs": [
-          "For one or two passengers, the shared option keeps the cost low. A private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and a private Sprinter is {{PRICE:nevsehir:sprinter}} one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details, or compare the service types in [[Shared Shuttle vs Private Transfer|cappadocia-shared-shuttle-vs-private-transfer]]."
+          "For one or two passengers, the shared option keeps the cost low. A private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and a private Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details, or compare the service types in [[Shared Shuttle vs Private Transfer|cappadocia-shared-shuttle-vs-private-transfer]]."
         ]
       }
     ],
@@ -1223,7 +1223,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1270,7 +1270,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1324,7 +1324,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1383,7 +1383,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1414,7 +1414,7 @@ const rawPages: SeoPage[] = [
     "description": "Goreme to Kayseri Airport (ASR) hotel pickup by shared shuttle or private transfer; approx. 75 km and 60–75 min, with route-specific departure guidance.",
     "eyebrow": "Goreme → ASR airport shuttle",
     "h1": "Goreme to Kayseri Airport Shuttle",
-    "lead": "Hotel pickup from Goreme to Kayseri Airport (ASR) is available by {{PRICE:kayseri:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 75 km, with a typical driving time of 60–75 minutes. Goreme’s cave-hotel and hillside streets can add local pickup time before the vehicle reaches the main road. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Goreme to Kayseri Airport (ASR) is available by shared shuttle at {{PRICE:kayseri:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 75 km, with a typical driving time of 60–75 minutes. Goreme’s cave-hotel and hillside streets can add local pickup time before the vehicle reaches the main road. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "kayseri",
       "town": "goreme",
@@ -1437,7 +1437,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1468,7 +1468,7 @@ const rawPages: SeoPage[] = [
     "description": "Urgup to Kayseri Airport (ASR) hotel pickup by shared shuttle or private transfer; approx. 70 km and 60–75 min, with route-specific departure guidance.",
     "eyebrow": "Urgup → ASR airport shuttle",
     "h1": "Urgup to Kayseri Airport Shuttle",
-    "lead": "Hotel pickup from Urgup to Kayseri Airport (ASR) is available by {{PRICE:kayseri:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 70 km, with a typical driving time of 60–75 minutes. Urgup accommodation spans central streets and hillside quarters, so the confirmed pickup point matters before the airport drive begins. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Urgup to Kayseri Airport (ASR) is available by shared shuttle at {{PRICE:kayseri:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 70 km, with a typical driving time of 60–75 minutes. Urgup accommodation spans central streets and hillside quarters, so the confirmed pickup point matters before the airport drive begins. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "kayseri",
       "town": "urgup",
@@ -1497,7 +1497,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1527,7 +1527,7 @@ const rawPages: SeoPage[] = [
     "description": "Uchisar to Kayseri Airport (ASR) hotel pickup by shared shuttle or private transfer; approx. 80 km and 70–85 min, with route-specific departure guidance.",
     "eyebrow": "Uchisar → ASR airport shuttle",
     "h1": "Uchisar to Kayseri Airport Shuttle",
-    "lead": "Hotel pickup from Uchisar to Kayseri Airport (ASR) is available by {{PRICE:kayseri:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 80 km, with a typical driving time of 70–85 minutes. Uchisar’s steep upper-village streets can require a practical pickup point rather than direct access to every hotel door. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Uchisar to Kayseri Airport (ASR) is available by shared shuttle at {{PRICE:kayseri:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 80 km, with a typical driving time of 70–85 minutes. Uchisar’s steep upper-village streets can require a practical pickup point rather than direct access to every hotel door. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "kayseri",
       "town": "uchisar",
@@ -1550,7 +1550,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1584,7 +1584,7 @@ const rawPages: SeoPage[] = [
     "description": "Avanos to Kayseri Airport (ASR) hotel pickup by shared shuttle or private transfer; approx. 70 km and 60–75 min, with route-specific departure guidance.",
     "eyebrow": "Avanos → ASR airport shuttle",
     "h1": "Avanos to Kayseri Airport Shuttle",
-    "lead": "Hotel pickup from Avanos to Kayseri Airport (ASR) is available by {{PRICE:kayseri:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 70 km, with a typical driving time of 60–75 minutes. Avanos accommodation is spread across different parts of town, so the full hotel name helps confirm the correct pickup point. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Avanos to Kayseri Airport (ASR) is available by shared shuttle at {{PRICE:kayseri:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 70 km, with a typical driving time of 60–75 minutes. Avanos accommodation is spread across different parts of town, so the full hotel name helps confirm the correct pickup point. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "kayseri",
       "town": "avanos",
@@ -1602,7 +1602,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1632,7 +1632,7 @@ const rawPages: SeoPage[] = [
     "description": "Ortahisar to Kayseri Airport (ASR) hotel pickup by shared shuttle or private transfer; approx. 75 km and 60–75 min, with route-specific departure guidance.",
     "eyebrow": "Ortahisar → ASR airport shuttle",
     "h1": "Ortahisar to Kayseri Airport Shuttle",
-    "lead": "Hotel pickup from Ortahisar to Kayseri Airport (ASR) is available by {{PRICE:kayseri:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 75 km, with a typical driving time of 60–75 minutes. Narrow old-village streets can affect the first minutes of an Ortahisar pickup, making the confirmed meeting point important. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Ortahisar to Kayseri Airport (ASR) is available by shared shuttle at {{PRICE:kayseri:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 75 km, with a typical driving time of 60–75 minutes. Narrow old-village streets can affect the first minutes of an Ortahisar pickup, making the confirmed meeting point important. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "kayseri",
       "town": "ortahisar",
@@ -1655,7 +1655,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1685,7 +1685,7 @@ const rawPages: SeoPage[] = [
     "description": "Cavusin to Kayseri Airport (ASR) hotel pickup by shared shuttle or private transfer; approx. 75 km and 65–80 min, with route-specific departure guidance.",
     "eyebrow": "Cavusin → ASR airport shuttle",
     "h1": "Cavusin to Kayseri Airport Shuttle",
-    "lead": "Hotel pickup from Cavusin to Kayseri Airport (ASR) is available by {{PRICE:kayseri:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 75 km, with a typical driving time of 65–80 minutes. Cavusin accommodation can be near the main road, the old village, or valley-side areas, so the confirmed pickup point matters. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Cavusin to Kayseri Airport (ASR) is available by shared shuttle at {{PRICE:kayseri:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 75 km, with a typical driving time of 65–80 minutes. Cavusin accommodation can be near the main road, the old village, or valley-side areas, so the confirmed pickup point matters. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1714,7 +1714,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:kayseri:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:kayseri:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1744,7 +1744,7 @@ const rawPages: SeoPage[] = [
     "description": "Goreme to Nevsehir Airport (NAV) hotel pickup by shared shuttle or private transfer; approx. 40 km and 35–45 min, with route-specific departure guidance.",
     "eyebrow": "Goreme → NAV airport shuttle",
     "h1": "Goreme to Nevsehir Airport Shuttle",
-    "lead": "Hotel pickup from Goreme to Nevsehir Airport (NAV) is available by {{PRICE:nevsehir:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 40 km, with a typical driving time of 35–45 minutes. Goreme’s cave-hotel and hillside streets can add local pickup time before the vehicle reaches the main road. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Goreme to Nevsehir Airport (NAV) is available by shared shuttle at {{PRICE:nevsehir:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 40 km, with a typical driving time of 35–45 minutes. Goreme’s cave-hotel and hillside streets can add local pickup time before the vehicle reaches the main road. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "nevsehir",
       "town": "goreme",
@@ -1767,7 +1767,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1798,7 +1798,7 @@ const rawPages: SeoPage[] = [
     "description": "Urgup to Nevsehir Airport (NAV) hotel pickup by shared shuttle or private transfer; approx. 50 km and 45–60 min, with route-specific departure guidance.",
     "eyebrow": "Urgup → NAV airport shuttle",
     "h1": "Urgup to Nevsehir Airport Shuttle",
-    "lead": "Hotel pickup from Urgup to Nevsehir Airport (NAV) is available by {{PRICE:nevsehir:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 50 km, with a typical driving time of 45–60 minutes. Urgup accommodation spans central streets and hillside quarters, so the confirmed pickup point matters before the airport drive begins. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Urgup to Nevsehir Airport (NAV) is available by shared shuttle at {{PRICE:nevsehir:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 50 km, with a typical driving time of 45–60 minutes. Urgup accommodation spans central streets and hillside quarters, so the confirmed pickup point matters before the airport drive begins. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "nevsehir",
       "town": "urgup",
@@ -1821,7 +1821,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1852,7 +1852,7 @@ const rawPages: SeoPage[] = [
     "description": "Uchisar to Nevsehir Airport (NAV) hotel pickup by shared shuttle or private transfer; approx. 35 km and 30–40 min, with route-specific departure guidance.",
     "eyebrow": "Uchisar → NAV airport shuttle",
     "h1": "Uchisar to Nevsehir Airport Shuttle",
-    "lead": "Hotel pickup from Uchisar to Nevsehir Airport (NAV) is available by {{PRICE:nevsehir:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 35 km, with a typical driving time of 30–40 minutes. Uchisar’s steep upper-village streets can require a practical pickup point rather than direct access to every hotel door. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Uchisar to Nevsehir Airport (NAV) is available by shared shuttle at {{PRICE:nevsehir:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 35 km, with a typical driving time of 30–40 minutes. Uchisar’s steep upper-village streets can require a practical pickup point rather than direct access to every hotel door. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "nevsehir",
       "town": "uchisar",
@@ -1875,7 +1875,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1910,7 +1910,7 @@ const rawPages: SeoPage[] = [
     "description": "Avanos to Nevsehir Airport (NAV) hotel pickup by shared shuttle or private transfer; approx. 38 km and 35–50 min, with route-specific departure guidance.",
     "eyebrow": "Avanos → NAV airport shuttle",
     "h1": "Avanos to Nevsehir Airport Shuttle",
-    "lead": "Hotel pickup from Avanos to Nevsehir Airport (NAV) is available by {{PRICE:nevsehir:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 38 km, with a typical driving time of 35–50 minutes. Avanos accommodation is spread across different parts of town, so the full hotel name helps confirm the correct pickup point. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Avanos to Nevsehir Airport (NAV) is available by shared shuttle at {{PRICE:nevsehir:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 38 km, with a typical driving time of 35–50 minutes. Avanos accommodation is spread across different parts of town, so the full hotel name helps confirm the correct pickup point. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -1927,7 +1927,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -1958,7 +1958,7 @@ const rawPages: SeoPage[] = [
     "description": "Ortahisar to Nevsehir Airport (NAV) hotel pickup by shared shuttle or private transfer; approx. 45 km and 40–50 min, with route-specific departure guidance.",
     "eyebrow": "Ortahisar → NAV airport shuttle",
     "h1": "Ortahisar to Nevsehir Airport Shuttle",
-    "lead": "Hotel pickup from Ortahisar to Nevsehir Airport (NAV) is available by {{PRICE:nevsehir:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 45 km, with a typical driving time of 40–50 minutes. Narrow old-village streets can affect the first minutes of an Ortahisar pickup, making the confirmed meeting point important. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Ortahisar to Nevsehir Airport (NAV) is available by shared shuttle at {{PRICE:nevsehir:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 45 km, with a typical driving time of 40–50 minutes. Narrow old-village streets can affect the first minutes of an Ortahisar pickup, making the confirmed meeting point important. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "nevsehir",
       "town": "ortahisar",
@@ -1981,7 +1981,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -2012,7 +2012,7 @@ const rawPages: SeoPage[] = [
     "description": "Cavusin to Nevsehir Airport (NAV) hotel pickup by shared shuttle or private transfer; approx. 42 km and 40–55 min, with route-specific departure guidance.",
     "eyebrow": "Cavusin → NAV airport shuttle",
     "h1": "Cavusin to Nevsehir Airport Shuttle",
-    "lead": "Hotel pickup from Cavusin to Nevsehir Airport (NAV) is available by {{PRICE:nevsehir:shuttle}}-per-person shared shuttle or private Vito/Sprinter. The usual road distance is about 42 km, with a typical driving time of 40–55 minutes. Cavusin accommodation can be near the main road, the old village, or valley-side areas, so the confirmed pickup point matters. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
+    "lead": "Hotel pickup from Cavusin to Nevsehir Airport (NAV) is available by shared shuttle at {{PRICE:nevsehir:shuttle}} per person one way or by private Vito/Sprinter. The usual road distance is about 42 km, with a typical driving time of 40–55 minutes. Cavusin accommodation can be near the main road, the old village, or valley-side areas, so the confirmed pickup point matters. Follow the confirmed pickup time, which also allows for shared pickups and the airport-arrival margin.",
     "route": {
       "airport": "nevsehir",
       "town": "cavusin",
@@ -2035,7 +2035,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Private Transfer for This Route",
         "paragraphs": [
-          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
+          "Prefer a dedicated vehicle? Private Vito is {{PRICE:nevsehir:vito}} per vehicle one way for up to 5 passengers, and Sprinter is {{PRICE:nevsehir:sprinter}} per vehicle one way for up to 16. See [[Private Airport Transfer|private-airport-transfer-cappadocia]] for full details."
         ]
       }
     ],
@@ -2076,21 +2076,21 @@ const rawPages: SeoPage[] = [
         "heading": "Which airport is Cappadocia Airport?",
         "paragraphs": [
           "Nevsehir Kapadokya Airport uses the IATA code **NAV** and is the airport whose official name carries Kapadokya/Cappadocia. In travel planning, however, “Cappadocia airport” is also used loosely for the two practical gateways serving the region: NAV and Kayseri Airport **ASR**. That is why a hotel transfer booking should use the airport code on the flight ticket rather than only the regional word Cappadocia.",
-          "If you are still choosing a flight, compare [[Nearest Airport to Cappadocia|nearest-airport-to-cappadocia]] and [[Kayseri or Nevsehir Airport for Cappadocia|kayseri-or-nevsehir-airport-for-cappadocia]] before booking your ticket."
+          "If you are still choosing a flight, compare [[Nearest Airport to Cappadocia|nearest-airport-to-cappadocia]] and [[Kayseri or Nevsehir Airport for Cappadocia|kayseri-or-nevsehir-airport-for-cappadocia]] before booking your ticket. If your journey starts with a domestic flight from Istanbul, [[Istanbul to Cappadocia|istanbul-to-cappadocia]] explains how the flight and onward airport transfer fit together."
         ]
       },
       {
         "heading": "Nevsehir Kapadokya Airport (NAV)",
         "paragraphs": [
           "NAV is generally the shorter road transfer to central Cappadocia. Published route estimates include Goreme at about **40 km / 35–45 minutes**, Uchisar 35 km / 30–40 minutes, Avanos 38 km / 35–50 minutes, Cavusin 42 km / 40–55 minutes, Ortahisar 45 km / 40–50 minutes and Urgup 50 km / 45–60 minutes before possible shared-shuttle stops.",
-          "The shared [[Nevsehir Airport shuttle|nevsehir-airport-shuttle]] is **{{PRICE:nevsehir:shuttle}} per person each way**. Private one-way pricing is Vito {{PRICE:nevsehir:vito}} for up to 5 passengers or Sprinter {{PRICE:nevsehir:sprinter}} for up to 16."
+          "The shared [[Nevsehir Airport shuttle|nevsehir-airport-shuttle]] is **{{PRICE:nevsehir:shuttle}} per person one way**. Private one-way pricing per vehicle is Vito {{PRICE:nevsehir:vito}} for up to 5 passengers or Sprinter {{PRICE:nevsehir:sprinter}} for up to 16."
         ]
       },
       {
         "heading": "Kayseri Airport (ASR)",
         "paragraphs": [
           "ASR is farther by road but is widely used for Cappadocia because flight timing and availability can make it the better overall journey. Goreme is about **75 km / 60–75 minutes**, with the other supported towns generally in the 70–80 km range before shared stops.",
-          "The [[Kayseri Airport shuttle|kayseri-airport-shuttle]] is **{{PRICE:kayseri:shuttle}} per person each way**. Private one-way pricing is Vito {{PRICE:kayseri:vito}} or Sprinter {{PRICE:kayseri:sprinter}}. Compare the ASR fare, flight schedule and road distance together before choosing the airport."
+          "The [[Kayseri Airport shuttle|kayseri-airport-shuttle]] is **{{PRICE:kayseri:shuttle}} per person one way**. Private one-way pricing per vehicle is Vito {{PRICE:kayseri:vito}} or Sprinter {{PRICE:kayseri:sprinter}}. Compare the ASR fare, flight schedule and road distance together before choosing the airport."
         ]
       },
       {
@@ -2102,7 +2102,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Airport to hotel: shuttle or private vehicle",
         "paragraphs": [
-          "The shared shuttle is the main value service for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. The current one-way fare is {{PRICE:kayseri:shuttle}} from ASR and {{PRICE:nevsehir:shuttle}} from NAV. It is shared, so other passengers and hotel stops can be part of the run. Travelers who want a dedicated vehicle can choose a private Vito or Sprinter; private prices are per vehicle rather than per person.",
+          "The shared shuttle is the main value service for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. The current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV. It is shared, so other passengers and hotel stops can be part of the run. Travelers who want a dedicated vehicle can choose a private Vito or Sprinter; private prices are per vehicle rather than per person. For a broader service overview, see [[Cappadocia Airport Transfer|cappadocia-airport-transfer]], while [[Airport Transfer Prices|airport-transfer-prices]] keeps the airport-specific fare structure in one place.",
           "The booking request collects the airport, journey direction, flight details, hotel, WhatsApp contact and passenger information including passport numbers required for every reservation. Payment is made in cash to the driver after the booking is confirmed."
         ]
       },
@@ -2134,7 +2134,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "How much is the airport shuttle from NAV or ASR?",
-        "a": "The shared shuttle is {{PRICE:kayseri:shuttle}} per person each way from Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} from Nevsehir (NAV) to supported central Cappadocia hotel areas."
+        "a": "The shared shuttle is {{PRICE:kayseri:shuttle}} per person one way from Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} per person one way from Nevsehir (NAV) to supported central Cappadocia hotel areas."
       },
       {
         "q": "What does NAV Airport mean?",
@@ -2180,7 +2180,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Nearest does not always mean best",
         "paragraphs": [
-          "A shorter transfer is useful, but a poor flight time or expensive connection can cancel the advantage. Compare the total journey from your origin, not just the final road distance. Shared-shuttle fares are airport-specific: ASR is {{PRICE:kayseri:shuttle}} and NAV is {{PRICE:nevsehir:shuttle}} per person."
+          "A shorter transfer is useful, but a poor flight time or expensive connection can cancel the advantage. Compare the total journey from your origin, not just the final road distance. Shared-shuttle fares are airport-specific: ASR is {{PRICE:kayseri:shuttle}} per person one way and NAV is {{PRICE:nevsehir:shuttle}} per person one way."
         ]
       },
       {
@@ -2210,7 +2210,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Compare shared and private prices by airport",
         "paragraphs": [
-          "Shared shuttle is {{PRICE:nevsehir:shuttle}} per person from NAV and {{PRICE:kayseri:shuttle}} from ASR. Private transfer is {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}} for NAV Vito/Sprinter and {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}} for ASR. Compare the airport-specific totals for your booking."
+          "Shared shuttle is {{PRICE:nevsehir:shuttle}} per person one way from NAV and {{PRICE:kayseri:shuttle}} per person one way from ASR. Private transfer is {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}} per vehicle one way for NAV Vito/Sprinter and {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}} per vehicle one way for ASR. Compare the airport-specific totals for your booking."
         ]
       }
     ],
@@ -2229,7 +2229,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "Is the shuttle cheaper from NAV?",
-        "a": "Current shared-shuttle fares are {{PRICE:kayseri:shuttle}} per person from Kayseri and {{PRICE:nevsehir:shuttle}} from Nevsehir."
+        "a": "Current shared-shuttle fares are {{PRICE:kayseri:shuttle}} per person one way from Kayseri and {{PRICE:nevsehir:shuttle}} per person one way from Nevsehir."
       },
       {
         "q": "Should I choose flight time or road distance?",
@@ -2260,19 +2260,19 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Road-distance advantage: Nevsehir",
         "paragraphs": [
-          "NAV is closer to most central Cappadocia bases. Goreme is roughly 40 km, Uchisar 35 km and Avanos about 38 km. This can reduce time in the vehicle after landing."
+          "NAV is closer to most central Cappadocia bases. Goreme is roughly 40 km, Uchisar 35 km and Avanos about 38 km. This can reduce time in the vehicle after landing. For airport-specific service details, compare the [[Nevsehir Airport Shuttle|nevsehir-airport-shuttle]] and [[Kayseri Airport Shuttle|kayseri-airport-shuttle]]."
         ]
       },
       {
         "heading": "Flight-choice advantage can favor Kayseri",
         "paragraphs": [
-          "ASR is farther from the central hotel towns, but a better-timed or better-priced flight can be worth the extra road time. Do not reject Kayseri before checking the flight options from Istanbul or your connecting city."
+          "ASR is farther from the central hotel towns, but a better-timed or better-priced flight can be worth the extra road time. Do not reject Kayseri before checking the flight options from Istanbul or your connecting city. The [[Cappadocia Airport guide|cappadocia-airport]] explains why both airport codes appear in trip planning."
         ]
       },
       {
         "heading": "Compare shuttle price by airport",
         "paragraphs": [
-          "Shared shuttle is {{PRICE:kayseri:shuttle}} per person from Kayseri and {{PRICE:nevsehir:shuttle}} from Nevsehir. Private transfer prices are also managed by airport: Kayseri Vito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}; Nevsehir {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}."
+          "Shared shuttle is {{PRICE:kayseri:shuttle}} per person one way from Kayseri and {{PRICE:nevsehir:shuttle}} per person one way from Nevsehir. Private transfer prices are also managed by airport and are per vehicle one way: Kayseri Vito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}; Nevsehir {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}."
         ]
       },
       {
@@ -2307,7 +2307,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "Which airport has cheaper shuttle?",
-        "a": "Kayseri is {{PRICE:kayseri:shuttle}} per person and Nevsehir is {{PRICE:nevsehir:shuttle}}; compare the current airport-specific fare."
+        "a": "Kayseri is {{PRICE:kayseri:shuttle}} per person one way and Nevsehir is {{PRICE:nevsehir:shuttle}} per person one way; compare the current airport-specific fare."
       },
       {
         "q": "How do private transfer prices compare between the two airports?",
@@ -2342,19 +2342,19 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Shared shuttle: best for value",
         "paragraphs": [
-          "The shared fare is airport-specific: {{PRICE:kayseri:shuttle}} per person each way from ASR and {{PRICE:nevsehir:shuttle}} from NAV. For solo travelers and couples, the shuttle is usually the lowest-cost pre-booked airport-to-hotel choice. It may carry other passengers and make several hotel stops."
+          "The shared fare is airport-specific: {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV. For solo travelers and couples, the shuttle is usually the lowest-cost pre-booked airport-to-hotel choice. It may carry other passengers and make several hotel stops. Booking details for the [[shared shuttle|cappadocia-shuttle-transfer]] are explained on the service page."
         ]
       },
       {
         "heading": "Private transfer: best for control",
         "paragraphs": [
-          "The Vito or Sprinter is dedicated to your booking. That is useful for groups, families, early flights, late arrivals and travelers who prefer no unrelated hotel drops."
+          "The Vito or Sprinter is dedicated to your booking. That is useful for groups, families, early flights, late arrivals and travelers who prefer no unrelated hotel drops. For vehicle capacities and dedicated-service details, see [[private airport transfer|private-airport-transfer-cappadocia]]."
         ]
       },
       {
         "heading": "Price comparison",
         "paragraphs": [
-          "Kayseri: shared shuttle {{PRICE:kayseri:shuttle}} per person, Vito {{PRICE:kayseri:vito}}, Sprinter {{PRICE:kayseri:sprinter}}. Nevsehir: shared shuttle {{PRICE:nevsehir:shuttle}} per person, Vito {{PRICE:nevsehir:vito}}, Sprinter {{PRICE:nevsehir:sprinter}}. Round trip doubles the applicable one-way total."
+          "Kayseri: shared shuttle {{PRICE:kayseri:shuttle}} per person one way, Vito {{PRICE:kayseri:vito}} per vehicle one way, Sprinter {{PRICE:kayseri:sprinter}} per vehicle one way. Nevsehir: shared shuttle {{PRICE:nevsehir:shuttle}} per person one way, Vito {{PRICE:nevsehir:vito}} per vehicle one way, Sprinter {{PRICE:nevsehir:sprinter}} per vehicle one way. Round trip doubles the applicable one-way total. [[Airport Transfer Prices|airport-transfer-prices]] shows the same airport-specific fare structure in one place."
         ]
       },
       {
@@ -2372,7 +2372,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Group-size examples make the choice clearer",
         "paragraphs": [
-          "Using Nevsehir as an example, one passenger pays {{PRICE:nevsehir:shuttle}} on the shuttle and six passengers pay {{PRICE:nevsehir:shuttle:x6}} total one way. That begins to overlap with private vehicle pricing. For larger groups, compare the Sprinter’s per-vehicle price against the total per-person shuttle fare rather than looking only at the headline numbers."
+          "Using Nevsehir as an example, the shuttle fare for one passenger is {{PRICE:nevsehir:shuttle}} per person one way, while six passengers pay {{PRICE:nevsehir:shuttle:x6}} total one way. That begins to overlap with private vehicle pricing. For larger groups, compare the Sprinter’s per-vehicle price against the total per-person shuttle fare rather than looking only at the headline numbers."
         ]
       },
       {
@@ -2391,7 +2391,7 @@ const rawPages: SeoPage[] = [
     "faq": [
       {
         "q": "Is shared shuttle the same as Cappadocia shuttle transfer?",
-        "a": "Yes. “Shared” describes how the service operates; the current one-way fare is {{PRICE:kayseri:shuttle}} per person from ASR and {{PRICE:nevsehir:shuttle}} from NAV."
+        "a": "Yes. “Shared” describes how the service operates; the current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV."
       },
       {
         "q": "Which is faster?",
@@ -2399,7 +2399,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "Which is cheaper for one person?",
-        "a": "The shared shuttle is currently {{PRICE:kayseri:shuttle}} per person from ASR and {{PRICE:nevsehir:shuttle}} from NAV."
+        "a": "The shared shuttle is currently {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV."
       },
       {
         "q": "Which can be better for a large group?",
@@ -2515,7 +2515,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Choose ASR or NAV from the full itinerary",
         "paragraphs": [
-          "NAV is closer by road to many Cappadocia hotels; ASR can have a flight time or fare that makes the longer road transfer worthwhile. Shared shuttle is {{PRICE:nevsehir:shuttle}} from NAV and {{PRICE:kayseri:shuttle}} from ASR, so compare both the flight and current transfer fare."
+          "NAV is closer by road to many Cappadocia hotels; ASR can have a flight time or fare that makes the longer road transfer worthwhile. Shared shuttle is {{PRICE:nevsehir:shuttle}} per person one way from NAV and {{PRICE:kayseri:shuttle}} per person one way from ASR, so compare both the flight and current transfer fare."
         ]
       },
       {
@@ -2564,7 +2564,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "How much is the shuttle after landing?",
-        "a": "ASR is {{PRICE:kayseri:shuttle}} per person and NAV is {{PRICE:nevsehir:shuttle}} per person."
+        "a": "ASR is {{PRICE:kayseri:shuttle}} per person one way and NAV is {{PRICE:nevsehir:shuttle}} per person one way."
       },
       {
         "q": "Do I book the shuttle using my Istanbul flight number?",
@@ -2607,7 +2607,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Choose NAV or ASR from the outbound flight",
         "paragraphs": [
-          "NAV is generally closer to Goreme, Uchisar and other central towns. ASR is farther but may have a flight time or fare that works better. The shared hotel-to-airport shuttle is **{{PRICE:nevsehir:shuttle}} per person to NAV** and **{{PRICE:kayseri:shuttle}} to ASR**, while private prices are NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}} and ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}} for Vito/Sprinter.",
+          "NAV is generally closer to Goreme, Uchisar and other central towns. ASR is farther but may have a flight time or fare that works better. The shared hotel-to-airport shuttle is **{{PRICE:nevsehir:shuttle}} per person one way to NAV** and **{{PRICE:kayseri:shuttle}} per person one way to ASR**, while private one-way prices per vehicle are NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}} and ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}} for Vito/Sprinter.",
           "If the departure airport is not chosen yet, compare [[Nearest Airport to Cappadocia|nearest-airport-to-cappadocia]] and [[Kayseri or Nevsehir Airport|kayseri-or-nevsehir-airport-for-cappadocia]] before booking the flight."
         ]
       },
@@ -2657,7 +2657,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "How much is the hotel shuttle to the airport?",
-        "a": "From supported hotel towns, the one-way shuttle is {{PRICE:nevsehir:shuttle}} per person to NAV and {{PRICE:kayseri:shuttle}} to ASR."
+        "a": "From supported hotel towns, the shuttle is {{PRICE:nevsehir:shuttle}} per person one way to NAV and {{PRICE:kayseri:shuttle}} per person one way to ASR."
       },
       {
         "q": "Can I book a private hotel transfer for the Istanbul flight?",

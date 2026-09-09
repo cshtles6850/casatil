@@ -390,7 +390,7 @@ export function BookingFormZh({
               {people.map((person, index) => <div key={index}><dt>乘客 {index + 1}</dt><dd>{person.fullName || '—'} · 护照 {maskPassport(person.passport)}</dd></div>)}
               <div><dt>付款</dt><dd>现金支付给司机</dd></div>
             </dl>
-            <p className="form-note">价格以 EUR 显示。如需用 USD 或 TRY 现金支付，应使用预订确认时提供的汇率。</p>
+            <p className="form-note">价格以 EUR 显示。如需用 USD 或 TRY 现金支付，应按付款时的当前汇率结算。</p>
           </div>
 
           <label className="confirm-row field full">

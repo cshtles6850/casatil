@@ -21,12 +21,12 @@ const rawJaPages: JaSeoPage[] = [
     "description": "カイセリ空港（ASR）またはネヴシェヒル空港（NAV）からギョレメ、ユルギュップなどへ向かうカッパドキアの乗合空港シャトル。WhatsAppで予約できます。",
     "eyebrow": "乗合空港シャトル",
     "h1": "カッパドキア乗合空港シャトル",
-    "lead": "カッパドキアの乗合空港シャトルは、カイセリ空港（ASR）とネヴシェヒル空港（NAV）から、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルを結びます。現在の片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが{{PRICE:nevsehir:shuttle}}で、フライトに合わせて乗車・降車を手配します。",
+    "lead": "カッパドキアの乗合空港シャトルは、カイセリ空港（ASR）とネヴシェヒル空港（NAV）から、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルを結びます。現在の料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}で、フライトに合わせて乗車・降車を手配します。",
     "sections": [
       {
         "heading": "サービスに含まれるもの",
         "paragraphs": [
-          "どちらの空港からでも宿泊施設まで乗合車両で移動します。フライト、乗客情報、ホテル名を事前に確認し、同じ便にほかの予約済み乗客やホテルへの立ち寄りが含まれる場合があります。現在の片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが{{PRICE:nevsehir:shuttle}}です。"
+          "どちらの空港からでも宿泊施設まで乗合車両で移動します。フライト、乗客情報、ホテル名を事前に確認し、同じ便にほかの予約済み乗客やホテルへの立ち寄りが含まれる場合があります。現在の料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}です。"
         ]
       },
       {
@@ -51,7 +51,7 @@ const rawJaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カッパドキアの乗合シャトルはいくらですか？",
-        "a": "対象ホテルエリアまで、ASRは1名片道{{PRICE:kayseri:shuttle}}、NAVは{{PRICE:nevsehir:shuttle}}です。"
+        "a": "対象ホテルエリアまで、ASRは1名片道{{PRICE:kayseri:shuttle}}、NAVは1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "どの空港に対応していますか？",
@@ -96,7 +96,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "乗合シャトルまたはプライベート送迎",
         "paragraphs": [
-          "[[乗合シャトル|cappadocia-shuttle-transfer]]は現在、カイセリ（ASR）が1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒル（NAV）が{{PRICE:nevsehir:shuttle}}で、事前予約後にWhatsAppで確認します。同じ運行にほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車をご希望の場合は、[[プライベート送迎|private-airport-transfer-cappadocia]]でVito（最大5名）またはSprinter（最大16名）を選択できます。料金は1名あたりではなく1台あたりで、カイセリとネヴシェヒルでは料金を空港別に管理しています。どちらが合うか迷う場合は、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]で料金、対象エリア、時間の違いを比較できます。"
+          "[[乗合シャトル|cappadocia-shuttle-transfer]]は現在、カイセリ（ASR）が1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒル（NAV）が1名片道{{PRICE:nevsehir:shuttle}}で、事前予約後にWhatsAppで確認します。同じ運行にほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車をご希望の場合は、[[プライベート送迎|private-airport-transfer-cappadocia]]でVito（最大5名）またはSprinter（最大16名）を選択できます。料金は1名あたりではなく1台あたりで、カイセリとネヴシェヒルでは料金を空港別に管理しています。どちらが合うか迷う場合は、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]で料金、対象エリア、時間の違いを比較できます。"
         ]
       },
       {
@@ -173,7 +173,7 @@ const rawJaPages: JaSeoPage[] = [
     "description": "カイセリ（ASR）・ネヴシェヒル（NAV）空港からのカッパドキア・プライベート送迎。Vitoは最大5名、Sprinterは最大16名。ドライバーへ現金払い。",
     "eyebrow": "専用車",
     "h1": "カッパドキア・プライベート空港送迎",
-    "lead": "カイセリ空港：**Vito {{PRICE:kayseri:vito}}**、**Sprinter {{PRICE:kayseri:sprinter}}**（片道）。ネヴシェヒル空港：**Vito {{PRICE:nevsehir:vito}}**、**Sprinter {{PRICE:nevsehir:sprinter}}**。料金は1名あたりではなく1台あたりです。往復はカイセリが{{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}、ネヴシェヒルが{{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}です。",
+    "lead": "カイセリ空港・1台あたり片道：**Vito {{PRICE:kayseri:vito}}**、**Sprinter {{PRICE:kayseri:sprinter}}**。ネヴシェヒル空港・1台あたり片道：**Vito {{PRICE:nevsehir:vito}}**、**Sprinter {{PRICE:nevsehir:sprinter}}**。1台あたり往復は、カイセリ Vito/Sprinter {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}、ネヴシェヒル Vito/Sprinter {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}です。",
     "sections": [
       {
         "heading": "Mercedes Vito：最大5名",
@@ -202,7 +202,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "予約情報・乗客情報・支払い",
         "paragraphs": [
-          "プライベート送迎の確認には、便名、宿泊施設の正式名称、乗客氏名、パスポート番号、WhatsApp連絡先をご入力ください。支払いはドライバーへ現金で行います。料金はEUR表示で、予約時に確認した為替レートによりUSDまたはTRYの現金払いも可能です。"
+          "プライベート送迎の確認には、便名、宿泊施設の正式名称、乗客氏名、パスポート番号、WhatsApp連絡先をご入力ください。支払いはドライバーへ現金で行います。料金はEUR表示で、支払い時点の為替レートによりUSDまたはTRYの現金払いも可能です。"
         ]
       }
     ],
@@ -256,30 +256,30 @@ const rawJaPages: JaSeoPage[] = [
     "twitterDescription": "カッパドキア空港送迎の現在料金を比較。カイセリ・ネヴシェヒルの乗合シャトル、Vito、Sprinter、片道・往復の料金体系を案内します。",
     "eyebrow": "明確な料金",
     "h1": "カッパドキア空港送迎料金",
-    "lead": "乗合シャトルはカイセリ（ASR）が1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒル（NAV）が{{PRICE:nevsehir:shuttle}}です。プライベート送迎も空港別・1台あたりの料金です。",
+    "lead": "乗合シャトルはカイセリ（ASR）が1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒル（NAV）が1名片道{{PRICE:nevsehir:shuttle}}です。プライベート送迎も空港別・1台あたりの料金です。",
     "sections": [
       {
         "heading": "乗合シャトル料金",
         "paragraphs": [
-          "カイセリ空港（ASR）→ カッパドキアの対象ホテル：**1名片道{{PRICE:kayseri:shuttle}}**。ネヴシェヒル空港（NAV）→ 対象ホテル：**1名片道{{PRICE:nevsehir:shuttle}}**。ホテル→空港は同じ空港別片道料金が適用され、往復はカイセリ{{PRICE:kayseri:shuttle:roundTrip}}、ネヴシェヒル{{PRICE:nevsehir:shuttle:roundTrip}}です。詳しいルートは[[乗合シャトルページ|cappadocia-shuttle-transfer]]をご覧ください。"
+          "カイセリ空港（ASR）→ カッパドキアの対象ホテル：**1名片道{{PRICE:kayseri:shuttle}}**。ネヴシェヒル空港（NAV）→ 対象ホテル：**1名片道{{PRICE:nevsehir:shuttle}}**。ホテル→空港は同じ空港別片道料金が適用され、往復はカイセリ1名{{PRICE:kayseri:shuttle:roundTrip}}、ネヴシェヒル1名{{PRICE:nevsehir:shuttle:roundTrip}}です。詳しいルートは[[乗合シャトルページ|cappadocia-shuttle-transfer]]をご覧ください。"
         ]
       },
       {
         "heading": "カイセリ空港のプライベート料金",
         "paragraphs": [
-          "Mercedes Vito（最大5名）：**片道{{PRICE:kayseri:vito}} / 往復{{PRICE:kayseri:vito:roundTrip}}**。Mercedes Sprinter（最大16名）：**片道{{PRICE:kayseri:sprinter}} / 往復{{PRICE:kayseri:sprinter:roundTrip}}**。"
+          "Mercedes Vito（最大5名）：**1台あたり片道{{PRICE:kayseri:vito}} / 往復{{PRICE:kayseri:vito:roundTrip}}**。Mercedes Sprinter（最大16名）：**1台あたり片道{{PRICE:kayseri:sprinter}} / 往復{{PRICE:kayseri:sprinter:roundTrip}}**。"
         ]
       },
       {
         "heading": "ネヴシェヒル空港のプライベート料金",
         "paragraphs": [
-          "Mercedes Vito（最大5名）：**片道{{PRICE:nevsehir:vito}} / 往復{{PRICE:nevsehir:vito:roundTrip}}**。Mercedes Sprinter（最大16名）：**片道{{PRICE:nevsehir:sprinter}} / 往復{{PRICE:nevsehir:sprinter:roundTrip}}**。車両の詳細やプライベート送迎が向いているケースは[[プライベート送迎ページ|private-airport-transfer-cappadocia]]をご確認ください。"
+          "Mercedes Vito（最大5名）：**1台あたり片道{{PRICE:nevsehir:vito}} / 1台あたり往復{{PRICE:nevsehir:vito:roundTrip}}**。Mercedes Sprinter（最大16名）：**1台あたり片道{{PRICE:nevsehir:sprinter}} / 1台あたり往復{{PRICE:nevsehir:sprinter:roundTrip}}**。車両の詳細やプライベート送迎が向いているケースは[[プライベート送迎ページ|private-airport-transfer-cappadocia]]をご確認ください。"
         ]
       },
       {
         "heading": "1名あたり料金と1台あたり料金",
         "paragraphs": [
-          "乗合シャトルは1名あたりの料金なので、人数が増えると合計も増えます。プライベート送迎は、Vito最大5名・Sprinter最大16名という定員内で1台あたりの料金です。そのため、大人数では車両料金が高く見えてもSprinterの1名あたり費用が乗合シャトルを下回ることがあります。プライベート料金は空港別に管理しており、NAVはVito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}、ASRは{{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。空港を選んだ後に合計を比較してください。"
+          "乗合シャトルは1名あたりの料金なので、人数が増えると合計も増えます。プライベート送迎は、Vito最大5名・Sprinter最大16名という定員内で1台あたりの料金です。そのため、大人数では車両料金が高く見えてもSprinterの1名あたり費用が乗合シャトルを下回ることがあります。プライベート片道料金は空港別に管理しており、NAVはVito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}、ASRは{{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。空港を選んだ後に合計を比較してください。"
         ]
       },
       {
@@ -291,34 +291,34 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "支払い・通貨・予約情報",
         "paragraphs": [
-          "料金はEURで表示し、支払いはドライバーへ現金で行います。予約時に確認した為替レートによりUSDまたはTRYの現金払いも可能です。往復は片道2回分で、別のパッケージ料金はありません。予約には便名、ホテル、乗客氏名、パスポート番号が必要で、WhatsAppで内容を確認してから確定します。特にホテルへのアクセスが特殊な場合、到着と出発で空港が異なる場合、標準の乗合対象外に関する相談では、予約情報の確認が重要です。"
+          "料金はEURで表示し、支払いはドライバーへ現金で行います。支払い時点の為替レートによりUSDまたはTRYの現金払いも可能です。往復は片道2回分で、別のパッケージ料金はありません。予約には便名、ホテル、乗客氏名、パスポート番号が必要で、WhatsAppで内容を確認してから確定します。特にホテルへのアクセスが特殊な場合、到着と出発で空港が異なる場合、標準の乗合対象外に関する相談では、予約情報の確認が重要です。"
         ]
       }
     ],
     "faq": [
       {
         "q": "カッパドキア空港シャトルはいくらですか？",
-        "a": "現在はカイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle}}です。"
+        "a": "現在はカイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "乗合シャトルの往復はいくらですか？",
-        "a": "往復はカイセリが1名{{PRICE:kayseri:shuttle:roundTrip}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle:roundTrip}}です。"
+        "a": "往復はカイセリが1名{{PRICE:kayseri:shuttle:roundTrip}}、ネヴシェヒルが1名{{PRICE:nevsehir:shuttle:roundTrip}}です。"
       },
       {
         "q": "カイセリ空港のVitoはいくらですか？",
-        "a": "片道{{PRICE:kayseri:vito}}、往復{{PRICE:kayseri:vito:roundTrip}}です。"
+        "a": "1台あたり片道{{PRICE:kayseri:vito}}、往復{{PRICE:kayseri:vito:roundTrip}}です。"
       },
       {
         "q": "カイセリ空港のSprinterはいくらですか？",
-        "a": "片道{{PRICE:kayseri:sprinter}}、往復{{PRICE:kayseri:sprinter:roundTrip}}です。"
+        "a": "1台あたり片道{{PRICE:kayseri:sprinter}}、往復{{PRICE:kayseri:sprinter:roundTrip}}です。"
       },
       {
         "q": "ネヴシェヒル空港のVitoはいくらですか？",
-        "a": "片道{{PRICE:nevsehir:vito}}、往復{{PRICE:nevsehir:vito:roundTrip}}です。"
+        "a": "1台あたり片道{{PRICE:nevsehir:vito}}、往復{{PRICE:nevsehir:vito:roundTrip}}です。"
       },
       {
         "q": "ネヴシェヒル空港のSprinterはいくらですか？",
-        "a": "片道{{PRICE:nevsehir:sprinter}}、往復{{PRICE:nevsehir:sprinter:roundTrip}}です。"
+        "a": "1台あたり片道{{PRICE:nevsehir:sprinter}}、往復{{PRICE:nevsehir:sprinter:roundTrip}}です。"
       },
       {
         "q": "プライベート料金は1名あたりですか？",
@@ -330,7 +330,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "USDやTRYで支払えますか？",
-        "a": "予約時に確認した為替レートにより、USDまたはTRYの現金払いも可能です。"
+        "a": "支払い時点の為替レートにより、USDまたはTRYの現金払いも可能です。"
       },
       {
         "q": "現金払いでもパスポート番号は必要ですか？",
@@ -357,7 +357,7 @@ const rawJaPages: JaSeoPage[] = [
     "description": "カイセリ空港（ASR）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンのホテルへ。乗合シャトルとプライベート送迎に対応。",
     "eyebrow": "カイセリ空港 ASR",
     "h1": "カイセリ空港からカッパドキアへのシャトル",
-    "lead": "カイセリ・エルキレト空港（ASR）からカッパドキアの対象宿泊エリアまで、1名{{PRICE:kayseri:shuttle}}の乗合シャトルを予約できます。空港での待ち合わせは到着便に合わせて手配し、WhatsAppで確認します。",
+    "lead": "カイセリ・エルキレト空港（ASR）からカッパドキアの対象宿泊エリアまで、1名片道{{PRICE:kayseri:shuttle}}の乗合シャトルを予約できます。空港での待ち合わせは到着便に合わせて手配し、WhatsAppで確認します。",
     "sections": [
       {
         "heading": "カイセリからカッパドキアへ：道路移動はやや長め",
@@ -393,7 +393,7 @@ const rawJaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カイセリ空港からカッパドキアのシャトルはいくらですか？",
-        "a": "1名片道{{PRICE:kayseri:shuttle}}、往復{{PRICE:kayseri:shuttle:roundTrip}}です。"
+        "a": "1名片道{{PRICE:kayseri:shuttle}}、1名往復{{PRICE:kayseri:shuttle:roundTrip}}です。"
       },
       {
         "q": "カイセリ空港からギョレメまでどのくらいかかりますか？",
@@ -432,7 +432,7 @@ const rawJaPages: JaSeoPage[] = [
     "description": "ネヴシェヒル空港（NAV）からギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルへ。乗合シャトルとプライベート送迎に対応。",
     "eyebrow": "NAV 空港シャトル",
     "h1": "ネヴシェヒル空港からカッパドキアへのシャトル",
-    "lead": "ネヴシェヒル・カッパドキア空港から対象宿泊エリアまで、1名{{PRICE:nevsehir:shuttle}}の乗合シャトルを予約できます。到着便に合わせた待ち合わせ案内をWhatsAppで確認します。",
+    "lead": "ネヴシェヒル・カッパドキア空港から対象宿泊エリアまで、1名片道{{PRICE:nevsehir:shuttle}}の乗合シャトルを予約できます。到着便に合わせた待ち合わせ案内をWhatsAppで確認します。",
     "sections": [
       {
         "heading": "ネヴシェヒル空港：中心部の多くのホテルに近い玄関口",
@@ -441,9 +441,9 @@ const rawJaPages: JaSeoPage[] = [
         ]
       },
       {
-        "heading": "NAVの乗合シャトルは1名{{PRICE:nevsehir:shuttle}}",
+        "heading": "NAVの乗合シャトルは1名片道{{PRICE:nevsehir:shuttle}}",
         "paragraphs": [
-          "ネヴシェヒル空港の乗合シャトルは**1名片道{{PRICE:nevsehir:shuttle}}**、**往復{{PRICE:nevsehir:shuttle:roundTrip}}**です。プライベート料金は空港別で、NAVはVitoが片道{{PRICE:nevsehir:vito}}、Sprinterが{{PRICE:nevsehir:sprinter}}（いずれも1台あたり）です。両空港を利用できる場合はASRの現在料金も合わせて比較してください。"
+          "ネヴシェヒル空港の乗合シャトルは**1名片道{{PRICE:nevsehir:shuttle}}**、**1名往復{{PRICE:nevsehir:shuttle:roundTrip}}**です。プライベート料金は空港別で、NAVはVitoが片道{{PRICE:nevsehir:vito}}、Sprinterが{{PRICE:nevsehir:sprinter}}（いずれも1台あたり）です。両空港を利用できる場合はASRの現在料金も合わせて比較してください。"
         ]
       },
       {
@@ -461,7 +461,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "NAVへの復路も実際のホテル所在地に合わせます",
         "paragraphs": [
-          "ネヴシェヒル空港へ戻る乗合シャトルも1名{{PRICE:nevsehir:shuttle}}です。実際の出発便と[[カッパドキアからネヴシェヒル空港へのシャトル|cappadocia-to-nevsehir-airport-shuttle]]の該当町ルートを使い、ギョレメのお迎えをウチヒサルやアヴァノスなどと同じ条件で計画しないようにします。"
+          "ネヴシェヒル空港へ戻る乗合シャトルも1名片道{{PRICE:nevsehir:shuttle}}です。実際の出発便と[[カッパドキアからネヴシェヒル空港へのシャトル|cappadocia-to-nevsehir-airport-shuttle]]の該当町ルートを使い、ギョレメのお迎えをウチヒサルやアヴァノスなどと同じ条件で計画しないようにします。"
         ]
       },
       {
@@ -474,7 +474,7 @@ const rawJaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "ネヴシェヒル空港からカッパドキアのシャトルはいくらですか？",
-        "a": "1名片道{{PRICE:nevsehir:shuttle}}、往復{{PRICE:nevsehir:shuttle:roundTrip}}です。"
+        "a": "1名片道{{PRICE:nevsehir:shuttle}}、1名往復{{PRICE:nevsehir:shuttle:roundTrip}}です。"
       },
       {
         "q": "NAVはギョレメやウチヒサルに近い空港ですか？",
@@ -513,7 +513,7 @@ const rawJaPages: JaSeoPage[] = [
     "description": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルからカイセリ空港（ASR）へ。乗合またはプライベート送迎を予約できます。",
     "eyebrow": "カッパドキア → ASR",
     "h1": "カッパドキアからカイセリ空港へのシャトル",
-    "lead": "カッパドキアの対象ホテルエリアからカイセリ・エルキレト空港まで、1名{{PRICE:kayseri:shuttle}}のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
+    "lead": "カッパドキアの対象ホテルエリアからカイセリ・エルキレト空港まで、1名片道{{PRICE:kayseri:shuttle}}のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
     "sections": [
       {
         "heading": "ASR出発は地図の所要時間より早めに考える必要があります",
@@ -583,7 +583,7 @@ const rawJaPages: JaSeoPage[] = [
     "description": "ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、チャウシン、オルタヒサルのホテルからネヴシェヒル空港（NAV）へ。乗合またはプライベート送迎を予約できます。",
     "eyebrow": "カッパドキア → NAV",
     "h1": "カッパドキアからネヴシェヒル空港へのシャトル",
-    "lead": "カッパドキアの対象ホテルエリアからネヴシェヒル・カッパドキア空港まで、1名{{PRICE:nevsehir:shuttle}}のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
+    "lead": "カッパドキアの対象ホテルエリアからネヴシェヒル・カッパドキア空港まで、1名片道{{PRICE:nevsehir:shuttle}}のホテル→空港シャトルを予約できます。お迎え場所と時刻は実際の出発便をもとに確認します。",
     "sections": [
       {
         "heading": "NAVは近くても、お迎え時刻は出発便を基準にします",
@@ -739,7 +739,7 @@ const rawJaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "カイセリとネヴシェヒルからギョレメまでの乗合シャトル料金はいくらですか？",
-        "a": "現在の乗合シャトルはASRから1名片道{{PRICE:kayseri:shuttle}}、NAVから{{PRICE:nevsehir:shuttle}}です。航空券に記載された空港の料金と、そのルートの道路距離を合わせて確認してください。"
+        "a": "現在の乗合シャトルはASRから1名片道{{PRICE:kayseri:shuttle}}、NAVから1名片道{{PRICE:nevsehir:shuttle}}です。航空券に記載された空港の料金と、そのルートの道路距離を合わせて確認してください。"
       },
       {
         "q": "空港到着と帰りのギョレメホテルお迎えを1回の予約で手配できますか？",
@@ -802,7 +802,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       },
       {
@@ -861,7 +861,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。ASRではなくNAVも利用できる場合は[[ネヴシェヒル空港からユルギュップへのシャトル|nevsehir-airport-to-urgup-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。ASRではなくNAVも利用できる場合は[[ネヴシェヒル空港からユルギュップへのシャトル|nevsehir-airport-to-urgup-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -913,7 +913,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からウチヒサルへのシャトル|nevsehir-airport-to-uchisar-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からウチヒサルへのシャトル|nevsehir-airport-to-uchisar-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -965,7 +965,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からアヴァノスへのシャトル|nevsehir-airport-to-avanos-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からアヴァノスへのシャトル|nevsehir-airport-to-avanos-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -1017,7 +1017,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からオルタヒサルへのシャトル|nevsehir-airport-to-ortahisar-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からオルタヒサルへのシャトル|nevsehir-airport-to-ortahisar-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -1069,7 +1069,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からチャウシンへのシャトル|nevsehir-airport-to-cavusin-shuttle]]とも比較してください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。NAVも利用できるなら[[ネヴシェヒル空港からチャウシンへのシャトル|nevsehir-airport-to-cavusin-shuttle]]とも比較してください。"
         ]
       }
     ],
@@ -1122,7 +1122,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1173,7 +1173,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "料金重視なら乗合、専用車を希望するならプライベート送迎",
         "paragraphs": [
-          "1〜2名なら乗合シャトルで費用を抑えやすくなります。プライベートVitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧いただくか、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]でサービスを比較してください。"
+          "1〜2名なら乗合シャトルで費用を抑えやすくなります。プライベートVitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧いただくか、[[乗合シャトルとプライベート送迎の比較|cappadocia-shared-shuttle-vs-private-transfer]]でサービスを比較してください。"
         ]
       }
     ],
@@ -1227,7 +1227,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1274,7 +1274,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1328,7 +1328,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1387,7 +1387,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1441,7 +1441,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1501,7 +1501,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1554,7 +1554,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1606,7 +1606,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1659,7 +1659,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1718,7 +1718,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:kayseri:vito}}、Sprinterは最大16名まで{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:kayseri:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:kayseri:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1771,7 +1771,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1825,7 +1825,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1879,7 +1879,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1931,7 +1931,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -1985,7 +1985,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -2039,7 +2039,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "このルートのプライベート送迎",
         "paragraphs": [
-          "専用車をご希望の場合、Vitoは最大5名まで片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名まで{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
+          "専用車をご希望の場合、Vitoは最大5名・1台あたり片道{{PRICE:nevsehir:vito}}、Sprinterは最大16名・1台あたり片道{{PRICE:nevsehir:sprinter}}です。詳しくは[[プライベート空港送迎|private-airport-transfer-cappadocia]]をご覧ください。"
         ]
       }
     ],
@@ -2080,21 +2080,21 @@ const rawJaPages: JaSeoPage[] = [
         "heading": "カッパドキア空港とはどの空港？",
         "paragraphs": [
           "ネヴシェヒル・カッパドキア空港のIATAコードは**NAV**で、正式名称にKapadokya／Cappadociaが入っています。一方、旅行計画では「カッパドキア空港」という言葉が、地域への主要な2つの玄関口であるNAVとカイセリ空港**ASR**をまとめて指すこともあります。そのためホテル送迎の予約では、「カッパドキア」という地域名だけでなく航空券の空港コードを確認してください。",
-          "まだ航空券を決めていない場合は、予約前に[[カッパドキアに最も近い空港|nearest-airport-to-cappadocia]]と[[カイセリ空港とネヴシェヒル空港の比較|kayseri-or-nevsehir-airport-for-cappadocia]]をご覧ください。"
+          "まだ航空券を決めていない場合は、予約前に[[カッパドキアに最も近い空港|nearest-airport-to-cappadocia]]と[[カイセリ空港とネヴシェヒル空港の比較|kayseri-or-nevsehir-airport-for-cappadocia]]をご覧ください。 イスタンブールから国内線で向かう旅程なら、[[イスタンブールからカッパドキア|istanbul-to-cappadocia]]でフライトと到着後の空港送迎のつながりを確認できます。"
         ]
       },
       {
         "heading": "ネヴシェヒル・カッパドキア空港（NAV）",
         "paragraphs": [
           "NAVは一般的にカッパドキア中心部への道路移動が短い空港です。乗合シャトルの立ち寄り前の目安で、ギョレメは約**40 km / 35–45分**、ウチヒサル35 km / 30–40分、アヴァノス38 km / 35–50分、チャウシン42 km / 40–55分、オルタヒサル45 km / 40–50分、ユルギュップ50 km / 45–60分です。",
-          "[[ネヴシェヒル空港シャトル|nevsehir-airport-shuttle]]は**1名片道{{PRICE:nevsehir:shuttle}}**。プライベート片道はVitoが最大5名で{{PRICE:nevsehir:vito}}、Sprinterが最大16名で{{PRICE:nevsehir:sprinter}}です。"
+          "[[ネヴシェヒル空港シャトル|nevsehir-airport-shuttle]]は**1名片道{{PRICE:nevsehir:shuttle}}**。プライベートは1台あたり片道で、Vitoが最大5名・{{PRICE:nevsehir:vito}}、Sprinterが最大16名・{{PRICE:nevsehir:sprinter}}です。"
         ]
       },
       {
         "heading": "カイセリ空港（ASR）",
         "paragraphs": [
           "ASRは道路距離では遠めですが、フライト時間や便数によって旅行全体では便利になるため、カッパドキア旅行で広く利用されています。ギョレメは約**75 km / 60–75分**で、ほかの対象地域も乗合の立ち寄り前でおおむね70–80 km圏です。",
-          "[[カイセリ空港シャトル|kayseri-airport-shuttle]]は**1名片道{{PRICE:kayseri:shuttle}}**です。プライベート片道はVito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。ASRの現在料金とフライト時間、道路距離を合わせて比較してください。"
+          "[[カイセリ空港シャトル|kayseri-airport-shuttle]]は**1名片道{{PRICE:kayseri:shuttle}}**です。プライベートは1台あたり片道で、Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。ASRの現在料金とフライト時間、道路距離を合わせて比較してください。"
         ]
       },
       {
@@ -2106,7 +2106,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "空港からホテルへ：乗合シャトルまたはプライベート車両",
         "paragraphs": [
-          "乗合シャトルは、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンへの基本的で料金を抑えやすいサービスです。現在の片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。乗合のため、ほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車を希望する場合はVitoまたはSprinterを選択でき、料金は1名あたりではなく1台あたりです。",
+          "乗合シャトルは、ギョレメ、ユルギュップ、ウチヒサル、アヴァノス、オルタヒサル、チャウシンへの基本的で料金を抑えやすいサービスです。現在の料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}です。乗合のため、ほかの乗客やホテルへの立ち寄りが含まれる場合があります。専用車を希望する場合はVitoまたはSprinterを選択でき、料金は1名あたりではなく1台あたりです。 サービス全体の違いは[[カッパドキア空港送迎|cappadocia-airport-transfer]]で、空港別の現在料金は[[空港送迎料金|airport-transfer-prices]]でまとめて確認できます。",
           "予約フォームでは空港、移動方向、フライト情報、ホテル、WhatsApp連絡先、氏名・パスポート番号を含む乗客情報を入力します。予約確認後、支払いはドライバーへ現金で行います。"
         ]
       },
@@ -2138,7 +2138,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "NAVまたはASRからの空港シャトルはいくらですか？",
-        "a": "対象ホテルエリアへは、カイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle}}です。"
+        "a": "対象ホテルエリアへは、カイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "NAV Airportとは何ですか？",
@@ -2184,7 +2184,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "近い空港が必ずしも最適とは限りません",
         "paragraphs": [
-          "送迎が短いのは便利ですが、フライト時間が悪かったり乗り継ぎが高額だったりすれば、その利点は小さくなります。最後の道路距離だけでなく出発地からの全旅程を比較してください。乗合シャトルはASR {{PRICE:kayseri:shuttle}}、NAV {{PRICE:nevsehir:shuttle}}なので、空港別の現在料金も確認してください。"
+          "送迎が短いのは便利ですが、フライト時間が悪かったり乗り継ぎが高額だったりすれば、その利点は小さくなります。最後の道路距離だけでなく出発地からの全旅程を比較してください。乗合シャトルはASR 1名片道{{PRICE:kayseri:shuttle}}、NAV 1名片道{{PRICE:nevsehir:shuttle}}なので、空港別の現在料金も確認してください。"
         ]
       },
       {
@@ -2214,7 +2214,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "プライベート料金も乗合料金も空港別に確認",
         "paragraphs": [
-          "乗合シャトルはNAVが1名{{PRICE:nevsehir:shuttle}}、ASRが{{PRICE:kayseri:shuttle}}です。プライベート送迎はNAVがVito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}、ASRが{{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。利用空港の現在料金を比較してください。"
+          "乗合シャトルはNAVが1名片道{{PRICE:nevsehir:shuttle}}、ASRが1名片道{{PRICE:kayseri:shuttle}}です。プライベート送迎は1台あたり片道で、NAVがVito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}、ASRが{{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。利用空港の現在料金を比較してください。"
         ]
       }
     ],
@@ -2233,7 +2233,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトル料金は空港で変わりますか？",
-        "a": "現在はNAVが1名片道{{PRICE:nevsehir:shuttle}}、ASRが{{PRICE:kayseri:shuttle}}です。"
+        "a": "現在はNAVが1名片道{{PRICE:nevsehir:shuttle}}、ASRが1名片道{{PRICE:kayseri:shuttle}}です。"
       },
       {
         "q": "2つの空港でプライベート送迎料金はどう違いますか？",
@@ -2264,19 +2264,19 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "道路距離ではネヴシェヒルが有利",
         "paragraphs": [
-          "NAVはカッパドキア中心部の多くの宿泊地に近く、ギョレメは約40 km、ウチヒサル35 km、アヴァノス約38 kmです。到着後の車内時間を短くできる可能性があります。"
+          "NAVはカッパドキア中心部の多くの宿泊地に近く、ギョレメは約40 km、ウチヒサル35 km、アヴァノス約38 kmです。到着後の車内時間を短くできる可能性があります。 空港ごとのサービス詳細は、[[ネヴシェヒル空港シャトル|nevsehir-airport-shuttle]]と[[カイセリ空港シャトル|kayseri-airport-shuttle]]を比較してください。"
         ]
       },
       {
         "heading": "フライト条件ではカイセリが有利なことも",
         "paragraphs": [
-          "ASRは中心部のホテル街から遠い一方、時間や料金の良いフライトがあれば追加の道路移動に見合うことがあります。イスタンブールや乗り継ぎ都市からの便を確認する前にカイセリを候補から外さないでください。"
+          "ASRは中心部のホテル街から遠い一方、時間や料金の良いフライトがあれば追加の道路移動に見合うことがあります。イスタンブールや乗り継ぎ都市からの便を確認する前にカイセリを候補から外さないでください。 [[カッパドキア空港ガイド|cappadocia-airport]]では、旅行計画でNAVとASRの2つのコードが出てくる理由を説明しています。"
         ]
       },
       {
         "heading": "乗合シャトル料金は空港別",
         "paragraphs": [
-          "乗合シャトルはカイセリが1名{{PRICE:kayseri:shuttle}}、ネヴシェヒルが{{PRICE:nevsehir:shuttle}}です。プライベート送迎料金も空港別に管理しており、カイセリはVito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}、ネヴシェヒルは{{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}です。"
+          "乗合シャトルはカイセリが1名片道{{PRICE:kayseri:shuttle}}、ネヴシェヒルが1名片道{{PRICE:nevsehir:shuttle}}です。プライベート送迎料金も空港別・1台あたり片道で管理しており、カイセリはVito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}、ネヴシェヒルは{{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}です。"
         ]
       },
       {
@@ -2311,7 +2311,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "乗合シャトルはどちらの空港が安いですか？",
-        "a": "現在はネヴシェヒルが1名{{PRICE:nevsehir:shuttle}}、カイセリが{{PRICE:kayseri:shuttle}}です。"
+        "a": "現在はネヴシェヒルが1名片道{{PRICE:nevsehir:shuttle}}、カイセリが1名片道{{PRICE:kayseri:shuttle}}です。"
       },
       {
         "q": "2つの空港のプライベート送迎料金をどう比較すればよいですか？",
@@ -2341,24 +2341,24 @@ const rawJaPages: JaSeoPage[] = [
     "description": "カッパドキアの乗合シャトルとプライベートVito/Sprinterを比較。現在料金、定員、ホテル停車、所要時間、対象エリアを確認できます。",
     "eyebrow": "サービス比較",
     "h1": "カッパドキア乗合シャトル vs プライベート送迎",
-    "lead": "少人数で料金を抑えるなら乗合シャトルが向いています。片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。専用車と他ホテルへの立ち寄りなしを優先するなら、プライベートVitoまたはSprinterが適しています。",
+    "lead": "少人数で料金を抑えるなら乗合シャトルが向いています。料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}です。専用車と他ホテルへの立ち寄りなしを優先するなら、プライベートVitoまたはSprinterが適しています。",
     "sections": [
       {
         "heading": "乗合シャトル：料金重視に最適",
         "paragraphs": [
-          "乗合シャトルの片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。1人旅やカップルにとって、事前予約できる空港→ホテル送迎の中で通常もっとも低コストの選択肢です。ほかの乗客と同乗し、複数のホテルに立ち寄る場合があります。"
+          "乗合シャトル料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}です。1人旅やカップルにとって、事前予約できる空港→ホテル送迎の中で通常もっとも低コストの選択肢です。ほかの乗客と同乗し、複数のホテルに立ち寄る場合があります。 予約方法の詳細は[[カッパドキア乗合シャトル|cappadocia-shuttle-transfer]]をご覧ください。"
         ]
       },
       {
         "heading": "プライベート送迎：自由度重視に最適",
         "paragraphs": [
-          "VitoまたはSprinterは予約専用の車両です。グループ、家族、早朝便、深夜到着、関係のないホテルへの立ち寄りを避けたい旅行者に向いています。"
+          "VitoまたはSprinterは予約専用の車両です。グループ、家族、早朝便、深夜到着、関係のないホテルへの立ち寄りを避けたい旅行者に向いています。 専用車の定員や利用方法は[[カッパドキア・プライベート送迎|private-airport-transfer-cappadocia]]で確認できます。"
         ]
       },
       {
         "heading": "料金比較",
         "paragraphs": [
-          "カイセリ：乗合シャトル1名{{PRICE:kayseri:shuttle}}、Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。ネヴシェヒル：乗合シャトル1名{{PRICE:nevsehir:shuttle}}、Vito {{PRICE:nevsehir:vito}}、Sprinter {{PRICE:nevsehir:sprinter}}。往復は該当する片道合計の2倍です。"
+          "カイセリ：乗合シャトル1名片道{{PRICE:kayseri:shuttle}}、Vito 1台あたり片道{{PRICE:kayseri:vito}}、Sprinter 1台あたり片道{{PRICE:kayseri:sprinter}}。ネヴシェヒル：乗合シャトル1名片道{{PRICE:nevsehir:shuttle}}、Vito 1台あたり片道{{PRICE:nevsehir:vito}}、Sprinter 1台あたり片道{{PRICE:nevsehir:sprinter}}。往復は該当する片道合計の2倍です。 [[空港送迎料金|airport-transfer-prices]]では、同じ空港別料金の仕組みをまとめて比較できます。"
         ]
       },
       {
@@ -2376,7 +2376,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "人数別に見ると選びやすい",
         "paragraphs": [
-          "ネヴシェヒル（NAV）を例にすると、1名の乗合シャトルは{{PRICE:nevsehir:shuttle}}、6名の片道合計は{{PRICE:nevsehir:shuttle:x6}}です。人数が増えるとプライベート車両料金に近づく場合があります。大人数では、見出し料金だけでなくSprinterの1台料金と乗合の人数合計を比較してください。"
+          "ネヴシェヒル（NAV）を例にすると、乗合シャトルは1名片道{{PRICE:nevsehir:shuttle}}、6名の片道合計は{{PRICE:nevsehir:shuttle:x6}}です。人数が増えるとプライベート車両料金に近づく場合があります。大人数では、見出し料金だけでなくSprinterの1台料金と乗合の人数合計を比較してください。"
         ]
       },
       {
@@ -2395,7 +2395,7 @@ const rawJaPages: JaSeoPage[] = [
     "faq": [
       {
         "q": "乗合シャトルとCappadocia shuttle transferは同じですか？",
-        "a": "はい。「乗合」は運行方法を表しています。片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。"
+        "a": "はい。「乗合」は運行方法を表しています。料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "どちらが速いですか？",
@@ -2403,7 +2403,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "1名ならどちらが安いですか？",
-        "a": "乗合シャトルです。片道料金はASRが1名{{PRICE:kayseri:shuttle}}、NAVが1名{{PRICE:nevsehir:shuttle}}です。"
+        "a": "乗合シャトルです。料金はASRが1名片道{{PRICE:kayseri:shuttle}}、NAVが1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "大人数にはどちらが向いていますか？",
@@ -2467,7 +2467,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "乗合シャトルまたはプライベートVito",
         "paragraphs": [
-          "乗合シャトルは空港別の1名料金で、ASRは{{PRICE:kayseri:shuttle}}、NAVは{{PRICE:nevsehir:shuttle}}です。その日の乗客数に応じて大型車両を使うことがあります。プライベートVitoは一部の路地で便利な場合がありますが、入口前へのアクセスを保証するものではありません。最終地点は実際の道路状況と安全に停車できるかどうかで決まります。"
+          "乗合シャトルは空港別の1名料金で、ASRは1名片道{{PRICE:kayseri:shuttle}}、NAVは1名片道{{PRICE:nevsehir:shuttle}}です。その日の乗客数に応じて大型車両を使うことがあります。プライベートVitoは一部の路地で便利な場合がありますが、入口前へのアクセスを保証するものではありません。最終地点は実際の道路状況と安全に停車できるかどうかで決まります。"
         ]
       }
     ],
@@ -2519,7 +2519,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "旅程全体を見てASRかNAVを選ぶ",
         "paragraphs": [
-          "NAVは多くのカッパドキアのホテルに道路距離で近く、ASRは道路移動が長くてもフライト時間や運賃が有利な場合があります。乗合シャトルはNAV {{PRICE:nevsehir:shuttle}}、ASR {{PRICE:kayseri:shuttle}}なので、フライトと現在料金を合わせて比較してください。"
+          "NAVは多くのカッパドキアのホテルに道路距離で近く、ASRは道路移動が長くてもフライト時間や運賃が有利な場合があります。乗合シャトルはNAV 1名片道{{PRICE:nevsehir:shuttle}}、ASR 1名片道{{PRICE:kayseri:shuttle}}なので、フライトと現在料金を合わせて比較してください。"
         ]
       },
       {
@@ -2568,7 +2568,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "到着後のシャトルはいくらですか？",
-        "a": "ASRは1名{{PRICE:kayseri:shuttle}}、NAVは{{PRICE:nevsehir:shuttle}}です。"
+        "a": "ASRは1名片道{{PRICE:kayseri:shuttle}}、NAVは1名片道{{PRICE:nevsehir:shuttle}}です。"
       },
       {
         "q": "イスタンブール出発便の便名でシャトルを予約しますか？",
@@ -2611,7 +2611,7 @@ const rawJaPages: JaSeoPage[] = [
       {
         "heading": "出発便に合わせてNAVまたはASRを選ぶ",
         "paragraphs": [
-          "NAVは一般的にギョレメ、ウチヒサルなど中心部に近く、ASRは遠いもののフライト時間や運賃が合う場合があります。ホテル→空港の乗合シャトルは**NAV 1名{{PRICE:nevsehir:shuttle}}**、**ASR {{PRICE:kayseri:shuttle}}**、プライベートVito/SprinterはNAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}、ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。",
+          "NAVは一般的にギョレメ、ウチヒサルなど中心部に近く、ASRは遠いもののフライト時間や運賃が合う場合があります。ホテル→空港の乗合シャトルは**NAV 1名片道{{PRICE:nevsehir:shuttle}}**、**ASR 1名片道{{PRICE:kayseri:shuttle}}**、プライベートVito/Sprinterは1台あたり片道で、NAV {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}、ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}です。",
           "まだ出発空港を決めていない場合は、航空券予約前に[[カッパドキアに最も近い空港|nearest-airport-to-cappadocia]]と[[カイセリ空港とネヴシェヒル空港|kayseri-or-nevsehir-airport-for-cappadocia]]を比較してください。"
         ]
       },
@@ -2661,7 +2661,7 @@ const rawJaPages: JaSeoPage[] = [
       },
       {
         "q": "ホテルから空港までのシャトルはいくらですか？",
-        "a": "対象ホテルエリアからNAVまでは1名片道{{PRICE:nevsehir:shuttle}}、ASRまでは{{PRICE:kayseri:shuttle}}です。"
+        "a": "対象ホテルエリアからNAVまでは1名片道{{PRICE:nevsehir:shuttle}}、ASRまでは1名片道{{PRICE:kayseri:shuttle}}です。"
       },
       {
         "q": "イスタンブール便のためにプライベートのホテル送迎も予約できますか？",

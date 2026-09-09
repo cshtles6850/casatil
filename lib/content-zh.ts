@@ -11,12 +11,12 @@ const rawZhPages: SeoPage[] = [
     "description": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与六个主要酒店区，可预订接机或送机，也提供私人 Vito/Sprinter 接送。",
     "eyebrow": "共享机场班车",
     "h1": "卡帕多奇亚机场拼车接送",
-    "lead": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨的酒店。当前单程价格为 ASR {{PRICE:kayseri:shuttle}}/人、NAV {{PRICE:nevsehir:shuttle}}/人，接机和送机根据实际航班确认。",
+    "lead": "卡帕多奇亚共享机场班车连接开塞利机场（ASR）、内夫谢希尔机场（NAV）与格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨的酒店。当前价格为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}/人/单程，接机和送机根据实际航班确认。",
     "sections": [
       {
         "heading": "服务包含什么",
         "paragraphs": [
-          "服务包括从任一机场到住宿地的共享接送；航班、乘客资料和酒店名称会提前确认。同一班次可能还有其他已确认乘客和酒店停靠，当前单程价格为 ASR {{PRICE:kayseri:shuttle}}/人、NAV {{PRICE:nevsehir:shuttle}}/人。"
+          "服务包括从任一机场到住宿地的共享接送；航班、乘客资料和酒店名称会提前确认。同一班次可能还有其他已确认乘客和酒店停靠，当前价格为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}/人/单程。"
         ]
       },
       {
@@ -174,13 +174,13 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "Mercedes Sprinter：最多 16 位乘客",
         "paragraphs": [
-          "Sprinter 是最多 16 人的较大型私人车型。单程价格按机场分别管理：开塞利 {{PRICE:kayseri:sprinter}}，内夫谢希尔 {{PRICE:nevsehir:sprinter}}，因此在表单中选择 ASR 或 NAV 后应再次确认总价。"
+          "Sprinter 是最多 16 人的较大型私人车型。每车单程价格按机场分别管理：开塞利 {{PRICE:kayseri:sprinter}}，内夫谢希尔 {{PRICE:nevsehir:sprinter}}，因此在表单中选择 ASR 或 NAV 后应再次确认总价。"
         ]
       },
       {
         "heading": "什么时候私人接送比共享班车更合适",
         "paragraphs": [
-          "私人接送更适合较大团队、较早离港、较晚抵达、行李较多的家庭、希望酒店直达，或住宿不在共享班车覆盖范围内的旅客。一两位时间较灵活的乘客通常选择 [[共享班车|cappadocia-shuttle-transfer]] 更划算；目前 ASR 单程 {{PRICE:kayseri:shuttle}}/人，NAV 单程 {{PRICE:nevsehir:shuttle}}/人。"
+          "私人接送更适合较大团队、较早离港、较晚抵达、行李较多的家庭、希望酒店直达，或住宿不在共享班车覆盖范围内的旅客。一两位时间较灵活的乘客通常选择 [[共享班车|cappadocia-shuttle-transfer]] 更划算；目前 ASR {{PRICE:kayseri:shuttle}}/人/单程，NAV {{PRICE:nevsehir:shuttle}}/人/单程。"
         ]
       },
       {
@@ -244,7 +244,7 @@ const rawZhPages: SeoPage[] = [
     "description": "卡帕多奇亚机场接送价格指南：比较 ASR/NAV 共享班车、私人 Vito 与 Sprinter 的当前费用，以及单程、往返和按人/按车计价方式。",
     "eyebrow": "透明固定价格",
     "h1": "卡帕多奇亚机场接送价格",
-    "lead": "共享拼车从开塞利（ASR）为 {{PRICE:kayseri:shuttle}}/人/单程，从内夫谢希尔（NAV）为 {{PRICE:nevsehir:shuttle}}；私人车按机场和车型计价。这里把单程、往返和车辆容量一次说明清楚。",
+    "lead": "共享拼车从开塞利（ASR）为 {{PRICE:kayseri:shuttle}}/人/单程，从内夫谢希尔（NAV）为 {{PRICE:nevsehir:shuttle}}/人/单程；私人车按机场和车型计价。这里把单程、往返和车辆容量一次说明清楚。",
     "sections": [
       {
         "heading": "共享班车价格",
@@ -255,19 +255,19 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "开塞利机场私人接送价格",
         "paragraphs": [
-          "Mercedes Vito，最多 5 人：**{{PRICE:kayseri:vito}} 单程 / {{PRICE:kayseri:vito:roundTrip}} 往返**。Mercedes Sprinter，最多 16 人：**{{PRICE:kayseri:sprinter}} 单程 / {{PRICE:kayseri:sprinter:roundTrip}} 往返**。"
+          "Mercedes Vito，最多 5 人：**每车 {{PRICE:kayseri:vito}} 单程 / {{PRICE:kayseri:vito:roundTrip}} 往返**。Mercedes Sprinter，最多 16 人：**每车 {{PRICE:kayseri:sprinter}} 单程 / {{PRICE:kayseri:sprinter:roundTrip}} 往返**。"
         ]
       },
       {
         "heading": "内夫谢希尔机场私人接送价格",
         "paragraphs": [
-          "Mercedes Vito，最多 5 人：**{{PRICE:nevsehir:vito}} 单程 / {{PRICE:nevsehir:vito:roundTrip}} 往返**。Mercedes Sprinter，最多 16 人：**{{PRICE:nevsehir:sprinter}} 单程 / {{PRICE:nevsehir:sprinter:roundTrip}} 往返**。车型详情和适用场景见 [[私人接送页面|private-airport-transfer-cappadocia]]。"
+          "Mercedes Vito，最多 5 人：**每车 {{PRICE:nevsehir:vito}} 单程 / {{PRICE:nevsehir:vito:roundTrip}} 往返**。Mercedes Sprinter，最多 16 人：**每车 {{PRICE:nevsehir:sprinter}} 单程 / {{PRICE:nevsehir:sprinter:roundTrip}} 往返**。车型详情和适用场景见 [[私人接送页面|private-airport-transfer-cappadocia]]。"
         ]
       },
       {
         "heading": "按人计价与按车计价",
         "paragraphs": [
-          "共享班车按人数计价，所以人数增加时总价也增加。私人接送按整车计价，只要团队不超过车型容量：Vito 最多 5 人、Sprinter 最多 16 人。因此团队较大时，Sprinter 的人均成本有时会低于共享班车。私人价格也不是一个统一数字：NAV 为 Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}，ASR 为 Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}，选择机场后应再次确认总价。"
+          "共享班车按人数计价，所以人数增加时总价也增加。私人接送按整车计价，只要团队不超过车型容量：Vito 最多 5 人、Sprinter 最多 16 人。因此团队较大时，Sprinter 的人均成本有时会低于共享班车。私人单程价格也不是一个统一数字：NAV 为 Vito {{PRICE:nevsehir:vito}} / Sprinter {{PRICE:nevsehir:sprinter}}，ASR 为 Vito {{PRICE:kayseri:vito}} / Sprinter {{PRICE:kayseri:sprinter}}，选择机场后应再次确认总价。"
         ]
       },
       {
@@ -279,7 +279,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "付款、币种与预订资料",
         "paragraphs": [
-          "价格以 EUR 公布，费用以现金支付给司机；USD 或 TRY 现金也可按预订确认的汇率支付。往返就是两段单程按公布价格计算，没有单独的套餐价。预订仍需要航班号、酒店、乘客姓名和护照号码，并在 WhatsApp 核对这些资料后确认；遇到特殊酒店通行、不同机场进出或非标准共享覆盖请求时，这一点尤其重要。"
+          "价格以 EUR 公布，费用以现金支付给司机；USD 或 TRY 现金也可按付款时的当前汇率支付。往返就是两段单程按公布价格计算，没有单独的套餐价。预订仍需要航班号、酒店、乘客姓名和护照号码，并在 WhatsApp 核对这些资料后确认；遇到特殊酒店通行、不同机场进出或非标准共享覆盖请求时，这一点尤其重要。"
         ]
       }
     ],
@@ -322,7 +322,7 @@ const rawZhPages: SeoPage[] = [
       },
       {
         "q": "从 ASR 切换到 NAV 后应使用哪组私人接送价格？",
-        "a": "应按所选机场使用对应价格：NAV 的 Vito/Sprinter 为 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR 为 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}。"
+        "a": "应按所选机场使用对应的整车单程价格：NAV 的 Vito/Sprinter 为 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR 为 {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}。"
       },
       {
         "q": "如果抵达 NAV、离开 ASR，往返怎么计算？",
@@ -347,7 +347,7 @@ const rawZhPages: SeoPage[] = [
     "description": "开塞利机场（ASR）到卡帕多奇亚酒店的共享班车与私人接送，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，可预订单程或往返。",
     "eyebrow": "ASR 共享机场班车",
     "h1": "开塞利机场到卡帕多奇亚班车",
-    "lead": "预订从开塞利 Erkilet 机场（ASR）前往服务覆盖范围内的卡帕多奇亚住宿区的 {{PRICE:kayseri:shuttle}}/人共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
+    "lead": "预订从开塞利 Erkilet 机场（ASR）前往服务覆盖范围内的卡帕多奇亚住宿区的 {{PRICE:kayseri:shuttle}}/人/单程共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
     "sections": [
       {
         "heading": "开塞利机场班车：前往卡帕多奇亚公路距离较长的主要机场",
@@ -356,7 +356,7 @@ const rawZhPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "即使从 ASR 出发，共享班车仍是 {{PRICE:kayseri:shuttle}}/人",
+        "heading": "即使从 ASR 出发，共享班车仍是 {{PRICE:kayseri:shuttle}}/人/单程",
         "paragraphs": [
           "开塞利共享机场班车为 **{{PRICE:kayseri:shuttle}}/人/单程**，往返 **{{PRICE:kayseri:shuttle:roundTrip}}/人**。ASR 距离更长也不会提高共享票价。希望独立车辆的旅客可选择 Vito {{PRICE:kayseri:vito}} 或 Sprinter {{PRICE:kayseri:sprinter}}/车/单程。"
         ]
@@ -376,7 +376,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "返回 ASR 使用独立的酒店接车安排",
         "paragraphs": [
-          "从服务覆盖的酒店返回开塞利机场，共享班车同样为 {{PRICE:kayseri:shuttle}}/人。返程并不是把抵达时间简单倒过来；应使用真实离港航班，并结合 [[卡帕多奇亚到开塞利机场班车|cappadocia-to-kayseri-airport-shuttle]] 的信息，按实际住宿城镇确认接车时间和地点。"
+          "从服务覆盖的酒店返回开塞利机场，共享班车同样为 {{PRICE:kayseri:shuttle}}/人/单程。返程并不是把抵达时间简单倒过来；应使用真实离港航班，并结合 [[卡帕多奇亚到开塞利机场班车|cappadocia-to-kayseri-airport-shuttle]] 的信息，按实际住宿城镇确认接车时间和地点。"
         ]
       }
     ],
@@ -422,7 +422,7 @@ const rawZhPages: SeoPage[] = [
     "description": "内夫谢希尔机场（NAV）到卡帕多奇亚酒店的共享班车与私人接送，覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛，可预订单程或往返。",
     "eyebrow": "NAV 共享机场班车",
     "h1": "内夫谢希尔机场到卡帕多奇亚班车",
-    "lead": "预订从内夫谢希尔卡帕多奇亚机场（NAV）前往服务覆盖范围内的卡帕多奇亚住宿区的 {{PRICE:nevsehir:shuttle}}/人共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
+    "lead": "预订从内夫谢希尔卡帕多奇亚机场（NAV）前往服务覆盖范围内的卡帕多奇亚住宿区的 {{PRICE:nevsehir:shuttle}}/人/单程共享班车，机场会合信息会根据实际航班通过 WhatsApp 确认。",
     "sections": [
       {
         "heading": "内夫谢希尔机场班车：前往许多中部住宿区公路更短的入口",
@@ -431,7 +431,7 @@ const rawZhPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "NAV 共享班车为 {{PRICE:nevsehir:shuttle}}/人",
+        "heading": "NAV 共享班车为 {{PRICE:nevsehir:shuttle}}/人/单程",
         "paragraphs": [
           "内夫谢希尔共享机场班车为 **{{PRICE:nevsehir:shuttle}}/人/单程**，往返 **{{PRICE:nevsehir:shuttle:roundTrip}}/人**。私人接送按机场分别定价：NAV 的 Vito 为 {{PRICE:nevsehir:vito}}、Sprinter 为 {{PRICE:nevsehir:sprinter}}/车/单程；如果两座机场的航班都合适，请同时比较 ASR 的当前车辆价格。"
         ]
@@ -451,7 +451,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "返回 NAV 要按酒店城镇安排，而不是使用统一接车点",
         "paragraphs": [
-          "返回内夫谢希尔机场的共享票价也是 {{PRICE:nevsehir:shuttle}}/人。请使用真实离港航班，并从 [[卡帕多奇亚到内夫谢希尔机场班车|cappadocia-to-nevsehir-airport-shuttle]] 进入对应城镇路线，避免把格雷梅接车按乌奇希萨尔、阿瓦诺斯或其他区域的方式安排。"
+          "返回内夫谢希尔机场的共享票价也是 {{PRICE:nevsehir:shuttle}}/人/单程。请使用真实离港航班，并从 [[卡帕多奇亚到内夫谢希尔机场班车|cappadocia-to-nevsehir-airport-shuttle]] 进入对应城镇路线，避免把格雷梅接车按乌奇希萨尔、阿瓦诺斯或其他区域的方式安排。"
         ]
       },
       {
@@ -503,7 +503,7 @@ const rawZhPages: SeoPage[] = [
     "description": "从格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的酒店前往开塞利机场（ASR），可预订共享送机班车或私人接送。",
     "eyebrow": "卡帕多奇亚 → ASR",
     "h1": "卡帕多奇亚到开塞利机场班车",
-    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往开塞利 Erkilet 机场（ASR）的 {{PRICE:kayseri:shuttle}}/人酒店送机班车，接车点和时间根据离港航班确认。",
+    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往开塞利 Erkilet 机场（ASR）的 {{PRICE:kayseri:shuttle}}/人/单程酒店送机班车，接车点和时间根据离港航班确认。",
     "sections": [
       {
         "heading": "前往 ASR 的送机规划要比地图距离更早开始",
@@ -526,7 +526,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "私人开塞利送机提供独立车辆",
         "paragraphs": [
-          "[[私人接送|private-airport-transfer-cappadocia]] Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter {{PRICE:kayseri:sprinter}}，最多 16 人。私人服务不安排其他订单的酒店停靠，但车辆仍需要使用酒店附近安全且实际可通行的接车点。"
+          "[[私人接送|private-airport-transfer-cappadocia]] Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。私人服务不安排其他订单的酒店停靠，但车辆仍需要使用酒店附近安全且实际可通行的接车点。"
         ]
       },
       {
@@ -573,7 +573,7 @@ const rawZhPages: SeoPage[] = [
     "description": "从格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的酒店前往内夫谢希尔机场（NAV），可预订共享送机班车或私人接送。",
     "eyebrow": "卡帕多奇亚 → NAV",
     "h1": "卡帕多奇亚到内夫谢希尔机场班车",
-    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往内夫谢希尔卡帕多奇亚机场（NAV）的 {{PRICE:nevsehir:shuttle}}/人酒店送机班车，接车点和时间根据离港航班确认。",
+    "lead": "预订从服务覆盖的卡帕多奇亚城镇前往内夫谢希尔卡帕多奇亚机场（NAV）的 {{PRICE:nevsehir:shuttle}}/人/单程酒店送机班车，接车点和时间根据离港航班确认。",
     "sections": [
       {
         "heading": "NAV 更近，但酒店接车时间仍然来自航班",
@@ -596,7 +596,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "私人内夫谢希尔送机是独立车辆选择",
         "paragraphs": [
-          "[[私人接送|private-airport-transfer-cappadocia]] Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter {{PRICE:nevsehir:sprinter}}，最多 16 人。私人车辆不安排其他订单的酒店停靠，但最终酒店接车点仍取决于车辆能否安全进入。"
+          "[[私人接送|private-airport-transfer-cappadocia]] Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。私人车辆不安排其他订单的酒店停靠，但最终酒店接车点仍取决于车辆能否安全进入。"
         ]
       },
       {
@@ -644,7 +644,7 @@ const rawZhPages: SeoPage[] = [
     "description": "格雷梅机场接送指南：比较开塞利 ASR 与内夫谢希尔 NAV，拼车与私人 Vito/Sprinter，并集中说明格雷梅酒店周边道路、住宿区域和送机信息。",
     "eyebrow": "格雷梅机场接送指南",
     "h1": "格雷梅机场接送",
-    "lead": "格雷梅可从开塞利机场（ASR）或内夫谢希尔机场（NAV）抵达。共享班车为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}；公路时间、酒店通行和返程接车安排也会随机场与方向不同。",
+    "lead": "格雷梅可从开塞利机场（ASR）或内夫谢希尔机场（NAV）抵达。共享班车为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}/人/单程；公路时间、酒店通行和返程接车安排也会随机场与方向不同。",
     "sections": [
       {
         "heading": "格雷梅机场接送要先考虑洞穴酒店街道",
@@ -851,7 +851,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到于尔居普班车|nevsehir-airport-to-urgup-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到于尔居普班车|nevsehir-airport-to-urgup-shuttle]]。"
         ]
       }
     ],
@@ -903,7 +903,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到乌奇希萨尔班车|nevsehir-airport-to-uchisar-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到乌奇希萨尔班车|nevsehir-airport-to-uchisar-shuttle]]。"
         ]
       }
     ],
@@ -955,7 +955,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到阿瓦诺斯班车|nevsehir-airport-to-avanos-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到阿瓦诺斯班车|nevsehir-airport-to-avanos-shuttle]]。"
         ]
       }
     ],
@@ -1007,7 +1007,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到奥塔西萨班车|nevsehir-airport-to-ortahisar-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到奥塔西萨班车|nevsehir-airport-to-ortahisar-shuttle]]。"
         ]
       }
     ],
@@ -1059,7 +1059,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到恰武辛班车|nevsehir-airport-to-cavusin-shuttle]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。如果更倾向 NAV，可比较 [[内夫谢希尔机场到恰武辛班车|nevsehir-airport-to-cavusin-shuttle]]。"
         ]
       }
     ],
@@ -1112,7 +1112,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1163,7 +1163,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "拼车控制费用，私人车辆提供独立行程",
         "paragraphs": [
-          "一两位乘客选择共享班车可以把费用保持在较低水平。私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；私人 Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]，也可在 [[共享班车与私人接送对比|cappadocia-shared-shuttle-vs-private-transfer]] 中比较两种服务。"
+          "一两位乘客选择共享班车可以把费用保持在较低水平。私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；私人 Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]，也可在 [[共享班车与私人接送对比|cappadocia-shared-shuttle-vs-private-transfer]] 中比较两种服务。"
         ]
       }
     ],
@@ -1217,7 +1217,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1264,7 +1264,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1318,7 +1318,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1377,7 +1377,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1431,7 +1431,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1491,7 +1491,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1544,7 +1544,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1596,7 +1596,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1649,7 +1649,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1708,7 +1708,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1761,7 +1761,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1815,7 +1815,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1869,7 +1869,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1921,7 +1921,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -1975,7 +1975,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -2029,7 +2029,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "这条路线也可预订私人接送",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:nevsehir:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:nevsehir:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
         ]
       }
     ],
@@ -2070,21 +2070,21 @@ const rawZhPages: SeoPage[] = [
         "heading": "Cappadocia Airport 到底是哪座机场？",
         "paragraphs": [
           "Nevsehir Kapadokya Airport 的 IATA 代码是 **NAV**，正式名称中带有 Kapadokya/Cappadocia。不过在旅行规划中，“Cappadocia airport”也常被宽泛地用于服务该地区的两座实际机场：NAV 与 Kayseri Airport **ASR**。因此预订酒店接送时，应使用机票上的机场代码，而不能只写“Cappadocia”。",
-          "如果还在选择航班，可先比较 [[离卡帕多奇亚最近的机场|nearest-airport-to-cappadocia]] 和 [[开塞利还是内夫谢希尔机场|kayseri-or-nevsehir-airport-for-cappadocia]]，再购买机票。"
+          "如果还在选择航班，可先比较 [[离卡帕多奇亚最近的机场|nearest-airport-to-cappadocia]] 和 [[开塞利还是内夫谢希尔机场|kayseri-or-nevsehir-airport-for-cappadocia]]，再购买机票。 如果行程先从伊斯坦布尔搭乘国内航班，[[伊斯坦布尔到卡帕多奇亚|istanbul-to-cappadocia]]会说明航班与落地后的机场接送如何衔接。"
         ]
       },
       {
         "heading": "Nevsehir Kapadokya Airport（NAV）",
         "paragraphs": [
           "NAV 到卡帕多奇亚中部的公路通常更短。常用路线参考包括：格雷梅约 **40 km / 35–45 分钟**，乌奇希萨尔 35 km / 30–40 分钟，阿瓦诺斯 38 km / 35–50 分钟，恰武辛 42 km / 40–55 分钟，奥塔西萨 45 km / 40–50 分钟，于尔居普 50 km / 45–60 分钟；共享班车停靠可能增加总时间。",
-          "[[内夫谢希尔机场班车|nevsehir-airport-shuttle]] 为 **{{PRICE:nevsehir:shuttle}}/人/单程**。私人接送单程为 Vito {{PRICE:nevsehir:vito}}（最多 5 人）或 Sprinter {{PRICE:nevsehir:sprinter}}（最多 16 人）。"
+          "[[内夫谢希尔机场班车|nevsehir-airport-shuttle]] 为 **{{PRICE:nevsehir:shuttle}}/人/单程**。私人接送每车单程为 Vito {{PRICE:nevsehir:vito}}（最多 5 人）或 Sprinter {{PRICE:nevsehir:sprinter}}（最多 16 人）。"
         ]
       },
       {
         "heading": "Kayseri Airport（ASR）",
         "paragraphs": [
           "ASR 公路距离更长，但由于航班时间和班次选择，仍是前往卡帕多奇亚非常常用的机场。格雷梅约 **75 km / 60–75 分钟**，其他支持城镇在不含共享停靠时通常约 70–80 km。",
-          "[[开塞利机场班车|kayseri-airport-shuttle]] 为 **{{PRICE:kayseri:shuttle}}/人/单程**。私人单程为 Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。选择机场时应同时比较 ASR 当前价格、航班时间和公路距离。"
+          "[[开塞利机场班车|kayseri-airport-shuttle]] 为 **{{PRICE:kayseri:shuttle}}/人/单程**。私人接送每车单程为 Vito {{PRICE:kayseri:vito}}、Sprinter {{PRICE:kayseri:sprinter}}。选择机场时应同时比较 ASR 当前价格、航班时间和公路距离。"
         ]
       },
       {
@@ -2096,7 +2096,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "机场到酒店：共享班车或私人车辆",
         "paragraphs": [
-          "共享班车是前往格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的主要性价比选择；目前 ASR 单程 {{PRICE:kayseri:shuttle}}/人，NAV 单程 {{PRICE:nevsehir:shuttle}}/人。共享服务可能包含其他乘客和酒店停靠。希望独立车辆的旅客可选择私人 Vito 或 Sprinter，私人价格按整车而不是按人计算。",
+          "共享班车是前往格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、奥塔西萨和恰武辛的主要性价比选择；目前 ASR {{PRICE:kayseri:shuttle}}/人/单程，NAV {{PRICE:nevsehir:shuttle}}/人/单程。共享服务可能包含其他乘客和酒店停靠。希望独立车辆的旅客可选择私人 Vito 或 Sprinter，私人价格按整车而不是按人计算。 想先了解两种服务的整体区别，可查看[[卡帕多奇亚机场接送|cappadocia-airport-transfer]]；[[机场接送价格|airport-transfer-prices]]则集中列出按机场区分的当前价格结构。",
           "预订会收集机场、行程方向、航班资料、酒店、WhatsApp 联系方式，以及每笔预订所需的乘客姓名和护照资料。确认后费用以现金支付给司机。"
         ]
       },
@@ -2174,7 +2174,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "最近不一定等于最适合",
         "paragraphs": [
-          "较短接送当然方便，但糟糕的航班时间或昂贵的转机可能抵消这个优势。应比较从出发地到酒店的完整行程，而不是只看最后的公路距离。共享班车为 ASR {{PRICE:kayseri:shuttle}}/人、NAV {{PRICE:nevsehir:shuttle}}/人，也应比较当前机场价格。"
+          "较短接送当然方便，但糟糕的航班时间或昂贵的转机可能抵消这个优势。应比较从出发地到酒店的完整行程，而不是只看最后的公路距离。共享班车为 ASR {{PRICE:kayseri:shuttle}}/人/单程、NAV {{PRICE:nevsehir:shuttle}}/人/单程，也应比较当前机场价格。"
         ]
       },
       {
@@ -2204,7 +2204,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "按机场比较共享班车与私人接送价格",
         "paragraphs": [
-          "共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人、ASR {{PRICE:kayseri:shuttle}}/人。私人接送为 NAV Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}；请按实际机场比较当前总价。"
+          "共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人/单程、ASR {{PRICE:kayseri:shuttle}}/人/单程。私人接送每车单程为 NAV Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}；请按实际机场比较当前总价。"
         ]
       }
     ],
@@ -2223,7 +2223,7 @@ const rawZhPages: SeoPage[] = [
       },
       {
         "q": "从 NAV 坐共享班车更便宜吗？",
-        "a": "当前共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人、ASR {{PRICE:kayseri:shuttle}}/人。"
+        "a": "当前共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人/单程、ASR {{PRICE:kayseri:shuttle}}/人/单程。"
       },
       {
         "q": "应该优先看航班时间还是公路距离？",
@@ -2254,19 +2254,19 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "公路距离优势：内夫谢希尔",
         "paragraphs": [
-          "NAV 到多数卡帕多奇亚中部住宿区更近。格雷梅约 40 km，乌奇希萨尔约 35 km，阿瓦诺斯约 38 km，落地后在车上的时间通常更短。"
+          "NAV 到多数卡帕多奇亚中部住宿区更近。格雷梅约 40 km，乌奇希萨尔约 35 km，阿瓦诺斯约 38 km，落地后在车上的时间通常更短。 若要查看各机场的具体班车服务，可分别查看[[内夫谢希尔机场班车|nevsehir-airport-shuttle]]和[[开塞利机场班车|kayseri-airport-shuttle]]。"
         ]
       },
       {
         "heading": "航班选择有时让开塞利更有优势",
         "paragraphs": [
-          "ASR 到中部酒店城镇更远，但如果航班时间更好或票价更合适，多出的公路时间可能值得。不要在查看伊斯坦布尔或转机城市的实际航班前就排除开塞利。"
+          "ASR 到中部酒店城镇更远，但如果航班时间更好或票价更合适，多出的公路时间可能值得。不要在查看伊斯坦布尔或转机城市的实际航班前就排除开塞利。 [[卡帕多奇亚机场指南|cappadocia-airport]]也解释了为什么规划行程时会同时看到 NAV 和 ASR 两个代码。"
         ]
       },
       {
         "heading": "按机场比较共享班车价格",
         "paragraphs": [
-          "共享班车为开塞利 {{PRICE:kayseri:shuttle}}/人、内夫谢希尔 {{PRICE:nevsehir:shuttle}}/人。私人价格也按机场分别管理：开塞利 Vito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}；内夫谢希尔 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}。"
+          "共享班车为开塞利 {{PRICE:kayseri:shuttle}}/人/单程、内夫谢希尔 {{PRICE:nevsehir:shuttle}}/人/单程。私人价格也按机场分别管理，并按整车单程计价：开塞利 Vito/Sprinter {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}；内夫谢希尔 {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}。"
         ]
       },
       {
@@ -2301,7 +2301,7 @@ const rawZhPages: SeoPage[] = [
       },
       {
         "q": "哪座机场的共享班车更便宜？",
-        "a": "当前为内夫谢希尔 {{PRICE:nevsehir:shuttle}}/人、开塞利 {{PRICE:kayseri:shuttle}}/人。"
+        "a": "当前为内夫谢希尔 {{PRICE:nevsehir:shuttle}}/人/单程、开塞利 {{PRICE:kayseri:shuttle}}/人/单程。"
       },
       {
         "q": "两座机场的私人接送价格如何比较？",
@@ -2336,19 +2336,19 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "共享班车：更适合控制预算",
         "paragraphs": [
-          "共享班车按机场计价：ASR 为 {{PRICE:kayseri:shuttle}}/人/单程，NAV 为 {{PRICE:nevsehir:shuttle}}/人/单程。对独自旅行者和情侣来说，它通常是成本较低的提前预订机场到酒店方案；同一车辆可能还有其他乘客和多个酒店停靠。"
+          "共享班车按机场计价：ASR 为 {{PRICE:kayseri:shuttle}}/人/单程，NAV 为 {{PRICE:nevsehir:shuttle}}/人/单程。对独自旅行者和情侣来说，它通常是成本较低的提前预订机场到酒店方案；同一车辆可能还有其他乘客和多个酒店停靠。 共享服务的预订方式可查看[[卡帕多奇亚共享班车|cappadocia-shuttle-transfer]]。"
         ]
       },
       {
         "heading": "私人接送：更适合希望独立用车的旅客",
         "paragraphs": [
-          "Vito 或 Sprinter 只服务你的预订，更适合团队、家庭、早班机、晚到航班，以及希望避免其他订单酒店停靠的旅客。"
+          "Vito 或 Sprinter 只服务你的预订，更适合团队、家庭、早班机、晚到航班，以及希望避免其他订单酒店停靠的旅客。 专车的车型、载客量与服务方式可查看[[卡帕多奇亚私人接送|private-airport-transfer-cappadocia]]。"
         ]
       },
       {
         "heading": "价格比较",
         "paragraphs": [
-          "开塞利：共享班车 {{PRICE:kayseri:shuttle}}/人，Vito {{PRICE:kayseri:vito}}，Sprinter {{PRICE:kayseri:sprinter}}。内夫谢希尔：共享班车 {{PRICE:nevsehir:shuttle}}/人，Vito {{PRICE:nevsehir:vito}}，Sprinter {{PRICE:nevsehir:sprinter}}。往返均为对应单程总价的两倍。"
+          "开塞利：共享班车 {{PRICE:kayseri:shuttle}}/人/单程，Vito {{PRICE:kayseri:vito}}/车/单程，Sprinter {{PRICE:kayseri:sprinter}}/车/单程。内夫谢希尔：共享班车 {{PRICE:nevsehir:shuttle}}/人/单程，Vito {{PRICE:nevsehir:vito}}/车/单程，Sprinter {{PRICE:nevsehir:sprinter}}/车/单程。往返均为对应单程总价的两倍。 [[机场接送价格|airport-transfer-prices]]集中列出了同一套按机场区分的价格结构。"
         ]
       },
       {
@@ -2366,7 +2366,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "用团队人数举例更容易比较",
         "paragraphs": [
-          "以内夫谢希尔（NAV）为例，一位乘客坐共享班车为 {{PRICE:nevsehir:shuttle}}，六人单程合计 {{PRICE:nevsehir:shuttle:x6}}。这个总价可能开始接近私人车型价格。人数更多时，应把 Sprinter 的整车价与共享班车的人数总价比较，而不是只看单个标价。"
+          "以内夫谢希尔（NAV）为例，共享班车为 {{PRICE:nevsehir:shuttle}}/人/单程，六人单程合计 {{PRICE:nevsehir:shuttle:x6}}。这个总价可能开始接近私人车型价格。人数更多时，应把 Sprinter 的整车价与共享班车的人数总价比较，而不是只看单个标价。"
         ]
       },
       {
@@ -2509,7 +2509,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "从完整行程选择 ASR 或 NAV",
         "paragraphs": [
-          "NAV 到很多卡帕多奇亚酒店的公路距离更短；ASR 则可能有时间或票价更合适的航班，使较长的公路接送仍然值得。共享班车为 NAV {{PRICE:nevsehir:shuttle}}、ASR {{PRICE:kayseri:shuttle}}，因此应同时比较航班和当前价格。"
+          "NAV 到很多卡帕多奇亚酒店的公路距离更短；ASR 则可能有时间或票价更合适的航班，使较长的公路接送仍然值得。共享班车为 NAV {{PRICE:nevsehir:shuttle}}/人/单程、ASR {{PRICE:kayseri:shuttle}}/人/单程，因此应同时比较航班和当前价格。"
         ]
       },
       {
@@ -2558,7 +2558,7 @@ const rawZhPages: SeoPage[] = [
       },
       {
         "q": "落地后的共享班车多少钱？",
-        "a": "ASR 当前为 {{PRICE:kayseri:shuttle}}/人，NAV 为 {{PRICE:nevsehir:shuttle}}/人。"
+        "a": "ASR 当前为 {{PRICE:kayseri:shuttle}}/人/单程，NAV 为 {{PRICE:nevsehir:shuttle}}/人/单程。"
       },
       {
         "q": "预订班车时要用伊斯坦布尔那一段航班号吗？",
@@ -2601,7 +2601,7 @@ const rawZhPages: SeoPage[] = [
       {
         "heading": "按离港航班选择 NAV 或 ASR",
         "paragraphs": [
-          "NAV 通常离格雷梅、乌奇希萨尔和其他中部城镇更近。ASR 公路更远，但航班时间或票价可能更合适。支持城镇到机场的共享送机为 **NAV {{PRICE:nevsehir:shuttle}}/人**、**ASR {{PRICE:kayseri:shuttle}}/人**；私人价格为 NAV Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}。",
+          "NAV 通常离格雷梅、乌奇希萨尔和其他中部城镇更近。ASR 公路更远，但航班时间或票价可能更合适。支持城镇到机场的共享送机为 **NAV {{PRICE:nevsehir:shuttle}}/人/单程**、**ASR {{PRICE:kayseri:shuttle}}/人/单程**；私人价格按整车单程计价：NAV Vito/Sprinter {{PRICE:nevsehir:vito}}/{{PRICE:nevsehir:sprinter}}，ASR {{PRICE:kayseri:vito}}/{{PRICE:kayseri:sprinter}}。",
           "如果还没有确定离港机场，可在订机票前比较 [[离卡帕多奇亚最近的机场|nearest-airport-to-cappadocia]] 和 [[开塞利还是内夫谢希尔机场|kayseri-or-nevsehir-airport-for-cappadocia]]。"
         ]
       },

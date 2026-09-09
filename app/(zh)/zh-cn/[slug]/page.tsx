@@ -11,7 +11,8 @@ import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { zhPageBySlug, zhPages, zhPrettySlug, zhTownNames, type ZhSeoPage } from '@/lib/content-zh';
 import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking } from '@/lib/booking-visibility';
-import { formatEuro, lowestShuttlePrice, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
+import { mobileShuttlePriceLabel } from '@/lib/home-hero-pricing';
+import { formatEuro, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return zhPages.map((page) => ({ slug: page.slug })); }
@@ -165,8 +166,8 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
     areaServed:serviceAreaServed(page),
     offers:page.route?[
       {'@type':'Offer',price:String(shuttleOneWayPrice(page.route.airport)),priceCurrency:'EUR',description:'共享机场班车，每人单程'},
-      {'@type':'Offer',price:String(privateOneWayPrice(page.route.airport,'vito')),priceCurrency:'EUR',description:'私人 Mercedes Vito，单程，最多5人'},
-      {'@type':'Offer',price:String(privateOneWayPrice(page.route.airport,'sprinter')),priceCurrency:'EUR',description:'私人 Mercedes Sprinter，单程，最多16人'},
+      {'@type':'Offer',price:String(privateOneWayPrice(page.route.airport,'vito')),priceCurrency:'EUR',description:'私人 Mercedes Vito，每车单程，最多5人'},
+      {'@type':'Offer',price:String(privateOneWayPrice(page.route.airport,'sprinter')),priceCurrency:'EUR',description:'私人 Mercedes Sprinter，每车单程，最多16人'},
     ]:undefined,
   };
   const defaults=bookingDefaults(page);
@@ -213,6 +214,6 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
       </>}
     </div></section>
 
-    {hasBookingForm && <MobileBookingCta priceLabel={page.route ? `${formatEuro(shuttleOneWayPrice(page.route.airport))} / 人` : `${formatEuro(lowestShuttlePrice())} / 人起`} bookLabel="立即预订" ariaLabel="快速预订" />}
+    {hasBookingForm && <MobileBookingCta priceLabel={mobileShuttlePriceLabel('zh-CN', page.route?.airport)} bookLabel="立即预订" ariaLabel="快速预订" />}
   </main>;
 }

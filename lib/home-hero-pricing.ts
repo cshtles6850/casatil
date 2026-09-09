@@ -3,64 +3,91 @@ import { formatEuro, shuttleOneWayPrice } from './prices';
 export type HomeHeroLocale = 'en' | 'zh-CN' | 'es' | 'pt-BR' | 'ko' | 'ja';
 
 export type HomeHeroPricingCopy = {
-  shared: string;
+  sharedLabel: string;
+  navLine: string;
+  asrLine: string;
+  unit: string;
   private: string;
 };
 
 /**
  * Homepage hero pricing copy.
- * Prices always come from lib/prices.ts. When ASR and NAV share the same
- * shuttle fare, show one compact "from" price instead of duplicating it.
+ * ASR and NAV always remain separate price sources, even when the values happen
+ * to match. This avoids reintroducing the old "one shared airport fare" assumption.
  */
 export function homeHeroPricing(locale: HomeHeroLocale): HomeHeroPricingCopy {
-  const asr = shuttleOneWayPrice('kayseri');
-  const nav = shuttleOneWayPrice('nevsehir');
-  const samePrice = asr === nav;
-  const asrPrice = formatEuro(asr);
-  const navPrice = formatEuro(nav);
+  const asrPrice = formatEuro(shuttleOneWayPrice('kayseri'));
+  const navPrice = formatEuro(shuttleOneWayPrice('nevsehir'));
 
   switch (locale) {
     case 'zh-CN':
       return {
-        shared: samePrice
-          ? `共享接驳车：每人 ${asrPrice} 起`
-          : `共享接驳车：NAV 每人 ${navPrice} 起 · ASR 每人 ${asrPrice} 起`,
+        sharedLabel: '共享班车：',
+        navLine: `NAV ${navPrice} 起`,
+        asrLine: `ASR ${asrPrice} 起`,
+        unit: '每人',
         private: '另提供 Vito 和 Sprinter 私人接送',
       };
     case 'es':
       return {
-        shared: samePrice
-          ? `Shuttle compartido: desde ${asrPrice} por persona`
-          : `Shuttle compartido: NAV desde ${navPrice} • ASR desde ${asrPrice} por persona`,
+        sharedLabel: 'Shuttle compartido:',
+        navLine: `NAV desde ${navPrice}`,
+        asrLine: `ASR desde ${asrPrice}`,
+        unit: 'Por persona',
         private: 'Traslados privados en Vito y Sprinter disponibles',
       };
     case 'pt-BR':
       return {
-        shared: samePrice
-          ? `Shuttle compartilhado: a partir de ${asrPrice} por pessoa`
-          : `Shuttle compartilhado: NAV a partir de ${navPrice} • ASR a partir de ${asrPrice} por pessoa`,
+        sharedLabel: 'Shuttle compartilhado:',
+        navLine: `NAV a partir de ${navPrice}`,
+        asrLine: `ASR a partir de ${asrPrice}`,
+        unit: 'Por pessoa',
         private: 'Transfers privativos em Vito e Sprinter disponíveis',
       };
     case 'ko':
       return {
-        shared: samePrice
-          ? `합승 셔틀: 1인 ${asrPrice}부터`
-          : `합승 셔틀: NAV 1인 ${navPrice}부터 · ASR 1인 ${asrPrice}부터`,
+        sharedLabel: '합승 셔틀:',
+        navLine: `NAV ${navPrice}부터`,
+        asrLine: `ASR ${asrPrice}부터`,
+        unit: '1인 요금',
         private: '프라이빗 Vito·Sprinter 이용 가능',
       };
     case 'ja':
       return {
-        shared: samePrice
-          ? `乗合シャトル：1名 ${asrPrice}から`
-          : `乗合シャトル：NAV 1名 ${navPrice}から・ASR 1名 ${asrPrice}から`,
+        sharedLabel: '乗合シャトル：',
+        navLine: `NAV ${navPrice}から`,
+        asrLine: `ASR ${asrPrice}から`,
+        unit: '1名あたり',
         private: 'プライベートVito・Sprinterも利用できます',
       };
     default:
       return {
-        shared: samePrice
-          ? `Shared shuttle: From ${asrPrice} per person`
-          : `Shared shuttle: NAV from ${navPrice} • ASR from ${asrPrice} per person`,
+        sharedLabel: 'Shared shuttle:',
+        navLine: `NAV from ${navPrice}`,
+        asrLine: `ASR from ${asrPrice}`,
+        unit: 'Per person',
         private: 'Private Vito & Sprinter transfers available',
       };
   }
+}
+
+export function mobileShuttlePriceLabel(locale: HomeHeroLocale, airport?: 'kayseri' | 'nevsehir') {
+  if (airport) {
+    const price = formatEuro(shuttleOneWayPrice(airport));
+    if (locale === 'zh-CN') return `${price} / 人`;
+    if (locale === 'ko') return `1인 ${price}`;
+    if (locale === 'ja') return `1名 ${price}`;
+    if (locale === 'es') return `${price} / persona`;
+    if (locale === 'pt-BR') return `${price} / pessoa`;
+    return `${price} / person`;
+  }
+
+  const nav = formatEuro(shuttleOneWayPrice('nevsehir'));
+  const asr = formatEuro(shuttleOneWayPrice('kayseri'));
+  if (locale === 'zh-CN') return `NAV ${nav} · ASR ${asr} / 人`;
+  if (locale === 'ko') return `NAV ${nav} · ASR ${asr} / 1인`;
+  if (locale === 'ja') return `NAV ${nav} · ASR ${asr} / 1名`;
+  if (locale === 'es') return `NAV ${nav} · ASR ${asr} / persona`;
+  if (locale === 'pt-BR') return `NAV ${nav} · ASR ${asr} / pessoa`;
+  return `NAV ${nav} · ASR ${asr} / person`;
 }

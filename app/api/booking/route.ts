@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SITE } from '@/lib/site';
 import { privateTotal, shuttleTotal, type AirportPriceKey, type PrivateVehicleKey } from '@/lib/prices';
+import { getBookingTiming, isAfterBookingDateTime } from '@/lib/booking-time';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -37,11 +38,6 @@ function isRateLimited(request: NextRequest) {
 }
 
 function clean(value: unknown, max = 1200) { return String(value ?? '').trim().slice(0, max); }
-function todayInIstanbul() {
-  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
-  return `${get('year')}-${get('month')}-${get('day')}`;
-}
 function escapeHtml(value: string) {
   return value.replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char] || char));
 }
@@ -108,13 +104,14 @@ export async function POST(request: NextRequest) {
   const validDestination = ['Goreme', 'Urgup', 'Uchisar', 'Avanos', 'Ortahisar', 'Cavusin'].includes(data.destination);
   const validDate = /^\d{4}-\d{2}-\d{2}$/.test(data.firstTransferDate);
   const validTime = /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.firstTransferTime);
-  const validFutureOrToday = validDate && data.firstTransferDate >= todayInIstanbul();
+  const firstTiming = validDate && validTime ? getBookingTiming(data.firstTransferDate, data.firstTransferTime) : 'incomplete';
+  const validFutureTime = firstTiming !== 'incomplete' && firstTiming !== 'past';
   const isVito = data.vehicle === 'Mercedes Vito (max 5)';
-  if (!validBookingId || !validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !validFutureOrToday || !data.whatsapp || !data.hotel) {
+  if (!validBookingId || !validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !validFutureTime || !data.whatsapp || !data.hotel) {
     return reply({ ok: false, error: 'missing-or-invalid-fields' }, 400);
   }
   if (data.journey === 'round-trip' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate) || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.returnTransferTime))) return reply({ ok: false, error: 'missing-return-fields' }, 400);
-  if (data.journey === 'round-trip' && data.returnTransferDate < data.firstTransferDate) return reply({ ok: false, error: 'invalid-return-date' }, 400);
+  if (data.journey === 'round-trip' && !isAfterBookingDateTime(data.returnTransferDate, data.returnTransferTime, data.firstTransferDate, data.firstTransferTime)) return reply({ ok: false, error: 'invalid-return-date-time' }, 400);
   if (data.transferType === 'private' && isVito && passengerCount > 5) return reply({ ok: false, error: 'vehicle-capacity' }, 400);
   if (passengers.some((p) => !p.fullName || !p.passport)) return reply({ ok: false, error: 'missing-passenger-fields' }, 400);
 

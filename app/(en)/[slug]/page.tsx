@@ -11,7 +11,8 @@ import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { pageBySlug, pages, prettySlug, type SeoPage } from '@/lib/content';
 import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking } from '@/lib/booking-visibility';
-import { formatEuro, lowestShuttlePrice, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
+import { mobileShuttlePriceLabel } from '@/lib/home-hero-pricing';
+import { formatEuro, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return pages.map((page) => ({ slug: page.slug })); }
@@ -156,8 +157,8 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
     areaServed: serviceAreaServed(page),
     offers: page.route ? [
       { '@type': 'Offer', price: String(shuttleOneWayPrice(page.route.airport)), priceCurrency: 'EUR', description: 'Shared shuttle per person, one way' },
-      { '@type': 'Offer', price: String(privateOneWayPrice(page.route.airport,'vito')), priceCurrency: 'EUR', description: 'Private Mercedes Vito, one way, up to 5 passengers' },
-      { '@type': 'Offer', price: String(privateOneWayPrice(page.route.airport,'sprinter')), priceCurrency: 'EUR', description: 'Private Mercedes Sprinter, one way, up to 16 passengers' },
+      { '@type': 'Offer', price: String(privateOneWayPrice(page.route.airport,'vito')), priceCurrency: 'EUR', description: 'Private Mercedes Vito per vehicle, one way, up to 5 passengers' },
+      { '@type': 'Offer', price: String(privateOneWayPrice(page.route.airport,'sprinter')), priceCurrency: 'EUR', description: 'Private Mercedes Sprinter per vehicle, one way, up to 16 passengers' },
     ] : undefined,
   };
   const defaults = bookingDefaults(page);
@@ -211,6 +212,6 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
       </>}
     </div></section>
 
-    {hasBookingForm && <MobileBookingCta priceLabel={page.route ? `${formatEuro(shuttleOneWayPrice(page.route.airport))} / person` : `From ${formatEuro(lowestShuttlePrice())} / person`} bookLabel="Book Now" ariaLabel="Quick booking" />}
+    {hasBookingForm && <MobileBookingCta priceLabel={mobileShuttlePriceLabel('en', page.route?.airport)} bookLabel="Book Now" ariaLabel="Quick booking" />}
   </main>;
 }

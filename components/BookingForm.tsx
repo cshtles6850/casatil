@@ -392,7 +392,7 @@ export function BookingForm({
               {people.map((person, index) => <div key={index}><dt>Passenger {index + 1}</dt><dd>{person.fullName || '—'} · Passport {maskPassport(person.passport)}</dd></div>)}
               <div><dt>Payment</dt><dd>Cash to the driver</dd></div>
             </dl>
-            <p className="form-note">Prices are shown in EUR. Cash payment can also be arranged in USD or TRY using the current exchange rate confirmed for the booking.</p>
+            <p className="form-note">Prices are shown in EUR. Cash payment can also be arranged in USD or TRY using the current exchange rate at the time of payment.</p>
           </div>
 
           <label className="confirm-row field full">

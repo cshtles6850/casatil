@@ -6,8 +6,8 @@ import { BookingInfoChecklist } from '@/components/BookingInfoChecklist';
 import { JsonLd } from '@/components/JsonLd';
 import { MobileBookingCta } from '@/components/MobileBookingCta';
 import { SITE, towns } from '@/lib/site';
-import { formatEuro, lowestShuttlePrice, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
-import { homeHeroPricing } from '@/lib/home-hero-pricing';
+import { formatEuro, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
+import { homeHeroPricing, mobileShuttlePriceLabel } from '@/lib/home-hero-pricing';
 
 
 export const metadata: Metadata = {
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
 const townKeys = Object.keys(towns) as (keyof typeof towns)[];
 
 const homeFaq = [
-  ['How much is Cappadocia Airport Shuttle?', `Kayseri Airport (ASR) shared shuttle is ${formatEuro(shuttleOneWayPrice('kayseri'))} per person one way; Nevsehir Airport (NAV) is ${formatEuro(shuttleOneWayPrice('nevsehir'))}. Round trip is always double the selected airport's one-way fare.`],
+  ['How much is Cappadocia Airport Shuttle?', `Kayseri Airport (ASR) shared shuttle is ${formatEuro(shuttleOneWayPrice('kayseri'))} per person one way; Nevsehir Airport (NAV) is ${formatEuro(shuttleOneWayPrice('nevsehir'))} per person one way. Round trip is always double the selected airport's one-way fare.`],
   ['Which Cappadocia towns are covered by the shared shuttle?', 'Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar are within the shared-shuttle service area.'],
   ['Can I book both airport arrival and hotel-to-airport return?', 'Yes. Select Round Trip and enter both arrival and departure flight information.'],
-  ['How much is a private Vito?', `Kayseri Airport Vito is ${formatEuro(privateOneWayPrice('kayseri','vito'))} one way; Nevsehir Airport Vito is ${formatEuro(privateOneWayPrice('nevsehir','vito'))}. The Vito is for up to 5 passengers.`],
-  ['How much is a private Sprinter?', `Kayseri Airport Sprinter is ${formatEuro(privateOneWayPrice('kayseri','sprinter'))} one way; Nevsehir Airport Sprinter is ${formatEuro(privateOneWayPrice('nevsehir','sprinter'))}. The Sprinter is for up to 16 passengers.`],
-  ['How do I pay for the transfer?', 'Payment is cash to the driver. Prices are shown in EUR; USD or TRY cash payment can be arranged using the current exchange rate confirmed for the booking.'],
+  ['How much is a private Vito?', `Kayseri Airport Vito is ${formatEuro(privateOneWayPrice('kayseri','vito'))} per vehicle one way; Nevsehir Airport Vito is ${formatEuro(privateOneWayPrice('nevsehir','vito'))} per vehicle one way. The Vito is for up to 5 passengers.`],
+  ['How much is a private Sprinter?', `Kayseri Airport Sprinter is ${formatEuro(privateOneWayPrice('kayseri','sprinter'))} per vehicle one way; Nevsehir Airport Sprinter is ${formatEuro(privateOneWayPrice('nevsehir','sprinter'))} per vehicle one way. The Sprinter is for up to 16 passengers.`],
+  ['How do I pay for the transfer?', 'Payment is cash to the driver. Prices are shown in EUR; USD or TRY cash payment can be arranged using the current exchange rate at the time of payment.'],
   ['Why does the booking form ask for passport numbers?', 'Passenger names and passport numbers are required for every reservation.'],
   ['Will the driver meet me at the airport?', 'Meeting details are confirmed on WhatsApp after the booking request, using the name on your reservation for the airport meeting sign.'],
   ['What happens if my flight is delayed?', 'Send updated flight information on WhatsApp as early as possible, since a shared shuttle can involve several passengers and a schedule change needs to be reconfirmed.'],
@@ -45,10 +45,10 @@ export default function HomePage() {
     offers: [
       { '@type': 'Offer', price: String(shuttleOneWayPrice('kayseri')), priceCurrency: 'EUR', description: 'Kayseri shared airport shuttle per person, one way' },
       { '@type': 'Offer', price: String(shuttleOneWayPrice('nevsehir')), priceCurrency: 'EUR', description: 'Nevsehir shared airport shuttle per person, one way' },
-      { '@type': 'Offer', price: String(privateOneWayPrice('kayseri','vito')), priceCurrency: 'EUR', description: 'Kayseri private Vito, one way' },
-      { '@type': 'Offer', price: String(privateOneWayPrice('kayseri','sprinter')), priceCurrency: 'EUR', description: 'Kayseri private Sprinter, one way' },
-      { '@type': 'Offer', price: String(privateOneWayPrice('nevsehir','vito')), priceCurrency: 'EUR', description: 'Nevsehir private Vito, one way' },
-      { '@type': 'Offer', price: String(privateOneWayPrice('nevsehir','sprinter')), priceCurrency: 'EUR', description: 'Nevsehir private Sprinter, one way' },
+      { '@type': 'Offer', price: String(privateOneWayPrice('kayseri','vito')), priceCurrency: 'EUR', description: 'Kayseri private Vito per vehicle, one way' },
+      { '@type': 'Offer', price: String(privateOneWayPrice('kayseri','sprinter')), priceCurrency: 'EUR', description: 'Kayseri private Sprinter per vehicle, one way' },
+      { '@type': 'Offer', price: String(privateOneWayPrice('nevsehir','vito')), priceCurrency: 'EUR', description: 'Nevsehir private Vito per vehicle, one way' },
+      { '@type': 'Offer', price: String(privateOneWayPrice('nevsehir','sprinter')), priceCurrency: 'EUR', description: 'Nevsehir private Sprinter per vehicle, one way' },
     ],
   };
   const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q,a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
@@ -63,10 +63,10 @@ export default function HomePage() {
       <div className="hero-copy">
         <span className="eyebrow">Kayseri ASR · Nevsehir NAV</span>
         <h1>Cappadocia Airport Shuttle</h1>
-        <p className="hero-price-highlight"><span className="hero-price-main">{heroPricing.shared}</span><span className="hero-private-note">{heroPricing.private}</span></p>
+        <div className="hero-price-highlight"><span className="hero-price-label">{heroPricing.sharedLabel}</span><span className="hero-price-grid"><span className="hero-price-airport hero-price-nav">{heroPricing.navLine}</span><span className="hero-price-airport hero-price-asr">{heroPricing.asrLine}</span><span className="hero-price-unit">{heroPricing.unit}</span></span><span className="hero-private-note">{heroPricing.private}</span></div>
         <p className="lead">Book a <strong>Cappadocia Airport Shuttle</strong> between Kayseri Airport (ASR), Nevsehir Airport (NAV) and hotels across Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin.</p>
         <div className="hero-actions"><a className="btn btn-primary" href="#booking">Book airport shuttle</a><Link className="btn btn-secondary" href="/cappadocia-shared-shuttle-vs-private-transfer">Shuttle vs private</Link></div>
-        <div className="trust-row"><span>ASR {formatEuro(shuttleOneWayPrice('kayseri'))} · NAV {formatEuro(shuttleOneWayPrice('nevsehir'))}</span><span>Airport meet & hotel transfer</span><span>Cash to driver</span></div>
+        <div className="trust-row"><span>ASR {formatEuro(shuttleOneWayPrice('kayseri'))} / person / way · NAV {formatEuro(shuttleOneWayPrice('nevsehir'))} / person / way</span><span>Airport meet & hotel transfer</span><span>Cash to driver</span></div>
       </div>
     </div></section>
 
@@ -76,10 +76,10 @@ export default function HomePage() {
         <div className="summary-box home-summary">
           <div className="summary-line"><span>Kayseri shared shuttle</span><strong>{formatEuro(shuttleOneWayPrice('kayseri'))} / person / way</strong></div>
           <div className="summary-line"><span>Nevsehir shared shuttle</span><strong>{formatEuro(shuttleOneWayPrice('nevsehir'))} / person / way</strong></div>
-          <div className="summary-line"><span>Kayseri Vito · max 5</span><strong>{formatEuro(privateOneWayPrice('kayseri','vito'))}</strong></div>
-          <div className="summary-line"><span>Kayseri Sprinter · max 16</span><strong>{formatEuro(privateOneWayPrice('kayseri','sprinter'))}</strong></div>
-          <div className="summary-line"><span>Nevsehir Vito · max 5</span><strong>{formatEuro(privateOneWayPrice('nevsehir','vito'))}</strong></div>
-          <div className="summary-line"><span>Nevsehir Sprinter · max 16</span><strong>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))}</strong></div>
+          <div className="summary-line"><span>Kayseri Vito · max 5</span><strong>{formatEuro(privateOneWayPrice('kayseri','vito'))} / vehicle / way</strong></div>
+          <div className="summary-line"><span>Kayseri Sprinter · max 16</span><strong>{formatEuro(privateOneWayPrice('kayseri','sprinter'))} / vehicle / way</strong></div>
+          <div className="summary-line"><span>Nevsehir Vito · max 5</span><strong>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / vehicle / way</strong></div>
+          <div className="summary-line"><span>Nevsehir Sprinter · max 16</span><strong>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / vehicle / way</strong></div>
         </div>
         <p className="small-copy">Round trip is exactly double. Private prices are per vehicle. Passenger names and passport numbers are required for every reservation.</p>
         <BookingInfoChecklist className="home-booking-checklist" />
@@ -100,8 +100,8 @@ export default function HomePage() {
     <section className="section"><div className="container">
       <div className="section-head"><div className="kicker">Airport hubs</div><h2>Choose the airport before the route</h2><p>Shared-shuttle fares are set separately for Kayseri and Nevsehir airports. Compare the road distance, flight schedule and airport-specific private vehicle price as well.</p></div>
       <div className="cards">
-        <Link href="/kayseri-airport-shuttle" className="card card-link"><h3>Kayseri Airport Shuttle (ASR)</h3><p>Service for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Vito {formatEuro(privateOneWayPrice('kayseri','vito'))} · Sprinter {formatEuro(privateOneWayPrice('kayseri','sprinter'))}.</p></Link>
-        <Link href="/nevsehir-airport-shuttle" className="card card-link"><h3>Nevsehir Airport Shuttle (NAV)</h3><p>Shorter road access to many central towns. Vito {formatEuro(privateOneWayPrice('nevsehir','vito'))} · Sprinter {formatEuro(privateOneWayPrice('nevsehir','sprinter'))}.</p></Link>
+        <Link href="/kayseri-airport-shuttle" className="card card-link"><h3>Kayseri Airport Shuttle (ASR)</h3><p>Service for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Vito {formatEuro(privateOneWayPrice('kayseri','vito'))} / vehicle / way · Sprinter {formatEuro(privateOneWayPrice('kayseri','sprinter'))} / vehicle / way.</p></Link>
+        <Link href="/nevsehir-airport-shuttle" className="card card-link"><h3>Nevsehir Airport Shuttle (NAV)</h3><p>Shorter road access to many central towns. Vito {formatEuro(privateOneWayPrice('nevsehir','vito'))} / vehicle / way · Sprinter {formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / vehicle / way.</p></Link>
         <Link href="/kayseri-or-nevsehir-airport-for-cappadocia" className="card card-link"><h3>Kayseri or Nevsehir?</h3><p>Compare airport distance, flight convenience and transfer cost before choosing.</p></Link>
       </div>
     </div></section>
@@ -109,16 +109,16 @@ export default function HomePage() {
     <section className="section"><div className="container">
       <div className="section-head"><div className="kicker">Airport → hotel</div><h2>All Cappadocia arrival routes</h2><p>Each route shows the airport-specific distance, typical road time, hotel-access details and booking information for that journey.</p></div>
       <div className="route-groups">
-        <div><h3>Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/kayseri-airport-to-${key}-shuttle`}><strong>Kayseri Airport → {towns[key].name}</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span><span>{formatEuro(shuttleOneWayPrice('kayseri'))} shared shuttle · cash to driver</span></Link>)}</div></div>
-        <div><h3>Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/nevsehir-airport-to-${key}-shuttle`}><strong>Nevsehir Airport → {towns[key].name}</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span><span>{formatEuro(shuttleOneWayPrice('nevsehir'))} shared shuttle · cash to driver</span></Link>)}</div></div>
+        <div><h3>Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/kayseri-airport-to-${key}-shuttle`}><strong>Kayseri Airport → {towns[key].name}</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span><span>{formatEuro(shuttleOneWayPrice('kayseri'))} / person / way · shared shuttle · cash to driver</span></Link>)}</div></div>
+        <div><h3>Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/nevsehir-airport-to-${key}-shuttle`}><strong>Nevsehir Airport → {towns[key].name}</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span><span>{formatEuro(shuttleOneWayPrice('nevsehir'))} / person / way · shared shuttle · cash to driver</span></Link>)}</div></div>
       </div>
     </div></section>
 
     <section className="section section-muted"><div className="container">
       <div className="section-head"><div className="kicker">Hotel → airport</div><h2>Return shuttle routes for the flight home</h2><p>Return shuttle planning includes pickup timing, hotel access, flight changes and the airport-arrival margin needed before departure.</p></div>
       <div className="route-groups">
-        <div><h3>To Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-kayseri-airport-shuttle`}><strong>{towns[key].name} → Kayseri Airport</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span><span>{formatEuro(shuttleOneWayPrice('kayseri'))} shared shuttle · cash to driver</span></Link>)}</div></div>
-        <div><h3>To Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-nevsehir-airport-shuttle`}><strong>{towns[key].name} → Nevsehir Airport</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span><span>{formatEuro(shuttleOneWayPrice('nevsehir'))} shared shuttle · cash to driver</span></Link>)}</div></div>
+        <div><h3>To Kayseri Airport (ASR)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-kayseri-airport-shuttle`}><strong>{towns[key].name} → Kayseri Airport</strong><span>{towns[key].distanceKayseri} · {towns[key].timeKayseri}</span><span>{formatEuro(shuttleOneWayPrice('kayseri'))} / person / way · shared shuttle · cash to driver</span></Link>)}</div></div>
+        <div><h3>To Nevsehir Airport (NAV)</h3><div className="route-link-grid">{townKeys.map((key) => <Link key={key} href={`/${key}-to-nevsehir-airport-shuttle`}><strong>{towns[key].name} → Nevsehir Airport</strong><span>{towns[key].distanceNevsehir} · {towns[key].timeNevsehir}</span><span>{formatEuro(shuttleOneWayPrice('nevsehir'))} / person / way · shared shuttle · cash to driver</span></Link>)}</div></div>
       </div>
     </div></section>
 
@@ -132,6 +132,6 @@ export default function HomePage() {
     </div></section>
 
     <section className="section section-muted"><div className="container"><div className="section-head"><div className="kicker">FAQ</div><h2>Cappadocia airport shuttle questions</h2></div><div className="faq faq-wide">{homeFaq.map(([q,a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
-    <MobileBookingCta priceLabel={`From ${formatEuro(lowestShuttlePrice())} / person`} bookLabel="Book Now" ariaLabel="Quick booking" />
+    <MobileBookingCta priceLabel={mobileShuttlePriceLabel('en')} bookLabel="Book Now" ariaLabel="Quick booking" />
   </main>;
 }
