@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef } from 'react';
+
 type Props = {
   id: string;
   name: string;
@@ -18,13 +20,28 @@ function formatNumericDate(value: string) {
 
 export function NumericDateInput({ id, name, min, value, onChange, required = false, ariaLabel }: Props) {
   const displayValue = formatNumericDate(value);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const openPicker = () => {
+    const input = inputRef.current;
+    if (!input) return;
+
+    input.focus({ preventScroll: true });
+    try {
+      if (typeof input.showPicker === 'function') input.showPicker();
+    } catch {
+      // The native input remains clickable as a fallback on browsers that
+      // restrict showPicker() despite a direct user gesture.
+    }
+  };
 
   return (
-    <div className="numeric-date-input">
+    <div className="numeric-date-input" onClick={openPicker}>
       <span className={`numeric-date-display${displayValue ? '' : ' is-placeholder'}`} aria-hidden="true">
         {displayValue || 'DD/MM/YYYY'}
       </span>
       <input
+        ref={inputRef}
         className="numeric-date-native"
         id={id}
         name={name}
