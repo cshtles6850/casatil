@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SITE } from '@/lib/site';
 import { privateTotal, shuttleTotal, type AirportPriceKey, type PrivateVehicleKey } from '@/lib/prices';
-import { getBookingTiming, isAfterBookingDateTime } from '@/lib/booking-time';
+import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -103,15 +103,21 @@ export async function POST(request: NextRequest) {
   const validPassengers = Number.isInteger(passengerCount) && passengerCount >= 1 && passengerCount <= 16 && passengers.length === passengerCount;
   const validDestination = ['Goreme', 'Urgup', 'Uchisar', 'Avanos', 'Ortahisar', 'Cavusin'].includes(data.destination);
   const validDate = /^\d{4}-\d{2}-\d{2}$/.test(data.firstTransferDate);
-  const validTime = /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.firstTransferTime);
-  const firstTiming = validDate && validTime ? getBookingTiming(data.firstTransferDate, data.firstTransferTime) : 'incomplete';
-  const validFutureTime = firstTiming !== 'incomplete' && firstTiming !== 'past';
+  const companyArrangedPickup = data.transferType === 'shuttle' && data.journey === 'one-way' && data.direction === 'Hotel → Airport';
+  const companyArrangedReturnPickup = data.transferType === 'shuttle' && data.journey === 'round-trip';
+  const effectiveFirstTransferTime = companyArrangedPickup ? '' : data.firstTransferTime;
+  const effectiveReturnTransferTime = companyArrangedReturnPickup ? '' : data.returnTransferTime;
+  const validTime = companyArrangedPickup || /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(effectiveFirstTransferTime);
+  const firstTiming = validDate && !companyArrangedPickup && validTime ? getBookingTiming(data.firstTransferDate, effectiveFirstTransferTime) : 'incomplete';
+  const validFutureTime = companyArrangedPickup ? validDate && data.firstTransferDate >= todayInIstanbul() : firstTiming !== 'incomplete' && firstTiming !== 'past';
   const isVito = data.vehicle === 'Mercedes Vito (max 5)';
   if (!validBookingId || !validTransferType || !validJourney || !validAirport || !validDirection || !validVehicle || !validPassengers || !validDestination || !validDate || !validTime || !validFutureTime || !data.whatsapp || !data.hotel) {
     return reply({ ok: false, error: 'missing-or-invalid-fields' }, 400);
   }
-  if (data.journey === 'round-trip' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate) || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(data.returnTransferTime))) return reply({ ok: false, error: 'missing-return-fields' }, 400);
-  if (data.journey === 'round-trip' && !isAfterBookingDateTime(data.returnTransferDate, data.returnTransferTime, data.firstTransferDate, data.firstTransferTime)) return reply({ ok: false, error: 'invalid-return-date-time' }, 400);
+  if (data.journey === 'round-trip' && (!/^\d{4}-\d{2}-\d{2}$/.test(data.returnTransferDate) || (!companyArrangedReturnPickup && !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(effectiveReturnTransferTime)))) return reply({ ok: false, error: 'missing-return-fields' }, 400);
+  if (data.journey === 'round-trip' && (companyArrangedReturnPickup
+    ? data.returnTransferDate < data.firstTransferDate
+    : !isAfterBookingDateTime(data.returnTransferDate, effectiveReturnTransferTime, data.firstTransferDate, data.firstTransferTime))) return reply({ ok: false, error: 'invalid-return-date-time' }, 400);
   if (data.transferType === 'private' && isVito && passengerCount > 5) return reply({ ok: false, error: 'vehicle-capacity' }, 400);
   if (passengers.some((p) => !p.fullName || !p.passport)) return reply({ ok: false, error: 'missing-passenger-fields' }, 400);
 
@@ -132,10 +138,10 @@ export async function POST(request: NextRequest) {
     ? `${data.firstTransferDate} ${data.firstTransferTime} · ${data.arrivalFlight}`
     : '';
   const departureValue = data.journey === 'one-way' && departureRequired && data.departureFlight
-    ? `${data.firstTransferDate} ${data.firstTransferTime} · ${data.departureFlight}`
+    ? `${data.firstTransferDate}${effectiveFirstTransferTime ? ` ${effectiveFirstTransferTime}` : ''} · ${data.departureFlight}`
     : '';
   const returnValue = data.journey === 'round-trip' && data.returnTransferDate
-    ? `${data.returnTransferDate} ${data.returnTransferTime}${data.returnFlight ? ` · ${data.returnFlight}` : ''}`
+    ? `${data.returnTransferDate}${effectiveReturnTransferTime ? ` ${effectiveReturnTransferTime}` : ''}${data.returnFlight ? ` · ${data.returnFlight}` : ''}`
     : '';
 
   const mainRows: Array<[string, string]> = [
@@ -148,7 +154,9 @@ export async function POST(request: NextRequest) {
     ['Destination', data.destination],
     ...(arrivalValue ? [['Arrival', arrivalValue] as [string, string]] : []),
     ...(departureValue ? [['Departure', departureValue] as [string, string]] : []),
+    ...(companyArrangedPickup ? [['Pickup Time', 'Arranged by company according to flight details'] as [string, string]] : []),
     ...(returnValue ? [['Return', returnValue] as [string, string]] : []),
+    ...(companyArrangedReturnPickup ? [['Return Pickup Time', 'Arranged by company according to flight details'] as [string, string]] : []),
     ['Hotel / Accommodation', data.hotel],
     ['Passenger Count', String(data.passengerCount)],
     ['Contact WhatsApp', data.whatsapp],

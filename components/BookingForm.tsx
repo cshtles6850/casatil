@@ -82,9 +82,13 @@ export function BookingForm({
   const [clockTick, setClockTick] = useState(() => Date.now());
   const today = todayInIstanbul(clockTick);
   const hotelReady = hotel.trim().length > 0;
+  const companyArrangedPickup = transferType === 'shuttle' && journey === 'one-way' && direction === 'hotel-airport';
+  const companyArrangedReturnPickup = transferType === 'shuttle' && journey === 'round-trip';
   const firstTiming = getBookingTiming(firstTransferDate, firstTransferTime, clockTick);
-  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past');
-  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime));
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && (companyArrangedPickup ? firstTransferDate >= today : isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past'));
+  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (companyArrangedReturnPickup
+    ? Boolean(firstTransferDate && returnTransferDate < firstTransferDate)
+    : isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)));
 
   useEffect(() => {
     const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
@@ -127,11 +131,11 @@ export function BookingForm({
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!confirmed) return;
-    if (getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
+    if (!companyArrangedPickup && getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
       setStatus('The selected date and time has already passed. Please choose a future date and time.');
       return;
     }
-    if (journey === 'round-trip' && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)) {
+    if (journey === 'round-trip' && returnOrderInvalid) {
       setStatus('Return date and time must be after the first transfer date and time.');
       return;
     }
@@ -148,6 +152,9 @@ export function BookingForm({
       passport: person.passport.trim(),
     }));
 
+    const effectiveFirstTransferTime = companyArrangedPickup ? '' : firstTransferTime;
+    const effectiveReturnTransferTime = companyArrangedReturnPickup ? '' : returnTransferTime;
+
     const details = {
       bookingId,
       transferType,
@@ -159,11 +166,11 @@ export function BookingForm({
       destination: destination ? townLabels[destination] : '',
       hotel,
       firstTransferDate,
-      firstTransferTime,
+      firstTransferTime: effectiveFirstTransferTime,
       arrivalFlight,
       departureFlight,
       returnTransferDate,
-      returnTransferTime,
+      returnTransferTime: effectiveReturnTransferTime,
       returnFlight,
       whatsapp,
       passengerDetails: passengerPayload,
@@ -192,11 +199,13 @@ export function BookingForm({
       `${destinationLabel}: ${destination ? townLabels[destination] : '-'}`,
       `Hotel / Accommodation: ${hotel || '-'}`,
       `${firstDateLabel}: ${firstTransferDate || '-'}`,
-      `${firstTimeLabel}: ${firstTransferTime || '-'}`,
+      !companyArrangedPickup ? `${firstTimeLabel}: ${effectiveFirstTransferTime || '-'}` : '',
+      companyArrangedPickup ? 'Pickup time: Arranged according to your flight details and confirmed by us.' : '',
       isArrivalOnly || journey === 'round-trip' ? `Arrival flight: ${arrivalFlight || '-'}` : '',
       isDepartureOnly ? `Departure flight: ${departureFlight || '-'}` : '',
       journey === 'round-trip' ? `Return flight date: ${returnTransferDate || '-'}` : '',
-      journey === 'round-trip' ? `Return flight time: ${returnTransferTime || '-'}` : '',
+      journey === 'round-trip' && !companyArrangedReturnPickup ? `Return flight time: ${effectiveReturnTransferTime || '-'}` : '',
+      journey === 'round-trip' && companyArrangedReturnPickup ? 'Pickup time: Arranged according to your flight details and confirmed by us.' : '',
       journey === 'round-trip' ? `Return flight: ${returnFlight || '-'}` : '',
       `Contact WhatsApp: ${whatsapp || '-'}`,
       ...passengerLines,
@@ -296,18 +305,22 @@ export function BookingForm({
             </div>
           )}
 
-          <div className="field">
+          <div className={`field${companyArrangedPickup ? ' full' : ''}`}>
             <label htmlFor={`date-${compact ? 'compact' : 'full'}`}>{firstDateLabel}</label>
             <NumericDateInput id={`date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" min={today} value={firstTransferDate} onChange={setFirstTransferDate} required ariaLabel={firstDateLabel} />
           </div>
 
-          <TimeSelect idPrefix={`time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
+          {companyArrangedPickup ? (
+            <div className="field full"><div className="journey-note" role="note">Pickup time will be arranged according to your flight details and confirmed by us.</div></div>
+          ) : (
+            <TimeSelect idPrefix={`time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
+          )}
 
-          {firstTiming === 'past' && (
+          {!companyArrangedPickup && firstTiming === 'past' && (
             <div className="field full booking-time-error" role="alert">⚠️ <span>The selected date and time has already passed. <strong>Please choose a future date and time.</strong></span></div>
           )}
 
-          {(firstTiming === 'urgent' || firstTiming === 'short-notice') && (
+          {!companyArrangedPickup && (firstTiming === 'urgent' || firstTiming === 'short-notice') && (
             <div className={`field full short-notice-warning${firstTiming === 'urgent' ? ' urgent' : ''}`}>⚠️ <span>{firstTiming === 'urgent' ? <>This booking is for a time within the next 8 hours. <strong>Please wait for our WhatsApp confirmation and contact us on WhatsApp if you need an urgent response.</strong></> : <>This booking is within the next 24 hours. <strong>Please wait for our WhatsApp confirmation before considering your transfer confirmed.</strong></>}</span></div>
           )}
 
@@ -316,7 +329,7 @@ export function BookingForm({
               <button className="btn booking-continue" type="button" disabled={!firstStageReady} aria-disabled={!firstStageReady} onClick={() => { if (firstStageReady) setExpanded(true); }}>
                 Continue with flight & passenger details · €{total}
               </button>
-              <div className="form-note">{firstStageReady ? 'The form expands only when the transfer details above are complete.' : 'Select the town and enter the flight date, flight time and full hotel name to continue.'}</div>
+              <div className="form-note">{firstStageReady ? 'The form expands only when the transfer details above are complete.' : companyArrangedPickup ? 'Select the town and enter the flight date and full hotel name to continue.' : 'Select the town and enter the flight date, flight time and full hotel name to continue.'}</div>
             </div>
           )}
 
@@ -338,13 +351,23 @@ export function BookingForm({
 
           {journey === 'round-trip' && (
             <>
-              <div className="field full return-datetime-row">
-                <div className="field">
-                  <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
-                  <NumericDateInput id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="Return flight date" />
+              {companyArrangedReturnPickup ? (
+                <>
+                  <div className="field full">
+                    <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
+                    <NumericDateInput id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="Return flight date" />
+                  </div>
+                  <div className="field full"><div className="journey-note" role="note">Pickup time will be arranged according to your flight details and confirmed by us.</div></div>
+                </>
+              ) : (
+                <div className="field full return-datetime-row">
+                  <div className="field">
+                    <label htmlFor={`return-date-${compact ? 'compact' : 'full'}`}>Return flight date</label>
+                    <NumericDateInput id={`return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="Return flight date" />
+                  </div>
+                  <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
                 </div>
-                <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
-              </div>
+              )}
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>Return date and time must be <strong>after the first transfer date and time.</strong></span></div>}
               <div className="field full">
                 <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>

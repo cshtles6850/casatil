@@ -96,9 +96,13 @@ export function BookingFormZh({
   const [clockTick, setClockTick] = useState(() => Date.now());
   const today = todayInIstanbul(clockTick);
   const hotelReady = hotel.trim().length > 0;
+  const companyArrangedPickup = transferType === 'shuttle' && journey === 'one-way' && direction === 'hotel-airport';
+  const companyArrangedReturnPickup = transferType === 'shuttle' && journey === 'round-trip';
   const firstTiming = getBookingTiming(firstTransferDate, firstTransferTime, clockTick);
-  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past');
-  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime));
+  const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && (companyArrangedPickup ? firstTransferDate >= today : isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past'));
+  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (companyArrangedReturnPickup
+    ? Boolean(firstTransferDate && returnTransferDate < firstTransferDate)
+    : isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)));
 
   useEffect(() => {
     const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
@@ -141,11 +145,11 @@ export function BookingFormZh({
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!confirmed) return;
-    if (getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
+    if (!companyArrangedPickup && getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
       setStatus('所选日期和时间已过去，请选择未来的日期和时间。');
       return;
     }
-    if (journey === 'round-trip' && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)) {
+    if (journey === 'round-trip' && returnOrderInvalid) {
       setStatus('返程日期和时间必须晚于首次接送的日期和时间。');
       return;
     }
@@ -168,6 +172,9 @@ export function BookingFormZh({
     const serviceZh = transferType === 'shuttle' ? '拼车机场接送' : '私人机场接送';
     const vehicleZh = vehicle === 'vito' ? 'Mercedes Vito（最多5人）' : 'Mercedes Sprinter（最多16人）';
 
+    const effectiveFirstTransferTime = companyArrangedPickup ? '' : firstTransferTime;
+    const effectiveReturnTransferTime = companyArrangedReturnPickup ? '' : returnTransferTime;
+
     const details = {
       bookingId,
       language: 'zh-CN',
@@ -180,11 +187,11 @@ export function BookingFormZh({
       destination: destination ? townEnglishLabels[destination] : '',
       hotel,
       firstTransferDate,
-      firstTransferTime,
+      firstTransferTime: effectiveFirstTransferTime,
       arrivalFlight,
       departureFlight,
       returnTransferDate,
-      returnTransferTime,
+      returnTransferTime: effectiveReturnTransferTime,
       returnFlight,
       whatsapp,
       passengerDetails: passengerPayload,
@@ -212,11 +219,13 @@ export function BookingFormZh({
       `${destinationLabel}：${destination ? `${townZhLabels[destination]}（${townEnglishLabels[destination]}）` : '-'}`,
       `酒店 / 住宿：${hotel || '-'}`,
       `${firstDateLabel}：${firstTransferDate || '-'}`,
-      `${firstTimeLabel}：${firstTransferTime || '-'}`,
+      !companyArrangedPickup ? `${firstTimeLabel}：${effectiveFirstTransferTime || '-'}` : '',
+      companyArrangedPickup ? '接送时间将根据您的航班信息安排，并由我们另行确认。' : '',
       isArrivalOnly || journey === 'round-trip' ? `抵达航班：${arrivalFlight || '-'}` : '',
       isDepartureOnly ? `离港航班：${departureFlight || '-'}` : '',
       journey === 'round-trip' ? `返程航班日期：${returnTransferDate || '-'}` : '',
-      journey === 'round-trip' ? `返程航班时间：${returnTransferTime || '-'}` : '',
+      journey === 'round-trip' && !companyArrangedReturnPickup ? `返程航班时间：${effectiveReturnTransferTime || '-'}` : '',
+      journey === 'round-trip' && companyArrangedReturnPickup ? '接送时间将根据您的航班信息安排，并由我们另行确认。' : '',
       journey === 'round-trip' ? `返程航班：${returnFlight || '-'}` : '',
       `联系 WhatsApp：${whatsapp || '-'}`,
       ...passengerLines,
@@ -314,18 +323,22 @@ export function BookingFormZh({
             </div>
           )}
 
-          <div className="field">
+          <div className={`field${companyArrangedPickup ? ' full' : ''}`}>
             <label htmlFor={`zh-date-${compact ? 'compact' : 'full'}`}>{firstDateLabel}</label>
             <NumericDateInput id={`zh-date-${compact ? 'compact' : 'full'}`} name="firstTransferDate" min={today} value={firstTransferDate} onChange={setFirstTransferDate} required ariaLabel={firstDateLabel} />
           </div>
 
-          <TimeSelect idPrefix={`zh-time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
+          {companyArrangedPickup ? (
+            <div className="field full"><div className="journey-note" role="note">接送时间将根据您的航班信息安排，并由我们另行确认。</div></div>
+          ) : (
+            <TimeSelect idPrefix={`zh-time-${compact ? 'compact' : 'full'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime} />
+          )}
 
-          {firstTiming === 'past' && (
+          {!companyArrangedPickup && firstTiming === 'past' && (
             <div className="field full booking-time-error" role="alert">⚠️ <span>所选日期和时间已过去。<strong>请选择未来的日期和时间。</strong></span></div>
           )}
 
-          {(firstTiming === 'urgent' || firstTiming === 'short-notice') && (
+          {!companyArrangedPickup && (firstTiming === 'urgent' || firstTiming === 'short-notice') && (
             <div className={`field full short-notice-warning${firstTiming === 'urgent' ? ' urgent' : ''}`}>⚠️ <span>{firstTiming === 'urgent' ? <>此预订距离所选时间不足 8 小时。<strong>请等待我们的 WhatsApp 确认；如需尽快回复，请通过 WhatsApp 联系我们。</strong></> : <>此预订距离所选时间不足 24 小时。<strong>请在收到我们的 WhatsApp 确认后，再将接送视为已确认。</strong></>}</span></div>
           )}
 
@@ -334,7 +347,7 @@ export function BookingFormZh({
               <button className="btn booking-continue" type="button" disabled={!firstStageReady} aria-disabled={!firstStageReady} onClick={() => { if (firstStageReady) setExpanded(true); }}>
                 继续填写航班与乘客资料 · €{total}
               </button>
-              <div className="form-note">{firstStageReady ? '以上接送信息完整后，才会展开航班、乘客和护照资料。' : '请选择城镇，并填写航班日期、时间和完整酒店名称后再继续。'}</div>
+              <div className="form-note">{firstStageReady ? '以上接送信息完整后，才会展开航班、乘客和护照资料。' : companyArrangedPickup ? '请选择城镇，并填写航班日期和完整酒店名称后再继续。' : '请选择城镇，并填写航班日期、时间和完整酒店名称后再继续。'}</div>
             </div>
           )}
 
@@ -356,7 +369,14 @@ export function BookingFormZh({
 
           {journey === 'round-trip' && (
             <>
-              <div className="field full return-datetime-row"><div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><NumericDateInput id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="返程航班日期" /></div><TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} /></div>
+              {companyArrangedReturnPickup ? (
+                <>
+                  <div className="field full"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><NumericDateInput id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="返程航班日期" /></div>
+                  <div className="field full"><div className="journey-note" role="note">接送时间将根据您的航班信息安排，并由我们另行确认。</div></div>
+                </>
+              ) : (
+                <div className="field full return-datetime-row"><div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><NumericDateInput id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="返程航班日期" /></div><TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} /></div>
+              )}
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>返程日期和时间必须<strong>晚于首次接送的日期和时间。</strong></span></div>}
               <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>
