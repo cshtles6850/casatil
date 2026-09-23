@@ -9,6 +9,7 @@ import { PassengerCounter } from './PassengerCounter';
 import { NumericDateInput } from './NumericDateInput';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
+import { sanitizeLatinHotel, sanitizeLatinName } from '@/lib/booking-input';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -88,10 +89,12 @@ export function BookingFormZh({
   const [returnTransferTime, setReturnTransferTime] = useState('');
   const [returnFlight, setReturnFlight] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [email, setEmail] = useState('');
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
-  const bookingIdRef = useRef<string | null>(null);
+  const submittingRef = useRef(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [clockTick, setClockTick] = useState(() => Date.now());
   const today = todayInIstanbul(clockTick);
@@ -100,9 +103,9 @@ export function BookingFormZh({
   const companyArrangedReturnPickup = transferType === 'shuttle' && journey === 'round-trip';
   const firstTiming = getBookingTiming(firstTransferDate, firstTransferTime, clockTick);
   const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && (companyArrangedPickup ? firstTransferDate >= today : isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past'));
-  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (companyArrangedReturnPickup
-    ? Boolean(firstTransferDate && returnTransferDate < firstTransferDate)
-    : isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)));
+  const returnDateBeforeFirst = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && returnTransferDate < firstTransferDate);
+  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (returnDateBeforeFirst || (!companyArrangedReturnPickup && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime))));
+  const sameDayRoundTrip = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && firstTransferDate === returnTransferDate);
 
   useEffect(() => {
     const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
@@ -118,6 +121,13 @@ export function BookingFormZh({
   useEffect(() => {
     setPeople((current) => Array.from({ length: passengers }, (_, index) => current[index] ?? { fullName: '', passport: '' }));
   }, [passengers]);
+
+  useEffect(() => {
+    if (firstTransferDate && returnTransferDate && returnTransferDate < firstTransferDate) {
+      setReturnTransferDate('');
+      setReturnTransferTime('');
+    }
+  }, [firstTransferDate, returnTransferDate]);
 
   const total = useMemo(() => {
     const isRoundTrip = journey === 'round-trip';
@@ -144,7 +154,12 @@ export function BookingFormZh({
 
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
     if (!confirmed) return;
+    if (!whatsapp.trim()) {
+      setStatus('请填写联系电话。如果您不使用 WhatsApp，也请填写电子邮箱地址。');
+      return;
+    }
     if (!companyArrangedPickup && getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
       setStatus('所选日期和时间已过去，请选择未来的日期和时间。');
       return;
@@ -157,8 +172,9 @@ export function BookingFormZh({
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return;
 
-    const bookingId = bookingIdRef.current ?? generateBookingId(SITE.bookingCode);
-    bookingIdRef.current = bookingId;
+    submittingRef.current = true;
+    setIsSubmitting(true);
+    const bookingId = generateBookingId(SITE.bookingCode);
 
     const passengerPayload = people.map((person, index) => ({
       number: index + 1,
@@ -194,6 +210,7 @@ export function BookingFormZh({
       returnTransferTime: effectiveReturnTransferTime,
       returnFlight,
       whatsapp,
+      email,
       passengerDetails: passengerPayload,
       notes,
       total: `EUR ${total}`,
@@ -228,15 +245,20 @@ export function BookingFormZh({
       journey === 'round-trip' && companyArrangedReturnPickup ? '接送时间将根据您的航班信息安排，并由我们另行确认。' : '',
       journey === 'round-trip' ? `返程航班：${returnFlight || '-'}` : '',
       `联系 WhatsApp：${whatsapp || '-'}`,
+      `电子邮箱：${email || '-'}`,
       ...passengerLines,
       `预计总价：EUR ${total}`,
       '付款：现金支付给司机',
       notes ? `备注：${notes}` : '',
     ].filter(Boolean);
 
-    const url = `https://wa.me/${SITE.whatsappDigits}?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-    setStatus('预订信息已准备在 WhatsApp 中，请在 WhatsApp 里发送消息完成申请。');
+    if (whatsapp.trim()) {
+      const url = `https://wa.me/${SITE.whatsappDigits}?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setStatus('预订信息已准备在 WhatsApp 中，请在 WhatsApp 里发送消息完成申请。');
+    } else {
+      setStatus('正在通过电子邮箱发送您的预订申请。');
+    }
 
     void fetch('/api/booking', {
       method: 'POST',
@@ -245,9 +267,12 @@ export function BookingFormZh({
       keepalive: true,
     }).then(async (response) => {
       const result = await response.json().catch(() => null) as { email?: string } | null;
-      if (result?.email === 'sent') setStatus('WhatsApp 消息已准备好，同时预订副本已发送到我们的邮箱。请在 WhatsApp 中发送消息完成申请。');
-      if (!response.ok || result?.email === 'send-failed') setStatus('WhatsApp 预订信息已准备好。邮箱副本暂未确认，请务必在 WhatsApp 中发送消息。');
-    }).catch(() => setStatus('WhatsApp 预订信息已准备好，请在 WhatsApp 中发送消息完成申请。'));
+      if (result?.email === 'sent') setStatus(whatsapp.trim() ? 'WhatsApp 消息已准备好，同时预订副本已发送到我们的邮箱。请在 WhatsApp 中发送消息完成申请。' : '您的预订申请已成功发送。我们将通过您提供的电子邮箱与您联系。');
+      if (!response.ok || result?.email === 'send-failed') setStatus(whatsapp.trim() ? 'WhatsApp 预订信息已准备好。邮箱副本暂未确认，请务必在 WhatsApp 中发送消息。' : '无法通过电子邮箱发送预订申请。请填写 WhatsApp 号码或稍后重试。');
+    }).catch(() => setStatus('WhatsApp 预订信息已准备好，请在 WhatsApp 中发送消息完成申请。')).finally(() => {
+      submittingRef.current = false;
+      setIsSubmitting(false);
+    });
   }
 
   return (
@@ -309,7 +334,7 @@ export function BookingFormZh({
             <PassengerCounter id={`zh-passengers-${compact ? 'compact' : 'full'}`} label="乘客人数" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
             <div className="field passenger-hotel-field">
               <label htmlFor={`zh-hotel-${compact ? 'compact' : 'full'}`}>酒店 / 住宿</label>
-              <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} required />
+              <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} required /><div className="form-note">酒店名称请使用拉丁字母填写。</div>
             </div>
           </div>
 
@@ -377,21 +402,29 @@ export function BookingFormZh({
               ) : (
                 <div className="field full return-datetime-row"><div className="field"><label htmlFor={`zh-return-date-${compact ? 'compact' : 'full'}`}>返程航班日期</label><NumericDateInput id={`zh-return-date-${compact ? 'compact' : 'full'}`} name="returnTransferDate" min={firstTransferDate || today} value={returnTransferDate} onChange={setReturnTransferDate} required ariaLabel="返程航班日期" /></div><TimeSelect idPrefix={`zh-return-time-${compact ? 'compact' : 'full'}`} label="返程航班时间" value={returnTransferTime} onChange={setReturnTransferTime} /></div>
               )}
+              {sameDayRoundTrip && <div className="field full booking-time-error" role="alert">⚠️ <span><strong>您选择了同一天往返。</strong>提交前请再次确认抵达和返程航班日期。</span></div>}
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>返程日期和时间必须<strong>晚于首次接送的日期和时间。</strong></span></div>}
               <div className="field full"><label htmlFor={`zh-return-flight-${compact ? 'compact' : 'full'}`}>返程 / 离港航班号</label><input id={`zh-return-flight-${compact ? 'compact' : 'full'}`} name="returnFlight" value={returnFlight} onChange={(e) => setReturnFlight(e.target.value)} placeholder="例如 TK2011" required /></div>
             </>
           )}
 
-          <div className="field full">
-            <label htmlFor={`zh-whatsapp-${compact ? 'compact' : 'full'}`}>联系 WhatsApp 号码</label>
-            <input id={`zh-whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="请包含国家代码，例如 +86..." autoComplete="tel" required />
+          <div className="field full contact-methods-row">
+            <div className="field">
+              <label htmlFor={`zh-whatsapp-${compact ? 'compact' : 'full'}`}>联系电话（如有 WhatsApp 请填写该号码）</label>
+              <input id={`zh-whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="请包含国家代码，例如 +86..." autoComplete="tel" required />
+            </div>
+            <div className="field">
+              <label htmlFor={`zh-email-${compact ? 'compact' : 'full'}`}>电子邮箱（可选）</label>
+              <input id={`zh-email-${compact ? 'compact' : 'full'}`} name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" autoComplete="email" />
+            </div>
+            <div className="form-note contact-fallback-note">联系电话为必填项。如果您不使用 WhatsApp，也请留下电子邮箱地址。</div>
           </div>
 
           <div className="field full passenger-block">
             <div className="passenger-heading"><div><strong>乘客信息</strong><span>姓名与护照号码是每笔预订所需资料。</span></div></div>
             {people.map((person, index) => (
               <div className="passenger-row" key={index}>
-                <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名（与护照一致）</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', e.target.value)} autoComplete={index === 0 ? 'name' : 'off'} required /></div>
+                <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名（与护照一致）</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">姓名请仅使用拉丁字母，并按护照上的拼写填写。</div></div>
                 <div className="field"><label htmlFor={`zh-passport-${compact ? 'c' : 'f'}-${index}`}>护照号码</label><input id={`zh-passport-${compact ? 'c' : 'f'}-${index}`} value={person.passport} onChange={(e) => updatePassenger(index, 'passport', e.target.value)} autoCapitalize="characters" autoComplete="off" required /></div>
               </div>
             ))}
@@ -420,8 +453,8 @@ export function BookingFormZh({
           </label>
 
           <div className="field full">
-            <button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid} aria-disabled={returnOrderInvalid}><WhatsAppIcon size={20} /> 提交并继续到 WhatsApp</button>
-            <div className="form-note">只有在 WhatsApp 确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨。</div>
+            <button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid || isSubmitting} aria-disabled={returnOrderInvalid || isSubmitting} aria-busy={isSubmitting}>{whatsapp.trim() && <WhatsAppIcon size={20} />} {whatsapp.trim() ? '提交并继续到 WhatsApp' : '提交预订申请'}</button>
+            <div className="form-note">只有在我们通过 WhatsApp 或电子邮箱确认后，预订才算完成。拼车覆盖格雷梅、于尔居普、乌奇希萨尔、阿瓦诺斯、恰武辛和奥塔西萨。</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
           </>}

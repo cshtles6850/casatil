@@ -9,6 +9,7 @@ import { PassengerCounter } from './PassengerCounter';
 import { NumericDateInput } from './NumericDateInput';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
+import { sanitizeLatinHotel, sanitizeLatinName } from '@/lib/booking-input';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -74,10 +75,12 @@ export function BookingForm({
   const [returnTransferTime, setReturnTransferTime] = useState('');
   const [returnFlight, setReturnFlight] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [email, setEmail] = useState('');
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
-  const bookingIdRef = useRef<string | null>(null);
+  const submittingRef = useRef(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [clockTick, setClockTick] = useState(() => Date.now());
   const today = todayInIstanbul(clockTick);
@@ -86,9 +89,9 @@ export function BookingForm({
   const companyArrangedReturnPickup = transferType === 'shuttle' && journey === 'round-trip';
   const firstTiming = getBookingTiming(firstTransferDate, firstTransferTime, clockTick);
   const firstStageReady = Boolean(destination && hotelReady && firstTransferDate && (companyArrangedPickup ? firstTransferDate >= today : isValidTime(firstTransferTime) && firstTiming !== 'incomplete' && firstTiming !== 'past'));
-  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (companyArrangedReturnPickup
-    ? Boolean(firstTransferDate && returnTransferDate < firstTransferDate)
-    : isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime)));
+  const returnDateBeforeFirst = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && returnTransferDate < firstTransferDate);
+  const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (returnDateBeforeFirst || (!companyArrangedReturnPickup && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime))));
+  const sameDayRoundTrip = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && firstTransferDate === returnTransferDate);
 
   useEffect(() => {
     const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
@@ -104,6 +107,13 @@ export function BookingForm({
   useEffect(() => {
     setPeople((current) => Array.from({ length: passengers }, (_, index) => current[index] ?? { fullName: '', passport: '' }));
   }, [passengers]);
+
+  useEffect(() => {
+    if (firstTransferDate && returnTransferDate && returnTransferDate < firstTransferDate) {
+      setReturnTransferDate('');
+      setReturnTransferTime('');
+    }
+  }, [firstTransferDate, returnTransferDate]);
 
   const total = useMemo(() => {
     const isRoundTrip = journey === 'round-trip';
@@ -130,7 +140,12 @@ export function BookingForm({
 
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
     if (!confirmed) return;
+    if (!whatsapp.trim()) {
+      setStatus('Please enter a contact number. If you do not use WhatsApp, also add your email address.');
+      return;
+    }
     if (!companyArrangedPickup && getBookingTiming(firstTransferDate, firstTransferTime) === 'past') {
       setStatus('The selected date and time has already passed. Please choose a future date and time.');
       return;
@@ -143,8 +158,9 @@ export function BookingForm({
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return; // honeypot
 
-    const bookingId = bookingIdRef.current ?? generateBookingId(SITE.bookingCode);
-    bookingIdRef.current = bookingId;
+    submittingRef.current = true;
+    setIsSubmitting(true);
+    const bookingId = generateBookingId(SITE.bookingCode);
 
     const passengerPayload = people.map((person, index) => ({
       number: index + 1,
@@ -173,6 +189,7 @@ export function BookingForm({
       returnTransferTime: effectiveReturnTransferTime,
       returnFlight,
       whatsapp,
+      email,
       passengerDetails: passengerPayload,
       notes,
       total: `EUR ${total}`,
@@ -208,15 +225,20 @@ export function BookingForm({
       journey === 'round-trip' && companyArrangedReturnPickup ? 'Pickup time: Arranged according to your flight details and confirmed by us.' : '',
       journey === 'round-trip' ? `Return flight: ${returnFlight || '-'}` : '',
       `Contact WhatsApp: ${whatsapp || '-'}`,
+      `Contact email: ${email || '-'}`,
       ...passengerLines,
       `Estimated total: EUR ${total}`,
       'Payment: Cash to the driver',
       notes ? `Notes: ${notes}` : '',
     ].filter(Boolean);
 
-    const url = `https://wa.me/${SITE.whatsappDigits}?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-    setStatus('Your request is ready in WhatsApp. Please send the message there to complete the booking request.');
+    if (whatsapp.trim()) {
+      const url = `https://wa.me/${SITE.whatsappDigits}?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setStatus('Your request is ready in WhatsApp. Please send the message there to complete the booking request.');
+    } else {
+      setStatus('Your booking request is being sent by email.');
+    }
 
     void fetch('/api/booking', {
       method: 'POST',
@@ -225,10 +247,13 @@ export function BookingForm({
       keepalive: true,
     }).then(async (response) => {
       const result = await response.json().catch(() => null) as { email?: string } | null;
-      if (result?.email === 'sent') setStatus('Your WhatsApp request is ready and a booking copy was sent to our inbox. Please send the WhatsApp message to complete the request.');
-      if (!response.ok || result?.email === 'send-failed') setStatus('Your WhatsApp request is ready. The email copy could not be confirmed, so please complete the request in WhatsApp.');
+      if (result?.email === 'sent') setStatus(whatsapp.trim() ? 'Your WhatsApp request is ready and a booking copy was sent to our inbox. Please send the WhatsApp message to complete the request.' : 'Your booking request was sent successfully. We will contact you using the email address you provided.');
+      if (!response.ok || result?.email === 'send-failed') setStatus(whatsapp.trim() ? 'Your WhatsApp request is ready. The email copy could not be confirmed, so please complete the request in WhatsApp.' : 'We could not send your booking request by email. Please add a WhatsApp number or try again.');
     }).catch(() => {
       setStatus('Your WhatsApp request is ready. Please complete the request in WhatsApp.');
+    }).finally(() => {
+      submittingRef.current = false;
+      setIsSubmitting(false);
     });
   }
 
@@ -291,7 +316,7 @@ export function BookingForm({
             <PassengerCounter id={`passengers-${compact ? 'compact' : 'full'}`} label="Passenger count" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
             <div className="field passenger-hotel-field">
               <label htmlFor={`hotel-${compact ? 'compact' : 'full'}`}>Hotel / accommodation</label>
-              <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(e.target.value)} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} required />
+              <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} required /><div className="form-note">Please enter the hotel name using Latin letters.</div>
             </div>
           </div>
 
@@ -368,6 +393,7 @@ export function BookingForm({
                   <TimeSelect idPrefix={`return-time-${compact ? 'compact' : 'full'}`} label="Return flight time" value={returnTransferTime} onChange={setReturnTransferTime} />
                 </div>
               )}
+              {sameDayRoundTrip && <div className="field full booking-time-error" role="alert">⚠️ <span><strong>Same-day round trip selected.</strong> Please double-check the arrival and return flight dates before submitting.</span></div>}
               {returnOrderInvalid && <div className="field full booking-time-error" role="alert">⚠️ <span>Return date and time must be <strong>after the first transfer date and time.</strong></span></div>}
               <div className="field full">
                 <label htmlFor={`return-flight-${compact ? 'compact' : 'full'}`}>Return / departure flight number</label>
@@ -376,9 +402,16 @@ export function BookingForm({
             </>
           )}
 
-          <div className="field full">
-            <label htmlFor={`whatsapp-${compact ? 'compact' : 'full'}`}>Contact WhatsApp number</label>
-            <input id={`whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="Include country code, e.g. +44..." autoComplete="tel" required />
+          <div className="field full contact-methods-row">
+            <div className="field">
+              <label htmlFor={`whatsapp-${compact ? 'compact' : 'full'}`}>Contact number (WhatsApp if available)</label>
+              <input id={`whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="Include country code, e.g. +44..." autoComplete="tel" required />
+            </div>
+            <div className="field">
+              <label htmlFor={`email-${compact ? 'compact' : 'full'}`}>Email address (optional)</label>
+              <input id={`email-${compact ? 'compact' : 'full'}`} name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" autoComplete="email" />
+            </div>
+            <div className="form-note contact-fallback-note">Contact number is required. If you do not use WhatsApp, please also leave your email address.</div>
           </div>
 
           <div className="field full passenger-block">
@@ -389,7 +422,7 @@ export function BookingForm({
               <div className="passenger-row" key={index}>
                 <div className="field">
                   <label htmlFor={`person-name-${compact ? 'c' : 'f'}-${index}`}>Passenger {index + 1} full name</label>
-                  <input id={`person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', e.target.value)} autoComplete={index === 0 ? 'name' : 'off'} required />
+                  <input id={`person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">Use Latin letters only, matching the passport spelling.</div>
                 </div>
                 <div className="field">
                   <label htmlFor={`passport-${compact ? 'c' : 'f'}-${index}`}>Passport number</label>
@@ -425,8 +458,8 @@ export function BookingForm({
           </label>
 
           <div className="field full">
-            <button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid} aria-disabled={returnOrderInvalid}><WhatsAppIcon size={20} /> Submit & Continue on WhatsApp</button>
-            <div className="form-note">Your booking is confirmed only after confirmation on WhatsApp. Shared shuttle coverage includes Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar.</div>
+            <button className="btn btn-whatsapp booking-submit" type="submit" disabled={returnOrderInvalid || isSubmitting} aria-disabled={returnOrderInvalid || isSubmitting} aria-busy={isSubmitting}>{whatsapp.trim() && <WhatsAppIcon size={20} />} {whatsapp.trim() ? 'Submit & Continue on WhatsApp' : 'Submit booking request'}</button>
+            <div className="form-note">Your booking is confirmed only after confirmation from us by WhatsApp or email. Shared shuttle coverage includes Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar.</div>
             {status && <div className="form-status" aria-live="polite">{status}</div>}
           </div>
           </>}

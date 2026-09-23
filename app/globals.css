@@ -134,6 +134,11 @@ p { margin-top: 0; }
 .passenger-heading span { display: block; margin-top: 2px; color: var(--ink-soft); font-size: .77rem; }
 .passenger-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
 .booking-card-compact .passenger-row { grid-template-columns: 1fr; }
+.contact-methods-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.contact-methods-row > .field { min-width: 0; }
+.contact-fallback-note { grid-column: 1 / -1; }
+.booking-card-compact .contact-methods-row { grid-template-columns: 1fr; }
+.booking-card-compact .contact-fallback-note { grid-column: auto; }
 .booking-summary { padding: 14px; border: 1px solid #d9def2; border-radius: 14px; background: #f6f7ff; }
 .booking-summary-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
 .summary-total { color: var(--sea-dark); font-size: 1.22rem; }
@@ -301,7 +306,8 @@ p { margin-top: 0; }
   .prose ul.long-list { columns: 1; }
   .booking-card { padding: 17px; border-radius: 18px; }
   .booking-head h2 { font-size: 1.42rem; }
-  .passenger-row { grid-template-columns: 1fr; }
+  .passenger-row, .contact-methods-row { grid-template-columns: 1fr; }
+  .contact-fallback-note { grid-column: auto; }
   .route-link-grid a { align-items: flex-start; flex-direction: column; gap: 2px; }
   .route-link-grid span { white-space: normal; }
   .footer-grid { grid-template-columns: 1fr; }
