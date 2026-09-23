@@ -97,7 +97,7 @@ p { margin-top: 0; }
 .booking-head p { margin: 0; color: var(--ink-soft); }
 .form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
 .booking-card-compact .form-grid { grid-template-columns: 1fr; gap: 11px; }
-.booking-card-compact .passenger-hotel-row { grid-template-columns: 136px minmax(0,1fr); align-items: end; }
+.booking-card-compact .passenger-hotel-row { grid-template-columns: 136px minmax(0,1fr); align-items: start; }
 .field { display: grid; gap: 6px; min-width: 0; }
 .field.full { grid-column: 1 / -1; }
 .field label, .field > label { font-size: .82rem; font-weight: 800; }
@@ -109,7 +109,7 @@ p { margin-top: 0; }
 .passenger-counter button { min-height: 46px; border: 0; background: var(--mist); color: var(--ink); font-size: 1.25rem; font-weight: 900; cursor: pointer; }
 .passenger-counter button:disabled { opacity: .4; cursor: default; }
 .passenger-counter output { display: grid; place-items: center; min-height: 46px; border-inline: 1px solid #e1e5f2; font-weight: 900; font-variant-numeric: tabular-nums; }
-.passenger-hotel-row { display: grid; grid-template-columns: 136px minmax(0,1fr); align-items: end; gap: 12px; }
+.passenger-hotel-row { display: grid; grid-template-columns: 136px minmax(0,1fr); align-items: start; gap: 12px; }
 .passenger-hotel-row > .field { min-width: 0; }
 .passenger-hotel-row > .field.full { grid-column: auto; }
 .passenger-hotel-field input { min-height: 46px; }
