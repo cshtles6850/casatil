@@ -14,7 +14,7 @@ export function PassengerCounter({
   onChange: (value: number) => void;
 }) {
   return (
-    <div className="field full">
+    <div className="field passenger-count-field">
       <label id={`${id}-label`}>{label}</label>
       <div className="passenger-counter" role="group" aria-labelledby={`${id}-label`}>
         <button type="button" onClick={() => onChange(Math.max(1, value - 1))} disabled={value <= 1} aria-label={`${label} -`}>−</button>
