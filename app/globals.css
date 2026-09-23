@@ -132,7 +132,9 @@ p { margin-top: 0; }
 .passenger-block { padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: #fafbff; }
 .passenger-heading strong { display: block; }
 .passenger-heading span { display: block; margin-top: 2px; color: var(--ink-soft); font-size: .77rem; }
-.passenger-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
+.passenger-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; align-items: start; }
+.passenger-row > .field { align-self: start; align-content: start; }
+.passenger-row input { min-height: 46px; }
 .booking-card-compact .passenger-row { grid-template-columns: 1fr; }
 .contact-methods-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .contact-methods-row > .field { min-width: 0; }
