@@ -1,0 +1,48 @@
+name: IndexNow after production deploy
+
+on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.success
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow-${{ github.event.client_payload.git.sha || github.event.deployment.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  notify-indexnow:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'repository_dispatch' && github.event.client_payload.environment == 'production') ||
+      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' &&
+       (github.event.deployment.environment == 'Production' || github.event.deployment.environment == 'production'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.git.sha || github.event.deployment.sha || github.sha }}
+          fetch-depth: 2
+
+      - name: Restore per-commit IndexNow state
+        id: indexnow-cache
+        uses: actions/cache@v4
+        with:
+          path: .indexnow-state
+          key: indexnow-${{ github.event.client_payload.git.sha || github.event.deployment.sha || github.sha }}
+
+      - name: Notify IndexNow only for changed indexable URLs
+        if: steps.indexnow-cache.outputs.cache-hit != 'true'
+        run: |
+          node scripts/indexnow.mjs
+          mkdir -p .indexnow-state
+          printf '%s\n' '${{ github.event.client_payload.git.sha || github.event.deployment.sha || github.sha }}' > .indexnow-state/submitted-commit.txt
+
+      - name: Skip duplicate notification
+        if: steps.indexnow-cache.outputs.cache-hit == 'true'
+        run: echo 'IndexNow already submitted for this commit; skipping duplicate deployment.'

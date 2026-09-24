@@ -10,6 +10,7 @@ import { NumericDateInput } from './NumericDateInput';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 import { sanitizeLatinHotel, sanitizeLatinName } from '@/lib/booking-input';
+import { hasExplicitCountryCode } from '@/lib/phone';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -93,6 +94,9 @@ export function BookingFormZh({
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
+  const phoneCountryConfirmedRef = useRef(false);
+  const [phoneConfirmPending, setPhoneConfirmPending] = useState(false);
   const submittingRef = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -106,6 +110,7 @@ export function BookingFormZh({
   const returnDateBeforeFirst = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && returnTransferDate < firstTransferDate);
   const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (returnDateBeforeFirst || (!companyArrangedReturnPickup && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime))));
   const sameDayRoundTrip = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && firstTransferDate === returnTransferDate);
+  const phoneCountryCodeMissing = Boolean(whatsapp.trim() && !hasExplicitCountryCode(whatsapp));
 
   useEffect(() => {
     const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
@@ -152,6 +157,18 @@ export function BookingFormZh({
     setPeople((current) => current.map((person, i) => i === index ? { ...person, [field]: value } : person));
   }
 
+  function updateWhatsApp(value: string) {
+    setWhatsapp(value);
+    phoneCountryConfirmedRef.current = false;
+    setPhoneConfirmPending(false);
+  }
+
+  function continueWithCurrentPhone() {
+    phoneCountryConfirmedRef.current = true;
+    setPhoneConfirmPending(false);
+    formRef.current?.requestSubmit();
+  }
+
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submittingRef.current) return;
@@ -171,6 +188,11 @@ export function BookingFormZh({
 
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return;
+    if (phoneCountryCodeMissing && !phoneCountryConfirmedRef.current) {
+      setPhoneConfirmPending(true);
+      setStatus('');
+      return;
+    }
 
     submittingRef.current = true;
     setIsSubmitting(true);
@@ -271,6 +293,7 @@ export function BookingFormZh({
       if (!response.ok || result?.email === 'send-failed') setStatus(whatsapp.trim() ? 'WhatsApp 预订信息已准备好。邮箱副本暂未确认，请务必在 WhatsApp 中发送消息。' : '无法通过电子邮箱发送预订申请。请填写 WhatsApp 号码或稍后重试。');
     }).catch(() => setStatus('WhatsApp 预订信息已准备好，请在 WhatsApp 中发送消息完成申请。')).finally(() => {
       submittingRef.current = false;
+      phoneCountryConfirmedRef.current = false;
       setIsSubmitting(false);
     });
   }
@@ -283,7 +306,7 @@ export function BookingFormZh({
         <p>选择机场与服务，填写航班、乘客和酒店信息，确认总价后继续到 WhatsApp。</p>
       </div>
 
-      <form onSubmit={submit}>
+      <form ref={formRef} onSubmit={submit}>
         <input className="hp-field" tabIndex={-1} autoComplete="off" name="companyWebsite" aria-hidden="true" />
         <div className="form-grid">
           <div className="field full">
@@ -411,13 +434,15 @@ export function BookingFormZh({
           <div className="field full contact-methods-row">
             <div className="field">
               <label htmlFor={`zh-whatsapp-${compact ? 'compact' : 'full'}`}>联系电话（如有 WhatsApp 请填写该号码）</label>
-              <input id={`zh-whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="请包含国家代码，例如 +86..." autoComplete="tel" required />
+              <input id={`zh-whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => updateWhatsApp(e.target.value)} placeholder="请包含国家代码，例如 +86..." autoComplete="tel" required />
             </div>
             <div className="field">
               <label htmlFor={`zh-email-${compact ? 'compact' : 'full'}`}>电子邮箱（可选）</label>
               <input id={`zh-email-${compact ? 'compact' : 'full'}`} name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" autoComplete="email" />
             </div>
             <div className="form-note contact-fallback-note">联系电话为必填项。如果您不使用 WhatsApp，也请留下电子邮箱地址。</div>
+            {phoneCountryCodeMissing && <div className="short-notice-warning phone-country-warning" role="status">⚠️ <span><strong>您的电话号码可能缺少国家/地区代码。</strong>继续前请检查，例如 +86、+44、+90。</span></div>}
+            {phoneConfirmPending && <div className="phone-country-confirm" role="alert"><div><strong>请检查电话号码</strong><span>您的电话号码似乎没有国家/地区代码：<b>{whatsapp}</b>。确定要这样提交吗？</span></div><div className="phone-country-actions"><button type="button" className="btn btn-secondary" onClick={() => { setPhoneConfirmPending(false); document.getElementById(`zh-whatsapp-${compact ? 'compact' : 'full'}`)?.focus(); }}>修改号码</button><button type="button" className="btn btn-primary" onClick={continueWithCurrentPhone}>仍然继续</button></div></div>}
           </div>
 
           <div className="field full passenger-block">

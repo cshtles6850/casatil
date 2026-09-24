@@ -142,6 +142,12 @@ p { margin-top: 0; }
 .contact-methods-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .contact-methods-row > .field { min-width: 0; }
 .contact-fallback-note { grid-column: 1 / -1; }
+.phone-country-warning { grid-column: 1 / -1; }
+.phone-country-confirm { grid-column: 1 / -1; display: grid; gap: 10px; padding: 12px; border: 1px solid #e3b44b; border-radius: 12px; background: #fff8e6; color: #60430a; font-size: .8rem; line-height: 1.45; }
+.phone-country-confirm > div:first-child { display: grid; gap: 3px; }
+.phone-country-confirm strong { color: #513806; }
+.phone-country-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.phone-country-actions .btn { flex: 1 1 150px; min-height: 40px; padding: 8px 12px; }
 .booking-card-compact .contact-methods-row { grid-template-columns: 1fr; }
 .booking-card-compact .contact-fallback-note { grid-column: auto; }
 .booking-summary { padding: 14px; border: 1px solid #d9def2; border-radius: 14px; background: #f6f7ff; }

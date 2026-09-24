@@ -3,6 +3,7 @@ import { SITE } from '@/lib/site';
 import { privateTotal, shuttleTotal, type AirportPriceKey, type PrivateVehicleKey } from '@/lib/prices';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { isLatinHotel, isLatinName } from '@/lib/booking-input';
+import { phoneDigits } from '@/lib/phone';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -112,7 +113,7 @@ export async function POST(request: NextRequest) {
   const firstTiming = validDate && !companyArrangedPickup && validTime ? getBookingTiming(data.firstTransferDate, effectiveFirstTransferTime) : 'incomplete';
   const validFutureTime = companyArrangedPickup ? validDate && data.firstTransferDate >= todayInIstanbul() : firstTiming !== 'incomplete' && firstTiming !== 'past';
   const isVito = data.vehicle === 'Mercedes Vito (max 5)';
-  const whatsappDigits = data.whatsapp.replace(/\D/g, '').replace(/^00/, '');
+  const whatsappDigits = phoneDigits(data.whatsapp);
   const validWhatsApp = Boolean(data.whatsapp) && whatsappDigits.length >= 7 && whatsappDigits.length <= 15;
   const validEmail = !data.email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
   const hasContact = Boolean(data.whatsapp);

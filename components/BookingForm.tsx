@@ -10,6 +10,7 @@ import { NumericDateInput } from './NumericDateInput';
 import { getBookingTiming, isAfterBookingDateTime, todayInIstanbul } from '@/lib/booking-time';
 import { privateOneWayPrice, privateTotal, shuttleOneWayPrice, shuttleTotal } from '@/lib/prices';
 import { sanitizeLatinHotel, sanitizeLatinName } from '@/lib/booking-input';
+import { hasExplicitCountryCode } from '@/lib/phone';
 
 type TransferType = 'shuttle' | 'private';
 type Journey = 'one-way' | 'round-trip';
@@ -79,6 +80,9 @@ export function BookingForm({
   const [notes, setNotes] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
+  const phoneCountryConfirmedRef = useRef(false);
+  const [phoneConfirmPending, setPhoneConfirmPending] = useState(false);
   const submittingRef = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -92,6 +96,7 @@ export function BookingForm({
   const returnDateBeforeFirst = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && returnTransferDate < firstTransferDate);
   const returnOrderInvalid = Boolean(journey === 'round-trip' && returnTransferDate && (returnDateBeforeFirst || (!companyArrangedReturnPickup && isValidTime(returnTransferTime) && !isAfterBookingDateTime(returnTransferDate, returnTransferTime, firstTransferDate, firstTransferTime))));
   const sameDayRoundTrip = Boolean(journey === 'round-trip' && firstTransferDate && returnTransferDate && firstTransferDate === returnTransferDate);
+  const phoneCountryCodeMissing = Boolean(whatsapp.trim() && !hasExplicitCountryCode(whatsapp));
 
   useEffect(() => {
     const timer = window.setInterval(() => setClockTick(Date.now()), 60_000);
@@ -138,6 +143,18 @@ export function BookingForm({
     setPeople((current) => current.map((person, i) => i === index ? { ...person, [field]: value } : person));
   }
 
+  function updateWhatsApp(value: string) {
+    setWhatsapp(value);
+    phoneCountryConfirmedRef.current = false;
+    setPhoneConfirmPending(false);
+  }
+
+  function continueWithCurrentPhone() {
+    phoneCountryConfirmedRef.current = true;
+    setPhoneConfirmPending(false);
+    formRef.current?.requestSubmit();
+  }
+
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submittingRef.current) return;
@@ -157,6 +174,11 @@ export function BookingForm({
 
     const form = new FormData(e.currentTarget);
     if (String(form.get('companyWebsite') || '').trim()) return; // honeypot
+    if (phoneCountryCodeMissing && !phoneCountryConfirmedRef.current) {
+      setPhoneConfirmPending(true);
+      setStatus('');
+      return;
+    }
 
     submittingRef.current = true;
     setIsSubmitting(true);
@@ -253,6 +275,7 @@ export function BookingForm({
       setStatus('Your WhatsApp request is ready. Please complete the request in WhatsApp.');
     }).finally(() => {
       submittingRef.current = false;
+      phoneCountryConfirmedRef.current = false;
       setIsSubmitting(false);
     });
   }
@@ -265,7 +288,7 @@ export function BookingForm({
         <p>Choose the airport and service, enter flight and passenger details, then review the total before continuing to WhatsApp.</p>
       </div>
 
-      <form onSubmit={submit}>
+      <form ref={formRef} onSubmit={submit}>
         <input className="hp-field" tabIndex={-1} autoComplete="off" name="companyWebsite" aria-hidden="true" />
         <div className="form-grid">
           <div className="field full">
@@ -405,13 +428,15 @@ export function BookingForm({
           <div className="field full contact-methods-row">
             <div className="field">
               <label htmlFor={`whatsapp-${compact ? 'compact' : 'full'}`}>Contact number (WhatsApp if available)</label>
-              <input id={`whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="Include country code, e.g. +44..." autoComplete="tel" required />
+              <input id={`whatsapp-${compact ? 'compact' : 'full'}`} name="whatsapp" type="tel" value={whatsapp} onChange={(e) => updateWhatsApp(e.target.value)} placeholder="Include country code, e.g. +44..." autoComplete="tel" required />
             </div>
             <div className="field">
               <label htmlFor={`email-${compact ? 'compact' : 'full'}`}>Email address (optional)</label>
               <input id={`email-${compact ? 'compact' : 'full'}`} name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" autoComplete="email" />
             </div>
             <div className="form-note contact-fallback-note">Contact number is required. If you do not use WhatsApp, please also leave your email address.</div>
+            {phoneCountryCodeMissing && <div className="short-notice-warning phone-country-warning" role="status">⚠️ <span><strong>Your number may be missing the country code.</strong> Please check it before continuing (for example +44, +82, +90).</span></div>}
+            {phoneConfirmPending && <div className="phone-country-confirm" role="alert"><div><strong>Check your phone number</strong><span>Your phone number does not appear to include a country code: <b>{whatsapp}</b>. Is this correct?</span></div><div className="phone-country-actions"><button type="button" className="btn btn-secondary" onClick={() => { setPhoneConfirmPending(false); document.getElementById(`whatsapp-${compact ? 'compact' : 'full'}`)?.focus(); }}>Fix number</button><button type="button" className="btn btn-primary" onClick={continueWithCurrentPhone}>Continue anyway</button></div></div>}
           </div>
 
           <div className="field full passenger-block">

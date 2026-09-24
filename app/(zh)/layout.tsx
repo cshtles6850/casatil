@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   openGraph: { type: 'website', siteName: SITE.name, locale: 'zh_CN', title: '卡帕多奇亚机场接送 | ASR 与 NAV', description: '开塞利与内夫谢希尔机场到卡帕多奇亚酒店的共享班车和私人 Vito/Sprinter 接送。', url: `${SITE.domain}/zh-cn`, images: [{ url: '/cappadocia-airport-shuttle-vito-sprinter.webp', width: 1200, height: 675, alt: '卡帕多奇亚机场接送 Mercedes Vito 与 Sprinter' }] },
   twitter: { card: 'summary_large_image', title: '卡帕多奇亚机场接送', description: '开塞利与内夫谢希尔机场到卡帕多奇亚酒店。', images: ['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
-  other: { 'applicable-device': 'pc,mobile' },
+  other: { 'applicable-device': 'pc,mobile', 'seznam-wmt': 'qNOe1BKzdZHCKlrSsy7WbekpxlbBFtIN', 'Petal-Search-site-verification': '9053f928ae' },
 };
 
 export default function ChineseRootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
