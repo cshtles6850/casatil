@@ -14,7 +14,7 @@ export const PRICES = {
     },
   },
   nevsehir: {
-    shuttle: { oneWayPerPerson: 10 },
+    shuttle: { oneWayPerPerson: 15 },
     private: {
       vito: { oneWayPerVehicle: 80 },
       sprinter: { oneWayPerVehicle: 90 },
