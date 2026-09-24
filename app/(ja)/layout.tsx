@@ -6,5 +6,5 @@ import { JsonLd } from '@/components/JsonLd';
 import { SITE } from '@/lib/site';
 import { localeHtmlLang } from '@/lib/locale-config';
 
-export const metadata: Metadata = {metadataBase:new URL(SITE.domain),robots:{index:true,follow:true},other:{'applicable-device':'pc,mobile','seznam-wmt':'qNOe1BKzdZHCKlrSsy7WbekpxlbBFtIN','Petal-Search-site-verification':'9053f928ae'}};
+export const metadata: Metadata = {metadataBase:new URL(SITE.domain),robots:{index:true,follow:true},other:{'applicable-device':'pc,mobile','seznam-wmt':'d5dsiGtndyURKORyIGWUOiFqdRMbtOGT','Petal-Search-site-verification':'9053f928ae'}};
 export default function Layout({children}:Readonly<{children:React.ReactNode}>){const org={'@context':'https://schema.org','@type':'TravelAgency',name:SITE.name,url:SITE.domain,telephone:SITE.whatsappDisplay,areaServed:['Goreme','Urgup','Uchisar','Avanos','Ortahisar','Cavusin','Kayseri Airport','Nevsehir Airport'],identifier:`TURSAB ${SITE.tursab}`,parentOrganization:{'@type':'Organization',name:SITE.company}};return <html lang={localeHtmlLang['ja']}><head><script src="https://analytics.ahrefs.com/analytics.js" data-key="JtSCb+u8cD998Q5+cUfyTg" async /></head><body><JsonLd data={org}/><LocalizedHeader locale="ja"/>{children}<LocalizedFooter locale="ja"/></body></html>}

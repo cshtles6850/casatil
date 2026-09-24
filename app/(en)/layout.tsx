@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: { default: 'Cappadocia Airport Shuttle | Kayseri & Nevsehir Airports', template: '%s | Cappadocia Airport Shuttle' },
   description: 'Cappadocia Airport Shuttle from Kayseri Airport (ASR) and Nevsehir Airport (NAV) to Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. Shared shuttle and private Vito/Sprinter transfers with WhatsApp booking.',
   robots: { index: true, follow: true },
-  other: { 'applicable-device': 'pc,mobile', 'seznam-wmt': 'qNOe1BKzdZHCKlrSsy7WbekpxlbBFtIN', 'Petal-Search-site-verification': '9053f928ae' },
+  other: { 'applicable-device': 'pc,mobile', 'seznam-wmt': 'd5dsiGtndyURKORyIGWUOiFqdRMbtOGT', 'Petal-Search-site-verification': '9053f928ae' },
   openGraph: { type: 'website', siteName: SITE.name, title: 'Cappadocia Airport Shuttle | Kayseri & Nevsehir', description: 'Shared airport shuttle plus private Vito and Sprinter transfers from Kayseri and Nevsehir airports to Cappadocia hotels.', url: SITE.domain, images: [{ url: '/cappadocia-airport-shuttle-vito-sprinter.webp', width: 1200, height: 675, alt: 'Cappadocia Airport Shuttle Vito and Sprinter' }] },
   twitter: { card: 'summary_large_image', title: 'Cappadocia Airport Shuttle', description: 'Kayseri & Nevsehir Airport shuttle to Cappadocia hotels.', images: ['/cappadocia-airport-shuttle-vito-sprinter.webp'] },
 };
