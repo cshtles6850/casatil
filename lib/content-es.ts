@@ -29,6 +29,37 @@ const sprinterSavingsBlocks: EsContentBlock[] = asrSavingsThreshold === null ? [
   { kind: 'paragraph', text: `A partir de ${asrSavingsThreshold} pasajeros, el Sprinter privado cuesta menos que el shuttle compartido.` },
 ];
 
+function navSprinterComparisonBlocks(): EsContentBlock[] {
+  const shuttlePrice = shuttleOneWayPrice('nevsehir');
+  const sprinterPrice = privateOneWayPrice('nevsehir', 'sprinter');
+  if (!Number.isFinite(shuttlePrice) || !Number.isFinite(sprinterPrice) || shuttlePrice <= 0 || sprinterPrice <= 0) return [];
+  const shuttleCents = Math.round(shuttlePrice * 100);
+  const sprinterCents = Math.round(sprinterPrice * 100);
+  if (!Number.isSafeInteger(shuttleCents) || !Number.isSafeInteger(sprinterCents) ||
+      shuttleCents <= 0 || sprinterCents <= 0 ||
+      Math.abs(shuttleCents / 100 - shuttlePrice) > 0.000001 ||
+      Math.abs(sprinterCents / 100 - sprinterPrice) > 0.000001) return [];
+
+  const equalOrCheaperFrom = Math.ceil(sprinterCents / shuttleCents);
+  const strictlyCheaperFrom = Math.floor(sprinterCents / shuttleCents) + 1;
+  const hasEquality = sprinterCents % shuttleCents === 0 &&
+    equalOrCheaperFrom >= 1 && equalOrCheaperFrom <= 16;
+  const hasCheaperAdvantage = strictlyCheaperFrom >= 1 && strictlyCheaperFrom <= 16 &&
+    strictlyCheaperFrom * shuttleCents > sprinterCents;
+
+  if (!hasEquality && !hasCheaperAdvantage) return [];
+  const equalText = hasEquality
+    ? `Para ${equalOrCheaperFrom} pasajeros, el Sprinter privado cuesta lo mismo que el shuttle compartido.`
+    : '';
+  const cheaperText = hasCheaperAdvantage
+    ? hasEquality
+      ? `A partir de ${strictlyCheaperFrom} pasajeros, resulta más económico.`
+      : `A partir de ${strictlyCheaperFrom} pasajeros, el Sprinter privado resulta más económico que el shuttle compartido.`
+    : '';
+  return [{ kind: 'paragraph', text: [equalText, cheaperText].filter(Boolean).join(' ') }];
+}
+const navSprinterComparison = navSprinterComparisonBlocks();
+
 const rawEsPages: EsSeoPage[] = [
   {
     "slug": "cappadocia-shuttle-transfer",
@@ -2050,7 +2081,7 @@ const rawEsPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Avanos al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 38 km y 35–50 min.",
     "eyebrow": "Avanos → NAV",
     "h1": "Shuttle de Avanos al Aeropuerto de Nevsehir",
-    "lead": "La recogida desde Avanos al Aeropuerto de Nevsehir (NAV) está disponible en shuttle compartido por {{PRICE:nevsehir:shuttle}} por persona y trayecto o en Vito/Sprinter privado. La distancia habitual es de unos 38 km y el trayecto suele durar 35–50 minutos. Los alojamientos de Avanos están repartidos por distintas zonas, por lo que el nombre completo del hotel ayuda a confirmar el punto correcto. Sigue la hora confirmada, que también contempla otras recogidas y el margen de llegada al aeropuerto.",
+    "lead": "¿Tu vuelo sale del Aeropuerto de Nevsehir Kapadokya (NAV) y te alojas en Avanos? Puedes reservar un shuttle compartido con recogida en tu hotel o elegir un traslado privado para tu grupo.",
     "route": {
       "airport": "nevsehir",
       "town": "avanos",
@@ -2058,27 +2089,157 @@ const rawEsPages: EsSeoPage[] = [
     },
     "sections": [
       {
-        "heading": "Avanos a Nevsehir: unos 38 km / 35–50 minutos",
-        "paragraphs": [
-          "La estimación cubre la conducción; la hora real de recogida también depende de otras recogidas compartidas y del margen de llegada al aeropuerto. Los alojamientos de Avanos se reparten por distintas partes de la localidad, así que el nombre completo ayuda a confirmar el punto correcto en vez de depender de una ubicación genérica de “Avanos”.",
-          "¿Vuelas desde ASR? Consulta [[Avanos al Aeropuerto de Kayseri|avanos-to-kayseri-airport-shuttle]]."
+        "heading": "Recogida en Avanos: del centro histórico a la zona del río",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Avanos es conocido por sus talleres de cerámica, sus casas tradicionales y el río Kızılırmak. Sin embargo, no todos los alojamientos están concentrados en una misma zona ni tienen el mismo acceso para vehículos."
+          },
+          {
+            "kind": "subheading",
+            "text": "Hoteles del centro y del casco antiguo"
+          },
+          {
+            "kind": "paragraph",
+            "text": "En la parte histórica de Avanos encontrarás casas de piedra, pequeños hoteles y alojamientos cerca de los talleres de cerámica. Algunas calles son estrechas o tienen pendientes, por lo que el lugar de recogida depende de la entrada y del espacio disponible para detener el vehículo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si no podemos acceder directamente a la puerta, te comunicaremos un punto cercano donde sea posible realizar la recogida con seguridad."
+          },
+          {
+            "kind": "subheading",
+            "text": "Alojamientos cerca del río Kızılırmak"
+          },
+          {
+            "kind": "paragraph",
+            "text": "En los alrededores del río y de los puentes que conectan distintas partes de Avanos también hay hoteles y establecimientos turísticos."
+          },
+          {
+            "kind": "paragraph",
+            "text": "La cercanía al río no determina por sí sola el punto de recogida. Para localizar correctamente tu alojamiento necesitamos su nombre completo, especialmente si existen establecimientos con nombres parecidos."
+          },
+          {
+            "kind": "subheading",
+            "text": "Hoteles en las afueras de Avanos"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Algunos alojamientos se encuentran fuera de las calles más céntricas, junto a carreteras de acceso o en propiedades con entradas independientes."
+          },
+          {
+            "kind": "paragraph",
+            "text": "En estos casos, la ubicación exacta del hotel es importante para comprobar la recogida y coordinar el servicio."
+          }
         ]
       },
       {
-        "heading": "Traslado privado para esta ruta",
+        "heading": "¿Cómo se organiza la salida hacia el Aeropuerto de Nevsehir?",
         "paragraphs": [
-          "Vito privado {{PRICE:nevsehir:vito}} por vehículo y trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} por vehículo y trayecto para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "El shuttle compartido no tiene una hora fija de salida desde Avanos. La recogida se organiza según los vuelos de los pasajeros y las condiciones del servicio.",
+          "Aunque el recorrido hasta NAV suele durar entre 35 y 50 minutos, este tiempo corresponde aproximadamente a la conducción. Si viajas en shuttle compartido, pueden realizarse otras recogidas antes de continuar hacia el aeropuerto.",
+          "También se tiene en cuenta el margen necesario para llegar con tiempo suficiente para los trámites del vuelo.",
+          "**Si tienes un vuelo temprano**, prepara el equipaje y organiza la salida del alojamiento con antelación. La hora válida será la que te comuniquemos una vez coordinada tu reserva.",
+          "Si la compañía aérea modifica la hora de salida o cambia el número de vuelo, envíanos los nuevos datos por WhatsApp lo antes posible para revisar la recogida."
+        ]
+      },
+      {
+        "heading": "Shuttle compartido o traslado privado: precios desde Avanos",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Shuttle compartido"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:nevsehir:shuttle}} por persona y trayecto.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Es una opción económica para viajeros individuales, parejas y grupos pequeños. Compartirás el vehículo con otros pasajeros que también se dirijan al aeropuerto."
+          },
+          {
+            "kind": "subheading",
+            "text": "Mercedes Vito privado"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:nevsehir:vito}} por vehículo y trayecto.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Capacidad máxima de 5 pasajeros. El vehículo está reservado exclusivamente para tu grupo y no realiza recogidas de pasajeros de otras reservas."
+          },
+          {
+            "kind": "subheading",
+            "text": "Mercedes Sprinter privado"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:nevsehir:sprinter}} por vehículo y trayecto.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Capacidad máxima de 16 pasajeros. Es una alternativa para familias numerosas y grupos que prefieren viajar juntos directamente al aeropuerto."
+          },
+          {
+            "kind": "subheading",
+            "text": "¿Cuándo resulta más económico un Sprinter?"
+          },
+          ...navSprinterComparison,
+          {
+            "kind": "paragraph",
+            "text": "El precio del shuttle compartido se calcula por persona, mientras que el traslado privado se cobra por vehículo. Si llevas equipaje especialmente voluminoso, indícalo antes de reservar para comprobar la capacidad adecuada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Consulta también las opciones de [[traslado privado en Capadocia|private-airport-transfer-cappadocia]]."
+          }
+        ]
+      },
+      {
+        "heading": "¿Tu vuelo sale de Kayseri en lugar de Nevsehir?",
+        "paragraphs": [
+          "El Aeropuerto de Nevsehir (NAV) y el Aeropuerto de Kayseri (ASR) son aeropuertos diferentes. Desde Avanos, la distancia por carretera hasta Kayseri es mayor.",
+          "Antes de hacer la reserva, comprueba el código que aparece en tu billete.",
+          "Si tu vuelo sale de ASR, consulta la información específica del [[shuttle de Avanos al Aeropuerto de Kayseri|avanos-to-kayseri-airport-shuttle]]."
+        ]
+      },
+      {
+        "heading": "Reserva y preparación del viaje",
+        "paragraphs": [
+          "Para organizar tu traslado, indica la fecha de salida, el número de vuelo, los nombres de los pasajeros, el nombre completo del alojamiento, el número de personas y un contacto de WhatsApp.",
+          "Puedes solicitar un traslado de solo ida o de ida y vuelta. El pago se realiza en efectivo directamente al conductor, en euros (EUR), dólares estadounidenses (USD) o liras turcas (TRY).",
+          "Si reservas también el trayecto de llegada, consulta cómo funciona el [[shuttle del Aeropuerto de Nevsehir a Avanos|nevsehir-airport-to-avanos-shuttle]], incluido el encuentro con el conductor en la terminal."
         ]
       }
     ],
     "faq": [
       {
-        "q": "¿Cuánto se tarda por carretera de Avanos al Aeropuerto de Nevsehir?",
-        "a": "La estimación habitual es de unos 38 km / 35–50 minutos."
+        "q": "¿Cuánto cuesta el shuttle de Avanos al Aeropuerto de Nevsehir?",
+        "a": "El shuttle compartido cuesta {{PRICE:nevsehir:shuttle}} por persona y trayecto. Si prefieres viajar en privado, el Mercedes Vito cuesta {{PRICE:nevsehir:vito}} y el Sprinter {{PRICE:nevsehir:sprinter}}, ambos por vehículo y trayecto."
       },
       {
-        "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito {{PRICE:nevsehir:vito}} por vehículo y trayecto para hasta 5 pasajeros y Sprinter {{PRICE:nevsehir:sprinter}} por vehículo y trayecto para hasta 16, ambos por vehículo."
+        "q": "¿A qué hora me recogerán si mi vuelo sale temprano?",
+        "a": "La hora de recogida se establece según los datos de tu vuelo y la organización del servicio. Te la comunicaremos una vez coordinada tu reserva, sin que tengas que calcularla únicamente a partir del tiempo de conducción."
+      },
+      {
+        "q": "¿Puedo salir desde un hotel del casco antiguo de Avanos?",
+        "a": "Sí, siempre que el acceso permita realizar la recogida de forma segura. Si el vehículo no puede llegar a la entrada, te indicaremos un punto cercano y accesible."
+      },
+      {
+        "q": "¿Qué ocurre si la compañía aérea cambia mi vuelo?",
+        "a": "Envíanos el nuevo horario o número de vuelo por WhatsApp lo antes posible. Revisaremos la organización del traslado y te comunicaremos la información actualizada."
+      },
+      {
+        "q": "¿Puedo pagar al conductor en liras turcas o dólares?",
+        "a": "Sí. El pago se realiza en efectivo y aceptamos EUR, USD y TRY."
+      },
+      {
+        "q": "¿Puedo reservar también el traslado desde NAV hasta Avanos?",
+        "a": "Sí. Selecciona la opción de ida y vuelta e introduce los datos de ambos vuelos. La recogida en el aeropuerto y la salida desde el hotel se organizan por separado."
       }
     ],
     "related": [
@@ -2090,7 +2251,15 @@ const rawEsPages: EsSeoPage[] = [
       "airport-transfer-prices"
     ],
     "twitterTitle": "Shuttle de Avanos al Aeropuerto de Nevsehir | Recogida en hotel",
-    "twitterDescription": "Recogida en hotel de Avanos al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 38 km y 35–50 min."
+    "twitterDescription": "Recogida en hotel de Avanos al Aeropuerto de Nevsehir (NAV) en shuttle compartido o privado; unos 38 km y 35–50 min.",
+    "introParagraphs": [
+      "Avanos se encuentra a unos 38 km del aeropuerto y el trayecto por carretera suele durar entre 35 y 50 minutos. La localidad está situada a orillas del río Kızılırmak, con alojamientos distribuidos entre el centro, el casco antiguo y otras zonas. Por eso, organizamos la recogida según la ubicación de tu alojamiento y los datos de tu vuelo.",
+      "**Shuttle compartido:** {{PRICE:nevsehir:shuttle}} por persona y trayecto.",
+      "**Traslado privado:** Mercedes Vito o Sprinter, con tarifa por vehículo."
+    ],
+    "relatedDescriptions": {
+      "nevsehir-airport-to-avanos-shuttle": "Encuentro en la terminal de NAV y traslado hasta tu alojamiento en Avanos."
+    }
   },
   {
     "slug": "ortahisar-to-nevsehir-airport-shuttle",
