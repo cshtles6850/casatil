@@ -18,8 +18,6 @@ type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
 type Passenger = { fullName: string };
-const AIRBNB_MEETING_POINT = 'Meeting hotel to be confirmed';
-
 type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportDisplayLabels: Record<Airport, string> = {
@@ -348,16 +346,13 @@ export function BookingFormZh({
             <PassengerCounter id={`zh-passengers-${compact ? 'compact' : 'full'}`} label="乘客人数" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
             <div className="field passenger-hotel-field">
               <label htmlFor={`zh-hotel-${compact ? 'compact' : 'full'}`}>酒店 / 住宿</label>
-              <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} readOnly={hotel === AIRBNB_MEETING_POINT} required /><div className="form-note">请仅填写完整酒店名称，不要填写街道地址，并使用拉丁字母。</div>
+              <input id={`zh-hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination ? `请填写${townZhLabels[destination]}的完整酒店名称` : '请填写完整酒店名称'} required /><div className="form-note">请仅填写完整酒店名称，不要填写街道地址，并使用拉丁字母。</div>
               <details className="airbnb-help">
                 <summary>住在 Airbnb？如何安排接送？</summary>
                 <div className="airbnb-help-panel">
-                  <p>我们不直接到 Airbnb 地址接送。可安排在车辆能够安全抵达的附近合适酒店门前上下车。请在上方填写该酒店名称。</p>
-                  <p>如果您不知道附近的酒店，请勾选下方选项。我们会在接送前通过 WhatsApp 与您确认会合地点。</p>
-                  <label className="airbnb-meeting-option">
-                    <input type="checkbox" checked={hotel === AIRBNB_MEETING_POINT} onChange={(e) => setHotel(e.target.checked ? AIRBNB_MEETING_POINT : '')} />
-                    <span>我不知道附近的酒店，请帮我确认会合地点。</span>
-                  </label>
+                  <p>我们不提供直接在 Airbnb 地址接送乘客的服务。</p>
+                  <p>我们可以将您送到 Airbnb 住宿地点附近的一家酒店门前，也可以在同一地点接您上车。</p>
+                  <p>请使用 Google 地图查找距离 Airbnb 地址最近的酒店，并在预订表单中填写该酒店的完整名称。</p>
                 </div>
               </details>
             </div>
