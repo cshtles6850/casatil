@@ -1,9 +1,11 @@
 import { towns } from './site';
 import { resolvePriceTokensDeep } from './price-content';
+import { shuttleOneWayPrice, privateOneWayPrice } from './prices';
 
-export type EsContentSection = { heading: string; paragraphs: string[]; bullets?: string[] };
+export type EsContentBlock = { kind: 'paragraph' | 'subheading'; text: string };
+export type EsContentSection = { heading: string; paragraphs: string[]; bullets?: string[]; blocks?: EsContentBlock[] };
 export type EsFaqItem = { q: string; a: string };
-export type EsSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; sections: EsContentSection[]; faq: EsFaqItem[]; related: string[]; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
+export type EsSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; introParagraphs?: string[]; sections: EsContentSection[]; faq: EsFaqItem[]; related: string[]; relatedDescriptions?: Record<string,string>; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
 
 export const townNamesEs: Record<keyof typeof towns, string> = {
   "goreme": "Goreme",
@@ -13,6 +15,19 @@ export const townNamesEs: Record<keyof typeof towns, string> = {
   "ortahisar": "Ortahisar",
   "cavusin": "Cavusin"
 };
+
+// Use only central ASR one-way fares; the first strictly cheaper count is floor(P / S) + 1.
+function getAsrSprinterSavingsThreshold(): number | null {
+  const shuttle = shuttleOneWayPrice('kayseri');
+  const sprinter = privateOneWayPrice('kayseri', 'sprinter');
+  if (!Number.isFinite(shuttle) || !Number.isFinite(sprinter) || shuttle <= 0 || sprinter <= 0) return null;
+  const threshold = Math.floor(sprinter / shuttle) + 1;
+  return threshold >= 1 && threshold <= 16 && threshold * shuttle > sprinter ? threshold : null;
+}
+const asrSavingsThreshold = getAsrSprinterSavingsThreshold();
+const sprinterSavingsBlocks: EsContentBlock[] = asrSavingsThreshold === null ? [] : [
+  { kind: 'paragraph', text: `A partir de ${asrSavingsThreshold} pasajeros, el Sprinter privado cuesta menos que el shuttle compartido.` },
+];
 
 const rawEsPages: EsSeoPage[] = [
   {
@@ -1681,7 +1696,11 @@ const rawEsPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 65–80 min.",
     "eyebrow": "Cavusin → ASR",
     "h1": "Shuttle de Cavusin al Aeropuerto de Kayseri",
-    "lead": "La recogida desde Cavusin al Aeropuerto de Kayseri (ASR) está disponible en shuttle compartido por {{PRICE:kayseri:shuttle}} por persona y trayecto o en Vito/Sprinter privado. La distancia habitual es de unos 75 km y el trayecto suele durar 65–80 minutos. Los alojamientos pueden estar junto a la carretera principal, cerca del pueblo antiguo o hacia los valles, por lo que importa el punto confirmado. Sigue la hora confirmada, que contempla otras recogidas y el margen de llegada.",
+    "lead": "Si tu vuelo sale del Aeropuerto de Kayseri Erkilet (ASR) y te alojas en Cavusin (Çavuşin), puedes reservar un shuttle compartido o un traslado privado con recogida en tu alojamiento o en el punto accesible confirmado. No necesitas desplazarte primero a Göreme para tomar el transporte al aeropuerto.",
+    "introParagraphs": [
+      "El trayecto es de aproximadamente 75 km y suele durar entre 65 y 80 minutos por carretera. El servicio compartido cuesta **{{PRICE:kayseri:shuttle}} por persona y trayecto**, mientras que los vehículos privados tienen una tarifa por vehículo.",
+      "La recogida se organiza según los datos de tu vuelo y las condiciones del servicio."
+    ],
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1689,48 +1708,173 @@ const rawEsPages: EsSeoPage[] = [
     },
     "sections": [
       {
-        "heading": "Cavusin a Kayseri: unos 75 km / 65–80 minutos",
+        "heading": "Cómo se organiza la recogida para tu vuelo",
         "paragraphs": [
-          "La estimación corresponde a la conducción; la hora real también depende de otras recogidas y del margen del aeropuerto. Los alojamientos pueden estar junto a la carretera principal, cerca del pueblo antiguo o hacia los accesos de los valles, por lo que el punto confirmado es esencial para planificar la salida."
+          "El shuttle compartido desde Cavusin no tiene una hora fija de salida para todos los pasajeros. La recogida se coordina según los vuelos, las posibles paradas en otros alojamientos y el margen necesario para llegar al aeropuerto.",
+          "Por eso necesitamos conocer el número de vuelo y la fecha de salida. Te comunicaremos la hora de recogida una vez organizado el servicio.",
+          "Si tu vuelo sale muy temprano, conviene preparar el equipaje y organizar la salida del alojamiento la noche anterior.",
+          "En algunas mañanas también puede haber movimiento de vehículos relacionados con los vuelos en globo en los alrededores del pueblo. Las condiciones del tráfico local pueden variar, especialmente al amanecer."
         ]
       },
       {
-        "heading": "Las mañanas de globos pueden añadir tráfico local en Cavusin",
-        "paragraphs": [
-          "La actividad de globos a primera hora puede añadir tráfico local alrededor de Cavusin, así que estate listo en el punto confirmado antes de que empiece la franja de recogida.",
-          "¿Vuelas desde NAV? Consulta [[Cavusin al Aeropuerto de Nevsehir|cavusin-to-nevsehir-airport-shuttle]]."
+        "heading": "Dónde te recogemos en Cavusin",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Aunque Cavusin es un pueblo pequeño situado entre Göreme y Avanos, sus alojamientos se encuentran en zonas con accesos diferentes. Conocer el hotel exacto es especialmente importante cuando se viaja al aeropuerto."
+          },
+          {
+            "kind": "subheading",
+            "text": "Alojamientos cerca de la carretera Göreme–Avanos"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Los establecimientos situados junto a la carretera principal suelen tener accesos más directos para los vehículos. La recogida se coordina utilizando la entrada accesible del alojamiento y las condiciones de parada disponibles."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Esta zona incluye los alrededores de la iglesia de Cavusin, conocida también como la iglesia de Nicéforo Focas."
+          },
+          {
+            "kind": "subheading",
+            "text": "Hoteles del pueblo antiguo"
+          },
+          {
+            "kind": "paragraph",
+            "text": "En la parte histórica, cerca de la iglesia de San Juan Bautista, algunas calles son estrechas, inclinadas o tienen accesos limitados."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si el vehículo no puede llegar con seguridad hasta la entrada de tu hotel, te indicaremos el punto accesible más cercano. Esto evita confusiones al salir con el equipaje, especialmente durante las primeras horas de la mañana."
+          },
+          {
+            "kind": "subheading",
+            "text": "Alojamientos cerca de los valles"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Algunos establecimientos están situados hacia los accesos de Güllüdere (Valle de las Rosas) y Kızılçukur (Valle Rojo), fuera de las calles principales del pueblo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "En estas zonas es importante facilitar el nombre completo del alojamiento para determinar el lugar adecuado de recogida. La accesibilidad depende de la ubicación concreta y del vehículo utilizado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Importante:** si te alojas en un Airbnb o apartamento particular, no ofrecemos recogidas directamente en direcciones privadas de Airbnb. Utiliza como referencia un hotel cercano y accesible, siguiendo las indicaciones del formulario de reserva."
+          }
         ]
       },
       {
-        "heading": "El pueblo antiguo y la carretera principal no son el mismo entorno de recogida",
-        "paragraphs": [
-          "Como los alojamientos se reparten entre distintas partes de Cavusin, el vehículo necesita el punto confirmado y no una ubicación genérica, especialmente en una mañana de salida hacia Kayseri."
+        "heading": "Shuttle compartido o traslado privado desde Cavusin",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "La opción más adecuada depende del número de pasajeros, el equipaje y el tipo de viaje que prefieras."
+          },
+          {
+            "kind": "subheading",
+            "text": "Shuttle compartido"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:kayseri:shuttle}} por persona y trayecto.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Una opción económica para quienes viajan solos, en pareja o en grupos pequeños. El vehículo puede realizar otras recogidas antes de continuar hacia Kayseri."
+          },
+          {
+            "kind": "subheading",
+            "text": "Mercedes Vito privado"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:kayseri:vito}} por vehículo y trayecto.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Capacidad máxima de 5 pasajeros. El vehículo se reserva exclusivamente para tu grupo, sin recogidas de pasajeros de otras reservas."
+          },
+          {
+            "kind": "subheading",
+            "text": "Mercedes Sprinter privado"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:kayseri:sprinter}} por vehículo y trayecto.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Capacidad máxima de 16 pasajeros. Es una alternativa para familias numerosas y grupos que prefieren viajar juntos directamente al aeropuerto."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**¿Viajas en grupo?**"
+          },
+          ...sprinterSavingsBlocks,
+          {
+            "kind": "paragraph",
+            "text": "El ahorro depende del número de pasajeros y de las tarifas vigentes. Recuerda que la capacidad máxima indicada no garantiza espacio ilimitado para equipaje voluminoso."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Puedes consultar también nuestro servicio de [[traslado privado en Capadocia|private-airport-transfer-cappadocia]]."
+          }
         ]
       },
       {
-        "heading": "Traslado privado para esta ruta",
+        "heading": "Cambios de vuelo, equipaje y reserva",
         "paragraphs": [
-          "Vito privado {{PRICE:kayseri:vito}} por vehículo y trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} por vehículo y trayecto para hasta 16. Consulta [[Traslado privado desde el Aeropuerto|private-airport-transfer-cappadocia]]."
+          "Si la compañía aérea cambia el horario o el número de tu vuelo, comunícanos los nuevos datos por WhatsApp lo antes posible. Revisaremos la organización del servicio y te confirmaremos la información actualizada.",
+          "Para solicitar el traslado, prepara los nombres de los pasajeros, la fecha del viaje, el número de vuelo, el nombre completo del hotel y un contacto de WhatsApp.",
+          "Si llevas varias maletas grandes, equipo deportivo u objetos voluminosos, indícalo al reservar para comprobar la opción de transporte más adecuada.",
+          "Puedes seleccionar un trayecto de solo ida o reservar también el regreso. El pago se realiza en efectivo directamente al conductor, en EUR, USD o TRY."
+        ]
+      },
+      {
+        "heading": "¿Tu vuelo sale del Aeropuerto de Nevsehir?",
+        "paragraphs": [
+          "El Aeropuerto de Nevsehir Kapadokya (NAV) también ofrece conexiones aéreas para los viajeros alojados en Cavusin, pero no es el mismo aeropuerto que Kayseri (ASR).",
+          "Comprueba el código de tu aeropuerto antes de reservar. Si tu vuelo sale de NAV, consulta el [[traslado de Cavusin al Aeropuerto de Nevsehir|cavusin-to-nevsehir-airport-shuttle]]."
         ]
       }
     ],
     "faq": [
       {
-        "q": "¿Por qué importa el punto exacto de recogida en Cavusin para ir a ASR?",
-        "a": "Los alojamientos se reparten entre la carretera principal, el pueblo antiguo y zonas próximas a los valles, por lo que el punto confirmado ayuda a evitar retrasos antes de iniciar el viaje a Kayseri."
+        "q": "¿Cuánto cuesta el traslado de Cavusin al Aeropuerto de Kayseri?",
+        "a": "El shuttle compartido cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto. Los traslados privados cuestan {{PRICE:kayseri:vito}} para un Vito de hasta 5 pasajeros o {{PRICE:kayseri:sprinter}} para un Sprinter de hasta 16 pasajeros, por vehículo y trayecto."
       },
       {
-        "q": "¿Puedo reservar un vehículo privado en lugar del shuttle compartido?",
-        "a": "Sí. Vito {{PRICE:kayseri:vito}} por vehículo y trayecto para hasta 5 pasajeros y Sprinter {{PRICE:kayseri:sprinter}} por vehículo y trayecto para hasta 16, ambos por vehículo."
+        "q": "¿Puedo salir directamente desde un hotel del pueblo antiguo?",
+        "a": "Sí, siempre que el acceso permita llegar y detenerse con seguridad. Si no es posible, te comunicaremos un punto cercano y accesible para la recogida."
+      },
+      {
+        "q": "¿Qué ocurre si mi vuelo cambia de horario?",
+        "a": "Envíanos el nuevo horario o número de vuelo por WhatsApp lo antes posible. Revisaremos la reserva y te comunicaremos la información de recogida actualizada."
+      },
+      {
+        "q": "¿El traslado privado recoge pasajeros de otros hoteles?",
+        "a": "No. El vehículo privado está reservado exclusivamente para tu grupo y no realiza recogidas de pasajeros de otras reservas."
+      },
+      {
+        "q": "¿Puedo reservar también el traslado desde Kayseri hasta Cavusin?",
+        "a": "Sí. Puedes elegir ida y vuelta en el formulario. Si necesitas información sobre la llegada, consulta el [[shuttle del Aeropuerto de Kayseri a Cavusin|kayseri-airport-to-cavusin-shuttle]]."
       }
     ],
     "related": [
       "kayseri-airport-to-cavusin-shuttle",
-      "kayseri-airport-shuttle",
+      "cavusin-to-nevsehir-airport-shuttle",
       "cappadocia-to-kayseri-airport-shuttle",
-      "cappadocia-shared-shuttle-vs-private-transfer",
       "airport-transfer-prices"
     ],
+    "relatedDescriptions": {
+      "kayseri-airport-to-cavusin-shuttle": "Encuentro en la terminal de ASR y traslado hasta tu alojamiento en Cavusin.",
+      "cavusin-to-nevsehir-airport-shuttle": "La alternativa desde Cavusin para pasajeros con vuelos desde el aeropuerto NAV.",
+      "cappadocia-to-kayseri-airport-shuttle": "Información general sobre los traslados desde las localidades de Capadocia hacia ASR."
+    },
     "twitterTitle": "Shuttle de Cavusin al Aeropuerto de Kayseri | Recogida en hotel",
     "twitterDescription": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 65–80 min."
   },
