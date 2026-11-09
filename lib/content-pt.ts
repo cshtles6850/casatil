@@ -1,9 +1,10 @@
 import { towns } from './site';
 import { resolvePriceTokensDeep } from './price-content';
 
-export type PtContentSection = { heading: string; paragraphs: string[]; bullets?: string[] };
+export type PtContentBlock = { kind: 'paragraph' | 'subheading'; text: string };
+export type PtContentSection = { heading: string; paragraphs: string[]; bullets?: string[]; blocks?: PtContentBlock[] };
 export type PtFaqItem = { q: string; a: string };
-export type PtSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; sections: PtContentSection[]; faq: PtFaqItem[]; related: string[]; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
+export type PtSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; introParagraphs?: string[]; sections: PtContentSection[]; faq: PtFaqItem[]; related: string[]; relatedDescriptions?: Record<string,string>; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
 
 export const townNamesPt: Record<keyof typeof towns, string> = {
   "goreme": "Goreme",
@@ -2424,73 +2425,169 @@ const rawPtPages: PtSeoPage[] = [
     "description": "Transfer do aeroporto para hotéis-caverna na Capadócia: informe o nome completo da hospedagem, entenda ruas estreitas e confirme o ponto de embarque acessível ou desembarque.",
     "eyebrow": "Acesso a hotéis-caverna",
     "h1": "Transfer do Aeroporto para hotéis-caverna na Capadócia",
-    "lead": "Hotéis-caverna e hospedagens históricas podem ficar em ruas estreitas, íngremes ou onde veículos grandes não conseguem parar. O nome completo da propriedade ajuda a confirmar o ponto acessível mais próximo para embarque ou desembarque.",
+    "lead": "Vai se hospedar em um hotel-caverna na Capadócia? Oferecemos shuttle compartilhado e transfer privativo dos aeroportos de Kayseri (ASR) e Nevsehir (NAV) para hotéis em Goreme, Uchisar, Urgup, Ortahisar, Cavusin e Avanos.",
+    "introParagraphs": [
+      "Na maioria das hospedagens, o veículo pode realizar o desembarque ou a busca na entrada do hotel. Quando o acesso é limitado, utilizamos um ponto próximo onde seja possível parar com segurança. O serviço é organizado de acordo com o aeroporto, a localização da hospedagem e os dados do seu voo."
+    ],
     "sections": [
       {
-        "heading": "Por que o nome completo do hotel é importante",
+        "heading": "Como funciona o transfer até um hotel-caverna?",
         "paragraphs": [
-          "Na Capadócia, muitas propriedades usam palavras parecidas como cave, suite, house, stone e boutique. Informe o nome completo que aparece na sua reserva e a cidade da hospedagem. Um pin do mapa pode ajudar, mas não deve substituir o nome correto da propriedade."
+          "Os hotéis-caverna fazem parte da paisagem histórica da Capadócia. Alguns foram construídos em encostas ou adaptados a partir de antigas casas de pedra, mas isso não significa que todos tenham acesso difícil.",
+          "Muitos estabelecimentos possuem entradas acessíveis a veículos. Outros ficam em ruas inclinadas, estreitas ou com restrições para manobras.",
+          "O importante é identificar corretamente a hospedagem antes da viagem. Informe o nome completo que aparece na sua reserva e a localidade onde ficará hospedado. Assim, podemos organizar o ponto de embarque ou desembarque adequado."
         ]
       },
       {
-        "heading": "Quando o veículo não consegue parar na porta",
-        "paragraphs": [
-          "Algumas ruas antigas são estreitas, íngremes ou inadequadas para um shuttle ou Sprinter esperar com segurança. Nesse caso, um ponto acessível próximo pode ser confirmado pelo WhatsApp. Isso é uma questão normal de acesso e não significa que a cidade esteja fora da área atendida."
+        "heading": "Diferenças de acesso entre as regiões da Capadócia",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Goreme: hotéis em encostas e no centro histórico"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Goreme reúne hotéis-caverna próximos ao centro e hospedagens situadas em ruas mais elevadas. A facilidade de acesso depende da localização de cada estabelecimento, e não apenas da distância até o centro."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se você reservou um hotel nessa região, consulte também nosso [[guia de transfer do aeroporto para Goreme|goreme-airport-transfer]]."
+          },
+          {
+            "kind": "subheading",
+            "text": "Uchisar: hospedagens próximas ao castelo"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Na região histórica de Uchisar, alguns hotéis ficam em ruas inclinadas ou nas proximidades da formação rochosa do castelo. Certas entradas são acessíveis por veículos, enquanto outras exigem atenção ao local de parada."
+          },
+          {
+            "kind": "subheading",
+            "text": "Urgup e Ortahisar: casas históricas e ruas antigas"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Em Urgup, há hotéis instalados em construções tradicionais, inclusive na região de Esbelli. Ortahisar também possui hospedagens próximas ao núcleo histórico e à sua formação rochosa central."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Nessas localidades, o acesso varia conforme a rua e a entrada utilizada pelo hotel."
+          },
+          {
+            "kind": "subheading",
+            "text": "Cavusin e Avanos: diferentes tipos de hospedagem"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Cavusin possui estabelecimentos próximos à estrada principal e outros na parte antiga do povoado, em áreas elevadas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Em Avanos, há hospedagens junto ao centro urbano e ao rio Kızılırmak, além de propriedades em outras áreas da localidade. A localização exata continua sendo importante para planejar o serviço."
+          }
         ]
       },
       {
-        "heading": "Acesso a hotéis-caverna em Goreme",
+        "heading": "Chegada à Capadócia e saída para o aeroporto",
         "paragraphs": [
-          "Goreme concentra muitas hospedagens em ruas compactas e encostas. O acesso pode variar bastante entre hotéis próximos. Informe sempre o nome exato da propriedade e siga o ponto confirmado para a reserva. Veja também [[Transfer do Aeroporto para Goreme|goreme-airport-transfer]]."
+          "Quando seu voo chega a Kayseri ou Nevsehir, o motorista acompanha os dados de chegada informados na reserva.",
+          "No aeroporto, o encontro é realizado na saída do terminal, com uma placa com seu nome. Depois de retirar a bagagem, dirija-se ao ponto indicado para encontrar o motorista.",
+          "Se o voo informado sofrer um atraso normal, acompanhamos o horário atualizado de chegada, sem cobrança adicional pelo tempo de espera.",
+          "Se a companhia aérea alterar o número do voo ou transferir sua reserva para outro voo, envie os novos dados pelo WhatsApp o quanto antes para que possamos revisar o atendimento.",
+          "Para o percurso de volta, do hotel ao aeroporto, o horário de busca é organizado de acordo com os dados do voo de saída e informado separadamente."
         ]
       },
       {
-        "heading": "Outras cidades históricas também precisam de confirmação de acesso",
-        "paragraphs": [
-          "Uchisar, Urgup, Ortahisar e Cavusin também têm hospedagens em ruas antigas ou inclinadas. Avanos é mais espalhada ao redor do rio. Em todas elas, o nome completo do hotel é mais útil para planejar o acesso do que apenas o nome da cidade."
+        "heading": "Shuttle compartilhado ou transfer privativo?",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Shuttle compartilhado"
+          },
+          {
+            "kind": "paragraph",
+            "text": "O shuttle compartilhado é uma alternativa econômica para viajantes individuais, casais e pequenos grupos."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Kayseri (ASR): {{PRICE:kayseri:shuttle}} por pessoa e trecho.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Nevsehir (NAV): {{PRICE:nevsehir:shuttle}} por pessoa e trecho.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Durante o percurso, podem ocorrer paradas para outros passageiros em diferentes hotéis."
+          },
+          {
+            "kind": "subheading",
+            "text": "Transfer privativo"
+          },
+          {
+            "kind": "paragraph",
+            "text": "O transfer privativo é reservado exclusivamente para seu grupo, sem paradas para buscar passageiros de outras reservas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O Mercedes Vito atende até 5 passageiros e o Mercedes Sprinter atende até 16, respeitando as condições de bagagem."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Os preços variam conforme o aeroporto e o veículo escolhido. Consulte as tarifas atuais de Vito e Sprinter no resumo de preços desta página ou na página de [[transfer privativo na Capadócia|private-airport-transfer-cappadocia]]."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Um veículo menor pode facilitar o acesso em determinadas ruas, mas nenhum tipo de veículo garante entrada em todas as vias históricas."
+          }
         ]
       },
       {
-        "heading": "Chegada e saída exigem o mesmo cuidado com o ponto real",
+        "heading": "Bagagem, reserva e pagamento",
         "paragraphs": [
-          "Na chegada, o objetivo é desembarcar no ponto seguro mais próximo da hospedagem. Na saída, esteja com a bagagem pronta no ponto confirmado antes do início da janela de embarque. Não presuma que o mesmo lugar usado por um táxi pequeno serve para um shuttle maior."
-        ]
-      },
-      {
-        "heading": "Shuttle compartilhado ou Vito privativo",
-        "paragraphs": [
-          "O shuttle é cobrado por pessoa, com tarifa de {{PRICE:kayseri:shuttle}} por pessoa e por trecho em ASR e {{PRICE:nevsehir:shuttle}} por pessoa e por trecho em NAV, e pode usar um veículo maior conforme o número de passageiros. Um Vito privativo pode ser mais prático em algumas ruas, mas também não há garantia de acesso até a porta. O ponto final depende da rua e da possibilidade de parada segura."
+          "Se você estiver viajando com várias malas grandes, carrinho de bebê ou equipamentos volumosos, informe isso ao reservar. Dependendo do tamanho da bagagem e do grupo, pode ser necessário verificar a opção de transporte mais adequada.",
+          "Para solicitar o serviço, tenha em mãos os nomes dos passageiros, o número do voo, a data da viagem, o nome completo do hotel e um contato de WhatsApp.",
+          "Você pode reservar apenas a chegada, apenas a saída ou os dois trajetos.",
+          "O pagamento é feito em dinheiro diretamente ao motorista. Aceitamos euros (EUR), dólares americanos (USD) e liras turcas (TRY)."
         ]
       }
     ],
     "faq": [
       {
-        "q": "O shuttle chega à porta de qualquer hotel-caverna?",
-        "a": "Não. Em algumas ruas, o ponto seguro mais próximo é usado e confirmado para a reserva."
+        "q": "É possível reservar um transfer para hotéis-caverna fora de Goreme?",
+        "a": "Sim. Atendemos as principais áreas de hospedagem da Capadócia, incluindo Uchisar, Urgup, Ortahisar, Cavusin e Avanos, conforme a disponibilidade e a localização do estabelecimento."
       },
       {
-        "q": "O que devo informar na reserva?",
-        "a": "Nome completo da hospedagem, cidade, voo, dados dos passageiros e contato de WhatsApp."
+        "q": "Qual aeroporto devo selecionar, Kayseri ou Nevsehir?",
+        "a": "Selecione o aeroporto indicado na sua passagem aérea. Kayseri utiliza o código ASR e Nevsehir utiliza NAV. Os dois aeroportos possuem trajetos diferentes até as localidades da Capadócia."
       },
       {
-        "q": "Um Vito privativo sempre consegue entrar onde o shuttle não entra?",
-        "a": "Não. Ele pode ser mais prático em algumas ruas, mas o acesso continua dependendo das condições reais e da possibilidade de parada segura."
+        "q": "O que acontece se meu voo de chegada atrasar?",
+        "a": "Acompanhamos o horário atualizado do voo informado na reserva e não cobramos taxa adicional pela espera decorrente de um atraso normal."
       },
       {
-        "q": "Hotéis de Goreme exigem atenção especial ao nome?",
-        "a": "Sim. Há muitas propriedades com nomes parecidos e o nome exato ajuda a identificar o endereço correto."
+        "q": "Um veículo privativo pode chegar mais perto do hotel?",
+        "a": "Em algumas ruas, um veículo menor pode oferecer mais facilidade de acesso. Entretanto, o local de parada depende das condições reais da via e da possibilidade de estacionar com segurança."
       },
       {
-        "q": "É possível organizar embarque no hotel para a saída?",
-        "a": "Sim, usando o ponto confirmado para a propriedade."
+        "q": "Posso reservar a chegada e a saída do aeroporto na mesma reserva?",
+        "a": "Sim. Escolha a opção de ida e volta e informe os dados dos dois voos. Os horários e os pontos de encontro serão organizados para cada trajeto."
       }
     ],
     "related": [
       "goreme-airport-transfer",
-      "cappadocia-airport-transfer",
+      "private-airport-transfer-cappadocia",
       "kayseri-airport-shuttle",
       "nevsehir-airport-shuttle"
     ],
+    "relatedDescriptions": {
+      "goreme-airport-transfer": "Planejamento do transfer para hotéis de Goreme e informações sobre os aeroportos ASR e NAV.",
+      "private-airport-transfer-cappadocia": "Veículos exclusivos para grupos de até 5 ou 16 passageiros, com tarifas por aeroporto.",
+      "kayseri-airport-shuttle": "Opções de transporte do Aeroporto de Kayseri para as localidades atendidas na Capadócia.",
+      "nevsehir-airport-shuttle": "Transfer do Aeroporto de Nevsehir para as principais áreas de hospedagem da Capadócia."
+    },
     "twitterTitle": "Transfer para hotéis-caverna na Capadócia",
     "twitterDescription": "Embarque e desembarque em hotéis-caverna das áreas atendidas, com nome completo da hospedagem, observações de acesso e pontos confirmados."
   },
