@@ -102,7 +102,7 @@ const rawPtPages: PtSeoPage[] = [
       {
         "heading": "Dados necessários para a reserva",
         "paragraphs": [
-          "Toda reserva precisa do nome dos passageiros, números de passaporte, número do voo e nome completo da hospedagem. Alguns [[hotéis-caverna e propriedades em vilas antigas|cappadocia-cave-hotel-airport-transfer]] ficam em ruas onde veículos não conseguem entrar; nesses casos, o embarque ou desembarque pode ser combinado no ponto acessível mais próximo."
+          "Toda reserva precisa do nome dos passageiros, número do voo e nome completo da hospedagem. Alguns [[hotéis-caverna e propriedades em vilas antigas|cappadocia-cave-hotel-airport-transfer]] ficam em ruas onde veículos não conseguem entrar; nesses casos, o embarque ou desembarque pode ser combinado no ponto acessível mais próximo."
         ]
       },
       {
@@ -155,7 +155,7 @@ const rawPtPages: PtSeoPage[] = [
       },
       {
         "q": "Quais dados dos passageiros são necessários?",
-        "a": "Nomes dos passageiros, números de passaporte, dados do voo, nome do hotel e um contato de WhatsApp."
+        "a": "Nomes dos passageiros, dados do voo, nome do hotel e um contato de WhatsApp."
       }
     ],
     "related": [
@@ -202,7 +202,7 @@ const rawPtPages: PtSeoPage[] = [
       {
         "heading": "Reserva, passageiros e pagamento",
         "paragraphs": [
-          "Para confirmar um transfer privativo, informe número do voo, nome completo do hotel, nomes dos passageiros, números de passaporte e contato de WhatsApp. O pagamento é feito em dinheiro ao motorista. Os preços publicados estão em EUR; USD ou TRY também podem ser combinados usando a cotação vigente no momento do pagamento."
+          "Para confirmar um transfer privativo, informe número do voo, nome completo do hotel, nomes dos passageiros e contato de WhatsApp. O pagamento é feito em dinheiro ao motorista. Os preços publicados estão em EUR; USD ou TRY também podem ser combinados usando a cotação vigente no momento do pagamento."
         ]
       }
     ],
@@ -230,10 +230,6 @@ const rawPtPages: PtSeoPage[] = [
       {
         "q": "O transfer privativo é sempre porta a porta?",
         "a": "O veículo é exclusivo para a sua reserva, mas o acesso a hotéis históricos ainda depende de a rua permitir entrada e parada com segurança."
-      },
-      {
-        "q": "É preciso informar o passaporte no transfer privativo?",
-        "a": "Sim. Os dados de passaporte dos passageiros são necessários para todas as reservas."
       },
       {
         "q": "Como é feito o pagamento?",
@@ -291,7 +287,7 @@ const rawPtPages: PtSeoPage[] = [
       {
         "heading": "Pagamento, moeda e dados da reserva",
         "paragraphs": [
-          "Os preços são publicados em EUR e o pagamento é feito em dinheiro ao motorista. Também é possível combinar pagamento em USD ou TRY usando a cotação vigente no momento do pagamento. Ida e volta equivale simplesmente a dois trechos pelo preço publicado, sem tarifa especial de pacote. Para reservar, ainda precisamos do número do voo, hotel, nomes e números de passaporte; a reserva é confirmada depois que esses dados forem verificados pelo WhatsApp. Isso é especialmente importante quando o acesso ao hotel é incomum, quando são usados aeroportos diferentes ou quando o pedido foge da cobertura padrão do shuttle compartilhado."
+          "Os preços são publicados em EUR e o pagamento é feito em dinheiro ao motorista. Também é possível combinar pagamento em USD ou TRY usando a cotação vigente no momento do pagamento. Ida e volta equivale simplesmente a dois trechos pelo preço publicado, sem tarifa especial de pacote. Para reservar, ainda precisamos do número do voo, hotel, nomes dos passageiros; a reserva é confirmada depois que esses dados forem verificados pelo WhatsApp. Isso é especialmente importante quando o acesso ao hotel é incomum, quando são usados aeroportos diferentes ou quando o pedido foge da cobertura padrão do shuttle compartilhado."
         ]
       }
     ],
@@ -333,10 +329,6 @@ const rawPtPages: PtSeoPage[] = [
         "a": "Sim. O pagamento em dinheiro em USD ou TRY pode ser combinado usando a cotação vigente no momento do pagamento."
       },
       {
-        "q": "É preciso informar os passaportes mesmo pagando em dinheiro?",
-        "a": "Sim. Os dados de passaporte são necessários em todas as reservas, independentemente do método de pagamento."
-      },
-      {
         "q": "Há desconto para ida e volta?",
         "a": "Não há desconto específico; ida e volta custa exatamente o dobro de um trecho."
       },
@@ -374,7 +366,7 @@ const rawPtPages: PtSeoPage[] = [
       {
         "heading": "O que ter em mãos ao desembarcar em ASR",
         "paragraphs": [
-          "Na reserva, informe o número do voo e o nome completo do hotel. Depois de retirar a bagagem, siga as instruções de encontro enviadas pelo WhatsApp. Os nomes e os dados de passaporte dos passageiros são necessários em todas as reservas. O nome completo do hotel ajuda a identificar a rota correta depois do encontro no aeroporto, seja a hospedagem em Goreme, Urgup, Uchisar, Avanos, Ortahisar ou Cavusin."
+          "Na reserva, informe o número do voo e o nome completo do hotel. Depois de retirar a bagagem, siga as instruções de encontro enviadas pelo WhatsApp. Os nomes dos passageiros são necessários em todas as reservas. O nome completo do hotel ajuda a identificar a rota correta depois do encontro no aeroporto, seja a hospedagem em Goreme, Urgup, Uchisar, Avanos, Ortahisar ou Cavusin."
         ]
       },
       {
@@ -2107,7 +2099,7 @@ const rawPtPages: PtSeoPage[] = [
         "heading": "Do aeroporto ao hotel: shuttle ou veículo privativo",
         "paragraphs": [
           "O shuttle compartilhado é a principal opção econômica para Goreme, Urgup, Uchisar, Avanos, Ortahisar e Cavusin. A tarifa atual é de {{PRICE:kayseri:shuttle}} por pessoa e por trecho saindo de ASR e {{PRICE:nevsehir:shuttle}} por pessoa e por trecho saindo de NAV. Como é compartilhado, outros passageiros e paradas em hotéis podem fazer parte do percurso. Quem quiser um veículo exclusivo pode escolher Vito ou Sprinter; as tarifas privativas são por veículo, e não por pessoa. Para uma visão geral dos serviços, veja [[transfer do aeroporto da Capadócia|cappadocia-airport-transfer]]; em [[preços de transfer do aeroporto|airport-transfer-prices]] ficam reunidas as tarifas atuais separadas por aeroporto.",
-          "A solicitação de reserva reúne aeroporto, sentido da viagem, dados do voo, hotel, contato de WhatsApp e dados dos passageiros, incluindo números de passaporte necessários em todas as reservas. O pagamento é feito em dinheiro ao motorista depois da confirmação."
+          "A solicitação de reserva reúne aeroporto, sentido da viagem, dados do voo, hotel, contato de WhatsApp e nomes dos passageiros. O pagamento é feito em dinheiro ao motorista depois da confirmação."
         ]
       },
       {
@@ -2525,7 +2517,7 @@ const rawPtPages: PtSeoPage[] = [
       {
         "heading": "Depois de pousar na Capadócia",
         "paragraphs": [
-          "Retire a bagagem, siga as instruções de encontro confirmadas pelo WhatsApp e use o nome da reserva para se identificar no aeroporto. A reserva precisa do número correto do voo, hotel, nomes e números de passaporte."
+          "Retire a bagagem, siga as instruções de encontro confirmadas pelo WhatsApp e use o nome da reserva para se identificar no aeroporto. A reserva precisa do número correto do voo, hotel, nomes dos passageiros."
         ]
       },
       {

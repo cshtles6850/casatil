@@ -98,7 +98,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Booking Details We Need",
         "paragraphs": [
-          "Every booking needs passenger names, passport numbers, your flight number, and your full accommodation name. Some [[cave hotels and old-village properties|cappadocia-cave-hotel-airport-transfer]] are on lanes that vehicles cannot access, so pickup or drop-off may be arranged at the nearest practical point."
+          "Every booking needs passenger names, your flight number, and your full accommodation name. Some [[cave hotels and old-village properties|cappadocia-cave-hotel-airport-transfer]] are on lanes that vehicles cannot access, so pickup or drop-off may be arranged at the nearest practical point."
         ]
       },
       {
@@ -151,7 +151,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "What passenger information is required?",
-        "a": "Passenger names, passport numbers, flight information, hotel name, and a WhatsApp contact."
+        "a": "Passenger names, flight information, hotel name, and a WhatsApp contact."
       }
     ],
     "related": [
@@ -192,7 +192,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Payment and Passenger Information",
         "paragraphs": [
-          "Payment is made in cash to the driver. The booking still collects the flight number, accommodation, passenger names, passport numbers and WhatsApp contact — these are required to confirm the transfer."
+          "Payment is made in cash to the driver. The booking still collects the flight number, accommodation, passenger names and WhatsApp contact — these are required to confirm the transfer."
         ]
       },
       {
@@ -226,10 +226,6 @@ const rawPages: SeoPage[] = [
       {
         "q": "Is private transfer door to door?",
         "a": "The vehicle is dedicated to your booking, but historic hotel access still depends on whether the street can safely accommodate the vehicle."
-      },
-      {
-        "q": "Do you need passport numbers for private transfer?",
-        "a": "Yes, passenger passport details are required for every reservation."
       },
       {
         "q": "How do I pay for a private transfer?",
@@ -287,7 +283,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "Payment, Currency and Booking Details",
         "paragraphs": [
-          "Prices are published in EUR and payment is made in cash to the driver; USD or TRY cash is also possible using the current exchange rate at the time of payment. Round trip is simply two one-way journeys at the published rate — no separate package price. The booking still needs flight number, hotel, passenger names and passport numbers, and is confirmed once these reservation details are checked on WhatsApp — this matters especially for unusual hotel access, mixed-airport itineraries, or requests outside the standard shared-shuttle coverage."
+          "Prices are published in EUR and payment is made in cash to the driver; USD or TRY cash is also possible using the current exchange rate at the time of payment. Round trip is simply two one-way journeys at the published rate — no separate package price. The booking still needs flight number, hotel, passenger names, and is confirmed once these reservation details are checked on WhatsApp — this matters especially for unusual hotel access, mixed-airport itineraries, or requests outside the standard shared-shuttle coverage."
         ]
       }
     ],
@@ -329,10 +325,6 @@ const rawPages: SeoPage[] = [
         "a": "Cash payment can be arranged in USD or TRY using the current exchange rate at the time of payment."
       },
       {
-        "q": "Are passport numbers required even though payment is cash?",
-        "a": "Yes, passport information is required for every reservation, independently of the payment method."
-      },
-      {
         "q": "Does round trip get a discount?",
         "a": "No separate round-trip discount is stated; round trip is exactly double the one-way price."
       },
@@ -370,7 +362,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "What to Have Ready After Landing at ASR",
         "paragraphs": [
-          "Use the flight number and full hotel name when booking, then follow the WhatsApp meeting instructions after baggage claim. Passenger names and passport details are required for every reservation. The full hotel name tells the driver which town route applies after the airport meeting, whether your hotel is in Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin."
+          "Use the flight number and full hotel name when booking, then follow the WhatsApp meeting instructions after baggage claim. Passenger names are required for every reservation. The full hotel name tells the driver which town route applies after the airport meeting, whether your hotel is in Goreme, Urgup, Uchisar, Avanos, Ortahisar or Cavusin."
         ]
       },
       {
@@ -2103,7 +2095,7 @@ const rawPages: SeoPage[] = [
         "heading": "Airport to hotel: shuttle or private vehicle",
         "paragraphs": [
           "The shared shuttle is the main value service for Goreme, Urgup, Uchisar, Avanos, Ortahisar and Cavusin. The current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV. It is shared, so other passengers and hotel stops can be part of the run. Travelers who want a dedicated vehicle can choose a private Vito or Sprinter; private prices are per vehicle rather than per person. For a broader service overview, see [[Cappadocia Airport Transfer|cappadocia-airport-transfer]], while [[Airport Transfer Prices|airport-transfer-prices]] keeps the airport-specific fare structure in one place.",
-          "The booking request collects the airport, journey direction, flight details, hotel, WhatsApp contact and passenger information including passport numbers required for every reservation. Payment is made in cash to the driver after the booking is confirmed."
+          "The booking request collects the airport, journey direction, flight details, hotel, WhatsApp contact and passenger names. Payment is made in cash to the driver after the booking is confirmed."
         ]
       },
       {
@@ -2364,9 +2356,9 @@ const rawPages: SeoPage[] = [
         ]
       },
       {
-        "heading": "Passenger and passport details",
+        "heading": "Passenger details",
         "paragraphs": [
-          "Both service types use reservation passenger information. The booking form collects names and passport numbers because they are required for every reservation."
+          "Both service types require passenger names for the reservation."
         ]
       },
       {
@@ -2484,10 +2476,6 @@ const rawPages: SeoPage[] = [
         "q": "Can I book hotel pickup for departure?",
         "a": "Yes, with the pickup point confirmed for the property."
       },
-      {
-        "q": "Are passport details required?",
-        "a": "Yes, for every reservation."
-      }
     ],
     "related": [
       "goreme-airport-transfer",
@@ -2521,7 +2509,7 @@ const rawPages: SeoPage[] = [
       {
         "heading": "After landing in Cappadocia",
         "paragraphs": [
-          "Collect baggage, follow the WhatsApp-confirmed meeting instructions and use the passenger reservation name for the airport meeting. The booking needs the correct flight number, hotel, names and passport numbers."
+          "Collect baggage, follow the WhatsApp-confirmed meeting instructions and use the passenger reservation name for the airport meeting. The booking needs the correct flight number, hotel, passenger names."
         ]
       },
       {

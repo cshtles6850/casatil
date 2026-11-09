@@ -17,7 +17,7 @@ type Journey = 'one-way' | 'round-trip';
 type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
-type Passenger = { fullName: string; passport: string };
+type Passenger = { fullName: string };
 type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportLabels: Record<Airport, string> = {
@@ -41,13 +41,6 @@ function initialTownKey(value: string): Town | '' {
 }
 
 
-function maskPassport(value: string) {
-  const clean = value.trim();
-  if (!clean) return 'Not entered';
-  if (clean.length <= 4) return 'Provided';
-  return `••••${clean.slice(-4)}`;
-}
-
 export function BookingForm({
   compact = false,
   initialAirport = 'kayseri',
@@ -65,7 +58,7 @@ export function BookingForm({
   const [airport, setAirport] = useState<Airport>(initialAirport);
   const [vehicle, setVehicle] = useState<Vehicle>('vito');
   const [passengers, setPassengers] = useState(1);
-  const [people, setPeople] = useState<Passenger[]>([{ fullName: '', passport: '' }]);
+  const [people, setPeople] = useState<Passenger[]>([{ fullName: '' }]);
   const [destination, setDestination] = useState<Town | ''>(() => initialTownKey(initialTown));
   const [hotel, setHotel] = useState('');
   const [firstTransferDate, setFirstTransferDate] = useState('');
@@ -110,7 +103,7 @@ export function BookingForm({
   }, [transferType, vehicle, passengers]);
 
   useEffect(() => {
-    setPeople((current) => Array.from({ length: passengers }, (_, index) => current[index] ?? { fullName: '', passport: '' }));
+    setPeople((current) => Array.from({ length: passengers }, (_, index) => current[index] ?? { fullName: '' }));
   }, [passengers]);
 
   useEffect(() => {
@@ -187,7 +180,6 @@ export function BookingForm({
     const passengerPayload = people.map((person, index) => ({
       number: index + 1,
       fullName: person.fullName.trim(),
-      passport: person.passport.trim(),
     }));
 
     const effectiveFirstTransferTime = companyArrangedPickup ? '' : firstTransferTime;
@@ -220,10 +212,7 @@ export function BookingForm({
       submittedAt: new Date().toISOString(),
     };
 
-    const passengerLines = passengerPayload.flatMap((person) => [
-      `Passenger ${person.number}: ${person.fullName || '-'}`,
-      `Passport ${person.number}: ${person.passport || '-'}`,
-    ]);
+    const passengerLines = passengerPayload.map((person) => `Passenger ${person.number}: ${person.fullName || '-'}`);
 
     const lines = [
       'Booking request.',
@@ -441,17 +430,13 @@ export function BookingForm({
 
           <div className="field full passenger-block">
             <div className="passenger-heading">
-              <div><strong>Passenger information</strong><span>Names and passport numbers are required for every reservation.</span></div>
+              <div><strong>Passenger information</strong><span>Passenger names are required for every reservation.</span></div>
             </div>
             {people.map((person, index) => (
               <div className="passenger-row" key={index}>
                 <div className="field">
                   <label htmlFor={`person-name-${compact ? 'c' : 'f'}-${index}`}>Passenger {index + 1} full name</label>
-                  <input id={`person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">Use Latin letters only, matching the passport spelling.</div>
-                </div>
-                <div className="field">
-                  <label htmlFor={`passport-${compact ? 'c' : 'f'}-${index}`}>Passport number</label>
-                  <input id={`passport-${compact ? 'c' : 'f'}-${index}`} value={person.passport} onChange={(e) => updatePassenger(index, 'passport', e.target.value)} autoCapitalize="characters" autoComplete="off" required />
+                  <input id={`person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">Use Latin letters only.</div>
                 </div>
               </div>
             ))}
@@ -471,7 +456,7 @@ export function BookingForm({
               <div><dt>{destinationLabel}</dt><dd>{destination ? townLabels[destination] : '—'}</dd></div>
               <div><dt>Hotel</dt><dd>{hotel || '—'}</dd></div>
               <div><dt>Passengers</dt><dd>{passengers}</dd></div>
-              {people.map((person, index) => <div key={index}><dt>Passenger {index + 1}</dt><dd>{person.fullName || '—'} · Passport {maskPassport(person.passport)}</dd></div>)}
+              {people.map((person, index) => <div key={index}><dt>Passenger {index + 1}</dt><dd>{person.fullName || '—'}</dd></div>)}
               <div><dt>Payment</dt><dd>Cash to the driver</dd></div>
             </dl>
             <p className="form-note">Prices are shown in EUR. Cash payment can also be arranged in USD or TRY using the current exchange rate at the time of payment.</p>

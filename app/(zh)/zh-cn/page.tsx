@@ -26,7 +26,6 @@ const homeFaq = [
   ['私人 Vito 多少钱？',`开塞利机场每车 ${formatEuro(privateOneWayPrice('kayseri','vito'))}/单程，内夫谢希尔机场每车 ${formatEuro(privateOneWayPrice('nevsehir','vito'))}/单程，最多 5 位乘客。`],
   ['私人 Sprinter 多少钱？',`开塞利机场每车 ${formatEuro(privateOneWayPrice('kayseri','sprinter'))}/单程，内夫谢希尔机场每车 ${formatEuro(privateOneWayPrice('nevsehir','sprinter'))}/单程，最多 16 位乘客。`],
   ['怎么付款？','按确认方式现金支付给司机。价格以 EUR 标示；如需用 USD 或 TRY 现金支付，应以付款时的当前汇率为准。'],
-  ['为什么表单需要护照号码？','乘客姓名和护照号码是每笔预订所需资料。'],
   ['机场会有人接我吗？','预订确认后，会通过 WhatsApp 发送机场会合信息，并使用预订中的乘客姓名进行接机核对。'],
   ['航班晚点怎么办？','尽快在 WhatsApp 更新航班。拼车涉及其他乘客，因此新的安排需要重新确认。'],
   ['洞穴酒店都能停到门口吗？','不一定。部分老街不适合大型车辆通行或等待，会为具体酒店确认附近安全上下客点。'],
@@ -80,7 +79,7 @@ export default function ChineseHomePage() {
           <div className="summary-line"><span>内夫谢希尔 Vito · 最多5人</span><strong>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / 车 / 单程</strong></div>
           <div className="summary-line"><span>内夫谢希尔 Sprinter · 最多16人</span><strong>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / 车 / 单程</strong></div>
         </div>
-        <p className="small-copy">往返正好是单程的两倍。私人接送按整车计价。乘客姓名和护照号码是每笔预订所需资料。</p>
+        <p className="small-copy">往返正好是单程的两倍。私人接送按整车计价。每笔预订都需要乘客姓名。</p>
         <BookingInfoChecklist locale="zh-CN" className="home-booking-checklist" />
       </aside>
       <BookingFormZh />

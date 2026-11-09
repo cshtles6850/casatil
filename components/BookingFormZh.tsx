@@ -17,7 +17,7 @@ type Journey = 'one-way' | 'round-trip';
 type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
-type Passenger = { fullName: string; passport: string };
+type Passenger = { fullName: string };
 type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportDisplayLabels: Record<Airport, string> = {
@@ -55,13 +55,6 @@ function initialTownKey(value: string): Town | '' {
 }
 
 
-function maskPassport(value: string) {
-  const clean = value.trim();
-  if (!clean) return '未填写';
-  if (clean.length <= 4) return '已填写';
-  return `••••${clean.slice(-4)}`;
-}
-
 export function BookingFormZh({
   compact = false,
   initialAirport = 'kayseri',
@@ -79,7 +72,7 @@ export function BookingFormZh({
   const [airport, setAirport] = useState<Airport>(initialAirport);
   const [vehicle, setVehicle] = useState<Vehicle>('vito');
   const [passengers, setPassengers] = useState(1);
-  const [people, setPeople] = useState<Passenger[]>([{ fullName: '', passport: '' }]);
+  const [people, setPeople] = useState<Passenger[]>([{ fullName: '' }]);
   const [destination, setDestination] = useState<Town | ''>(() => initialTownKey(initialTown));
   const [hotel, setHotel] = useState('');
   const [firstTransferDate, setFirstTransferDate] = useState('');
@@ -124,7 +117,7 @@ export function BookingFormZh({
   }, [transferType, vehicle, passengers]);
 
   useEffect(() => {
-    setPeople((current) => Array.from({ length: passengers }, (_, index) => current[index] ?? { fullName: '', passport: '' }));
+    setPeople((current) => Array.from({ length: passengers }, (_, index) => current[index] ?? { fullName: '' }));
   }, [passengers]);
 
   useEffect(() => {
@@ -201,7 +194,6 @@ export function BookingFormZh({
     const passengerPayload = people.map((person, index) => ({
       number: index + 1,
       fullName: person.fullName.trim(),
-      passport: person.passport.trim(),
     }));
 
     const serviceEnglish = transferType === 'shuttle' ? 'Shared Airport Shuttle' : 'Private Airport Transfer';
@@ -240,10 +232,7 @@ export function BookingFormZh({
       submittedAt: new Date().toISOString(),
     };
 
-    const passengerLines = passengerPayload.flatMap((person) => [
-      `乘客 ${person.number}：${person.fullName || '-'}`,
-      `护照号码 ${person.number}：${person.passport || '-'}`,
-    ]);
+    const passengerLines = passengerPayload.map((person) => `乘客 ${person.number}：${person.fullName || '-'}`);
 
     const lines = [
       '机场接送预订请求。',
@@ -395,7 +384,7 @@ export function BookingFormZh({
               <button className="btn booking-continue" type="button" disabled={!firstStageReady} aria-disabled={!firstStageReady} onClick={() => { if (firstStageReady) setExpanded(true); }}>
                 继续填写航班与乘客资料 · €{total}
               </button>
-              <div className="form-note">{firstStageReady ? '以上接送信息完整后，才会展开航班、乘客和护照资料。' : companyArrangedPickup ? '请选择城镇，并填写航班日期和完整酒店名称后再继续。' : '请选择城镇，并填写航班日期、时间和完整酒店名称后再继续。'}</div>
+              <div className="form-note">{firstStageReady ? '以上接送信息完整后，才会展开航班和乘客资料。' : companyArrangedPickup ? '请选择城镇，并填写航班日期和完整酒店名称后再继续。' : '请选择城镇，并填写航班日期、时间和完整酒店名称后再继续。'}</div>
             </div>
           )}
 
@@ -446,11 +435,10 @@ export function BookingFormZh({
           </div>
 
           <div className="field full passenger-block">
-            <div className="passenger-heading"><div><strong>乘客信息</strong><span>姓名与护照号码是每笔预订所需资料。</span></div></div>
+            <div className="passenger-heading"><div><strong>乘客信息</strong><span>每笔预订都需要乘客姓名。</span></div></div>
             {people.map((person, index) => (
               <div className="passenger-row" key={index}>
-                <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名（与护照一致）</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">姓名请仅使用拉丁字母，并按护照上的拼写填写。</div></div>
-                <div className="field"><label htmlFor={`zh-passport-${compact ? 'c' : 'f'}-${index}`}>护照号码</label><input id={`zh-passport-${compact ? 'c' : 'f'}-${index}`} value={person.passport} onChange={(e) => updatePassenger(index, 'passport', e.target.value)} autoCapitalize="characters" autoComplete="off" required /></div>
+                <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">姓名请仅使用拉丁字母填写。</div></div>
               </div>
             ))}
           </div>
@@ -466,7 +454,7 @@ export function BookingFormZh({
               <div><dt>{destinationLabel}</dt><dd>{destination ? `${townZhLabels[destination]} · ${townEnglishLabels[destination]}` : '—'}</dd></div>
               <div><dt>酒店</dt><dd>{hotel || '—'}</dd></div>
               <div><dt>人数</dt><dd>{passengers}</dd></div>
-              {people.map((person, index) => <div key={index}><dt>乘客 {index + 1}</dt><dd>{person.fullName || '—'} · 护照 {maskPassport(person.passport)}</dd></div>)}
+              {people.map((person, index) => <div key={index}><dt>乘客 {index + 1}</dt><dd>{person.fullName || '—'}</dd></div>)}
               <div><dt>付款</dt><dd>现金支付给司机</dd></div>
             </dl>
             <p className="form-note">价格以 EUR 显示。如需用 USD 或 TRY 现金支付，应按付款时的当前汇率结算。</p>

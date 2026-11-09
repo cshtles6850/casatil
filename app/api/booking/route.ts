@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 
-type Passenger = { number?: number; fullName?: string; passport?: string };
+type Passenger = { number?: number; fullName?: string };
 type RawBooking = {
   bookingId?: unknown; transferType?: unknown; journey?: unknown; direction?: unknown; airport?: unknown; vehicle?: unknown;
   passengers?: unknown; destination?: unknown; hotel?: unknown; firstTransferDate?: unknown; firstTransferTime?: unknown; arrivalFlight?: unknown;
@@ -47,7 +47,7 @@ function normalizePassengers(value: unknown): Passenger[] {
   if (!Array.isArray(value)) return [];
   return value.slice(0, 16).map((item, index) => {
     const row = item && typeof item === 'object' ? item as Record<string, unknown> : {};
-    return { number: index + 1, fullName: clean(row.fullName, 180), passport: clean(row.passport, 80) };
+    return { number: index + 1, fullName: clean(row.fullName, 180) };
   });
 }
 
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
     ? data.returnTransferDate < data.firstTransferDate
     : !isAfterBookingDateTime(data.returnTransferDate, effectiveReturnTransferTime, data.firstTransferDate, data.firstTransferTime))) return reply({ ok: false, error: 'invalid-return-date-time' }, 400);
   if (data.transferType === 'private' && isVito && passengerCount > 5) return reply({ ok: false, error: 'vehicle-capacity' }, 400);
-  if (passengers.some((p) => !p.fullName || !p.passport)) return reply({ ok: false, error: 'missing-passenger-fields' }, 400);
+  if (passengers.some((p) => !p.fullName)) return reply({ ok: false, error: 'missing-passenger-fields' }, 400);
 
   const arrivalRequired = data.journey === 'round-trip' || data.direction.includes('Airport → Hotel');
   const departureRequired = data.journey === 'round-trip' || data.direction.includes('Hotel → Airport');
@@ -205,11 +205,11 @@ export async function POST(request: NextRequest) {
   ].join('');
   const passengerRows = passengers.map((p) => renderRow(
     `Yolcu ${p.number}`,
-    `${escapeHtml(p.fullName || '')}<br>Pasaport: ${escapeHtml(p.passport || '')}`
+    escapeHtml(p.fullName || '')
   )).join('');
   const finalHtmlRows = finalRows.map(([label, value]) => renderRow(label, escapeHtml(value))).join('');
 
-  const textPassengers = passengers.map((p) => `Yolcu ${p.number}: ${p.fullName}\nPasaport: ${p.passport}`).join('\n');
+  const textPassengers = passengers.map((p) => `Yolcu ${p.number}: ${p.fullName}`).join('\n');
   const text = `Yeni rezervasyon talebi\n\n${mainRows.map(([label, value]) => `${label}: ${value}`).join('\n')}\nİletişim Numarası: ${data.whatsapp || '—'}\nE-posta: ${data.email || '—'}\n${textPassengers}\n${finalRows.map(([label, value]) => `${label}: ${value}`).join('\n')}`;
   const airportCode = data.airport.includes('(ASR)') ? 'ASR' : 'NAV';
   const routeLabel = data.journey === 'one-way' && data.direction === 'Hotel → Airport'
@@ -223,7 +223,7 @@ export async function POST(request: NextRequest) {
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from, to: [to], subject, text,
-      html: `<div style="font-family:Arial,Helvetica,sans-serif;color:#111827;max-width:684px;margin:0 auto"><h2 style="font-size:18px;line-height:1.3;margin:0 0 16px;font-weight:700">Yeni rezervasyon talebi</h2><table role="presentation" style="border-collapse:collapse;width:100%;font-size:14px;border:1px solid #d5dde8">${regularRows}${contactRows}${passengerRows}${finalHtmlRows}</table><p style="margin:18px 0 0;color:#4b5563;font-size:11px;line-height:1.45">Pasaport bilgileri rezervasyon işlemi için gönderilmiştir. Bu e-postayı güvenli şekilde saklayın ve gereksiz yere iletmeyin.</p></div>`,
+      html: `<div style="font-family:Arial,Helvetica,sans-serif;color:#111827;max-width:684px;margin:0 auto"><h2 style="font-size:18px;line-height:1.3;margin:0 0 16px;font-weight:700">Yeni rezervasyon talebi</h2><table role="presentation" style="border-collapse:collapse;width:100%;font-size:14px;border:1px solid #d5dde8">${regularRows}${contactRows}${passengerRows}${finalHtmlRows}</table></div>`,
     }),
   });
 

@@ -102,7 +102,7 @@ const rawEsPages: EsSeoPage[] = [
       {
         "heading": "Datos necesarios para la reserva",
         "paragraphs": [
-          "Para cada reserva necesitamos los nombres de los pasajeros, números de pasaporte, número de vuelo y nombre completo del alojamiento. Algunos [[hoteles cueva y alojamientos en calles antiguas|cappadocia-cave-hotel-airport-transfer]] están en vías a las que un vehículo no puede acceder; en esos casos, la recogida o la llegada puede organizarse en el punto accesible más cercano."
+          "Para cada reserva necesitamos los nombres de los pasajeros, número de vuelo y nombre completo del alojamiento. Algunos [[hoteles cueva y alojamientos en calles antiguas|cappadocia-cave-hotel-airport-transfer]] están en vías a las que un vehículo no puede acceder; en esos casos, la recogida o la llegada puede organizarse en el punto accesible más cercano."
         ]
       },
       {
@@ -155,7 +155,7 @@ const rawEsPages: EsSeoPage[] = [
       },
       {
         "q": "¿Qué datos de los pasajeros se necesitan?",
-        "a": "Nombres de los pasajeros, números de pasaporte, información del vuelo, nombre del hotel y un contacto de WhatsApp."
+        "a": "Nombres de los pasajeros, información del vuelo, nombre del hotel y un contacto de WhatsApp."
       }
     ],
     "related": [
@@ -196,7 +196,7 @@ const rawEsPages: EsSeoPage[] = [
       {
         "heading": "Pago y datos de los pasajeros",
         "paragraphs": [
-          "El pago se realiza en efectivo al conductor. Para confirmar el traslado seguimos necesitando número de vuelo, alojamiento, nombres de los pasajeros, números de pasaporte y contacto de WhatsApp."
+          "El pago se realiza en efectivo al conductor. Para confirmar el traslado seguimos necesitando número de vuelo, alojamiento, nombres de los pasajeros y contacto de WhatsApp."
         ]
       },
       {
@@ -230,10 +230,6 @@ const rawEsPages: EsSeoPage[] = [
       {
         "q": "¿El traslado privado es siempre puerta a puerta?",
         "a": "El vehículo es exclusivo para tu reserva, pero el acceso a hoteles históricos sigue dependiendo de que la calle permita entrar y detenerse con seguridad."
-      },
-      {
-        "q": "¿Se necesitan números de pasaporte para un traslado privado?",
-        "a": "Sí. Los datos de pasaporte de los pasajeros son necesarios para cada reserva."
       },
       {
         "q": "¿Cómo se paga el traslado privado?",
@@ -291,7 +287,7 @@ const rawEsPages: EsSeoPage[] = [
       {
         "heading": "Pago, moneda y datos de la reserva",
         "paragraphs": [
-          "Los precios se publican en EUR y el pago se realiza en efectivo al conductor. También puede pagarse en efectivo en USD o TRY usando el tipo de cambio vigente en el momento del pago. Ida y vuelta equivale simplemente a dos trayectos al precio publicado, sin una tarifa especial de paquete. Para reservar seguimos necesitando número de vuelo, hotel, nombres y números de pasaporte; la reserva queda confirmada después de revisar estos datos por WhatsApp. Esto es especialmente importante cuando el acceso al hotel es poco habitual, se utilizan aeropuertos distintos o la solicitud está fuera de la cobertura estándar del shuttle compartido."
+          "Los precios se publican en EUR y el pago se realiza en efectivo al conductor. También puede pagarse en efectivo en USD o TRY usando el tipo de cambio vigente en el momento del pago. Ida y vuelta equivale simplemente a dos trayectos al precio publicado, sin una tarifa especial de paquete. Para reservar seguimos necesitando número de vuelo, hotel, nombres de los pasajeros; la reserva queda confirmada después de revisar estos datos por WhatsApp. Esto es especialmente importante cuando el acceso al hotel es poco habitual, se utilizan aeropuertos distintos o la solicitud está fuera de la cobertura estándar del shuttle compartido."
         ]
       }
     ],
@@ -333,10 +329,6 @@ const rawEsPages: EsSeoPage[] = [
         "a": "Sí. Puede acordarse pago en efectivo en USD o TRY con el tipo de cambio vigente en el momento del pago."
       },
       {
-        "q": "¿Se necesitan números de pasaporte aunque el pago sea en efectivo?",
-        "a": "Sí. La información del pasaporte es necesaria para cada reserva, independientemente del método de pago."
-      },
-      {
         "q": "¿Hay descuento por ida y vuelta?",
         "a": "No se aplica un descuento específico; la ida y vuelta cuesta exactamente el doble del trayecto de ida."
       },
@@ -374,7 +366,7 @@ const rawEsPages: EsSeoPage[] = [
       {
         "heading": "Qué tener preparado al aterrizar en ASR",
         "paragraphs": [
-          "Al reservar, indica el número de vuelo y el nombre completo del hotel; después de recoger el equipaje, sigue las instrucciones de encuentro enviadas por WhatsApp. Los nombres y datos de pasaporte de los pasajeros son necesarios para cada reserva. El nombre completo del hotel permite identificar la ruta correcta después del encuentro en el aeropuerto, tanto si el alojamiento está en Goreme como en Urgup, Uchisar, Avanos, Ortahisar o Cavusin."
+          "Al reservar, indica el número de vuelo y el nombre completo del hotel; después de recoger el equipaje, sigue las instrucciones de encuentro enviadas por WhatsApp. Los nombres de los pasajeros son necesarios para cada reserva. El nombre completo del hotel permite identificar la ruta correcta después del encuentro en el aeropuerto, tanto si el alojamiento está en Goreme como en Urgup, Uchisar, Avanos, Ortahisar o Cavusin."
         ]
       },
       {
@@ -2107,7 +2099,7 @@ const rawEsPages: EsSeoPage[] = [
         "heading": "Del aeropuerto al hotel: shuttle o vehículo privado",
         "paragraphs": [
           "El shuttle compartido es la opción principal de bajo coste para Goreme, Urgup, Uchisar, Avanos, Ortahisar y Cavusin. La tarifa actual es de {{PRICE:kayseri:shuttle}} por persona y trayecto desde ASR y {{PRICE:nevsehir:shuttle}} por persona y trayecto desde NAV. Al ser compartido, puede incluir otros pasajeros y paradas en distintos hoteles. Quien quiera un vehículo exclusivo puede elegir Vito o Sprinter privado; las tarifas privadas son por vehículo y no por persona. Para una visión general de los servicios, consulta [[traslado del aeropuerto de Capadocia|cappadocia-airport-transfer]]; en [[precios de traslado al aeropuerto|airport-transfer-prices]] se reúnen las tarifas actuales separadas por aeropuerto.",
-          "La solicitud de reserva recoge aeropuerto, sentido del viaje, datos del vuelo, hotel, contacto de WhatsApp y datos de pasajeros, incluidos los números de pasaporte necesarios para cada reserva. El pago se realiza en efectivo al conductor después de la confirmación."
+          "La solicitud de reserva recoge aeropuerto, sentido del viaje, datos del vuelo, hotel, contacto de WhatsApp y nombres de los pasajeros. El pago se realiza en efectivo al conductor después de la confirmación."
         ]
       },
       {
@@ -2368,9 +2360,9 @@ const rawEsPages: EsSeoPage[] = [
         ]
       },
       {
-        "heading": "Datos de pasajeros y pasaportes",
+        "heading": "Datos de pasajeros",
         "paragraphs": [
-          "Ambos servicios utilizan información de los pasajeros. El formulario solicita nombres y números de pasaporte porque son necesarios para cada reserva."
+          "Ambos servicios utilizan información de los pasajeros. El formulario solicita los nombres de los pasajeros para cada reserva."
         ]
       },
       {
@@ -2488,10 +2480,6 @@ const rawEsPages: EsSeoPage[] = [
         "q": "¿Puedo reservar recogida en el hotel para la salida?",
         "a": "Sí, con el punto de recogida confirmado para la propiedad."
       },
-      {
-        "q": "¿Se necesitan datos de pasaporte?",
-        "a": "Sí, para cada reserva."
-      }
     ],
     "related": [
       "goreme-airport-transfer",
@@ -2525,7 +2513,7 @@ const rawEsPages: EsSeoPage[] = [
       {
         "heading": "Después de aterrizar en Capadocia",
         "paragraphs": [
-          "Recoge el equipaje, sigue las instrucciones de encuentro confirmadas por WhatsApp y utiliza el nombre de la reserva para identificarte en el aeropuerto. La reserva necesita el número correcto de vuelo, hotel, nombres y números de pasaporte."
+          "Recoge el equipaje, sigue las instrucciones de encuentro confirmadas por WhatsApp y utiliza el nombre de la reserva para identificarte en el aeropuerto. La reserva necesita el número correcto de vuelo, hotel, nombres de los pasajeros."
         ]
       },
       {

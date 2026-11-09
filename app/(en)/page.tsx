@@ -25,7 +25,6 @@ const homeFaq = [
   ['How much is a private Vito?', `Kayseri Airport Vito is ${formatEuro(privateOneWayPrice('kayseri','vito'))} per vehicle one way; Nevsehir Airport Vito is ${formatEuro(privateOneWayPrice('nevsehir','vito'))} per vehicle one way. The Vito is for up to 5 passengers.`],
   ['How much is a private Sprinter?', `Kayseri Airport Sprinter is ${formatEuro(privateOneWayPrice('kayseri','sprinter'))} per vehicle one way; Nevsehir Airport Sprinter is ${formatEuro(privateOneWayPrice('nevsehir','sprinter'))} per vehicle one way. The Sprinter is for up to 16 passengers.`],
   ['How do I pay for the transfer?', 'Payment is cash to the driver. Prices are shown in EUR; USD or TRY cash payment can be arranged using the current exchange rate at the time of payment.'],
-  ['Why does the booking form ask for passport numbers?', 'Passenger names and passport numbers are required for every reservation.'],
   ['Will the driver meet me at the airport?', 'Meeting details are confirmed on WhatsApp after the booking request, using the name on your reservation for the airport meeting sign.'],
   ['What happens if my flight is delayed?', 'Send updated flight information on WhatsApp as early as possible, since a shared shuttle can involve several passengers and a schedule change needs to be reconfirmed.'],
   ['Can a shuttle reach every cave hotel door?', 'Not always. Some historic lanes are too narrow or unsuitable for a large vehicle, so a nearby safe stopping point may be confirmed for the specific hotel.'],
@@ -81,7 +80,7 @@ export default function HomePage() {
           <div className="summary-line"><span>Nevsehir Vito · max 5</span><strong>{formatEuro(privateOneWayPrice('nevsehir','vito'))} / vehicle / way</strong></div>
           <div className="summary-line"><span>Nevsehir Sprinter · max 16</span><strong>{formatEuro(privateOneWayPrice('nevsehir','sprinter'))} / vehicle / way</strong></div>
         </div>
-        <p className="small-copy">Round trip is exactly double. Private prices are per vehicle. Passenger names and passport numbers are required for every reservation.</p>
+        <p className="small-copy">Round trip is exactly double. Private prices are per vehicle. Passenger names are required for every reservation.</p>
         <BookingInfoChecklist className="home-booking-checklist" />
       </aside>
       <BookingForm />
