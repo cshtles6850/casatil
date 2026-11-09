@@ -747,3 +747,60 @@ p { margin-top: 0; }
 .airbnb-help summary:focus-visible { outline: 2px solid var(--sea); outline-offset: 3px; border-radius: 4px; }
 .airbnb-help-panel { margin-top: 9px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--sky); color: var(--ink); font-size: .82rem; line-height: 1.52; }
 .airbnb-help-panel p { margin: 0 0 10px; }
+
+/* Compact booking note: only rendered on /es/cavusin-to-kayseri-airport-shuttle. */
+.es-cavusin-quick-booking-note {
+  width: 100%;
+  max-width: 680px;
+  min-width: 0;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.4;
+}
+.es-cavusin-quick-booking-title {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin: 0 0 8px;
+  font-size: .9rem;
+  font-weight: 850;
+}
+.es-cavusin-quick-booking-title > span,
+.es-cavusin-quick-booking-items > li > span {
+  flex: 0 0 auto;
+  color: #15845c;
+  font-weight: 900;
+}
+.es-cavusin-quick-booking-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.es-cavusin-quick-booking-items > li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: .82rem;
+}
+.es-cavusin-quick-booking-payment {
+  margin: 9px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: .78rem;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+.es-cavusin-quick-booking-payment strong { color: var(--ink); }
+@media (max-width: 380px) {
+  .es-cavusin-quick-booking-note { padding: 11px 12px; }
+  .es-cavusin-quick-booking-items { grid-template-columns: 1fr; gap: 4px; }
+}
