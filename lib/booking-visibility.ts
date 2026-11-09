@@ -25,7 +25,7 @@ export type BookingChecklistLocale = 'en' | 'zh-CN' | 'es' | 'pt-BR' | 'ko' | 'j
 
 // Add another locale only when its Cavusin to Kayseri editorial update is published.
 const HIDDEN_BOOKING_CHECKLIST_LOCALES_BY_SLUG: Readonly<Record<string, readonly BookingChecklistLocale[]>> = {
-  'cavusin-to-kayseri-airport-shuttle': ['en', 'es', 'zh-CN'],
+  'cavusin-to-kayseri-airport-shuttle': ['en', 'es', 'zh-CN', 'pt-BR'],
 };
 
 export function pageShowsBookingInfoChecklist(slug: string, locale: BookingChecklistLocale): boolean {
