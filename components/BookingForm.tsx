@@ -18,6 +18,8 @@ type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
 type Passenger = { fullName: string };
+const AIRBNB_MEETING_POINT = 'Meeting hotel to be confirmed';
+
 type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportLabels: Record<Airport, string> = {
@@ -328,7 +330,18 @@ export function BookingForm({
             <PassengerCounter id={`passengers-${compact ? 'compact' : 'full'}`} label="Passenger count" value={passengers} max={transferType === 'private' ? (vehicle === 'vito' ? 5 : 16) : 16} onChange={setPassengers} />
             <div className="field passenger-hotel-field">
               <label htmlFor={`hotel-${compact ? 'compact' : 'full'}`}>Hotel / accommodation</label>
-              <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} required /><div className="form-note">Please enter the hotel name using Latin letters.</div>
+              <input id={`hotel-${compact ? 'compact' : 'full'}`} name="hotel" value={hotel} onChange={(e) => setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination ? `Full hotel name in ${townLabels[destination]}` : 'Full hotel name'} readOnly={hotel === AIRBNB_MEETING_POINT} required /><div className="form-note">Please enter only the full hotel name, not the street address. Use Latin letters.</div>
+              <details className="airbnb-help">
+                <summary>Staying at an Airbnb? What should I do?</summary>
+                <div className="airbnb-help-panel">
+                  <p>We do not provide direct pickup or drop-off at Airbnb addresses. We can arrange pickup and drop-off in front of a nearby suitable hotel that our vehicle can safely access. Please enter that hotel&apos;s name above.</p>
+                  <p>If you do not know a nearby hotel, select the option below. We will confirm the meeting point with you via WhatsApp before your transfer.</p>
+                  <label className="airbnb-meeting-option">
+                    <input type="checkbox" checked={hotel === AIRBNB_MEETING_POINT} onChange={(e) => setHotel(e.target.checked ? AIRBNB_MEETING_POINT : '')} />
+                    <span>I do not know a nearby hotel. Please arrange the meeting point.</span>
+                  </label>
+                </div>
+              </details>
             </div>
           </div>
 

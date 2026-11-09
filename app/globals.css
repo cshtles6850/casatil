@@ -740,3 +740,12 @@ p { margin-top: 0; }
     transition: opacity 140ms ease, transform 180ms ease;
   }
 }
+
+/* Optional Airbnb pickup/drop-off guidance in the hotel name field. */
+.airbnb-help { margin-top: 3px; min-width: 0; }
+.airbnb-help summary { cursor: pointer; color: var(--sea-dark); font-size: .8rem; line-height: 1.45; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
+.airbnb-help summary:focus-visible { outline: 2px solid var(--sea); outline-offset: 3px; border-radius: 4px; }
+.airbnb-help-panel { margin-top: 9px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--sky); color: var(--ink); font-size: .82rem; line-height: 1.52; }
+.airbnb-help-panel p { margin: 0 0 10px; }
+.airbnb-help .airbnb-meeting-option { display: flex; align-items: flex-start; gap: 9px; cursor: pointer; font-size: .8rem; font-weight: 650; line-height: 1.48; }
+.passenger-hotel-field .airbnb-meeting-option input[type="checkbox"] { flex: none; width: 18px; min-width: 18px; height: 18px; min-height: 18px; margin: 2px 0 0; padding: 0; }

@@ -19,6 +19,8 @@ type Direction = 'airport-hotel' | 'hotel-airport';
 type Airport = 'kayseri' | 'nevsehir';
 type Vehicle = 'vito' | 'sprinter';
 type Passenger = { fullName: string };
+const AIRBNB_MEETING_POINT = 'Meeting hotel to be confirmed';
+
 type Town = 'goreme' | 'urgup' | 'uchisar' | 'avanos' | 'ortahisar' | 'cavusin';
 
 const airportLabels: Record<Airport, string> = { kayseri: 'Kayseri Airport (ASR)', nevsehir: 'Nevsehir Airport (NAV)' };
@@ -44,6 +46,38 @@ const expandMissingWithoutTime: Record<NewLocale, string> = {
   ja: '続けるには町を選び、便の日付と宿泊施設の正式名称を入力してください。',
 };
 
+
+
+const airbnbCopy: Record<NewLocale, { title: string; info: string; meeting: string; option: string; hotelNote: string }> = {
+  es: {
+    title: '¿Te alojas en un Airbnb? ¿Qué debes hacer?',
+    info: 'No realizamos recogidas ni traslados directamente a direcciones de Airbnb. Podemos recogerte o dejarte frente a un hotel cercano adecuado al que nuestro vehículo pueda acceder con seguridad. Escribe arriba el nombre de ese hotel.',
+    meeting: 'Si no conoces un hotel cercano, marca la opción siguiente. Confirmaremos el punto de encuentro por WhatsApp antes del traslado.',
+    option: 'No conozco un hotel cercano. Necesito acordar el punto de encuentro.',
+    hotelNote: 'Escribe solo el nombre completo del hotel, no su dirección. Usa letras latinas.',
+  },
+  'pt-BR': {
+    title: 'Vai ficar em um Airbnb? O que fazer?',
+    info: 'Não fazemos embarque nem desembarque diretamente em endereços de Airbnb. Podemos combinar o embarque ou desembarque em frente a um hotel próximo e adequado, com acesso seguro para nosso veículo. Informe o nome desse hotel acima.',
+    meeting: 'Se não conhece um hotel próximo, marque a opção abaixo. Confirmaremos o ponto de encontro pelo WhatsApp antes do transfer.',
+    option: 'Não conheço um hotel próximo. Preciso combinar o ponto de encontro.',
+    hotelNote: 'Informe apenas o nome completo do hotel, não o endereço. Use letras latinas.',
+  },
+  ko: {
+    title: 'Airbnb에 숙박하시나요? 이용 방법 안내',
+    info: 'Airbnb 주소로 직접 픽업하거나 내려드리지 않습니다. 차량이 안전하게 접근할 수 있는 가까운 적절한 호텔 앞에서 픽업 또는 하차를 진행할 수 있습니다. 위 입력란에 해당 호텔 이름을 입력해 주세요.',
+    meeting: '근처 호텔을 모르시면 아래 항목을 선택해 주세요. 이동 전에 WhatsApp으로 만남 장소를 확인해 드립니다.',
+    option: '가까운 호텔을 모릅니다. 만남 장소를 정해주세요.',
+    hotelNote: '주소가 아닌 호텔의 정확한 이름만 라틴 문자로 입력해 주세요.',
+  },
+  ja: {
+    title: 'Airbnbに宿泊しますか？送迎について',
+    info: 'Airbnbの住所への直接のお迎え・お送りは行っていません。車両が安全にアクセスできる近隣の適切なホテル前で乗降できます。上の欄にそのホテル名を入力してください。',
+    meeting: '近くのホテルが分からない場合は、下の項目を選んでください。送迎前にWhatsAppで集合場所をご案内・確認します。',
+    option: '近くのホテルが分かりません。集合場所の調整を希望します。',
+    hotelNote: '住所ではなくホテルの正式名称だけをラテン文字で入力してください。',
+  },
+};
 
 const contactCopy: Record<NewLocale, {
   emailLabel: string; fallback: string; contactRequired: string; sendingEmail: string; emailSuccess: string; emailFail: string; genericEmailFail: string;
@@ -159,7 +193,7 @@ function initialTownKey(value: string): Town | '' {
 
 
 export function LocalizedBookingForm({ locale, compact=false, initialAirport='kayseri', initialDirection='airport-hotel', initialTown='' }: { locale:NewLocale; compact?:boolean; initialAirport?:Airport; initialDirection?:Direction; initialTown?:string }) {
-  const t=localeUi[locale].form; const prefix=localePrefix[locale]; const townLabels=localeTownNames[locale] as Record<Town,string>;
+  const t=localeUi[locale].form; const airbnb=airbnbCopy[locale]; const prefix=localePrefix[locale]; const townLabels=localeTownNames[locale] as Record<Town,string>;
   const [transferType,setTransferType]=useState<TransferType>('shuttle'); const [journey,setJourney]=useState<Journey>('one-way'); const [direction,setDirection]=useState<Direction>(initialDirection); const [airport,setAirport]=useState<Airport>(initialAirport); const [vehicle,setVehicle]=useState<Vehicle>('vito');
   const [passengers,setPassengers]=useState(1); const [people,setPeople]=useState<Passenger[]>([{fullName:''}]); const [destination,setDestination]=useState<Town|''>(()=>initialTownKey(initialTown)); const [hotel,setHotel]=useState('');
   const [firstTransferDate,setFirstTransferDate]=useState(''); const [firstTransferTime,setFirstTransferTime]=useState(''); const [arrivalFlight,setArrivalFlight]=useState(''); const [departureFlight,setDepartureFlight]=useState(''); const [returnTransferDate,setReturnTransferDate]=useState(''); const [returnTransferTime,setReturnTransferTime]=useState(''); const [returnFlight,setReturnFlight]=useState('');
@@ -203,7 +237,7 @@ export function LocalizedBookingForm({ locale, compact=false, initialAirport='ka
       {journey==='one-way'&&<div className="field full"><label>{t.direction}</label><div className="radio-row"><label className="radio-card"><input type="radio" name="direction" checked={direction==='airport-hotel'} onChange={()=>setDirection('airport-hotel')}/>{t.airportHotel}</label><label className="radio-card"><input type="radio" name="direction" checked={direction==='hotel-airport'} onChange={()=>setDirection('hotel-airport')}/>{t.hotelAirport}</label></div></div>}
       <div className="field full"><label htmlFor={`airport-loc-${compact?'c':'f'}`}>{t.airport}</label><select id={`airport-loc-${compact?'c':'f'}`} value={airport} onChange={e=>setAirport(e.target.value as Airport)}><option value="kayseri">{airportDisplay.kayseri}</option><option value="nevsehir">{airportDisplay.nevsehir}</option></select></div>
       <div className="field full"><label htmlFor={`destination-loc-${compact?'c':'f'}`}>{destinationLabel}</label><select id={`destination-loc-${compact?'c':'f'}`} value={destination} onChange={e=>setDestination(e.target.value as Town|'')} required><option value="">{t.selectTown}</option>{(Object.keys(canonicalTownLabels) as Town[]).map(key=><option key={key} value={key}>{townLabels[key]}</option>)}</select></div>
-      <div className="field full passenger-hotel-row"><PassengerCounter id={`passengers-loc-${compact?'c':'f'}`} label={t.passengerCount} value={passengers} max={transferType==='private'?(vehicle==='vito'?5:16):16} onChange={setPassengers}/><div className="field passenger-hotel-field"><label>{t.hotel}</label><input value={hotel} onChange={e=>setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination?`${t.fullHotelIn} ${townLabels[destination]}`:t.fullHotel} required/><div className="form-note">{contact.hotelLatin}</div></div></div>
+      <div className="field full passenger-hotel-row"><PassengerCounter id={`passengers-loc-${compact?'c':'f'}`} label={t.passengerCount} value={passengers} max={transferType==='private'?(vehicle==='vito'?5:16):16} onChange={setPassengers}/><div className="field passenger-hotel-field"><label>{t.hotel}</label><input value={hotel} onChange={e=>setHotel(sanitizeLatinHotel(e.target.value))} placeholder={destination?`${t.fullHotelIn} ${townLabels[destination]}`:t.fullHotel} readOnly={hotel===AIRBNB_MEETING_POINT} required/><div className="form-note">{airbnb.hotelNote}</div><details className="airbnb-help"><summary>{airbnb.title}</summary><div className="airbnb-help-panel"><p>{airbnb.info}</p><p>{airbnb.meeting}</p><label className="airbnb-meeting-option"><input type="checkbox" checked={hotel===AIRBNB_MEETING_POINT} onChange={e=>setHotel(e.target.checked?AIRBNB_MEETING_POINT:'')}/><span>{airbnb.option}</span></label></div></details></div></div>
       {transferType==='private'&&<div className="field full"><label>{t.privateVehicle}</label><div className="radio-row"><label className="radio-card"><input type="radio" checked={vehicle==='vito'} onChange={()=>setVehicle('vito')}/>Vito · {capacityLabel(5)} · <strong>€{privateOneWayPrice(airport,'vito')}/{t.way}</strong></label><label className="radio-card"><input type="radio" checked={vehicle==='sprinter'} onChange={()=>setVehicle('sprinter')}/>Sprinter · {capacityLabel(16)} · <strong>€{privateOneWayPrice(airport,'sprinter')}/{t.way}</strong></label></div></div>}
       <div className={`field${companyArrangedPickup?' full':''}`}><label>{firstDateLabel}</label><NumericDateInput id={`date-loc-${locale}-${compact?'c':'f'}`} name="firstTransferDate" min={today} value={firstTransferDate} onChange={setFirstTransferDate} required ariaLabel={firstDateLabel}/></div>{companyArrangedPickup?<div className="field full"><div className="journey-note" role="note">{pickupTimeNotice[locale]}</div></div>:<TimeSelect idPrefix={`time-loc-${locale}-${compact?'c':'f'}`} label={firstTimeLabel} value={firstTransferTime} onChange={setFirstTransferTime}/>}
       {!companyArrangedPickup&&firstTiming==='past'&&<div className="field full booking-time-error" role="alert">⚠️ <span>{timingCopy.past} <strong>{timingCopy.pastStrong}</strong></span></div>}
