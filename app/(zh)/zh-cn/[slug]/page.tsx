@@ -176,7 +176,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
   const guideIntroSectionCount = usesGuideInlineBooking ? guideInlineBookingSectionCount(page.slug) : 1;
   const mainClassName = [page.route ? 'route-page' : '', hasBookingForm ? 'has-booking-cta' : ''].filter(Boolean).join(' ') || undefined;
 
-  const renderSection = (section: ZhSeoPage['sections'][number]) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>;
+  const renderSection = (section: ZhSeoPage['sections'][number]) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.blocks ? section.blocks.map((block,i)=>block.kind==='subheading'?<h3 key={i}>{block.text}</h3>:<p key={i}><RichText text={block.text} prefix="/zh-cn" /></p>) : section.paragraphs.map((p,i)=><p key={i}><RichText text={p} prefix="/zh-cn" /></p>)}{section.bullets&&<ul className={section.bullets.length>12?'long-list':undefined}>{section.bullets.map((b)=><li key={b}><RichText text={b} prefix="/zh-cn" /></li>)}</ul>}</section>;
 
   return <main lang="zh-CN" className={mainClassName}>
     <JsonLd data={faqSchema}/><JsonLd data={breadcrumb}/><JsonLd data={primarySchema}/>
@@ -203,6 +203,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
         </article>
       </> : <>
         <article className={page.route ? 'prose route-prose' : 'prose'}>
+          {page.introParagraphs?.map((text,i)=><p key={`intro-${i}`}><RichText text={text} prefix="/zh-cn" /></p>)}
           <RouteAirportMeetingZh page={page} />
           {page.sections.map(renderSection)}
           {hasBookingForm && pageShowsBookingInfoChecklist(page.slug, 'zh-CN') && <PageBookingInfoChecklistZh />}

@@ -1,8 +1,40 @@
 import type { SeoPage } from './content';
 import { resolvePriceTokensDeep } from './price-content';
+import { shuttleOneWayPrice, privateOneWayPrice } from './prices';
 export type ZhSeoPage = SeoPage;
 
 export const zhTownNames: Record<string,string> = { goreme:'格雷梅', urgup:'于尔居普', uchisar:'乌奇希萨尔', avanos:'阿瓦诺斯', ortahisar:'奥塔西萨', cavusin:'恰武辛' };
+
+
+function asrGroupComparisonZh(): NonNullable<SeoPage['sections'][number]['blocks']> {
+  const shared = shuttleOneWayPrice('kayseri');
+  const sprinter = privateOneWayPrice('kayseri', 'sprinter');
+  const neutral = '请根据当前价格和同行人数比较拼车与私人 Sprinter 的总费用。';
+  if (!Number.isFinite(shared) || !Number.isFinite(sprinter) || shared <= 0 || sprinter <= 0) {
+    return [{ kind: 'paragraph', text: neutral }];
+  }
+  const s = Math.round(shared * 100);
+  const p = Math.round(sprinter * 100);
+  if (!Number.isSafeInteger(s) || !Number.isSafeInteger(p) || s <= 0 || p <= 0 ||
+      Math.abs(shared - s / 100) > 0.000001 || Math.abs(sprinter - p / 100) > 0.000001) {
+    return [{ kind: 'paragraph', text: neutral }];
+  }
+  const equalCount = p % s === 0 ? p / s : null;
+  const cheaperCount = Math.floor(p / s) + 1;
+  const equalWithinCapacity = equalCount !== null && equalCount >= 1 && equalCount <= 16;
+  const cheaperWithinCapacity = cheaperCount >= 1 && cheaperCount <= 16 && cheaperCount * s > p;
+  const statements = [
+    ...(equalWithinCapacity ? [`同行 ${equalCount} 人时，私人 Sprinter 与相同人数的拼车总价相同。`] : []),
+    ...(cheaperWithinCapacity ? [`同行达到 ${cheaperCount} 人时，私人 Sprinter 的整车价格低于相同人数的拼车总价。`] : []),
+  ];
+  return [
+    { kind: 'paragraph', text: statements.length ? `**${statements.join(' ')}**` : neutral },
+    { kind: 'paragraph', text: cheaperWithinCapacity
+      ? '当同行人数较多时，私人 Sprinter 的整车总价可能低于购买相同人数的拼车座位。实际是否更划算，应根据当前价格和乘客人数计算。'
+      : '实际是否更划算，应根据当前价格和乘客人数计算。' },
+  ];
+}
+const asrGroupComparisonZhBlocks = asrGroupComparisonZh();
 
 const rawZhPages: SeoPage[] = [
   {
@@ -1675,7 +1707,10 @@ const rawZhPages: SeoPage[] = [
     "description": "恰武辛到开塞利机场（ASR）约 75 km，常规车程约 65–80 分钟。可预订共享送机班车或私人接送，接车时间按离港航班和酒店位置确认。",
     "eyebrow": "恰武辛 → ASR 机场班车",
     "h1": "恰武辛到开塞利机场班车",
-    "lead": "从恰武辛前往开塞利机场（ASR），可预订 {{PRICE:kayseri:shuttle}}/人/单程的共享送机班车，也可选择私人 Vito 或 Sprinter。常规公路约 75 km / 65–80 分钟，实际接车时间会根据离港航班、酒店位置和共享接车顺序确认。",
+    "lead": "如果您住在卡帕多奇亚的恰武辛（Cavusin / Çavuşin），并计划从开塞利机场（Kayseri Erkilet Airport，ASR）离境，可以预订从酒店出发的拼车送机服务，也可以选择私人包车。无需先自行前往格雷梅（Göreme）换乘机场交通。",
+    "introParagraphs": [
+      "恰武辛距离开塞利机场约 75 公里，通常的公路行驶时间约为 65–80 分钟。实际接车时间还需考虑航班起飞时间、其他乘客的酒店接车安排以及到机场办理登机手续所需的时间。"
+    ],
     "route": {
       "airport": "kayseri",
       "town": "cavusin",
@@ -1683,39 +1718,173 @@ const rawZhPages: SeoPage[] = [
     },
     "sections": [
       {
-        "heading": "恰武辛到开塞利机场：约 75 km / 65–80 分钟",
+        "heading": "恰武辛送机班车几点接人？",
         "paragraphs": [
-          "道路参考只覆盖实际行驶时间；确认的接车时间还会考虑共享酒店接车和航班前的机场余量。恰武辛住宿可能在主路附近、老村一带或更靠近山谷入口，因此送机规划真正应以住宿对应的确认接车点为准。"
+          "恰武辛前往开塞利机场的拼车服务没有适用于所有旅客的固定整点发车时刻表。",
+          "我们会根据您的离港航班信息、当次拼车安排及沿途酒店接车情况确定上车时间，并另行通知。请以最终确认的接车时间和地点为准，不要仅根据地图显示的行车时间自行推算出发时间。",
+          "预订时，请提供离港日期、航班号以及完整的酒店名称。如果航班在清晨起飞，建议提前整理好行李，并按照确认的信息做好离店准备。",
+          "恰武辛周边在部分清晨会有热气球活动，附近道路的交通情况也可能有所变化，因此按时到达指定接车点尤其重要。"
         ]
       },
       {
-        "heading": "热气球活动较集中的清晨可能增加恰武辛本地交通",
-        "paragraphs": [
-          "清晨的热气球活动有时会让恰武辛周边道路更忙，因此应在接车窗口开始前到达确认的接车点。",
-          "如果从 NAV 起飞，可查看 [[恰武辛到内夫谢希尔机场班车|cavusin-to-nevsehir-airport-shuttle]]。"
+        "heading": "恰武辛不同住宿区域如何安排接车？",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "恰武辛位于格雷梅与阿瓦诺斯（Avanos）之间。虽然村庄不大，但酒店和洞穴民宿分布在主路旁、历史老村及山谷附近，不同位置的车辆通行条件并不相同。"
+          },
+          {
+            "kind": "subheading",
+            "text": "格雷梅至阿瓦诺斯公路附近的酒店"
+          },
+          {
+            "kind": "paragraph",
+            "text": "靠近主要公路的酒店通常更方便车辆进出。实际接车位置会根据酒店入口、道路条件和车辆能否安全停靠来确定。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "请在预订时填写酒店的完整名称，以便确认具体上车点。"
+          },
+          {
+            "kind": "subheading",
+            "text": "恰武辛老村的洞穴酒店"
+          },
+          {
+            "kind": "paragraph",
+            "text": "恰武辛老村靠近圣约翰施洗者教堂（St. John the Baptist Church），部分住宿位于山坡及历史街巷中。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "这些区域的部分道路较窄或不适合接送车辆直接进入。如果车辆无法安全停在酒店门口，我们会告知附近合适、可通行的接车地点。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "对于清晨离店、携带行李的旅客，提前核对接车地点可以减少寻找车辆时的不便。"
+          },
+          {
+            "kind": "subheading",
+            "text": "玫瑰谷和红谷附近的住宿"
+          },
+          {
+            "kind": "paragraph",
+            "text": "部分住宿靠近玫瑰谷（Rose Valley / Güllüdere）及红谷（Red Valley / Kızılçukur）的入口区域，与村庄主路旁的酒店不同。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "接车地点需要结合具体住宿位置和车辆通行条件安排。请提供准确的酒店名称，不要仅填写“恰武辛”作为接车地址。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Airbnb 住宿提示：**我们不直接在私人 Airbnb 或公寓地址接送乘客。请按照预订表单中的说明，填写 Airbnb 附近一家便于车辆到达的酒店名称，并以该酒店作为接车地点。"
+          }
         ]
       },
       {
-        "heading": "老村与主路不是同一种接车环境",
-        "paragraphs": [
-          "恰武辛住宿分布在村庄不同区域，因此车辆需要明确的确认接车点，而不能只依赖一个笼统的“恰武辛”位置；前往开塞利机场的清晨送机尤其如此。"
+        "heading": "拼车送机还是私人包车？",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "从恰武辛前往开塞利机场，可以根据同行人数、行李情况和出行需求选择拼车或私人车辆。"
+          },
+          {
+            "kind": "subheading",
+            "text": "拼车机场送机"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:kayseri:shuttle}} / 人 / 单程**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "适合独自出行、情侣及人数较少的旅客。车辆可能先前往其他已预订乘客的酒店接人，再继续驶往开塞利机场。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "拼车接车时间根据实际航班及当次车辆安排确定，不提供固定的每小时发车班次。"
+          },
+          {
+            "kind": "subheading",
+            "text": "私人 Mercedes Vito"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:kayseri:vito}} / 车 / 单程**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "最多可乘坐 5 人，费用按整车计算。车辆专为您的订单安排，不会为了其他独立订单的乘客而停靠酒店接人。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "如果希望与同行家人或朋友单独乘车，可以考虑这一选择。"
+          },
+          {
+            "kind": "subheading",
+            "text": "私人 Mercedes Sprinter"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**{{PRICE:kayseri:sprinter}} / 车 / 单程**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "最多可乘坐 16 人，适合希望同车前往机场的家庭和团队。费用按整车计算，不按每位乘客分别收费。"
+          },
+          {
+            "kind": "paragraph",
+            "text": "车辆的最大载客人数不代表可以同时容纳不限数量的超大行李。如有多件大型行李或特殊装备，请在预订时提前说明。"
+          },
+          {
+            "kind": "subheading",
+            "text": "多人出行，怎样选择更划算？"
+          },
+          ...asrGroupComparisonZhBlocks,
+          {
+            "kind": "paragraph",
+            "text": "如需了解不同私人车型，可查看[[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]服务。"
+          }
         ]
       },
       {
-        "heading": "这条路线也可预订私人接送",
+        "heading": "航班变更、预订资料与付款方式",
         "paragraphs": [
-          "希望使用独立车辆？私人 Vito 每车单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 每车单程 {{PRICE:kayseri:sprinter}}，最多 16 人。详情见 [[卡帕多奇亚私人机场接送|private-airport-transfer-cappadocia]]。"
+          "如果航空公司更改了您的离港时间或航班号，请尽快通过 WhatsApp 提供更新后的信息。我们会重新核对送机安排，并告知是否需要调整接车时间。",
+          "预订时需要提供乘客姓名、出行日期、离港航班号、完整酒店名称及 WhatsApp 联系方式。",
+          "如携带多件大行李、运动器材或其他体积较大的物品，请在预订时说明，以便核对合适的车辆选择。",
+          "可以在表单中选择单程或往返服务。",
+          "**付款方式：**车费在乘车时以现金支付给司机，接受欧元（EUR）、美元（USD）或土耳其里拉（TRY）。不接受信用卡、借记卡、Apple Pay、Google Pay 或在线支付。"
+        ]
+      },
+      {
+        "heading": "从内夫谢希尔机场（NAV）起飞？",
+        "paragraphs": [
+          "开塞利机场（ASR）和内夫谢希尔卡帕多奇亚机场（NAV）是两个不同的机场。预订前，请先检查机票上的机场代码。",
+          "如果您的航班从 NAV 出发，请查看[[恰武辛到内夫谢希尔机场班车|cavusin-to-nevsehir-airport-shuttle]]，以免选错送机路线。"
         ]
       }
     ],
     "faq": [
       {
-        "q": "去 ASR 时，为什么必须确认准确的恰武辛接车点？",
-        "a": "住宿分布在主路、老村和更靠近山谷入口的不同区域，准确接车点可以减少前往开塞利机场前因找错位置造成的延误。"
+        "q": "从恰武辛到开塞利机场的接送费用是多少？",
+        "a": "拼车送机价格为 {{PRICE:kayseri:shuttle}} / 人 / 单程。私人 Mercedes Vito 的价格为 {{PRICE:kayseri:vito}} / 车 / 单程，最多 5 人；私人 Sprinter 为 {{PRICE:kayseri:sprinter}} / 车 / 单程，最多 16 人。"
       },
       {
-        "q": "这条路线可以不坐拼车，改订私人车辆吗？",
-        "a": "可以。私人 Vito 单程 {{PRICE:kayseri:vito}}，最多 5 人；Sprinter 单程 {{PRICE:kayseri:sprinter}}，最多 16 人，均按整车计价。"
+        "q": "住在恰武辛老村的洞穴酒店，可以安排接车吗？",
+        "a": "可以根据酒店位置和实际车辆通行条件安排接车。如果车辆无法安全到达酒店入口，我们会通知您附近合适的接车地点。请以确认的接车信息为准。"
+      },
+      {
+        "q": "航班起飞时间改变后，接车时间会自动调整吗？",
+        "a": "不会仅凭原来的预订信息保证自动调整。请尽快通过 WhatsApp 发送新的离港时间或航班号，我们会核对安排，并向您确认更新后的接车信息。"
+      },
+      {
+        "q": "私人包车会去其他酒店接陌生乘客吗？",
+        "a": "不会。私人车辆专为您的订单安排，不会接载其他独立预订的乘客。不过，具体酒店门口能否直接停车，仍取决于当地道路和车辆通行条件。"
+      },
+      {
+        "q": "可以同时预订去机场和从机场返回恰武辛的接送吗？",
+        "a": "可以。您可以在预订表单中选择往返服务，并分别提供相关航班信息。离港送机和抵达后的机场接机是不同方向的服务，接车安排会根据对应航班分别确认。"
       }
     ],
     "related": [
