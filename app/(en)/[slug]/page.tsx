@@ -10,7 +10,7 @@ import { MeetingSteps } from '@/components/MeetingSteps';
 import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { pageBySlug, pages, prettySlug, type SeoPage } from '@/lib/content';
-import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking } from '@/lib/booking-visibility';
+import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking, pageShowsBookingInfoChecklist } from '@/lib/booking-visibility';
 import { mobileShuttlePriceLabel } from '@/lib/home-hero-pricing';
 import { formatEuro, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
 
@@ -186,7 +186,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
         <aside className="sidebar guide-booking-sidebar" id="booking"><RouteSummary page={page} /><div className="sidebar-booking"><BookingForm compact {...defaults} /></div></aside>
         <article className="prose guide-booking-rest">
           {page.sections.slice(guideIntroSectionCount).map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
-          <PageBookingInfoChecklist />
+          {pageShowsBookingInfoChecklist(page.slug, 'en') && <PageBookingInfoChecklist />}
           <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
             {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}
           </div></section>
@@ -194,10 +194,11 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
         </article>
       </> : <>
         <article className={page.route ? 'prose route-prose' : 'prose'}>
+          {page.introParagraphs?.map((text, i) => <p key={`intro-${i}`}><RichText text={text} /></p>)}
           <RouteAirportMeeting page={page} />
-          {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
+          {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.blocks ? section.blocks.map((block, i) => block.kind === 'subheading' ? <h3 key={i}>{block.text}</h3> : <p key={i}><RichText text={block.text} /></p>) : section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
 
-          {hasBookingForm && <PageBookingInfoChecklist />}
+          {hasBookingForm && pageShowsBookingInfoChecklist(page.slug, 'en') && <PageBookingInfoChecklist />}
 
           <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
             {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}

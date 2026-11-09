@@ -10,7 +10,7 @@ import { MeetingSteps } from '@/components/MeetingSteps';
 import { RichText } from '@/components/RichText';
 import { airports, SITE, towns } from '@/lib/site';
 import { zhPageBySlug, zhPages, zhPrettySlug, zhTownNames, type ZhSeoPage } from '@/lib/content-zh';
-import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking } from '@/lib/booking-visibility';
+import { guideInlineBookingSectionCount, pageHasBookingForm, pageUsesGuideInlineBooking, pageShowsBookingInfoChecklist } from '@/lib/booking-visibility';
 import { mobileShuttlePriceLabel } from '@/lib/home-hero-pricing';
 import { formatEuro, privateOneWayPrice, shuttleOneWayPrice } from '@/lib/prices';
 
@@ -197,7 +197,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
         <aside className="sidebar guide-booking-sidebar" id="booking"><RouteSummaryZh page={page}/><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>
         <article className="prose guide-booking-rest">
           {page.sections.slice(guideIntroSectionCount).map(renderSection)}
-          <PageBookingInfoChecklistZh />
+          {pageShowsBookingInfoChecklist(page.slug, 'zh-CN') && <PageBookingInfoChecklistZh />}
           <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
           <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p><RichText text={item.a} prefix="/zh-cn" /></p></details>)}</div></section>
         </article>
@@ -205,7 +205,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
         <article className={page.route ? 'prose route-prose' : 'prose'}>
           <RouteAirportMeetingZh page={page} />
           {page.sections.map(renderSection)}
-          {hasBookingForm && <PageBookingInfoChecklistZh />}
+          {hasBookingForm && pageShowsBookingInfoChecklist(page.slug, 'zh-CN') && <PageBookingInfoChecklistZh />}
           <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
           <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p><RichText text={item.a} prefix="/zh-cn" /></p></details>)}</div></section>
         </article>

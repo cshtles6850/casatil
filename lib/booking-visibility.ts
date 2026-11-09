@@ -20,3 +20,14 @@ export function pageUsesGuideInlineBooking(slug: string) {
 export function guideInlineBookingSectionCount(slug: string) {
   return GUIDE_INLINE_BOOKING_SECTIONS[slug] ?? 1;
 }
+
+export type BookingChecklistLocale = 'en' | 'zh-CN' | 'es' | 'pt-BR' | 'ko' | 'ja';
+
+// Add another locale only when its Cavusin to Kayseri editorial update is published.
+const HIDDEN_BOOKING_CHECKLIST_LOCALES_BY_SLUG: Readonly<Record<string, readonly BookingChecklistLocale[]>> = {
+  'cavusin-to-kayseri-airport-shuttle': ['en', 'es'],
+};
+
+export function pageShowsBookingInfoChecklist(slug: string, locale: BookingChecklistLocale): boolean {
+  return !(HIDDEN_BOOKING_CHECKLIST_LOCALES_BY_SLUG[slug]?.includes(locale) ?? false);
+}
