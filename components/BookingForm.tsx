@@ -436,7 +436,7 @@ export function BookingForm({
               <div className="passenger-row" key={index}>
                 <div className="field">
                   <label htmlFor={`person-name-${compact ? 'c' : 'f'}-${index}`}>Passenger {index + 1} full name</label>
-                  <input id={`person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">Use Latin letters only.</div>
+                  <input id={`person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} placeholder="First name and last name (e.g. John Smith)" required /><div className="form-note">Use Latin letters only.</div>
                 </div>
               </div>
             ))}

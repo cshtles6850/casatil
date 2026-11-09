@@ -438,7 +438,7 @@ export function BookingFormZh({
             <div className="passenger-heading"><div><strong>乘客信息</strong><span>每笔预订都需要乘客姓名。</span></div></div>
             {people.map((person, index) => (
               <div className="passenger-row" key={index}>
-                <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} required /><div className="form-note">姓名请仅使用拉丁字母填写。</div></div>
+                <div className="field"><label htmlFor={`zh-person-name-${compact ? 'c' : 'f'}-${index}`}>乘客 {index + 1} 姓名</label><input id={`zh-person-name-${compact ? 'c' : 'f'}-${index}`} value={person.fullName} onChange={(e) => updatePassenger(index, 'fullName', sanitizeLatinName(e.target.value))} autoComplete={index === 0 ? 'name' : 'off'} placeholder="名字和姓氏（例如：John Smith）" required /><div className="form-note">姓名请仅使用拉丁字母填写。</div></div>
               </div>
             ))}
           </div>
