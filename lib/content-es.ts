@@ -1724,7 +1724,7 @@ const rawEsPages: EsSeoPage[] = [
   {
     "slug": "cavusin-to-kayseri-airport-shuttle",
     "title": "Shuttle de Cavusin al Aeropuerto de Kayseri | Recogida en hotel",
-    "description": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o privado; unos 75 km y 65–80 min.",
+    "description": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o traslado privado; unos 75 km y 65–80 min.",
     "eyebrow": "Cavusin → ASR",
     "h1": "Shuttle de Cavusin al Aeropuerto de Kayseri",
     "lead": "Si tu vuelo sale del Aeropuerto de Kayseri Erkilet (ASR) y te alojas en Cavusin (Çavuşin), puedes reservar un shuttle compartido o un traslado privado con recogida en tu alojamiento o en el punto accesible confirmado. No necesitas desplazarte primero a Göreme para tomar el transporte al aeropuerto.",
@@ -1778,7 +1778,8 @@ const rawEsPages: EsSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Si el vehículo no puede acceder con seguridad a la entrada de tu hotel, organizaremos la recogida en un punto cercano y adecuado para el traslado. Te comunicaremos la ubicación concreta junto con las instrucciones de recogida."},
+            "text": "Si el vehículo no puede acceder con seguridad a la entrada de tu hotel, organizaremos la recogida en un punto cercano y adecuado para el traslado. Te comunicaremos la ubicación concreta junto con las instrucciones de recogida."
+          },
           {
             "kind": "paragraph",
             "text": "Antes de salir de tu alojamiento, comprueba el punto y la hora de recogida confirmados, especialmente si tu vuelo sale temprano por la mañana."
@@ -1797,7 +1798,7 @@ const rawEsPages: EsSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "**Importante:** si te alojas en un Airbnb o apartamento particular, no ofrecemos recogidas directamente en direcciones privadas de Airbnb. Utiliza como referencia un hotel cercano y accesible, siguiendo las indicaciones del formulario de reserva."
+            "text": "**Airbnb o apartamento particular:** no recogemos directamente en direcciones privadas. Indica un hotel cercano al que pueda acceder el vehículo como punto de recogida."
           }
         ]
       },
