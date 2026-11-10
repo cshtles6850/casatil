@@ -1797,7 +1797,7 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "**Atenção para hospedagens Airbnb:** não fazemos embarques diretamente em endereços particulares de Airbnb ou apartamentos privados. Utilize um hotel próximo, com acesso adequado para veículos, como ponto de embarque e siga as orientações do formulário de reserva."
+            "text": "**Hospedagem em Airbnb ou apartamento particular:** não fazemos embarque direto em endereços privados. Escolha um hotel próximo com acesso para veículos como ponto de embarque."
           }
         ]
       },
@@ -1875,11 +1875,11 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Para grupos maiores, reservar um Mercedes Sprinter privativo pode sair mais barato no total do que comprar várias passagens individuais de shuttle compartilhado."
+            "text": "Para comparar, multiplique a tarifa por pessoa do shuttle compartilhado pelo número de passageiros; no Sprinter privativo, o valor é cobrado por veículo. Confira os totais atuais antes de escolher."
           },
           {
             "kind": "paragraph",
-            "text": "Antes de escolher, compare o valor total atualizado para a quantidade de passageiros do seu grupo. O Sprinter privativo pode transportar até 16 pessoas, mas também é importante considerar a quantidade e o tamanho das bagagens."
+            "text": "O Sprinter privativo transporta até 16 passageiros; considere também a quantidade e o tamanho das bagagens."
           },
           {
             "kind": "paragraph",
