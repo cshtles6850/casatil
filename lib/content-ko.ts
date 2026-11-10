@@ -1,7 +1,7 @@
 import { towns } from './site';
 import { resolvePriceTokensDeep } from './price-content';
 
-export type KoContentSection = { heading: string; paragraphs: string[]; bullets?: string[] };
+export type KoContentSection = { heading: string; paragraphs: string[]; bullets?: string[]; blocks?: { kind: 'paragraph' | 'subheading'; text: string }[] };
 export type KoFaqItem = { q: string; a: string };
 export type KoSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; sections: KoContentSection[]; faq: KoFaqItem[]; related: string[]; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
 
@@ -1699,24 +1699,90 @@ const rawKoPages: KoSeoPage[] = [
       },
       {
         "heading": "차우신에서는 어디에서 픽업하나요?",
-        "paragraphs": [
-          "차우신은 괴레메와 아바노스 사이의 작은 마을이지만 숙소마다 도로 접근 조건이 다릅니다. 예약 시 정확한 숙소 이름을 알려 주시면 적절한 픽업 지점을 확인하는 데 도움이 됩니다.",
-          "**괴레메–아바노스 도로 주변 호텔:** 주요 도로 인근 숙소는 오래된 마을 안쪽보다 차량 접근이 쉬운 편입니다. 안전하게 정차할 수 있다면 호텔 입구에서, 그렇지 않다면 적절한 인근 장소에서 픽업합니다.",
-          "**오래된 마을의 동굴호텔:** 세례 요한 교회(Church of St. John the Baptist) 주변에는 언덕길과 좁은 골목이 있어 일부 숙소 입구에 차량이 들어가기 어렵습니다. 필요한 경우 가까운 안전한 픽업 지점을 정하고 위치를 알려 드립니다.",
-          "**계곡 인근 숙소:** 로즈 밸리(Güllüdere)와 레드 밸리(Kızılçukur) 방향의 숙소는 마을 주요 도로에서 떨어져 있을 수 있습니다. 차량의 안전한 접근 가능 여부에 따라 실제 픽업 장소가 달라집니다.",
-          "특히 이른 아침에 출발한다면 호텔에서 나오기 전에 WhatsApp으로 안내받은 픽업 장소와 시간을 확인해 주세요.",
-          "**Airbnb 또는 개인 아파트에 숙박하나요?** 개인 숙소 주소에서는 직접 픽업하지 않습니다. 차량 접근이 가능한 인근 호텔을 실제 픽업 장소로 지정하고 예약 양식의 안내를 따라 주세요."
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "차우신은 괴레메와 아바노스 사이의 작은 마을이지만 숙소마다 도로 접근 조건이 다릅니다. 예약 시 정확한 숙소 이름을 알려 주시면 적절한 픽업 지점을 확인하는 데 도움이 됩니다."
+          },
+          {
+            "kind": "subheading",
+            "text": "괴레메–아바노스 도로 주변 호텔"
+          },
+          {
+            "kind": "paragraph",
+            "text": "주요 도로 인근 숙소는 오래된 마을 안쪽보다 차량 접근이 쉬운 편입니다. 안전하게 정차할 수 있다면 호텔 입구에서, 그렇지 않다면 적절한 인근 장소에서 픽업합니다."
+          },
+          {
+            "kind": "subheading",
+            "text": "오래된 마을의 동굴호텔"
+          },
+          {
+            "kind": "paragraph",
+            "text": "세례 요한 교회(Church of St. John the Baptist) 주변에는 언덕길과 좁은 골목이 있어 일부 숙소 입구에 차량이 들어가기 어렵습니다. 필요한 경우 가까운 안전한 픽업 지점을 정하고 위치를 알려 드립니다."
+          },
+          {
+            "kind": "subheading",
+            "text": "계곡 인근 숙소"
+          },
+          {
+            "kind": "paragraph",
+            "text": "로즈 밸리(Güllüdere)와 레드 밸리(Kızılçukur) 방향의 숙소는 마을 주요 도로에서 떨어져 있을 수 있습니다. 차량의 안전한 접근 가능 여부에 따라 실제 픽업 장소가 달라집니다."
+          },
+          {
+            "kind": "paragraph",
+            "text": "특히 이른 아침에 출발한다면 호텔에서 나오기 전에 WhatsApp으로 안내받은 픽업 장소와 시간을 확인해 주세요."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Airbnb 또는 개인 아파트에 숙박하나요?** 개인 숙소 주소에서는 직접 픽업하지 않습니다. 차량 접근이 가능한 인근 호텔을 실제 픽업 장소로 지정하고 예약 양식의 안내를 따라 주세요."
+          }
         ]
       },
       {
         "heading": "합승 셔틀과 프라이빗 차량 비교",
-        "paragraphs": [
-          "차우신에서 카이세리 공항으로 가는 교통편은 인원수, 수하물, 이동 방식에 맞춰 선택할 수 있습니다.",
-          "**합승 셔틀:** 1인 편도 {{PRICE:kayseri:shuttle}}입니다. 혼자 여행하거나 소규모로 이동할 때 이용할 수 있으며, 다른 호텔의 예약 승객을 태울 수 있습니다. 고정된 매시간 출발 시간표는 없습니다.",
-          "**프라이빗 Mercedes Vito:** 최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}입니다. 다른 예약의 승객을 태우지 않고 해당 예약의 일행만 이용합니다.",
-          "**프라이빗 Mercedes Sprinter:** 최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 가족이나 단체 여행에 적합할 수 있지만, 정원만으로 모든 종류의 큰 수하물 적재를 보장하지는 않습니다. 큰 가방이나 장비가 있다면 예약할 때 알려 주세요.",
-          "**단체라면 총요금 비교:** 합승 셔틀의 인원별 총요금과 Sprinter의 차량당 요금을 비교해 보세요. 인원이 많을 때 프라이빗 차량이 더 경제적일 수도 있으나 현재 요금과 수하물 조건을 고려해야 합니다.",
-          "더 자세한 사항은 [[카파도키아 프라이빗 공항 이동|private-airport-transfer-cappadocia]] 페이지를 참고하세요."
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "차우신에서 카이세리 공항으로 가는 교통편은 인원수, 수하물, 이동 방식에 맞춰 선택할 수 있습니다."
+          },
+          {
+            "kind": "subheading",
+            "text": "합승 공항 셔틀"
+          },
+          {
+            "kind": "paragraph",
+            "text": "1인 편도 {{PRICE:kayseri:shuttle}}입니다. 혼자 여행하거나 소규모로 이동할 때 이용할 수 있으며, 다른 호텔의 예약 승객을 태울 수 있습니다. 고정된 매시간 출발 시간표는 없습니다."
+          },
+          {
+            "kind": "subheading",
+            "text": "프라이빗 Mercedes Vito"
+          },
+          {
+            "kind": "paragraph",
+            "text": "최대 5명까지 차량 1대당 편도 {{PRICE:kayseri:vito}}입니다. 다른 예약의 승객을 태우지 않고 해당 예약의 일행만 이용합니다."
+          },
+          {
+            "kind": "subheading",
+            "text": "프라이빗 Mercedes Sprinter"
+          },
+          {
+            "kind": "paragraph",
+            "text": "최대 16명까지 차량 1대당 편도 {{PRICE:kayseri:sprinter}}입니다. 가족이나 단체 여행에 적합할 수 있지만, 정원만으로 모든 종류의 큰 수하물 적재를 보장하지는 않습니다. 큰 가방이나 장비가 있다면 예약할 때 알려 주세요."
+          },
+          {
+            "kind": "subheading",
+            "text": "단체 여행 시 총요금 비교"
+          },
+          {
+            "kind": "paragraph",
+            "text": "합승 셔틀의 인원별 총요금과 Sprinter의 차량당 요금을 비교해 보세요. 인원이 많을 때 프라이빗 차량이 더 경제적일 수도 있으나 현재 요금과 수하물 조건을 고려해야 합니다."
+          },
+          {
+            "kind": "paragraph",
+            "text": "더 자세한 사항은 [[카파도키아 프라이빗 공항 이동|private-airport-transfer-cappadocia]] 페이지를 참고하세요."
+          }
         ]
       },
       {
