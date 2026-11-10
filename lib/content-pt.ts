@@ -1732,10 +1732,11 @@ const rawPtPages: PtSeoPage[] = [
       {
         "heading": "Como funciona o horário de embarque para o Aeroporto de Kayseri?",
         "paragraphs": [
-          "O shuttle compartilhado que sai de Cavusin não funciona com partidas em horários fixos, iguais para todos os passageiros.",
-          "O horário de embarque é definido de acordo com o voo de saída e a organização do transporte. Como o veículo pode buscar outros passageiros em hotéis da região, o horário confirmado não depende apenas do tempo de viagem indicado no mapa.",
-          "Ao solicitar a reserva, informe a data da viagem, o número do voo de partida e o nome completo do hotel. O horário de embarque será comunicado separadamente, depois da organização do serviço.",
-          "Se o voo sair de madrugada ou nas primeiras horas da manhã, deixe as malas prontas e siga as instruções de embarque recebidas. Não escolha por conta própria um horário de saída com base apenas na distância até Kayseri."
+          "O horário de embarque em Cavusin é organizado de acordo com os dados do seu voo de partida e a programação do transfer. O shuttle compartilhado não funciona com horários fixos iguais para todos os passageiros e pode passar por outros hotéis antes de seguir para o Aeroporto de Kayseri.",
+          "O trajeto por estrada costuma levar entre 65 e 80 minutos, mas esse tempo representa apenas a viagem de carro, não o horário em que você será buscado no hotel. A organização também considera as demais paradas e o tempo necessário para chegar ao aeroporto antes do voo.",
+          "Informaremos seu horário de embarque separadamente, depois de organizar o serviço. Siga sempre as instruções confirmadas e não calcule por conta própria o horário de saída usando apenas a duração estimada do trajeto.",
+          "Se a sua companhia aérea oferecer check-in online, recomendamos realizá-lo com antecedência para facilitar os procedimentos antes do embarque no aeroporto.",
+          "Se o voo sair de madrugada ou nas primeiras horas da manhã, deixe as malas prontas e siga as instruções de embarque recebidas."
         ]
       },
       {
@@ -1776,7 +1777,11 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Quando isso acontecer, será informado um ponto de embarque próximo e acessível. Se você estiver saindo cedo e levando malas, confira o local combinado antes de deixar a hospedagem."
+            "text": "Se o veículo não conseguir chegar com segurança à entrada do seu hotel, organizaremos o embarque em um ponto próximo e adequado para o transfer. Informaremos a localização exata junto com as instruções de embarque."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Antes de sair da hospedagem, confira o local e o horário de embarque confirmados, especialmente se o seu voo partir nas primeiras horas da manhã."
           },
           {
             "kind": "subheading",
@@ -1868,7 +1873,14 @@ const rawPtPages: PtSeoPage[] = [
             "kind": "subheading",
             "text": "Vai viajar em grupo? Compare o valor total"
           },
-          ...asrGroupComparisonPtBrBlocks,
+          {
+            "kind": "paragraph",
+            "text": "Para grupos maiores, reservar um Mercedes Sprinter privativo pode sair mais barato no total do que comprar várias passagens individuais de shuttle compartilhado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Antes de escolher, compare o valor total atualizado para a quantidade de passageiros do seu grupo. O Sprinter privativo pode transportar até 16 pessoas, mas também é importante considerar a quantidade e o tamanho das bagagens."
+          },
           {
             "kind": "paragraph",
             "text": "Para conhecer as opções de veículos exclusivos, consulte nosso [[transfer privativo na Capadócia|private-airport-transfer-cappadocia]]."
@@ -1877,12 +1889,52 @@ const rawPtPages: PtSeoPage[] = [
       },
       {
         "heading": "Alterações de voo, bagagens e pagamento",
-        "paragraphs": [
-          "Se a companhia aérea alterar o horário de partida ou o número do seu voo, envie os dados atualizados pelo WhatsApp assim que possível. A equipe verificará a programação do transfer e informará se será necessário ajustar o horário de embarque.",
-          "Para solicitar o serviço, informe os nomes dos passageiros, a data da viagem, o número do voo de saída, o nome completo do hotel e um contato de WhatsApp.",
-          "Se estiver viajando com várias malas grandes, equipamentos esportivos ou outros volumes especiais, avise antecipadamente para que a opção de transporte seja avaliada.",
-          "Você pode solicitar somente a ida ao aeroporto ou selecionar ida e volta no formulário. Os dois sentidos da viagem são organizados conforme os respectivos voos.",
-          "**Pagamento:** o valor é pago em dinheiro diretamente ao motorista. Aceitamos euros (EUR), dólares americanos (USD) ou liras turcas (TRY). Não aceitamos cartões de crédito ou débito, Apple Pay, Google Pay nem pagamentos online."
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Se a companhia aérea alterar o horário de partida ou o número do seu voo, envie os dados atualizados pelo WhatsApp assim que possível. A equipe verificará a programação do transfer e informará se será necessário ajustar o horário de embarque."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para solicitar o serviço, informe os nomes dos passageiros, a data da viagem, o número do voo de saída, o nome completo do hotel e um contato de WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se estiver viajando com várias malas grandes, equipamentos esportivos ou outros volumes especiais, avise antecipadamente para que a opção de transporte seja avaliada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Você pode solicitar somente a ida ao aeroporto ou selecionar ida e volta no formulário. Os dois sentidos da viagem são organizados conforme os respectivos voos."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Pagamento:** o valor é pago em dinheiro diretamente ao motorista. Aceitamos euros (EUR), dólares americanos (USD) ou liras turcas (TRY). Não aceitamos cartões de crédito ou débito, Apple Pay, Google Pay nem pagamentos online."
+          },
+          {
+            "kind": "subheading",
+            "text": "Reserva antecipada, disponibilidade e confirmação pelo WhatsApp"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Recomendamos reservar seu transfer de Cavusin para o Aeroporto de Kayseri com a maior antecedência possível, especialmente se você pretende utilizar o shuttle compartilhado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "As solicitações de última hora podem ser mais difíceis de atender, pois precisamos verificar a disponibilidade de vagas e organizar os horários de embarque nos hotéis. Por isso, reservar com antecedência ajuda a evitar dificuldades na organização do seu transporte."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Você pode entrar em contato diretamente pelo WhatsApp ou enviar uma solicitação pelo formulário do nosso site. Verificaremos a disponibilidade e organizaremos sua reserva de acordo com os dados do voo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**O envio de uma solicitação não significa que a reserva já esteja confirmada. Seu transfer estará confirmado somente depois que você receber nossa mensagem de confirmação pelo WhatsApp.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Informe um número de WhatsApp ativo e acompanhe nossas mensagens para receber a confirmação da reserva e os detalhes do embarque."
+          }
         ]
       },
       {
