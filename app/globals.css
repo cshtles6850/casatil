@@ -748,60 +748,66 @@ p { margin-top: 0; }
 .airbnb-help-panel { margin-top: 9px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--sky); color: var(--ink); font-size: .82rem; line-height: 1.52; }
 .airbnb-help-panel p { margin: 0 0 10px; }
 
-/* The Spanish Cavusin -> Kayseri page alone moves this note below the hero. */
+/* Compact booking note: only /es/cavusin-to-kayseri-airport-shuttle. */
 .es-cavusin-booking-layout .page-content-section { padding-top: 28px; }
-.es-cavusin-quick-booking-note {
+.es-cavusin-booking-layout .es-cavusin-quick-booking-note {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 480px;
   min-width: 0;
-  margin: 0 0 22px;
-  padding: 16px 18px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid #cdd8f1;
+  border-radius: 13px;
   background: #fff;
-  box-shadow: 0 5px 18px rgba(31,42,84,.07);
+  box-shadow: 0 3px 12px rgba(31,42,84,.045);
   color: var(--ink);
-  line-height: 1.45;
+  line-height: 1.38;
 }
-.es-cavusin-quick-booking-title {
+.es-cavusin-booking-layout .es-cavusin-quick-booking-title {
   display: flex;
   align-items: baseline;
   gap: 7px;
-  margin: 0 0 10px;
-  font-size: 1rem;
+  margin: 0 0 8px;
+  font-size: .94rem;
   font-weight: 800;
 }
-.es-cavusin-quick-booking-title > span,
-.es-cavusin-quick-booking-items > li > span {
+.es-cavusin-booking-layout .es-cavusin-quick-booking-title > span {
+  flex: 0 0 auto;
+  color: #4b5fae;
+  font-weight: 900;
+}
+.es-cavusin-booking-layout .es-cavusin-quick-booking-items > li > span {
   flex: 0 0 auto;
   color: #15845c;
   font-weight: 900;
 }
-.es-cavusin-quick-booking-items {
+.es-cavusin-booking-layout .es-cavusin-quick-booking-items {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 14px;
+  gap: 4px 10px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.es-cavusin-quick-booking-items > li {
+.es-cavusin-booking-layout .es-cavusin-quick-booking-items > li {
   display: flex;
   align-items: baseline;
   gap: 6px;
   min-width: 0;
   overflow-wrap: anywhere;
-  font-size: .88rem;
+  font-size: .82rem;
 }
-.es-cavusin-quick-booking-payment {
-  margin: 12px 0 0;
-  padding-top: 11px;
-  border-top: 1px solid var(--line);
-  font-size: .83rem;
+.es-cavusin-booking-layout .es-cavusin-quick-booking-payment {
+  margin: 9px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f5;
+  font-size: .78rem;
   color: var(--ink-soft);
   overflow-wrap: anywhere;
 }
-.es-cavusin-quick-booking-payment strong { color: var(--ink); }
-@media (max-width: 380px) {
-  .es-cavusin-quick-booking-note { padding: 12px 13px; }
-  .es-cavusin-quick-booking-items { grid-template-columns: 1fr; gap: 5px; }
+.es-cavusin-booking-layout .es-cavusin-quick-booking-payment strong { color: var(--ink); }
+@media (max-width: 440px) {
+  .es-cavusin-booking-layout .es-cavusin-quick-booking-note { padding: 11px 12px; }
+  .es-cavusin-booking-layout .es-cavusin-quick-booking-items { grid-template-columns: 1fr; gap: 3px; }
 }
