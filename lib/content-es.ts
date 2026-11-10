@@ -1765,10 +1765,6 @@ const rawEsPages: EsSeoPage[] = [
             "text": "Los establecimientos situados junto a la carretera principal suelen tener accesos más directos para los vehículos. La recogida se coordina utilizando la entrada accesible del alojamiento y las condiciones de parada disponibles."
           },
           {
-            "kind": "paragraph",
-            "text": "Esta zona incluye los alrededores de la iglesia de Cavusin, conocida también como la iglesia de Nicéforo Focas."
-          },
-          {
             "kind": "subheading",
             "text": "Hoteles del pueblo antiguo"
           },
