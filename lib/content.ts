@@ -1694,8 +1694,8 @@ const rawPages: SeoPage[] = [
         "heading": "How Is Your Airport Pickup Time Arranged?",
         "paragraphs": [
           "Shared shuttles from Cavusin to Kayseri Airport do not operate on one fixed departure timetable for every passenger.",
-          "Your pickup time is arranged according to your departure flight details and the shared transfer schedule. Other hotel pickups may be included before the vehicle continues to Kayseri Airport.",
-          "The journey usually takes around 65–80 minutes by road, but this is not your hotel pickup time. We will inform you of your arranged pickup time separately. Please follow the pickup instructions provided rather than calculating your departure time from the driving estimate.",
+          "Your pickup time is arranged around your departure flight and communicated separately, allowing for other hotel pickups and sufficient time at the airport.",
+          "The 65–80-minute driving estimate is not your hotel pickup time. Please follow your confirmed pickup instructions instead of working backwards from the driving time.",
           "We also recommend completing your airline's online check-in in advance, when available, to help make your airport departure smoother.",
           "For an early-morning flight, have your luggage ready and follow the confirmed pickup instructions. Local road activity can vary around Cavusin, including on mornings when hot-air balloon operations are taking place nearby."
         ]
@@ -1754,7 +1754,7 @@ const rawPages: SeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "**Staying at an Airbnb or private apartment?** We do not pick up directly from private Airbnb addresses. Please use a nearby accessible hotel as your pickup point and follow the instructions in the booking form."
+            "text": "**Airbnb or private apartment?** Direct pickup from private addresses is unavailable; choose a nearby vehicle-accessible hotel as your pickup point."
           }
         ]
       },
