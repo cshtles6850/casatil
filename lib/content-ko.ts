@@ -1732,6 +1732,10 @@ const rawKoPages: KoSeoPage[] = [
           {
             "kind": "paragraph",
             "text": "특히 이른 아침에 출발한다면 호텔에서 나오기 전에 WhatsApp으로 안내받은 픽업 장소와 시간을 확인해 주세요."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Airbnb 또는 개인 아파트에 숙박하시나요?** 개인 숙소 주소에서는 직접 픽업하지 않습니다. 차량이 접근할 수 있는 가까운 호텔을 픽업 장소로 지정해 주세요."
           }
         ]
       },
