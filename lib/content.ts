@@ -1,6 +1,5 @@
 import { towns } from './site';
 import { resolvePriceTokensDeep } from './price-content';
-import { shuttleOneWayPrice, privateOneWayPrice } from './prices';
 
 export type ContentBlock = { kind: 'paragraph' | 'subheading'; text: string };
 export type ContentSection = { heading: string; paragraphs: string[]; bullets?: string[]; blocks?: ContentBlock[] };
@@ -13,37 +12,6 @@ export type SeoPage = {
   route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' };
 };
 
-
-function buildAsrGroupComparisonBlocks(): ContentBlock[] {
-  const shuttle = shuttleOneWayPrice('kayseri');
-  const sprinter = privateOneWayPrice('kayseri', 'sprinter');
-  const neutral = 'Compare the full group price before choosing your transfer.';
-  if (!Number.isFinite(shuttle) || !Number.isFinite(sprinter) || shuttle <= 0 || sprinter <= 0) {
-    return [{ kind: 'paragraph', text: neutral }];
-  }
-  // Compare integer cents, avoiding floating-point price equality mistakes.
-  const s = Math.round(shuttle * 100);
-  const p = Math.round(sprinter * 100);
-  if (!Number.isSafeInteger(s) || !Number.isSafeInteger(p) || s <= 0 || p <= 0 ||
-      Math.abs(shuttle - s / 100) > 0.000001 || Math.abs(sprinter - p / 100) > 0.000001) {
-    return [{ kind: 'paragraph', text: neutral }];
-  }
-  const equalCount = p % s === 0 ? p / s : null;
-  const cheaperFrom = Math.floor(p / s) + 1;
-  const equalWithinCapacity = equalCount !== null && equalCount >= 1 && equalCount <= 16;
-  const cheaperWithinCapacity = cheaperFrom >= 1 && cheaperFrom <= 16 && cheaperFrom * s > p;
-  const statements = [
-    ...(equalWithinCapacity ? [`For ${equalCount} passengers, a private Sprinter costs the same as the shared shuttle seats.`] : []),
-    ...(cheaperWithinCapacity ? [`From ${cheaperFrom} passengers, a private Sprinter costs less in total than the shared shuttle.`] : []),
-  ];
-  return [
-    ...(statements.length ? [{ kind: 'paragraph' as const, text: statements.join(' ') }] : []),
-    { kind: 'paragraph', text: cheaperWithinCapacity
-      ? 'Depending on the number of passengers and current fares, a private Sprinter may cost less in total than purchasing individual shared shuttle seats. Compare the full group price before choosing your transfer.'
-      : neutral },
-  ];
-}
-const asrGroupComparisonBlocks = buildAsrGroupComparisonBlocks();
 
 const rawPages: SeoPage[] = [
   {
@@ -1726,8 +1694,9 @@ const rawPages: SeoPage[] = [
         "heading": "How Is Your Airport Pickup Time Arranged?",
         "paragraphs": [
           "Shared shuttles from Cavusin to Kayseri Airport do not operate on one fixed departure timetable for every passenger.",
-          "Your pickup is arranged using your departure flight details and the requirements of the shared transfer service. Other hotel pickups may be included before the vehicle continues to Kayseri Airport.",
-          "When booking, provide your departure date, flight number and full hotel name. Your pickup time will be communicated separately once the transfer has been arranged.",
+          "Your pickup time is arranged according to your departure flight details and the shared transfer schedule. Other hotel pickups may be included before the vehicle continues to Kayseri Airport.",
+          "The journey usually takes around 65–80 minutes by road, but this is not your hotel pickup time. We will inform you of your arranged pickup time separately. Please follow the pickup instructions provided rather than calculating your departure time from the driving estimate.",
+          "We also recommend completing your airline's online check-in in advance, when available, to help make your airport departure smoother.",
           "For an early-morning flight, have your luggage ready and follow the confirmed pickup instructions. Local road activity can vary around Cavusin, including on mornings when hot-air balloon operations are taking place nearby."
         ]
       },
@@ -1774,6 +1743,14 @@ const rawPages: SeoPage[] = [
           {
             "kind": "paragraph",
             "text": "The correct pickup location depends on the specific property and whether the transfer vehicle can reach it safely. Enter your hotel's full name when booking rather than relying on a general Cavusin location."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If your hotel entrance is not safely accessible by the transfer vehicle, we will arrange a suitable nearby pickup point and communicate the location to you."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Please check your confirmed pickup instructions before leaving your accommodation, particularly for early-morning departures."
           },
           {
             "kind": "paragraph",
@@ -1841,7 +1818,14 @@ const rawPages: SeoPage[] = [
             "kind": "subheading",
             "text": "Travelling as a Group?"
           },
-          ...asrGroupComparisonBlocks,
+          {
+            "kind": "paragraph",
+            "text": "For larger groups, a private Mercedes Sprinter may cost less in total than booking individual shared shuttle seats."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Compare the current total price for your group before choosing. A private Sprinter can accommodate up to 16 passengers, subject to luggage requirements."
+          },
           {
             "kind": "paragraph",
             "text": "For more information about dedicated vehicles, see our [[Cappadocia private airport transfer|private-airport-transfer-cappadocia]] service."
@@ -1850,12 +1834,52 @@ const rawPages: SeoPage[] = [
       },
       {
         "heading": "Flight Changes, Luggage and Payment",
-        "paragraphs": [
-          "If your airline changes your departure time or flight number, send the updated details by WhatsApp as soon as possible. We will review the transfer arrangements and communicate any updated pickup information.",
-          "To request your transfer, you'll need the passenger names, departure date, flight number, full accommodation name and a WhatsApp contact.",
-          "If you're travelling with several large suitcases, sports equipment or other bulky items, mention them when booking so the appropriate transfer option can be considered.",
-          "You can request a one-way journey or include a return transfer in your booking.",
-          "Payment is made **in cash to the driver**, in EUR, USD or TRY. Credit cards and online payments are not accepted."
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "If your airline changes your departure time or flight number, send the updated details by WhatsApp as soon as possible. We will review the transfer arrangements and communicate any updated pickup information."
+          },
+          {
+            "kind": "paragraph",
+            "text": "To request your transfer, you'll need the passenger names, departure date, flight number, full accommodation name and a WhatsApp contact."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you're travelling with several large suitcases, sports equipment or other bulky items, mention them when booking so the appropriate transfer option can be considered."
+          },
+          {
+            "kind": "paragraph",
+            "text": "You can request a one-way journey or include a return transfer in your booking."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Payment is made **in cash to the driver**, in EUR, USD or TRY. Credit cards and online payments are not accepted."
+          },
+          {
+            "kind": "subheading",
+            "text": "Booking and Availability"
+          },
+          {
+            "kind": "paragraph",
+            "text": "We recommend booking your Cavusin to Kayseri Airport transfer as early as possible, especially if you need a shared shuttle."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Last-minute requests may be difficult to arrange because availability and pickup schedules need to be checked."
+          },
+          {
+            "kind": "paragraph",
+            "text": "You can contact us on WhatsApp or submit a booking request through our website. We will check availability and confirm the arrangements with you on WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Sending a request does not automatically confirm your reservation. Your booking is confirmed only after you receive our confirmation message on WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Please provide an active WhatsApp number and check your messages for confirmation and pickup details."
+          }
         ]
       },
       {
