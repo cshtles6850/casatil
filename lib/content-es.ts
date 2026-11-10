@@ -1727,7 +1727,7 @@ const rawEsPages: EsSeoPage[] = [
     "description": "Recogida en hotel de Cavusin al Aeropuerto de Kayseri (ASR) en shuttle compartido o traslado privado; unos 75 km y 65–80 min.",
     "eyebrow": "Cavusin → ASR",
     "h1": "Shuttle de Cavusin al Aeropuerto de Kayseri",
-    "lead": "Si tu vuelo sale del Aeropuerto de Kayseri Erkilet (ASR) y te alojas en Cavusin (Çavuşin), puedes reservar un shuttle compartido o un traslado privado con recogida en tu alojamiento o en el punto accesible confirmado. No necesitas desplazarte primero a Göreme para tomar el transporte al aeropuerto.",
+    "lead": "Si tu vuelo sale del Aeropuerto de Kayseri Erkilet (ASR) y te alojas en Cavusin (Çavuşin), puedes reservar un shuttle compartido o un traslado privado con recogida en tu hotel. No necesitas desplazarte primero a Göreme para tomar el transporte al aeropuerto.",
     "introParagraphs": [
       "El trayecto es de aproximadamente 75 km y suele durar entre 65 y 80 minutos por carretera. El servicio compartido cuesta **{{PRICE:kayseri:shuttle}} por persona y trayecto**, mientras que los vehículos privados tienen una tarifa por vehículo.",
       "La recogida se organiza según los datos de tu vuelo y las condiciones del servicio."
@@ -1754,7 +1754,7 @@ const rawEsPages: EsSeoPage[] = [
         "blocks": [
           {
             "kind": "paragraph",
-            "text": "Aunque Cavusin es un pueblo pequeño situado entre Göreme y Avanos, sus alojamientos se encuentran en zonas con accesos diferentes. Conocer el hotel exacto es especialmente importante cuando se viaja al aeropuerto."
+            "text": "En Cavusin, la recogida se realiza directamente en el hotel siempre que el vehículo pueda llegar y detenerse con seguridad. Aunque el pueblo está entre Göreme y Avanos, los accesos varían según la ubicación del alojamiento."
           },
           {
             "kind": "subheading",
@@ -1774,7 +1774,7 @@ const rawEsPages: EsSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Si el vehículo no puede acceder con seguridad a la entrada de tu hotel, organizaremos la recogida en un punto cercano y adecuado para el traslado. Te comunicaremos la ubicación concreta junto con las instrucciones de recogida."
+            "text": "Solo si el vehículo no puede acceder con seguridad a la entrada del hotel, te indicaremos con antelación un punto cercano y adecuado para la recogida."
           },
           {
             "kind": "paragraph",
@@ -1791,10 +1791,6 @@ const rawEsPages: EsSeoPage[] = [
           {
             "kind": "paragraph",
             "text": "En estas zonas es importante facilitar el nombre completo del alojamiento para determinar el lugar adecuado de recogida. La accesibilidad depende de la ubicación concreta y del vehículo utilizado."
-          },
-          {
-            "kind": "paragraph",
-            "text": "**Airbnb o apartamento particular:** no recogemos directamente en direcciones privadas. Indica un hotel cercano al que pueda acceder el vehículo como punto de recogida."
           }
         ]
       },
@@ -1843,8 +1839,8 @@ const rawEsPages: EsSeoPage[] = [
             "text": "Capacidad máxima de 16 pasajeros. Es una alternativa para familias numerosas y grupos que prefieren viajar juntos directamente al aeropuerto."
           },
           {
-            "kind": "paragraph",
-            "text": "**¿Viajas en grupo?**"
+            "kind": "subheading",
+            "text": "¿Viajas en grupo?"
           },
           {
             "kind": "paragraph",
@@ -1925,7 +1921,7 @@ const rawEsPages: EsSeoPage[] = [
       },
       {
         "q": "¿Qué ocurre si mi vuelo cambia de horario?",
-        "a": "Envíanos el nuevo horario o número de vuelo por WhatsApp lo antes posible. Revisaremos la reserva y te comunicaremos la información de recogida actualizada."
+        "a": "Envíanos el nuevo horario o número de vuelo por WhatsApp lo antes posible. Revisaremos la reserva y te comunicaremos la información de recogida actualizada. El cambio de vuelo no confirma automáticamente una nueva hora de recogida; espera nuestra confirmación actualizada."
       },
       {
         "q": "¿El traslado privado recoge pasajeros de otros hoteles?",
