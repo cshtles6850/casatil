@@ -1882,7 +1882,7 @@ const rawEsPages: EsSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Puedes seleccionar un trayecto de solo ida o reservar también el regreso. El pago se realiza en efectivo directamente al conductor, en EUR, USD o TRY."
+            "text": "Puedes seleccionar un trayecto de solo ida o reservar también el regreso. El pago se realiza en efectivo directamente al conductor, en EUR, USD o TRY. No aceptamos pagos con tarjeta de crédito o débito ni pagos online."
           },
           {
             "kind": "subheading",
