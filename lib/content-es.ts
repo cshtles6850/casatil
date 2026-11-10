@@ -1741,9 +1741,10 @@ const rawEsPages: EsSeoPage[] = [
       {
         "heading": "Cómo se organiza la recogida para tu vuelo",
         "paragraphs": [
-          "El shuttle compartido desde Cavusin no tiene una hora fija de salida para todos los pasajeros. La recogida se coordina según los vuelos, las posibles paradas en otros alojamientos y el margen necesario para llegar al aeropuerto.",
-          "Por eso necesitamos conocer el número de vuelo y la fecha de salida. Te comunicaremos la hora de recogida una vez organizado el servicio.",
-          "Si tu vuelo sale muy temprano, conviene preparar el equipaje y organizar la salida del alojamiento la noche anterior.",
+          "La hora de recogida en Cavusin se organiza según los datos de tu vuelo de salida y la planificación del traslado. El shuttle compartido no tiene un horario fijo de salida para todos los pasajeros y puede realizar paradas en otros hoteles antes de continuar hacia el Aeropuerto de Kayseri.",
+          "El trayecto por carretera suele durar entre 65 y 80 minutos, pero este tiempo no corresponde a la hora a la que te recogeremos en el hotel. También debemos tener en cuenta las demás recogidas y el margen necesario para llegar al aeropuerto.",
+          "Te comunicaremos la hora de recogida una vez organizado el servicio. Sigue siempre las instrucciones confirmadas y no calcules por tu cuenta la hora de salida basándote únicamente en la duración del trayecto.",
+          "Si tu compañía aérea ofrece check-in online, te recomendamos hacerlo con antelación para facilitar los trámites de salida en el aeropuerto.",
           "En algunas mañanas también puede haber movimiento de vehículos relacionados con los vuelos en globo en los alrededores del pueblo. Las condiciones del tráfico local pueden variar, especialmente al amanecer."
         ]
       },
@@ -1777,7 +1778,10 @@ const rawEsPages: EsSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Si el vehículo no puede llegar con seguridad hasta la entrada de tu hotel, te indicaremos el punto accesible más cercano. Esto evita confusiones al salir con el equipaje, especialmente durante las primeras horas de la mañana."
+            "text": "Si el vehículo no puede acceder con seguridad a la entrada de tu hotel, organizaremos la recogida en un punto cercano y adecuado para el traslado. Te comunicaremos la ubicación concreta junto con las instrucciones de recogida."},
+          {
+            "kind": "paragraph",
+            "text": "Antes de salir de tu alojamiento, comprueba el punto y la hora de recogida confirmados, especialmente si tu vuelo sale temprano por la mañana."
           },
           {
             "kind": "subheading",
@@ -1845,10 +1849,13 @@ const rawEsPages: EsSeoPage[] = [
             "kind": "paragraph",
             "text": "**¿Viajas en grupo?**"
           },
-          ...sprinterSavingsBlocks,
           {
             "kind": "paragraph",
-            "text": "El ahorro depende del número de pasajeros y de las tarifas vigentes. Recuerda que la capacidad máxima indicada no garantiza espacio ilimitado para equipaje voluminoso."
+            "text": "Si viajas con un grupo numeroso, un Mercedes Sprinter privado puede resultar más económico en total que comprar varios billetes individuales de shuttle compartido."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Antes de reservar, compara el precio total actualizado según el número de pasajeros. El Sprinter privado tiene una capacidad máxima de 16 personas, aunque también es necesario tener en cuenta la cantidad y el tamaño del equipaje."
           },
           {
             "kind": "paragraph",
@@ -1858,11 +1865,48 @@ const rawEsPages: EsSeoPage[] = [
       },
       {
         "heading": "Cambios de vuelo, equipaje y reserva",
-        "paragraphs": [
-          "Si la compañía aérea cambia el horario o el número de tu vuelo, comunícanos los nuevos datos por WhatsApp lo antes posible. Revisaremos la organización del servicio y te confirmaremos la información actualizada.",
-          "Para solicitar el traslado, prepara los nombres de los pasajeros, la fecha del viaje, el número de vuelo, el nombre completo del hotel y un contacto de WhatsApp.",
-          "Si llevas varias maletas grandes, equipo deportivo u objetos voluminosos, indícalo al reservar para comprobar la opción de transporte más adecuada.",
-          "Puedes seleccionar un trayecto de solo ida o reservar también el regreso. El pago se realiza en efectivo directamente al conductor, en EUR, USD o TRY."
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Si la compañía aérea cambia el horario o el número de tu vuelo, comunícanos los nuevos datos por WhatsApp lo antes posible. Revisaremos la organización del servicio y te confirmaremos la información actualizada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para solicitar el traslado, prepara los nombres de los pasajeros, la fecha del viaje, el número de vuelo, el nombre completo del hotel y un contacto de WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si llevas varias maletas grandes, equipo deportivo u objetos voluminosos, indícalo al reservar para comprobar la opción de transporte más adecuada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Puedes seleccionar un trayecto de solo ida o reservar también el regreso. El pago se realiza en efectivo directamente al conductor, en EUR, USD o TRY."
+          },
+          {
+            "kind": "subheading",
+            "text": "Reserva anticipada, disponibilidad y confirmación por WhatsApp"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Te recomendamos reservar tu traslado de Cavusin al Aeropuerto de Kayseri con la mayor antelación posible, especialmente si deseas utilizar el shuttle compartido."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Las solicitudes de última hora pueden resultar difíciles de organizar, ya que necesitamos comprobar la disponibilidad de plazas y coordinar las recogidas previstas. Por eso, reservar con antelación suele facilitar la organización de tu traslado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Puedes escribirnos directamente por WhatsApp o enviar una solicitud mediante el formulario de nuestra web. Comprobaremos la disponibilidad y organizaremos la reserva según los datos de tu vuelo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Enviar una solicitud no significa que la reserva esté confirmada. Tu traslado quedará confirmado únicamente cuando recibas nuestro mensaje de confirmación por WhatsApp.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Facilita un número de WhatsApp activo y revisa nuestros mensajes para conocer la confirmación y los detalles de recogida."
+          }
         ]
       },
       {
