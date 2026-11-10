@@ -1719,7 +1719,7 @@ const rawPtPages: PtSeoPage[] = [
     "description": "Cavusin para o Aeroporto de Kayseri (ASR): shuttle compartilhado ou transfer privativo Vito/Sprinter, 75 km, 65–80 min e embarque no hotel.",
     "eyebrow": "Cavusin → ASR · shuttle para o aeroporto",
     "h1": "Shuttle de Cavusin para o Aeroporto de Kayseri",
-    "lead": "Vai sair da Capadócia pelo Aeroporto de Kayseri Erkilet (ASR)? Se você está hospedado em Cavusin (Çavuşin), pode reservar um shuttle compartilhado ou um transfer privativo com embarque no hotel ou em um ponto próximo previamente confirmado. Não é necessário ir primeiro até Göreme para pegar o transporte ao aeroporto.",
+    "lead": "Vai sair da Capadócia pelo Aeroporto de Kayseri Erkilet (ASR)? Se você está hospedado em Cavusin (Çavuşin), pode reservar um shuttle compartilhado ou um transfer privativo com embarque no hotel. Não é necessário ir primeiro até Göreme para pegar o transporte ao aeroporto.",
     "introParagraphs": [
       "O trajeto tem aproximadamente 75 km e costuma levar de 65 a 80 minutos por estrada. O horário de embarque será organizado considerando os dados do seu voo, as possíveis paradas do shuttle compartilhado e o tempo necessário para chegar ao aeroporto."
     ],
@@ -1735,7 +1735,7 @@ const rawPtPages: PtSeoPage[] = [
           "O horário de embarque em Cavusin é organizado de acordo com os dados do seu voo de partida e a programação do transfer. O shuttle compartilhado não funciona com horários fixos iguais para todos os passageiros e pode passar por outros hotéis antes de seguir para o Aeroporto de Kayseri.",
           "O trajeto por estrada costuma levar entre 65 e 80 minutos, mas esse tempo representa apenas a viagem de carro, não o horário em que você será buscado no hotel. A organização também considera as demais paradas e o tempo necessário para chegar ao aeroporto antes do voo.",
           "Informaremos seu horário de embarque separadamente, depois de organizar o serviço. Siga sempre as instruções confirmadas e não calcule por conta própria o horário de saída usando apenas a duração estimada do trajeto.",
-          "Se a sua companhia aérea oferecer check-in online, recomendamos realizá-lo com antecedência para facilitar os procedimentos antes do embarque no aeroporto.",
+          "Se a sua companhia aérea oferecer check-in online, recomendamos realizá-lo com antecedência para facilitar os procedimentos antes do embarque no aeroporto. O check-in online é uma recomendação, não uma exigência do nosso transfer.",
           "Se o voo sair de madrugada ou nas primeiras horas da manhã, deixe as malas prontas e siga as instruções de embarque recebidas."
         ]
       },
@@ -1745,11 +1745,7 @@ const rawPtPages: PtSeoPage[] = [
         "blocks": [
           {
             "kind": "paragraph",
-            "text": "Cavusin fica entre Göreme e Avanos. Embora seja uma vila pequena, suas hospedagens estão distribuídas entre a estrada principal, a parte histórica do vilarejo e áreas próximas aos vales. O acesso para veículos pode variar bastante de uma propriedade para outra."
-          },
-          {
-            "kind": "paragraph",
-            "text": "Por isso, o nome completo do hotel é importante para identificar o local adequado de embarque."
+            "text": "Em Cavusin, buscamos os passageiros diretamente no hotel quando o veículo consegue acessar a entrada com segurança. As hospedagens ficam entre Göreme e Avanos, na estrada principal, no centro histórico e perto dos vales."
           },
           {
             "kind": "subheading",
@@ -1761,7 +1757,7 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "O embarque será organizado na entrada acessível do hotel ou em outro local adequado para a parada do veículo, conforme as condições da via e da propriedade."
+            "text": "Nesses hotéis, o embarque costuma ocorrer diretamente na entrada acessível."
           },
           {
             "kind": "subheading",
@@ -1777,7 +1773,7 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Se o veículo não conseguir chegar com segurança à entrada do seu hotel, organizaremos o embarque em um ponto próximo e adequado para o transfer. Informaremos a localização exata junto com as instruções de embarque."
+            "text": "Somente quando o veículo não puder chegar com segurança à entrada do hotel, indicaremos com antecedência um ponto próximo e adequado para o embarque."
           },
           {
             "kind": "paragraph",
@@ -1793,11 +1789,7 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Nesses locais, o ponto de embarque depende do endereço real da hospedagem e das condições de acesso do veículo. Informe o nome exato do hotel em vez de indicar apenas “Cavusin” como local de saída."
-          },
-          {
-            "kind": "paragraph",
-            "text": "**Hospedagem em Airbnb ou apartamento particular:** não fazemos embarque direto em endereços privados. Escolha um hotel próximo com acesso para veículos como ponto de embarque."
+            "text": "Para hospedagens próximas aos vales, informe o nome completo do hotel para que possamos verificar o acesso."
           }
         ]
       },
@@ -1875,11 +1867,11 @@ const rawPtPages: PtSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "Para comparar, multiplique a tarifa por pessoa do shuttle compartilhado pelo número de passageiros; no Sprinter privativo, o valor é cobrado por veículo. Confira os totais atuais antes de escolher."
+            "text": "Compare o total do shuttle (tarifa por pessoa × número de passageiros) com a tarifa por veículo do Sprinter."
           },
           {
             "kind": "paragraph",
-            "text": "O Sprinter privativo transporta até 16 passageiros; considere também a quantidade e o tamanho das bagagens."
+            "text": "O Sprinter leva até 16 passageiros; a quantidade e o tamanho das bagagens também devem ser considerados."
           },
           {
             "kind": "paragraph",
