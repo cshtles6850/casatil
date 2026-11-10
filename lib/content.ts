@@ -1746,10 +1746,6 @@ const rawPages: SeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "If your hotel entrance is not safely accessible by the transfer vehicle, we will arrange a suitable nearby pickup point and communicate the location to you."
-          },
-          {
-            "kind": "paragraph",
             "text": "Please check your confirmed pickup instructions before leaving your accommodation, particularly for early-morning departures."
           },
           {
