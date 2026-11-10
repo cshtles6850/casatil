@@ -1706,7 +1706,7 @@ const rawPages: SeoPage[] = [
         "blocks": [
           {
             "kind": "paragraph",
-            "text": "Cavusin is a small village between Goreme and Avanos, but its hotels and guesthouses are spread across areas with different road access. The exact name and location of your accommodation help us arrange a practical pickup point."
+            "text": "Cavusin hotels are served by direct hotel pickup wherever the transfer vehicle can safely access the entrance. The village lies between Goreme and Avanos, and the hotel's full name helps us confirm the pickup location."
           },
           {
             "kind": "subheading",
@@ -1718,7 +1718,7 @@ const rawPages: SeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "For these hotels, pickup is arranged at the accessible hotel entrance or another suitable stopping point, depending on the property and local road conditions."
+            "text": "Hotels near the main road generally allow pickup at their accessible entrance."
           },
           {
             "kind": "subheading",
@@ -1730,7 +1730,7 @@ const rawPages: SeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "If the transfer vehicle cannot safely reach your hotel's entrance, we will provide an appropriate nearby pickup point. Check this information before leaving your accommodation, especially when travelling early in the morning with luggage."
+            "text": "Only if a vehicle cannot safely reach your hotel entrance will we arrange a suitable nearby pickup point and tell you its location in advance."
           },
           {
             "kind": "subheading",
@@ -1742,15 +1742,7 @@ const rawPages: SeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "The correct pickup location depends on the specific property and whether the transfer vehicle can reach it safely. Enter your hotel's full name when booking rather than relying on a general Cavusin location."
-          },
-          {
-            "kind": "paragraph",
-            "text": "Please check your confirmed pickup instructions before leaving your accommodation, particularly for early-morning departures."
-          },
-          {
-            "kind": "paragraph",
-            "text": "**Airbnb or private apartment?** Direct pickup from private addresses is unavailable; choose a nearby vehicle-accessible hotel as your pickup point."
+            "text": "For accommodation near the valleys, provide your hotel's full name rather than only 'Cavusin', so we can check the location."
           }
         ]
       },
@@ -1816,11 +1808,11 @@ const rawPages: SeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "For larger groups, a private Mercedes Sprinter may cost less in total than booking individual shared shuttle seats."
+            "text": "For your group, compare the shared shuttle total (passengers × per-person fare) with the Sprinter's per-vehicle fare; a private transfer may cost less for some groups."
           },
           {
             "kind": "paragraph",
-            "text": "Compare the current total price for your group before choosing. A private Sprinter can accommodate up to 16 passengers, subject to luggage requirements."
+            "text": "The Sprinter accommodates up to 16 passengers, subject to luggage requirements."
           },
           {
             "kind": "paragraph",
@@ -1897,7 +1889,7 @@ const rawPages: SeoPage[] = [
       },
       {
         "q": "What happens if my departure flight time changes?",
-        "a": "Send the new departure time or flight number through WhatsApp as soon as possible. We will review the arrangements and let you know if your pickup information needs to change."
+        "a": "Send the new departure time or flight number through WhatsApp as soon as possible. We will review the arrangements and let you know if your pickup information needs to change. A changed flight does not automatically confirm a new pickup time; please wait for our updated confirmation."
       },
       {
         "q": "Will a private transfer stop to pick up other passengers?",
