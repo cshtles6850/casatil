@@ -1965,7 +1965,7 @@ const rawPtPages: PtSeoPage[] = [
       },
       {
         "q": "Posso reservar ida e volta entre Cavusin e o Aeroporto de Kayseri?",
-        "a": "Sim. O formulário permite selecionar ida e volta. Informe os dados dos voos correspondentes para que cada trecho seja organizado corretamente. Os horários de embarque serão comunicados conforme a programação de cada serviço."
+        "a": "Sim. O formulário permite selecionar ida e volta. Informe os dados dos voos correspondentes para que cada trecho seja organizado corretamente. Os horários de embarque serão comunicados conforme a programação de cada serviço. Para o trecho de chegada, veja também o [[shuttle do Aeroporto de Kayseri para Cavusin|kayseri-airport-to-cavusin-shuttle]]."
       }
     ],
     "related": [
