@@ -208,6 +208,7 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
         </article>
       </> : <>
         <article className={page.route ? 'prose route-prose' : 'prose'}>
+          {page.slug === 'cappadocia-shuttle-transfer' && <h2>了解我们的卡帕多奇亚机场拼车服务</h2>}
           {page.introParagraphs?.map((text,i)=><p key={`intro-${i}`}><RichText text={text} prefix="/zh-cn" /></p>)}
           <RouteAirportMeetingZh page={page} />
           {page.sections.map(renderSection)}
