@@ -188,20 +188,41 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
           {page.sections.slice(guideIntroSectionCount).map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
           {pageShowsBookingInfoChecklist(page.slug, 'en') && <PageBookingInfoChecklist />}
           <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
-            {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}
+            {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>{page.slug === 'cappadocia-shuttle-transfer' ? ({
+              'kayseri-airport-shuttle': 'Kayseri airport routes, travel times and booking',
+              'nevsehir-airport-shuttle': 'Nevsehir airport routes and transfer details',
+              'cappadocia-shared-shuttle-vs-private-transfer': 'Compare shared and private transfer options',
+              'private-airport-transfer-cappadocia': 'Private vehicles, capacity and booking',
+              'airport-transfer-prices': 'Compare current shuttle and private fares',
+            } as Record<string, string>)[related] ?? 'Route details, timing and booking' : 'Route details, timing and booking'} →</span></Link>)}
           </div></section>
           <section className="content-section"><h2>Frequently asked questions</h2><div className="faq">{page.faq.map((item) => <details key={item.q}><summary>{item.q}</summary><p><RichText text={item.a} /></p></details>)}</div></section>
         </article>
       </> : <>
         <article className={page.route ? 'prose route-prose' : 'prose'}>
+          {page.slug === 'cappadocia-shuttle-transfer' && <h2>About Our Cappadocia Shuttle Service</h2>}
           {page.introParagraphs?.map((text, i) => <p key={`intro-${i}`}><RichText text={text} /></p>)}
           <RouteAirportMeeting page={page} />
-          {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.blocks ? section.blocks.map((block, i) => block.kind === 'subheading' ? <h3 key={i}>{block.text}</h3> : <p key={i}><RichText text={block.text} /></p>) : section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
+          {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.blocks ? section.blocks.map((block, i) => {
+            if (page.slug === 'cappadocia-shuttle-transfer' && section.heading === 'Kayseri and Nevsehir Airport Shuttle' && block.kind === 'paragraph' && block.text.startsWith('• ')) {
+              if (block.text !== '• Goreme') return null;
+              return <ul key={i} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(135px, 100%), 1fr))', columnGap: 12, rowGap: 4, listStylePosition: 'inside', paddingLeft: 0 }}>
+                {section.blocks.filter((item) => item.kind === 'paragraph' && item.text.startsWith('• ')).map((item) => <li key={item.text}>{item.text.slice(2)}</li>)}
+              </ul>;
+            }
+            return block.kind === 'subheading' ? <h3 key={i}>{block.text}</h3> : <p key={i}><RichText text={block.text} /></p>;
+          }) : section.paragraphs.map((p, i) => <p key={i}><RichText text={p} /></p>)}{section.bullets && <ul className={section.bullets.length > 12 ? 'long-list' : undefined}>{section.bullets.map((b) => <li key={b}><RichText text={b} /></li>)}</ul>}</section>)}
 
           {hasBookingForm && pageShowsBookingInfoChecklist(page.slug, 'en') && <PageBookingInfoChecklist />}
 
           <section className="content-section related-section"><h2>Related shuttle & transfer pages</h2><div className="related-grid">
-            {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>Route details, timing and booking →</span></Link>)}
+            {page.related.slice(0, 8).map((related) => <Link className="related-card" href={`/${related}`} key={related}><strong>{prettySlug(related)}</strong><span>{page.slug === 'cappadocia-shuttle-transfer' ? ({
+              'kayseri-airport-shuttle': 'Kayseri airport routes, travel times and booking',
+              'nevsehir-airport-shuttle': 'Nevsehir airport routes and transfer details',
+              'cappadocia-shared-shuttle-vs-private-transfer': 'Compare shared and private transfer options',
+              'private-airport-transfer-cappadocia': 'Private vehicles, capacity and booking',
+              'airport-transfer-prices': 'Compare current shuttle and private fares',
+            } as Record<string, string>)[related] ?? 'Route details, timing and booking' : 'Route details, timing and booking'} →</span></Link>)}
           </div></section>
 
           <section className="content-section"><h2>Frequently asked questions</h2><div className="faq">{page.faq.map((item) => <details key={item.q}><summary>{item.q}</summary><p><RichText text={item.a} /></p></details>)}</div></section>
