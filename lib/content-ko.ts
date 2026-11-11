@@ -3,7 +3,7 @@ import { resolvePriceTokensDeep } from './price-content';
 
 export type KoContentSection = { heading: string; paragraphs: string[]; bullets?: string[]; blocks?: { kind: 'paragraph' | 'subheading'; text: string }[] };
 export type KoFaqItem = { q: string; a: string };
-export type KoSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; sections: KoContentSection[]; faq: KoFaqItem[]; related: string[]; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
+export type KoSeoPage = { slug: string; title: string; description: string; twitterTitle?: string; twitterDescription?: string; eyebrow: string; h1: string; lead: string; introParagraphs?: string[]; sections: KoContentSection[]; faq: KoFaqItem[]; related: string[]; relatedDescriptions?: Record<string,string>; route?: { airport: 'kayseri' | 'nevsehir'; town: keyof typeof towns; direction: 'arrival' | 'return' }; };
 
 export const townNamesKo: Record<keyof typeof towns, string> = {
   "goreme": "괴레메",
