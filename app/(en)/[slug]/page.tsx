@@ -114,6 +114,28 @@ function RouteQuickFacts({ page }: { page: SeoPage }) {
   />;
 }
 
+function RenderAirportTransferBlocks({blocks}:{blocks:Array<{kind:'paragraph'|'subheading';text:string}>}) {
+  const result: Array<import('react').ReactNode> = [];
+  for(let i=0;i<blocks.length;) {
+    const item=blocks[i];
+    if(item.kind==='subheading'){result.push(<h3 key={i}>{item.text}</h3>);i++;continue;}
+    const isBullet=item.text.startsWith('• ');
+    const isNumbered=/^\d+\. /.test(item.text);
+    if(isBullet||isNumbered){
+      const at=i,items:string[]=[];
+      while(i<blocks.length&&blocks[i].kind==='paragraph'&&(isBullet?blocks[i].text.startsWith('• '):/^\d+\. /.test(blocks[i].text))) {
+        items.push(isBullet?blocks[i].text.slice(2):blocks[i].text.replace(/^\d+\. /,''));
+        i++;
+      }
+      const children=items.map((t,j)=><li key={j}><RichText text={t}/></li>);
+      result.push(isBullet?<ul key={at}>{children}</ul>:<ol key={at}>{children}</ol>);
+      continue;
+    }
+    result.push(<p key={i}><RichText text={item.text}/></p>);i++;
+  }
+  return <>{result}</>;
+}
+
 function PageBookingInfoChecklist() {
   return <BookingInfoChecklist />;
 }
@@ -203,7 +225,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
           {page.slug === 'cappadocia-shuttle-transfer' && <h2>About Our Cappadocia Shuttle Service</h2>}
           {page.introParagraphs?.map((text, i) => <p key={`intro-${i}`}><RichText text={text} /></p>)}
           <RouteAirportMeeting page={page} />
-          {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{section.blocks ? section.blocks.map((block, i) => {
+          {page.sections.map((section) => <section className="content-section" key={section.heading}><h2>{section.heading}</h2>{page.slug === 'cappadocia-airport-transfer' && section.blocks ? <RenderAirportTransferBlocks blocks={section.blocks} /> : section.blocks ? section.blocks.map((block, i) => {
             if (page.slug === 'cappadocia-shuttle-transfer' && section.heading === 'Kayseri and Nevsehir Airport Shuttle' && block.kind === 'paragraph' && block.text.startsWith('• ')) {
               if (block.text !== '• Goreme') return null;
               return <ul key={i} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(135px, 100%), 1fr))', columnGap: 12, rowGap: 4, listStylePosition: 'inside', paddingLeft: 0 }}>
