@@ -56,12 +56,12 @@ function renderPtShuttleBlocks(blocks: Array<{kind:'paragraph'|'subheading';text
     const block=blocks[i];
     if (block.kind==='subheading') { output.push(<h3 key={i}>{block.text}</h3>); i++; continue; }
     const unordered=block.text.startsWith('• ');
-    const ordered=/^\\d+\\. /.test(block.text);
+    const ordered=/^\d+\. /.test(block.text);
     if (unordered || ordered) {
       const start=i;
       const entries: string[]=[];
-      while (i<blocks.length && blocks[i].kind==='paragraph' && (unordered ? blocks[i].text.startsWith('• ') : /^\\d+\\. /.test(blocks[i].text))) {
-        entries.push(unordered?blocks[i].text.slice(2):blocks[i].text.replace(/^\\d+\\. /,''));
+      while (i<blocks.length && blocks[i].kind==='paragraph' && (unordered ? blocks[i].text.startsWith('• ') : /^\d+\. /.test(blocks[i].text))) {
+        entries.push(unordered?blocks[i].text.slice(2):blocks[i].text.replace(/^\d+\. /,''));
         i++;
       }
       const nodes=entries.map((item,j)=><li key={j}><RichText text={item} prefix={prefix}/></li>);
