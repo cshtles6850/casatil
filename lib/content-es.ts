@@ -551,45 +551,469 @@ const rawEsPages: EsSeoPage[] = [
   {
     "slug": "cappadocia-airport-transfer",
     "title": "Traslado del aeropuerto a Capadocia | Kayseri y Nevsehir",
-    "description": "Traslado a Capadocia desde Kayseri (ASR) y Nevsehir (NAV): shuttle compartido o Vito/Sprinter privado, con recogida y llegada al hotel. Reserva por WhatsApp.",
-    "eyebrow": "Servicio de traslado desde el aeropuerto",
+    "description": "Reserva tu traslado a Capadocia desde Kayseri (ASR) o Nevsehir (NAV). Compara shuttle compartido y traslado privado, recogida, regreso y pago en efectivo.",
+    "eyebrow": "Traslados entre aeropuertos y hoteles",
     "h1": "Traslado del aeropuerto a Capadocia",
-    "lead": "Un traslado de aeropuerto en Capadocia cambia según el aeropuerto de llegada, la localidad del hotel y el sentido del viaje. Empieza por elegir el aeropuerto y después la zona del alojamiento; a partir de ahí se define la ruta correcta.",
+    "lead": "Organiza tu traslado entre los aeropuertos de Kayseri (ASR) o Nevsehir (NAV) y tu alojamiento en Capadocia. Puedes elegir un shuttle compartido o un traslado privado, reservar la llegada al hotel, el regreso al aeropuerto o ambos trayectos y consultar la ruta que corresponde a tu destino.",
     "sections": [
       {
         "heading": "Primero elige tu aeropuerto",
         "paragraphs": [
-          "Capadocia cuenta con dos aeropuertos principales: [[Aeropuerto de Kayseri (ASR)|kayseri-airport-shuttle]] y [[Aeropuerto de Nevsehir (NAV)|nevsehir-airport-shuttle]]. NAV está más cerca por carretera de la mayoría de las localidades centrales, mientras que ASR puede ofrecer un horario de vuelo que encaje mejor en tu viaje. Si aún no sabes cuál elegir, consulta [[Aeropuerto más cercano a Capadocia|nearest-airport-to-cappadocia]] y [[Kayseri o Nevsehir para Capadocia|kayseri-or-nevsehir-airport-for-cappadocia]] antes de reservar el vuelo."
+          "Para viajar a Capadocia puedes utilizar dos aeropuertos: **el aeropuerto de Kayseri (ASR)** y **el aeropuerto de Nevsehir Kapadokya (NAV)**.",
+          "Ambos permiten llegar a las principales zonas de alojamiento: Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar.",
+          "El aeropuerto de Nevsehir está más cerca por carretera de muchas localidades del centro de Capadocia. Sin embargo, Kayseri puede ofrecer vuelos con horarios que se adapten mejor a tu viaje.",
+          "**Antes de solicitar el traslado, comprueba el código de aeropuerto que aparece en tu billete.** ASR y NAV son aeropuertos diferentes y no se pueden intercambiar al hacer la reserva.",
+          "Si ya tienes los vuelos, consulta los servicios de [[shuttle del aeropuerto de Kayseri|kayseri-airport-shuttle]] y [[shuttle del aeropuerto de Nevsehir|nevsehir-airport-shuttle]] para conocer las opciones correspondientes.",
+          "Si todavía estás organizando tu viaje, nuestras guías sobre [[el aeropuerto más cercano a Capadocia|nearest-airport-to-cappadocia]] y [[Kayseri o Nevsehir: qué aeropuerto elegir|kayseri-or-nevsehir-airport-for-cappadocia]] te ayudarán a comparar ambas alternativas."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Para viajar a Capadocia puedes utilizar dos aeropuertos: **el aeropuerto de Kayseri (ASR)** y **el aeropuerto de Nevsehir Kapadokya (NAV)**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ambos permiten llegar a las principales zonas de alojamiento: Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar."
+          },
+          {
+            "kind": "paragraph",
+            "text": "El aeropuerto de Nevsehir está más cerca por carretera de muchas localidades del centro de Capadocia. Sin embargo, Kayseri puede ofrecer vuelos con horarios que se adapten mejor a tu viaje."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Antes de solicitar el traslado, comprueba el código de aeropuerto que aparece en tu billete.** ASR y NAV son aeropuertos diferentes y no se pueden intercambiar al hacer la reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si ya tienes los vuelos, consulta los servicios de [[shuttle del aeropuerto de Kayseri|kayseri-airport-shuttle]] y [[shuttle del aeropuerto de Nevsehir|nevsehir-airport-shuttle]] para conocer las opciones correspondientes."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si todavía estás organizando tu viaje, nuestras guías sobre [[el aeropuerto más cercano a Capadocia|nearest-airport-to-cappadocia]] y [[Kayseri o Nevsehir: qué aeropuerto elegir|kayseri-or-nevsehir-airport-for-cappadocia]] te ayudarán a comparar ambas alternativas."
+          }
         ]
       },
       {
         "heading": "Shuttle compartido o traslado privado",
         "paragraphs": [
-          "El [[shuttle compartido|cappadocia-shuttle-transfer]] cuesta {{PRICE:kayseri:shuttle}} por persona y trayecto desde Kayseri (ASR) y {{PRICE:nevsehir:shuttle}} por persona y trayecto desde Nevsehir (NAV), con reserva previa y confirmación por WhatsApp. En el mismo servicio puede haber otros pasajeros y paradas en diferentes hoteles. Si quieres un vehículo exclusivo, el [[traslado privado|private-airport-transfer-cappadocia]] se realiza con Vito (hasta 5 pasajeros) o Sprinter (hasta 16), con precio por vehículo y tarifas gestionadas por separado para Kayseri y Nevsehir. Si estás comparando ambas opciones, consulta [[shuttle compartido frente a traslado privado|cappadocia-shared-shuttle-vs-private-transfer]] para ver precio, cobertura y tiempos lado a lado."
+          "Puedes reservar dos tipos de traslado entre los aeropuertos y las principales zonas hoteleras de Capadocia. La elección depende de cuántas personas viajáis, de vuestro presupuesto y de cómo preferís desplazaros.",
+          "El **shuttle compartido** se reserva con antelación y tiene un precio por persona y trayecto.",
+          "Es una opción que puedes considerar si viajas solo, en pareja o en un grupo pequeño y no te importa compartir el vehículo con otros pasajeros que también tienen una reserva confirmada.",
+          "Según las reservas de ese día, puede ser necesario esperar a otros viajeros a su llegada al aeropuerto. Durante el recorrido, el vehículo también puede hacer paradas en distintos hoteles.",
+          "Por eso, el tiempo total del traslado puede ser mayor que el tiempo de conducción directa entre el aeropuerto y tu alojamiento.",
+          "Si quieres conocer con más detalle cómo funcionan las esperas, las paradas y la organización del servicio, consulta nuestra página de [[shuttle compartido en Capadocia|cappadocia-shuttle-transfer]].",
+          "El **traslado privado** ofrece un vehículo reservado exclusivamente para las personas incluidas en tu reserva.",
+          "No se realizan paradas adicionales para recoger o dejar a viajeros de otras reservas. Es una alternativa que merece la pena comparar si viajas con familiares, con un grupo o si prefieres un trayecto más directo.",
+          "Los vehículos privados disponibles incluyen:",
+          "**Mercedes Vito:** hasta 5 pasajeros. · **Mercedes Sprinter:** hasta 16 pasajeros.",
+          "A diferencia del shuttle compartido, el traslado privado se cobra por vehículo, no por persona. La tarifa aplicable también depende del aeropuerto elegido.",
+          "Puedes consultar nuestra comparación de [[shuttle compartido y traslado privado|cappadocia-shared-shuttle-vs-private-transfer]], o visitar la página de [[traslado privado en Capadocia|private-airport-transfer-cappadocia]] para conocer mejor esta modalidad.",
+          "Si viajas solo o en pareja, compara el coste total de las plazas de shuttle con el precio del vehículo privado.",
+          "Si sois entre tres y cinco personas, puede resultar útil comparar el precio de un Vito con el coste total del shuttle para todo el grupo.",
+          "Para grupos más grandes, un Sprinter puede ofrecer un coste por persona competitivo y permite que los viajeros se desplacen juntos, siempre dentro de la capacidad del vehículo.",
+          "**Un vehículo privado más grande no es necesariamente la opción más económica para todos los grupos.** La comparación depende del número de pasajeros, el aeropuerto, el vehículo y el total vigente para la reserva.",
+          "Comprueba los importes correspondientes en el formulario antes de enviar tu solicitud."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Puedes reservar dos tipos de traslado entre los aeropuertos y las principales zonas hoteleras de Capadocia. La elección depende de cuántas personas viajáis, de vuestro presupuesto y de cómo preferís desplazaros."
+          },
+          {
+            "kind": "subheading",
+            "text": "Shuttle compartido"
+          },
+          {
+            "kind": "paragraph",
+            "text": "El **shuttle compartido** se reserva con antelación y tiene un precio por persona y trayecto."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Es una opción que puedes considerar si viajas solo, en pareja o en un grupo pequeño y no te importa compartir el vehículo con otros pasajeros que también tienen una reserva confirmada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Según las reservas de ese día, puede ser necesario esperar a otros viajeros a su llegada al aeropuerto. Durante el recorrido, el vehículo también puede hacer paradas en distintos hoteles."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Por eso, el tiempo total del traslado puede ser mayor que el tiempo de conducción directa entre el aeropuerto y tu alojamiento."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si quieres conocer con más detalle cómo funcionan las esperas, las paradas y la organización del servicio, consulta nuestra página de [[shuttle compartido en Capadocia|cappadocia-shuttle-transfer]]."
+          },
+          {
+            "kind": "subheading",
+            "text": "Traslado privado"
+          },
+          {
+            "kind": "paragraph",
+            "text": "El **traslado privado** ofrece un vehículo reservado exclusivamente para las personas incluidas en tu reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "No se realizan paradas adicionales para recoger o dejar a viajeros de otras reservas. Es una alternativa que merece la pena comparar si viajas con familiares, con un grupo o si prefieres un trayecto más directo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Los vehículos privados disponibles incluyen:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Mercedes Vito:** hasta 5 pasajeros. · **Mercedes Sprinter:** hasta 16 pasajeros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A diferencia del shuttle compartido, el traslado privado se cobra por vehículo, no por persona. La tarifa aplicable también depende del aeropuerto elegido."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Puedes consultar nuestra comparación de [[shuttle compartido y traslado privado|cappadocia-shared-shuttle-vs-private-transfer]], o visitar la página de [[traslado privado en Capadocia|private-airport-transfer-cappadocia]] para conocer mejor esta modalidad."
+          },
+          {
+            "kind": "subheading",
+            "text": "¿Qué opción te conviene más?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si viajas solo o en pareja, compara el coste total de las plazas de shuttle con el precio del vehículo privado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si sois entre tres y cinco personas, puede resultar útil comparar el precio de un Vito con el coste total del shuttle para todo el grupo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para grupos más grandes, un Sprinter puede ofrecer un coste por persona competitivo y permite que los viajeros se desplacen juntos, siempre dentro de la capacidad del vehículo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Un vehículo privado más grande no es necesariamente la opción más económica para todos los grupos.** La comparación depende del número de pasajeros, el aeropuerto, el vehículo y el total vigente para la reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Comprueba los importes correspondientes en el formulario antes de enviar tu solicitud."
+          }
         ]
       },
       {
-        "heading": "Datos necesarios para la reserva",
+        "heading": "Recogida en el aeropuerto, retrasos y traslado de regreso",
         "paragraphs": [
-          "Para cada reserva necesitamos los nombres de los pasajeros, número de vuelo y nombre completo del alojamiento. Algunos [[hoteles cueva y alojamientos en calles antiguas|cappadocia-cave-hotel-airport-transfer]] están en vías a las que un vehículo no puede acceder; en esos casos, la recogida o la llegada puede organizarse en el punto accesible más cercano."
+          "Para organizar tu recogida en el aeropuerto, indica el número correcto de tu vuelo de llegada.",
+          "Hacemos seguimiento del vuelo y utilizamos la hora de llegada actualizada para organizar la recogida.",
+          "Después de aterrizar, completa los trámites de llegada que correspondan, recoge tu equipaje y dirígete a la **salida de la terminal**.",
+          "Allí te esperará un conductor o representante con un cartel en el que aparecerá el nombre del pasajero indicado en la reserva.",
+          "Ten a mano la confirmación recibida por WhatsApp. Si no encuentras a la persona encargada de recibirte, revisa las indicaciones del mensaje y ponte en contacto con nosotros por WhatsApp.",
+          "Si tu vuelo de llegada se retrasa, ajustamos la organización de la recogida según la nueva hora prevista de aterrizaje.",
+          "**No cobramos ningún suplemento de espera por el retraso del vuelo de llegada.**",
+          "Si has reservado un shuttle compartido, la salida del vehículo también puede depender de otros pasajeros con reservas confirmadas.",
+          "Si la compañía aérea cambia el número de tu vuelo, te asigna otro vuelo o cancela el original, envíanos los nuevos datos por WhatsApp lo antes posible.",
+          "Tendremos que comprobar la disponibilidad y las condiciones del traslado para el nuevo vuelo. El cambio a otro vuelo no significa que la recogida quede confirmada automáticamente.",
+          "También puedes reservar el traslado desde tu alojamiento en Capadocia hasta el aeropuerto de Kayseri o Nevsehir.",
+          "Para el regreso en shuttle compartido, organizamos la hora de recogida teniendo en cuenta tu vuelo de salida y las recogidas de otros pasajeros que viajan en el mismo vehículo.",
+          "**La hora de recogida en el hotel se comunicará por separado.** Una hora solicitada por el pasajero no queda garantizada automáticamente.",
+          "El shuttle puede pasar por otros hoteles antes de dirigirse al aeropuerto. En un traslado privado no se realizan paradas para pasajeros de reservas ajenas.",
+          "Si necesitas información sobre una ruta de regreso concreta, consulta [[Capadocia al aeropuerto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] o [[Capadocia al aeropuerto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]].",
+          "Las llegadas nocturnas y las salidas a primera hora de la mañana deben comprobarse según el vuelo y la disponibilidad del servicio. No debes dar por hecho que existe una salida fija de shuttle a cualquier hora."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "¿Dónde encontrarás al conductor al llegar?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para organizar tu recogida en el aeropuerto, indica el número correcto de tu vuelo de llegada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Hacemos seguimiento del vuelo y utilizamos la hora de llegada actualizada para organizar la recogida."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Después de aterrizar, completa los trámites de llegada que correspondan, recoge tu equipaje y dirígete a la **salida de la terminal**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Allí te esperará un conductor o representante con un cartel en el que aparecerá el nombre del pasajero indicado en la reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ten a mano la confirmación recibida por WhatsApp. Si no encuentras a la persona encargada de recibirte, revisa las indicaciones del mensaje y ponte en contacto con nosotros por WhatsApp."
+          },
+          {
+            "kind": "subheading",
+            "text": "¿Qué ocurre si se retrasa tu vuelo de llegada?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si tu vuelo de llegada se retrasa, ajustamos la organización de la recogida según la nueva hora prevista de aterrizaje."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**No cobramos ningún suplemento de espera por el retraso del vuelo de llegada.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si has reservado un shuttle compartido, la salida del vehículo también puede depender de otros pasajeros con reservas confirmadas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si la compañía aérea cambia el número de tu vuelo, te asigna otro vuelo o cancela el original, envíanos los nuevos datos por WhatsApp lo antes posible."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Tendremos que comprobar la disponibilidad y las condiciones del traslado para el nuevo vuelo. El cambio a otro vuelo no significa que la recogida quede confirmada automáticamente."
+          },
+          {
+            "kind": "subheading",
+            "text": "Regreso del hotel al aeropuerto"
+          },
+          {
+            "kind": "paragraph",
+            "text": "También puedes reservar el traslado desde tu alojamiento en Capadocia hasta el aeropuerto de Kayseri o Nevsehir."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para el regreso en shuttle compartido, organizamos la hora de recogida teniendo en cuenta tu vuelo de salida y las recogidas de otros pasajeros que viajan en el mismo vehículo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**La hora de recogida en el hotel se comunicará por separado.** Una hora solicitada por el pasajero no queda garantizada automáticamente."
+          },
+          {
+            "kind": "paragraph",
+            "text": "El shuttle puede pasar por otros hoteles antes de dirigirse al aeropuerto. En un traslado privado no se realizan paradas para pasajeros de reservas ajenas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si necesitas información sobre una ruta de regreso concreta, consulta [[Capadocia al aeropuerto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] o [[Capadocia al aeropuerto de Nevsehir|cappadocia-to-nevsehir-airport-shuttle]]."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Las llegadas nocturnas y las salidas a primera hora de la mañana deben comprobarse según el vuelo y la disponibilidad del servicio. No debes dar por hecho que existe una salida fija de shuttle a cualquier hora."
+          }
+        ]
+      },
+      {
+        "heading": "Datos de la reserva, acceso al hotel y confirmación",
+        "paragraphs": [
+          "Para solicitar tu traslado, selecciona en el formulario el aeropuerto, el tipo de servicio, la dirección del traslado y el número de pasajeros.",
+          "Introduce los nombres de los pasajeros, la fecha del viaje, el número correcto de vuelo, el nombre completo del alojamiento y un contacto de WhatsApp activo.",
+          "El servicio atiende hoteles situados en las principales zonas de alojamiento de Capadocia que están dentro de la cobertura correspondiente.",
+          "Algunos hoteles cueva y alojamientos de los pueblos históricos se encuentran en calles estrechas por las que no siempre pueden circular los vehículos de traslado.",
+          "Cuando el acceso lo permite, podemos recogerte o dejarte directamente en el hotel. Si el vehículo no puede llegar hasta la entrada, se podrá acordar un punto cercano y adecuado para subir o bajar.",
+          "Escribe el nombre completo del hotel tal como aparece en tu reserva, preferiblemente con caracteres latinos. No introduzcas solamente la dirección.",
+          "Si te alojas en un Airbnb o apartamento privado, sigue las indicaciones del formulario para elegir un hotel cercano y adecuado como punto de encuentro. No realizamos recogidas ni traslados directamente a direcciones particulares de Airbnb o apartamentos.",
+          "Si quieres saber más sobre las condiciones de acceso en calles históricas, consulta nuestra guía de [[traslados a hoteles cueva en Capadocia|cappadocia-cave-hotel-airport-transfer]].",
+          "**Enviar el formulario significa presentar una solicitud de reserva, no obtener una confirmación automática.**",
+          "Nuestro equipo revisará los datos del viaje y la disponibilidad del servicio.",
+          "Tu traslado quedará confirmado cuando recibas el mensaje de confirmación de la reserva por WhatsApp.",
+          "Comprueba que el número de WhatsApp facilitado sea correcto y que puedas recibir los mensajes relacionados con el traslado.",
+          "El pago se realiza **en efectivo al conductor**.",
+          "Aceptamos efectivo en:",
+          "Euros (EUR). · Dólares estadounidenses (USD). · Liras turcas (TRY).",
+          "No aceptamos tarjetas de crédito, tarjetas de débito ni pagos por internet.",
+          "El shuttle compartido se cobra por pasajero y el traslado privado por vehículo. Consulta el total correspondiente a tu servicio y trayecto en el formulario o en nuestra página de [[precios de traslados al aeropuerto|airport-transfer-prices]].",
+          "Utiliza el formulario existente para seleccionar el aeropuerto, la localidad del alojamiento, el servicio, la dirección del viaje y el número de pasajeros.",
+          "Revisa los datos del vuelo y el total mostrado antes de enviar la solicitud. Si utilizas dos aeropuertos diferentes, facilita la información de ambos vuelos para confirmar los trayectos por separado."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Para solicitar tu traslado, selecciona en el formulario el aeropuerto, el tipo de servicio, la dirección del traslado y el número de pasajeros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Introduce los nombres de los pasajeros, la fecha del viaje, el número correcto de vuelo, el nombre completo del alojamiento y un contacto de WhatsApp activo."
+          },
+          {
+            "kind": "subheading",
+            "text": "Recogida y llegada al alojamiento"
+          },
+          {
+            "kind": "paragraph",
+            "text": "El servicio atiende hoteles situados en las principales zonas de alojamiento de Capadocia que están dentro de la cobertura correspondiente."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Algunos hoteles cueva y alojamientos de los pueblos históricos se encuentran en calles estrechas por las que no siempre pueden circular los vehículos de traslado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Cuando el acceso lo permite, podemos recogerte o dejarte directamente en el hotel. Si el vehículo no puede llegar hasta la entrada, se podrá acordar un punto cercano y adecuado para subir o bajar."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Escribe el nombre completo del hotel tal como aparece en tu reserva, preferiblemente con caracteres latinos. No introduzcas solamente la dirección."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si te alojas en un Airbnb o apartamento privado, sigue las indicaciones del formulario para elegir un hotel cercano y adecuado como punto de encuentro. No realizamos recogidas ni traslados directamente a direcciones particulares de Airbnb o apartamentos."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si quieres saber más sobre las condiciones de acceso en calles históricas, consulta nuestra guía de [[traslados a hoteles cueva en Capadocia|cappadocia-cave-hotel-airport-transfer]]."
+          },
+          {
+            "kind": "subheading",
+            "text": "¿Cuándo queda confirmada la reserva?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Enviar el formulario significa presentar una solicitud de reserva, no obtener una confirmación automática.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Nuestro equipo revisará los datos del viaje y la disponibilidad del servicio."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Tu traslado quedará confirmado cuando recibas el mensaje de confirmación de la reserva por WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Comprueba que el número de WhatsApp facilitado sea correcto y que puedas recibir los mensajes relacionados con el traslado."
+          },
+          {
+            "kind": "subheading",
+            "text": "Forma de pago y monedas aceptadas"
+          },
+          {
+            "kind": "paragraph",
+            "text": "El pago se realiza **en efectivo al conductor**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Aceptamos efectivo en:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Euros (EUR). · Dólares estadounidenses (USD). · Liras turcas (TRY)."
+          },
+          {
+            "kind": "paragraph",
+            "text": "No aceptamos tarjetas de crédito, tarjetas de débito ni pagos por internet."
+          },
+          {
+            "kind": "paragraph",
+            "text": "El shuttle compartido se cobra por pasajero y el traslado privado por vehículo. Consulta el total correspondiente a tu servicio y trayecto en el formulario o en nuestra página de [[precios de traslados al aeropuerto|airport-transfer-prices]]."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Utiliza el formulario existente para seleccionar el aeropuerto, la localidad del alojamiento, el servicio, la dirección del viaje y el número de pasajeros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Revisa los datos del vuelo y el total mostrado antes de enviar la solicitud. Si utilizas dos aeropuertos diferentes, facilita la información de ambos vuelos para confirmar los trayectos por separado."
+          }
         ]
       },
       {
         "heading": "Llegar por un aeropuerto y salir por otro",
         "paragraphs": [
-          "Algunos viajes llegan por NAV y salen por ASR, o al revés. No se considera una ida y vuelta estándar por el mismo aeropuerto, porque cada trayecto tiene su propia ruta y su propia tarifa de traslado privado. Envía ambos vuelos por WhatsApp para confirmar cada tramo con el aeropuerto correcto en lugar de asumir un único precio para los dos sentidos."
+          "Puedes llegar a Capadocia por un aeropuerto y regresar desde el otro.",
+          "Por ejemplo, puedes aterrizar en Nevsehir (NAV), alojarte en Goreme y tomar el vuelo de regreso desde Kayseri (ASR). También puedes organizar el viaje en sentido contrario.",
+          "Sin embargo, utilizar dos aeropuertos distintos no equivale a reservar una ida y vuelta convencional por el mismo aeropuerto.",
+          "**Cada tramo debe comprobarse por separado según su aeropuerto, vuelo, tipo de servicio y precio aplicable.**",
+          "Si tu llegada y tu salida son desde aeropuertos diferentes, envíanos por WhatsApp las fechas, los números de ambos vuelos y los datos del alojamiento para que podamos revisar y confirmar cada traslado.",
+          "No presupongas que el precio de ida y vuelta de un solo aeropuerto se aplica automáticamente a un itinerario que combina ASR y NAV.",
+          "Esto es especialmente importante si llegas de noche o tienes un vuelo de regreso temprano, ya que la disponibilidad del shuttle compartido debe comprobarse para cada trayecto."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Puedes llegar a Capadocia por un aeropuerto y regresar desde el otro."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Por ejemplo, puedes aterrizar en Nevsehir (NAV), alojarte en Goreme y tomar el vuelo de regreso desde Kayseri (ASR). También puedes organizar el viaje en sentido contrario."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Sin embargo, utilizar dos aeropuertos distintos no equivale a reservar una ida y vuelta convencional por el mismo aeropuerto."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Cada tramo debe comprobarse por separado según su aeropuerto, vuelo, tipo de servicio y precio aplicable.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si tu llegada y tu salida son desde aeropuertos diferentes, envíanos por WhatsApp las fechas, los números de ambos vuelos y los datos del alojamiento para que podamos revisar y confirmar cada traslado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "No presupongas que el precio de ida y vuelta de un solo aeropuerto se aplica automáticamente a un itinerario que combina ASR y NAV."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Esto es especialmente importante si llegas de noche o tienes un vuelo de regreso temprano, ya que la disponibilidad del shuttle compartido debe comprobarse para cada trayecto."
+          }
         ]
       },
       {
-        "heading": "Tamaño del grupo y capacidad del vehículo",
+        "heading": "Número de pasajeros y opciones de vehículo",
         "paragraphs": [
-          "Un Vito admite hasta 5 pasajeros y un Sprinter hasta 16. Los traslados privados se cobran por vehículo, por lo que en grupos grandes el coste por persona de un Sprinter puede ser inferior al del shuttle. Como las tarifas privadas se gestionan por aeropuerto, conviene comparar los precios actuales de ASR y NAV para el grupo antes de reservar."
+          "El tamaño del grupo influye tanto en el vehículo adecuado como en el coste total del traslado.",
+          "El **Mercedes Vito** tiene capacidad para un máximo de 5 pasajeros y el **Mercedes Sprinter**, para un máximo de 16.",
+          "Como el servicio privado se cobra por vehículo, su coste por persona puede ser competitivo cuando viajan suficientes pasajeros para compartir el precio de un mismo vehículo.",
+          "Por ejemplo, seis personas no pueden viajar juntas en un único Vito porque supera su capacidad máxima. En ese caso, puedes comparar un Sprinter con el coste total de seis plazas de shuttle compartido.",
+          "Eso no significa que un vehículo privado sea siempre más barato. Conviene comparar los importes reales según el aeropuerto y la cantidad de viajeros.",
+          "La capacidad máxima de pasajeros tampoco garantiza que quepa cualquier combinación de equipaje voluminoso. Si llevas equipaje de dimensiones especiales, indícalo al solicitar la reserva para que podamos comprobar las opciones disponibles."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "El tamaño del grupo influye tanto en el vehículo adecuado como en el coste total del traslado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "El **Mercedes Vito** tiene capacidad para un máximo de 5 pasajeros y el **Mercedes Sprinter**, para un máximo de 16."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Como el servicio privado se cobra por vehículo, su coste por persona puede ser competitivo cuando viajan suficientes pasajeros para compartir el precio de un mismo vehículo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Por ejemplo, seis personas no pueden viajar juntas en un único Vito porque supera su capacidad máxima. En ese caso, puedes comparar un Sprinter con el coste total de seis plazas de shuttle compartido."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Eso no significa que un vehículo privado sea siempre más barato. Conviene comparar los importes reales según el aeropuerto y la cantidad de viajeros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "La capacidad máxima de pasajeros tampoco garantiza que quepa cualquier combinación de equipaje voluminoso. Si llevas equipaje de dimensiones especiales, indícalo al solicitar la reserva para que podamos comprobar las opciones disponibles."
+          }
         ]
       },
       {
         "heading": "Consulta las rutas por localidad",
         "paragraphs": [
-          "¿Ya sabes dónde está tu hotel? Ve directamente a la ruta correspondiente a tu aeropuerto:"
+          "¿Ya sabes en qué localidad está tu alojamiento? Elige el aeropuerto y accede a la ruta correspondiente para consultar información sobre el trayecto por carretera y cómo solicitarlo.",
+          "Estos enlaces corresponden a las rutas de llegada desde ambos aeropuertos a las principales localidades hoteleras.",
+          "Si vas desde el hotel al aeropuerto, selecciona la dirección de salida en el formulario o consulta la página específica del traslado de regreso.",
+          "La ubicación exacta de recogida o bajada dependerá del alojamiento y de las condiciones de acceso del vehículo."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "¿Ya sabes en qué localidad está tu alojamiento? Elige el aeropuerto y accede a la ruta correspondiente para consultar información sobre el trayecto por carretera y cómo solicitarlo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Estos enlaces corresponden a las rutas de llegada desde ambos aeropuertos a las principales localidades hoteleras."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Si vas desde el hotel al aeropuerto, selecciona la dirección de salida en el formulario o consulta la página específica del traslado de regreso."
+          },
+          {
+            "kind": "paragraph",
+            "text": "La ubicación exacta de recogida o bajada dependerá del alojamiento y de las condiciones de acceso del vehículo."
+          }
         ],
         "bullets": [
           "**Goreme** — [[desde Kayseri|kayseri-airport-to-goreme-shuttle]] · [[desde Nevsehir|nevsehir-airport-to-goreme-shuttle]]",
@@ -603,28 +1027,28 @@ const rawEsPages: EsSeoPage[] = [
     ],
     "faq": [
       {
-        "q": "¿Qué aeropuertos dan servicio a Capadocia?",
-        "a": "Aeropuerto de Kayseri (ASR) y Aeropuerto de Nevsehir (NAV)."
+        "q": "¿Qué aeropuerto me conviene más, Kayseri o Nevsehir?",
+        "a": "Depende de tu vuelo y de dónde te alojes. Nevsehir (NAV) está más cerca por carretera de muchas localidades centrales, pero Kayseri (ASR) puede ofrecer horarios de vuelo más adecuados. Para reservar el traslado, elige siempre el aeropuerto que figura en tu billete."
       },
       {
-        "q": "¿Puedo llegar por un aeropuerto y salir por el otro?",
-        "a": "Sí. Envía ambos vuelos por WhatsApp para confirmar cada sentido por separado, ya que la ruta y el precio se confirman según el aeropuerto correspondiente."
+        "q": "¿Qué ocurre si se retrasa mi vuelo de llegada?",
+        "a": "Hacemos seguimiento del vuelo facilitado y ajustamos la recogida a su nueva hora de llegada. No cobramos un suplemento de espera por el retraso del vuelo de llegada. Si te cambian a otro vuelo, envíanos los nuevos datos por WhatsApp para comprobar la disponibilidad de nuevo."
       },
       {
-        "q": "¿Qué aeropuerto está más cerca de mi hotel, Kayseri o Nevsehir?",
-        "a": "Depende de la localidad de tu hotel; NAV está más cerca de la mayoría de las zonas centrales. Consulta [[Kayseri o Nevsehir para Capadocia|kayseri-or-nevsehir-airport-for-cappadocia]] para una comparación completa."
+        "q": "¿Dónde me espera el conductor en el aeropuerto?",
+        "a": "Después de recoger el equipaje, dirígete a la salida de la terminal. El conductor o representante te esperará con un cartel que muestra el nombre del pasajero indicado en la reserva. También puedes consultar las instrucciones que recibiste por WhatsApp."
       },
       {
-        "q": "¿La recogida en el hotel está incluida para el trayecto de salida?",
-        "a": "Sí, siempre que la reserva esté confirmada y el acceso del vehículo sea viable."
+        "q": "¿Cómo se fija la hora de recogida en el hotel?",
+        "a": "Para el shuttle compartido de regreso, la hora se establece según el vuelo de salida y la organización de las recogidas de los demás pasajeros. Te comunicaremos la hora por separado. El horario que solicites no queda confirmado automáticamente."
       },
       {
-        "q": "¿Qué zonas de Capadocia cubre el servicio?",
-        "a": "Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar."
+        "q": "¿Cuándo queda confirmada mi reserva?",
+        "a": "El envío del formulario es solo una solicitud. La reserva queda confirmada cuando nuestro equipo revisa la información y recibes el mensaje de confirmación por WhatsApp."
       },
       {
-        "q": "¿Qué datos de los pasajeros se necesitan?",
-        "a": "Nombres de los pasajeros, información del vuelo, nombre del hotel y un contacto de WhatsApp."
+        "q": "¿Puedo pagar con tarjeta? ¿Qué monedas aceptáis?",
+        "a": "No aceptamos tarjetas de crédito ni débito ni pagos por internet. El pago se hace en efectivo al conductor y puedes utilizar euros (EUR), dólares estadounidenses (USD) o liras turcas (TRY)."
       }
     ],
     "related": [
@@ -633,8 +1057,14 @@ const rawEsPages: EsSeoPage[] = [
       "nevsehir-airport-shuttle",
       "airport-transfer-prices"
     ],
+    "relatedDescriptions": {
+      "cappadocia-airport": "Guía para elegir aeropuerto y planificar tu llegada.",
+      "kayseri-airport-shuttle": "Rutas desde Kayseri, duración aproximada y reserva.",
+      "nevsehir-airport-shuttle": "Rutas desde Nevsehir y opciones de traslado.",
+      "airport-transfer-prices": "Consulta los precios actuales según aeropuerto y servicio."
+    },
     "twitterTitle": "Traslado del aeropuerto a Capadocia | Kayseri y Nevsehir",
-    "twitterDescription": "Shuttle compartido o traslado privado desde Kayseri (ASR) y Nevsehir (NAV) a Goreme, Urgup, Uchisar, Avanos, Cavusin y Ortahisar."
+    "twitterDescription": "Reserva tu traslado a Capadocia desde Kayseri (ASR) o Nevsehir (NAV). Compara shuttle compartido y traslado privado, recogida, regreso y pago en efectivo."
   },
   {
     "slug": "private-airport-transfer-cappadocia",
