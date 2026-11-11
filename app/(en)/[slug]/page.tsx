@@ -207,7 +207,7 @@ export default async function SeoPageView({ params }: { params: Promise<{ slug: 
             if (page.slug === 'cappadocia-shuttle-transfer' && section.heading === 'Kayseri and Nevsehir Airport Shuttle' && block.kind === 'paragraph' && block.text.startsWith('• ')) {
               if (block.text !== '• Goreme') return null;
               return <ul key={i} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(135px, 100%), 1fr))', columnGap: 12, rowGap: 4, listStylePosition: 'inside', paddingLeft: 0 }}>
-                {section.blocks.filter((item) => item.kind === 'paragraph' && item.text.startsWith('• ')).map((item) => <li key={item.text}>{item.text.slice(2)}</li>)}
+                {section.blocks?.filter((item) => item.kind === 'paragraph' && item.text.startsWith('• ')).map((item) => <li key={item.text}>{item.text.slice(2)}</li>)}
               </ul>;
             }
             return block.kind === 'subheading' ? <h3 key={i}>{block.text}</h3> : <p key={i}><RichText text={block.text} /></p>;
