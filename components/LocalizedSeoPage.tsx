@@ -51,7 +51,7 @@ function RouteQuickFacts({locale,page}:{locale:NewLocale;page:LocalizedSeoPageDa
 function RouteAirportMeeting({locale,page}:{locale:NewLocale;page:LocalizedSeoPageData}){if(!page.route||page.route.direction!=='arrival')return null;const t=localeUi[locale].dynamic;return <section className="content-section airport-meeting-section"><h2>{t.meetingHeading}</h2><p>{t.meetingText}</p><MeetingSteps ariaLabel={t.meetingAria} steps={t.meetingSteps.map(([title,description])=>({title,description}))}/></section>}
 
 function renderPtShuttleBlocks(blocks: Array<{kind:'paragraph'|'subheading';text:string}>, prefix:string) {
-  const output: JSX.Element[] = [];
+  const output: Array<import('react').ReactNode> = [];
   for (let i=0; i<blocks.length;) {
     const block=blocks[i];
     if (block.kind==='subheading') { output.push(<h3 key={i}>{block.text}</h3>); i++; continue; }
