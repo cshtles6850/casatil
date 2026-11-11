@@ -198,7 +198,12 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
         <article className="prose guide-booking-rest">
           {page.sections.slice(guideIntroSectionCount).map(renderSection)}
           {pageShowsBookingInfoChecklist(page.slug, 'zh-CN') && <PageBookingInfoChecklistZh />}
-          <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
+          <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>{page.slug === 'cappadocia-shuttle-transfer' ? ({
+  'kayseri-airport-shuttle': '开塞利机场路线、参考车程与预订',
+  'nevsehir-airport-shuttle': '内夫谢希尔机场路线与接送信息',
+  'private-airport-transfer-cappadocia': '私人接送车型、人数与预订',
+  'airport-transfer-prices': '查看当前拼车与私人接送价格',
+} as Record<string, string>)[related] ?? '查看路线、时间与预订信息 →' : '查看路线、时间与预订信息 →'}</span></Link>)}</div></section>
           <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p><RichText text={item.a} prefix="/zh-cn" /></p></details>)}</div></section>
         </article>
       </> : <>
@@ -207,7 +212,12 @@ export default async function ChineseSeoPage({ params }: { params: Promise<{ slu
           <RouteAirportMeetingZh page={page} />
           {page.sections.map(renderSection)}
           {hasBookingForm && pageShowsBookingInfoChecklist(page.slug, 'zh-CN') && <PageBookingInfoChecklistZh />}
-          <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>查看路线、时间与预订信息 →</span></Link>)}</div></section>
+          <section className="content-section related-section"><h2>相关机场班车与接送页面</h2><div className="related-grid">{page.related.slice(0,8).map((related)=><Link className="related-card" href={`/zh-cn/${related}`} key={related}><strong>{zhPrettySlug(related)}</strong><span>{page.slug === 'cappadocia-shuttle-transfer' ? ({
+  'kayseri-airport-shuttle': '开塞利机场路线、参考车程与预订',
+  'nevsehir-airport-shuttle': '内夫谢希尔机场路线与接送信息',
+  'private-airport-transfer-cappadocia': '私人接送车型、人数与预订',
+  'airport-transfer-prices': '查看当前拼车与私人接送价格',
+} as Record<string, string>)[related] ?? '查看路线、时间与预订信息 →' : '查看路线、时间与预订信息 →'}</span></Link>)}</div></section>
           <section className="content-section"><h2>常见问题</h2><div className="faq">{page.faq.map((item)=><details key={item.q}><summary>{item.q}</summary><p><RichText text={item.a} prefix="/zh-cn" /></p></details>)}</div></section>
         </article>
         {page.route && <aside className="sidebar route-booking-sidebar" id="booking"><div className="sidebar-booking"><BookingFormZh compact {...defaults}/></div></aside>}
