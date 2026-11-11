@@ -15,7 +15,6 @@ export type SeoPage = {
 
 const rawPages: SeoPage[] = [
   {
-{
     "slug": "cappadocia-shuttle-transfer",
     "title": "Cappadocia Shuttle Transfer | Shared Airport Shuttle",
     "description": "Book a shared Cappadocia shuttle from Kayseri or Nevsehir Airport. Learn about hotel transfers, flight delays, airport pickup and WhatsApp confirmation.",
