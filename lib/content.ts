@@ -15,63 +15,346 @@ export type SeoPage = {
 
 const rawPages: SeoPage[] = [
   {
+{
     "slug": "cappadocia-shuttle-transfer",
     "title": "Cappadocia Shuttle Transfer | Shared Airport Shuttle",
-    "description": "Book Cappadocia shuttle transfer from Kayseri (ASR) or Nevsehir (NAV) to Goreme, Urgup & more. Shared airport shuttle with WhatsApp booking.",
+    "description": "Book a shared Cappadocia shuttle from Kayseri or Nevsehir Airport. Learn about hotel transfers, flight delays, airport pickup and WhatsApp confirmation.",
     "eyebrow": "Shared Airport Shuttle",
     "h1": "Cappadocia Shuttle Transfer",
-    "lead": "Cappadocia shuttle transfer is the shared airport shuttle connecting Kayseri Airport (ASR) and Nevsehir Airport (NAV) with hotels in Goreme, Urgup, Uchisar, Avanos, Cavusin, and Ortahisar. The fare is {{PRICE:kayseri:shuttle}} per person one way for Kayseri (ASR) and {{PRICE:nevsehir:shuttle}} per person one way for Nevsehir (NAV), with pickup and drop-off scheduled around your flight.",
+    "lead": "Travel between Kayseri Airport (ASR), Nevsehir Airport (NAV) and your accommodation in Cappadocia with a pre-booked shared shuttle.",
+    "introParagraphs": [
+      "Our Cappadocia shuttle transfer serves hotels in Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar. You can book an airport arrival, a hotel-to-airport departure or a round trip.",
+      "Shared shuttle fares are charged per passenger, making this a practical option for solo travelers, couples and small groups who do not need a private vehicle. Other booked passengers and hotel stops may be part of your journey.",
+      "Choose your airport and travel details in the booking form to view the applicable fare and submit your reservation request."
+    ],
     "sections": [
       {
-        "heading": "What's Included",
-        "paragraphs": [
-          "The service covers a shared ride from either airport to your accommodation, with your flight, passenger details, and hotel name confirmed in advance. Other confirmed passengers and hotel stops may be part of the same run. The current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV."
+        "heading": "How the Shared Shuttle Works",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "A shared airport shuttle is a pre-booked transfer that carries passengers traveling between the same airport and supported Cappadocia hotel areas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Unlike a private transfer, the vehicle is not reserved exclusively for your booking. Depending on the confirmed passengers, the journey may include waiting for other arrivals, collecting passengers or stopping at several hotels."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Your transfer is organized using your flight details, passenger information and accommodation name. The actual journey time can vary according to the airport, hotel location, other passenger stops and road conditions."
+          },
+          {
+            "kind": "paragraph",
+            "text": "This service is suitable if you want an airport-to-hotel transfer without booking an entire private vehicle."
+          }
         ]
       },
       {
-        "heading": "Kayseri or Nevsehir Airport",
-        "paragraphs": [
-          "Which route you need depends on your airport. Flying into ASR? Use [[Kayseri Airport Shuttle|kayseri-airport-shuttle]]. Flying into NAV? Use [[Nevsehir Airport Shuttle|nevsehir-airport-shuttle]] instead — each page has the exact distance and timing for your hotel town."
+        "heading": "Kayseri and Nevsehir Airport Shuttle",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Cappadocia is served by two airports, and your shuttle reservation must match the airport shown on your flight ticket."
+          },
+          {
+            "kind": "subheading",
+            "text": "Kayseri Airport (ASR)"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Kayseri Airport serves travelers heading to Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar. Shuttle transfers are available for supported hotel areas in either direction."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For airport-specific routes, approximate road times and booking information, visit our [[Kayseri Airport Shuttle|kayseri-airport-shuttle]] page."
+          },
+          {
+            "kind": "subheading",
+            "text": "Nevsehir Airport (NAV)"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Nevsehir Airport is another option for reaching central Cappadocia. The shuttle connects the airport with supported hotel areas, including Goreme, Urgup, Uchisar, Avanos, Cavusin and Ortahisar."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For route information and travel planning, visit our [[Nevsehir Airport Shuttle|nevsehir-airport-shuttle]] page."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Where can the shuttle take you?**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Our standard shared-shuttle service covers accommodation in these six areas:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Goreme"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Urgup"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Uchisar"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Avanos"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Cavusin"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Ortahisar"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Your exact hotel and its vehicle access are checked as part of the reservation process. The town name alone may not be enough to determine the final stopping point."
+          }
         ]
       },
       {
-        "heading": "Shared vs Private: Which One Do You Need",
-        "paragraphs": [
-          "The shuttle shares the vehicle with other confirmed passengers and hotel stops. If you'd rather travel without other passengers or unrelated hotel drops, compare [[private airport transfer|private-airport-transfer-cappadocia]] instead."
+        "heading": "Airport Pickup and Flight Delays",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "After landing at Kayseri or Nevsehir Airport, collect your luggage and proceed to the terminal exit."
+          },
+          {
+            "kind": "paragraph",
+            "text": "You will be met at the terminal exit by a representative holding a sign with the passenger name provided in your reservation. Your booking confirmation and WhatsApp communication help you identify the correct transfer arrangements."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**What if your flight is delayed?**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "We monitor your arrival flight and adjust the airport pickup arrangements according to its updated arrival time. There is no additional waiting charge for a flight delay."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Because this is a shared shuttle, other confirmed passengers may be traveling on the same service. Waiting and departure arrangements can therefore vary."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If your flight number changes, you are moved to a different flight or your original flight is cancelled, contact us on WhatsApp with the new flight details as soon as possible. A replacement flight must be checked against shuttle availability and confirmed separately."
+          }
         ]
       },
       {
-        "heading": "One Way, Round Trip, or Hotel Pickup",
-        "paragraphs": [
-          "Book Airport → Hotel, Hotel → Airport, or both as a round trip. Enter your flight number and full accommodation name so the correct airport meeting point or hotel pickup can be confirmed."
+        "heading": "Hotel Pickup for Your Return Flight",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "You can book a shuttle from your Cappadocia hotel to Kayseri Airport or Nevsehir Airport, as well as a transfer in the opposite direction."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For departure transfers, the hotel pickup time is arranged according to your flight departure details and the shared-shuttle schedule. Your pickup time is communicated to you separately."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The shuttle may collect other confirmed passengers from nearby hotels before continuing to the airport."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Please provide your correct departure flight number, date and accommodation name when booking. Do not assume that your preferred hotel pickup time is automatically confirmed."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you need a dedicated vehicle without unrelated hotel stops, you can compare our [[private transfer service|private-airport-transfer-cappadocia]]."
+          }
+        ]
+      },
+      {
+        "heading": "Shared Shuttle or Private Transfer?",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Both services provide pre-booked transport between the airport and supported Cappadocia accommodation areas, but they work differently."
+          },
+          {
+            "kind": "subheading",
+            "text": "Choose Shared Shuttle If You"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Prefer a per-person fare instead of paying for a whole vehicle."
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Are comfortable traveling with other confirmed passengers."
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Do not mind possible waiting or additional hotel stops."
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Want a pre-booked airport connection for a solo trip, couple or small group."
+          },
+          {
+            "kind": "subheading",
+            "text": "Choose Private Transfer If You"
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Prefer a vehicle reserved exclusively for your booking."
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Are traveling with a family or larger group."
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Want a more direct journey without unrelated hotel stops."
+          },
+          {
+            "kind": "paragraph",
+            "text": "• Need to discuss specific pickup arrangements for your flight."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Private transfer vehicles include the Mercedes Vito for up to five passengers and the Mercedes Sprinter for up to sixteen passengers."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Private prices are calculated per vehicle, while shared shuttle prices are calculated per passenger. The most suitable option depends on your group size and travel preferences."
+          },
+          {
+            "kind": "paragraph",
+            "text": "[[Compare Shared Shuttle and Private Transfer|cappadocia-shared-shuttle-vs-private-transfer]]"
+          }
+        ]
+      },
+      {
+        "heading": "Hotel Access and Pickup Locations",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Cappadocia has many cave hotels, hillside properties and historic streets where larger vehicles may not be able to reach every entrance."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Where vehicle access is suitable, your shuttle can pick you up from or drop you off at your hotel. If the road is unsuitable, a practical nearby meeting or drop-off point may be arranged."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Please provide your hotel's full name when booking so the correct location can be checked."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you are staying at an Airbnb or private apartment, follow the separate accommodation instructions in the booking form to select a suitable nearby hotel meeting point."
+          }
+        ]
+      },
+      {
+        "heading": "Booking, Confirmation and Payment",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Booking a Cappadocia shared shuttle starts with your travel information."
+          },
+          {
+            "kind": "paragraph",
+            "text": "1. Select Shared Shuttle and choose Kayseri Airport (ASR) or Nevsehir Airport (NAV)."
+          },
+          {
+            "kind": "paragraph",
+            "text": "2. Choose Airport to Hotel, Hotel to Airport or Round Trip."
+          },
+          {
+            "kind": "paragraph",
+            "text": "3. Enter your travel date, flight number, passenger details and full accommodation name."
+          },
+          {
+            "kind": "paragraph",
+            "text": "4. Review the displayed fare and send your reservation request."
+          },
+          {
+            "kind": "paragraph",
+            "text": "5. Receive your booking confirmation and relevant pickup information through WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Important:** Submitting the booking form creates a reservation request. Your transfer is confirmed only after our team has reviewed the details and you have received the confirmation message on WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Make sure the WhatsApp number you provide is active and correct."
+          },
+          {
+            "kind": "subheading",
+            "text": "How Do I Pay?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Payment is made in cash to the driver. We accept EUR, USD and TRY cash. Credit and debit card payments and online payments are not available."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Shared shuttle fares are calculated per passenger. Private transfer fares are calculated per vehicle. The booking form displays the applicable total for your selected service and journey."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For the full current fare comparison, see our [[Airport Transfer Prices|airport-transfer-prices]] page."
+          }
+        ]
+      },
+      {
+        "heading": "Book Your Cappadocia Shuttle Transfer",
+        "paragraphs": [],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Choose your airport, journey direction, passenger count and accommodation in the booking form below."
+          },
+          {
+            "kind": "paragraph",
+            "text": "You can book a one-way transfer or include your return journey. Check the displayed total before submitting your request."
+          }
         ]
       }
     ],
     "faq": [
       {
-        "q": "How much is the shared Cappadocia shuttle transfer?",
-        "a": "Kayseri Airport (ASR) is {{PRICE:kayseri:shuttle}} per person one way and Nevsehir Airport (NAV) is {{PRICE:nevsehir:shuttle}} per person one way to supported hotel areas."
+        "q": "How much does a shared Cappadocia shuttle cost?",
+        "a": "Shared shuttle fares are charged per passenger for each one-way transfer. Check the current Kayseri or Nevsehir fare in the booking form or on our [[Airport Transfer Prices|airport-transfer-prices]] page. A round-trip booking includes both transfer directions."
       },
       {
-        "q": "Which airports are covered?",
-        "a": "Kayseri Airport (ASR) and Nevsehir Airport (NAV)."
+        "q": "What happens if my flight is delayed?",
+        "a": "We monitor your arrival flight and adjust pickup arrangements according to its updated arrival time. There is no additional waiting charge for a flight delay. If you are moved to another flight, send the new flight details on WhatsApp so availability can be checked again."
       },
       {
-        "q": "Which Cappadocia areas are served?",
-        "a": "Goreme, Urgup, Uchisar, Avanos, Cavusin, and Ortahisar."
+        "q": "Where do I meet the shuttle at the airport?",
+        "a": "After collecting your luggage, proceed to the terminal exit. Look for the representative holding a sign with the passenger name on your reservation. Your WhatsApp confirmation provides the relevant booking information."
       },
       {
-        "q": "Can I book the hotel-to-airport direction too?",
-        "a": "Yes. Choose Hotel → Airport or Round Trip."
+        "q": "When is my shuttle reservation confirmed?",
+        "a": "Submitting the online form is a booking request, not an automatic confirmation. Your transfer is confirmed when our team sends you the confirmation message on WhatsApp."
       },
       {
-        "q": "Is private transfer also available?",
-        "a": "Yes. Vito and Sprinter private vehicles use airport-specific fixed prices."
+        "q": "Can I choose my hotel pickup time for the return transfer?",
+        "a": "Shared-shuttle departure pickups are organized according to flight departure details and the transfer schedule. Your confirmed pickup time is communicated separately. A specific requested time is not automatically guaranteed."
       }
     ],
     "related": [
       "kayseri-airport-shuttle",
       "nevsehir-airport-shuttle",
+      "cappadocia-shared-shuttle-vs-private-transfer",
       "private-airport-transfer-cappadocia",
       "airport-transfer-prices"
     ],
