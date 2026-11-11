@@ -329,7 +329,7 @@ const rawKoPages: KoSeoPage[] = [
           "프라이빗 이동 차량으로는 최대 5명까지 이용할 수 있는 Mercedes Vito와 최대 16명까지 이용할 수 있는 Mercedes Sprinter가 있습니다.",
           "**합승 셔틀은 1인당, 프라이빗 이동 서비스는 차량 1대당 요금이 적용됩니다.**",
           "동행 인원과 예약 화면에 표시되는 총요금, 원하는 이동 방식을 함께 비교해 보세요.",
-          "[[합승 셔틀과 프라이빗 이동 서비스 비교하기|cappadocia-shared-shuttle-vs-private-transfer]]"
+          "합승 셔틀과 프라이빗 이동 서비스의 차이를 비교해 보세요."
         ],
         "blocks": [
           {
@@ -398,7 +398,7 @@ const rawKoPages: KoSeoPage[] = [
           },
           {
             "kind": "paragraph",
-            "text": "[[합승 셔틀과 프라이빗 이동 서비스 비교하기|cappadocia-shared-shuttle-vs-private-transfer]]"
+            "text": "합승 셔틀과 프라이빗 이동 서비스의 차이를 비교해 보세요."
           }
         ]
       },
