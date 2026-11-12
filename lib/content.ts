@@ -870,70 +870,478 @@ const rawPages: SeoPage[] = [
   {
     "slug": "private-airport-transfer-cappadocia",
     "title": "Cappadocia Private Airport Transfer | Vito & Sprinter",
-    "description": "Private Cappadocia airport transfer from Kayseri (ASR) or Nevsehir (NAV): Vito for up to 5 passengers or Sprinter for up to 16, with cash payment to the driver.",
-    "eyebrow": "Dedicated vehicle",
+    "description": "Private airport transfers from Kayseri (ASR) and Nevsehir (NAV) to Cappadocia hotels. Choose a Vito for up to 5 or Sprinter for up to 16 passengers.",
+    "eyebrow": "Dedicated Private Vehicle",
     "h1": "Cappadocia Private Airport Transfer",
-    "lead": "Kayseri Airport, per vehicle one way: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}**. Nevsehir Airport, per vehicle one way: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. Round trip per vehicle: Kayseri Vito/Sprinter {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}; Nevsehir Vito/Sprinter {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}.",
+    "lead": "Book a private airport transfer between Kayseri Airport (ASR) or Nevsehir Airport (NAV) and your accommodation in Cappadocia. Travel in a dedicated Mercedes Vito for up to 5 passengers or a Mercedes Sprinter for up to 16, without sharing the vehicle with travelers from other bookings. Choose an airport arrival, a hotel-to-airport departure or a round trip. Private transfers are priced per vehicle, with separate rates for each airport and vehicle type. Check the current total when selecting your service in the booking form.",
     "sections": [
       {
-        "heading": "Mercedes Vito: up to 5 passengers",
+        "heading": "Mercedes Vito: Up to 5 Passengers",
         "paragraphs": [
-          "The Vito suits couples, families and small groups that want a dedicated vehicle and no unrelated hotel stops, with more control over departure time than a shared shuttle. It's the smaller private option for airport pickup, [[cave-hotel access|cappadocia-cave-hotel-airport-transfer]], and direct hotel-to-airport departures."
+          "The **Mercedes Vito** is the smaller private transfer option, accommodating up to five passengers.",
+          "It is worth considering for couples, families and small groups that want to travel together in a vehicle reserved exclusively for their booking.",
+          "Your vehicle does not need to collect travelers from unrelated reservations or stop at other hotels to drop them off.",
+          "You can arrange a Vito for an arrival at Kayseri or Nevsehir Airport, a departure from your Cappadocia hotel, or a round trip.",
+          "The applicable fare is calculated per vehicle and depends on the airport selected. The vehicle's passenger capacity does not automatically guarantee space for every combination of large suitcases."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "The **Mercedes Vito** is the smaller private transfer option, accommodating up to five passengers."
+          },
+          {
+            "kind": "paragraph",
+            "text": "It is worth considering for couples, families and small groups that want to travel together in a vehicle reserved exclusively for their booking."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Your vehicle does not need to collect travelers from unrelated reservations or stop at other hotels to drop them off."
+          },
+          {
+            "kind": "paragraph",
+            "text": "You can arrange a Vito for an arrival at Kayseri or Nevsehir Airport, a departure from your Cappadocia hotel, or a round trip."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The applicable fare is calculated per vehicle and depends on the airport selected. The vehicle's passenger capacity does not automatically guarantee space for every combination of large suitcases."
+          }
         ]
       },
       {
-        "heading": "Mercedes Sprinter: up to 16 passengers",
+        "heading": "Mercedes Sprinter: Up to 16 Passengers",
         "paragraphs": [
-          "Sprinter is the larger private option for groups up to 16. The one-way price per vehicle is managed separately by airport — {{PRICE:kayseri:sprinter}} from Kayseri and {{PRICE:nevsehir:sprinter}} from Nevsehir — so double-check the total once you select ASR or NAV in the booking form."
+          "The **Mercedes Sprinter** is the larger private transfer option, accommodating up to 16 passengers.",
+          "It is suitable to consider when a group is too large for a Vito or when everyone wants to travel together in a dedicated vehicle.",
+          "For example, six passengers exceed the Vito's five-passenger limit. A Sprinter allows that group to compare one private vehicle with the total cost of six individual shuttle seats.",
+          "The Sprinter is charged per vehicle, not per person. Prices depend on whether the transfer uses Kayseri Airport (ASR) or Nevsehir Airport (NAV).",
+          "**A larger vehicle is not automatically the cheaper choice for every group.** Compare the current booking total before deciding.",
+          "If your group is traveling with particularly large suitcases or unusual luggage, mention this in the booking details so the vehicle arrangements can be reviewed."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "The **Mercedes Sprinter** is the larger private transfer option, accommodating up to 16 passengers."
+          },
+          {
+            "kind": "paragraph",
+            "text": "It is suitable to consider when a group is too large for a Vito or when everyone wants to travel together in a dedicated vehicle."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For example, six passengers exceed the Vito's five-passenger limit. A Sprinter allows that group to compare one private vehicle with the total cost of six individual shuttle seats."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The Sprinter is charged per vehicle, not per person. Prices depend on whether the transfer uses Kayseri Airport (ASR) or Nevsehir Airport (NAV)."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**A larger vehicle is not automatically the cheaper choice for every group.** Compare the current booking total before deciding."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If your group is traveling with particularly large suitcases or unusual luggage, mention this in the booking details so the vehicle arrangements can be reviewed."
+          }
+        ]
+      },
+      {
+        "heading": "How Your Private Airport Pickup Works",
+        "paragraphs": [
+          "A private arrival transfer is arranged around your confirmed booking and the flight information you provide.",
+          "Select the correct arrival airport, vehicle type, passenger count and hotel area when requesting your transfer.",
+          "Provide the passenger names, arrival date, accurate flight number, full accommodation name and an active WhatsApp contact.",
+          "Submitting the form creates a booking request. The transfer is confirmed only after your details and service availability have been checked and you receive the booking confirmation message through WhatsApp.",
+          "We monitor your arrival flight and use its updated arrival information when organizing the pickup.",
+          "After landing, complete any necessary arrival procedures, collect your luggage and proceed to the **terminal exit**.",
+          "A driver or representative will meet you there with a sign displaying the passenger name provided for your reservation.",
+          "Keep your WhatsApp confirmation available. If you have difficulty locating the meeting point or the representative, check the confirmation instructions and contact us through WhatsApp.",
+          "Once you have met the driver, your dedicated vehicle takes your booking party toward the confirmed accommodation or agreed drop-off point.",
+          "There are no extra hotel stops for passengers from unrelated reservations.",
+          "Where road access permits, the vehicle can take you directly to your hotel. Some historic streets and cave-hotel locations require a nearby practical stopping point instead."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "A private arrival transfer is arranged around your confirmed booking and the flight information you provide."
+          },
+          {
+            "kind": "subheading",
+            "text": "Before You Travel"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Select the correct arrival airport, vehicle type, passenger count and hotel area when requesting your transfer."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Provide the passenger names, arrival date, accurate flight number, full accommodation name and an active WhatsApp contact."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Submitting the form creates a booking request. The transfer is confirmed only after your details and service availability have been checked and you receive the booking confirmation message through WhatsApp."
+          },
+          {
+            "kind": "subheading",
+            "text": "Meeting Your Driver at the Airport"
+          },
+          {
+            "kind": "paragraph",
+            "text": "We monitor your arrival flight and use its updated arrival information when organizing the pickup."
+          },
+          {
+            "kind": "paragraph",
+            "text": "After landing, complete any necessary arrival procedures, collect your luggage and proceed to the **terminal exit**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A driver or representative will meet you there with a sign displaying the passenger name provided for your reservation."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Keep your WhatsApp confirmation available. If you have difficulty locating the meeting point or the representative, check the confirmation instructions and contact us through WhatsApp."
+          },
+          {
+            "kind": "subheading",
+            "text": "From the Airport to Your Hotel"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Once you have met the driver, your dedicated vehicle takes your booking party toward the confirmed accommodation or agreed drop-off point."
+          },
+          {
+            "kind": "paragraph",
+            "text": "There are no extra hotel stops for passengers from unrelated reservations."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Where road access permits, the vehicle can take you directly to your hotel. Some historic streets and cave-hotel locations require a nearby practical stopping point instead."
+          }
+        ]
+      },
+      {
+        "heading": "Flight Delays and Changes",
+        "paragraphs": [
+          "We monitor the arrival flight you provide and adjust the airport pickup arrangements according to its updated arrival time.",
+          "**There is no additional waiting charge for an arrival flight delay.**",
+          "The private vehicle is reserved for your booking, so the journey does not depend on collecting other customers from separate reservations.",
+          "If your airline moves you to a different flight, changes the flight number or cancels the original flight, send the updated details through WhatsApp as soon as possible.",
+          "A replacement flight may have a different arrival time or airport. We will need to review the arrangements and confirm availability for the new flight.",
+          "Changing to another flight does not automatically guarantee the original transfer arrangement will remain available."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "If Your Arrival Flight Is Delayed"
+          },
+          {
+            "kind": "paragraph",
+            "text": "We monitor the arrival flight you provide and adjust the airport pickup arrangements according to its updated arrival time."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**There is no additional waiting charge for an arrival flight delay.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "The private vehicle is reserved for your booking, so the journey does not depend on collecting other customers from separate reservations."
+          },
+          {
+            "kind": "subheading",
+            "text": "If Your Flight Number Changes"
+          },
+          {
+            "kind": "paragraph",
+            "text": "If your airline moves you to a different flight, changes the flight number or cancels the original flight, send the updated details through WhatsApp as soon as possible."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A replacement flight may have a different arrival time or airport. We will need to review the arrangements and confirm availability for the new flight."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Changing to another flight does not automatically guarantee the original transfer arrangement will remain available."
+          }
+        ]
+      },
+      {
+        "heading": "Hotel Pickup, Cave Hotels and Airbnb Addresses",
+        "paragraphs": [
+          "Private transfers are also available from Cappadocia accommodation areas to Kayseri Airport or Nevsehir Airport.",
+          "The hotel pickup arrangements are reviewed using your departure flight details, accommodation location and confirmed booking information.",
+          "**Your agreed pickup time will be communicated separately.** A requested departure time should not be treated as confirmed until it has been accepted.",
+          "Unlike a shared shuttle, a private transfer does not have to stop at other hotels to collect passengers from separate bookings.",
+          "For airport-specific departure information, see our [[Cappadocia to Kayseri Airport|cappadocia-to-kayseri-airport-shuttle]] and [[Cappadocia to Nevsehir Airport|cappadocia-to-nevsehir-airport-shuttle]] guides.",
+          "Many Cappadocia cave hotels are located in historic neighborhoods with steep or narrow streets.",
+          "A dedicated vehicle does not remove the road-access restrictions that apply to these areas.",
+          "If the vehicle can safely reach your hotel, pickup or drop-off can take place there. Otherwise, a practical nearby meeting or drop-off location may need to be arranged.",
+          "Please provide your accommodation's full name rather than only the street address. For further details, see our [[Cappadocia Cave Hotel Airport Transfer|cappadocia-cave-hotel-airport-transfer]] guide.",
+          "We do not provide direct pickup or drop-off at private Airbnb or apartment addresses.",
+          "If you are staying in one of these properties, follow the instructions in the reservation form and select a suitable nearby hotel as the meeting or drop-off point.",
+          "The location must be appropriate for vehicle access and confirmed as part of the transfer arrangements."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Hotel-to-Airport Departures"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Private transfers are also available from Cappadocia accommodation areas to Kayseri Airport or Nevsehir Airport."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The hotel pickup arrangements are reviewed using your departure flight details, accommodation location and confirmed booking information."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Your agreed pickup time will be communicated separately.** A requested departure time should not be treated as confirmed until it has been accepted."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Unlike a shared shuttle, a private transfer does not have to stop at other hotels to collect passengers from separate bookings."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For airport-specific departure information, see our [[Cappadocia to Kayseri Airport|cappadocia-to-kayseri-airport-shuttle]] and [[Cappadocia to Nevsehir Airport|cappadocia-to-nevsehir-airport-shuttle]] guides."
+          },
+          {
+            "kind": "subheading",
+            "text": "Cave Hotels and Narrow Streets"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Many Cappadocia cave hotels are located in historic neighborhoods with steep or narrow streets."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A dedicated vehicle does not remove the road-access restrictions that apply to these areas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If the vehicle can safely reach your hotel, pickup or drop-off can take place there. Otherwise, a practical nearby meeting or drop-off location may need to be arranged."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Please provide your accommodation's full name rather than only the street address. For further details, see our [[Cappadocia Cave Hotel Airport Transfer|cappadocia-cave-hotel-airport-transfer]] guide."
+          },
+          {
+            "kind": "subheading",
+            "text": "Airbnb and Private Apartments"
+          },
+          {
+            "kind": "paragraph",
+            "text": "We do not provide direct pickup or drop-off at private Airbnb or apartment addresses."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you are staying in one of these properties, follow the instructions in the reservation form and select a suitable nearby hotel as the meeting or drop-off point."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The location must be appropriate for vehicle access and confirmed as part of the transfer arrangements."
+          }
         ]
       },
       {
         "heading": "When Private Makes More Sense Than Shuttle",
         "paragraphs": [
-          "Private transfer suits larger groups, early departures, late arrivals, families with more luggage, travelers who want a direct hotel route, or accommodation outside the shared-shuttle area. For one or two flexible travelers, the [[shared shuttle|cappadocia-shuttle-transfer]] is often better value; the current fare is {{PRICE:kayseri:shuttle}} per person one way from ASR and {{PRICE:nevsehir:shuttle}} per person one way from NAV."
+          "A private transfer may be worth considering if you want a vehicle reserved for your group, are traveling as a family, have several people traveling together or prefer to avoid hotel stops for unrelated passengers.",
+          "It can also be useful to compare for late arrivals or early departures, although availability must be confirmed for the actual travel date and flight.",
+          "A [[shared airport shuttle|cappadocia-shuttle-transfer]] is different: it is priced per passenger, and other confirmed travelers may share the vehicle. Waiting for other arriving passengers and multiple hotel stops can be part of the journey.",
+          "For one or two travelers, a shared shuttle may cost less than a private vehicle. For a larger group, compare the full cost of all shuttle seats with the private vehicle rate.",
+          "If you are deciding between the two services, see our [[Cappadocia Shuttle Transfer|cappadocia-shuttle-transfer]] page or [[Shared Shuttle vs Private Transfer|cappadocia-shared-shuttle-vs-private-transfer]] comparison."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "A private transfer may be worth considering if you want a vehicle reserved for your group, are traveling as a family, have several people traveling together or prefer to avoid hotel stops for unrelated passengers."
+          },
+          {
+            "kind": "paragraph",
+            "text": "It can also be useful to compare for late arrivals or early departures, although availability must be confirmed for the actual travel date and flight."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A [[shared airport shuttle|cappadocia-shuttle-transfer]] is different: it is priced per passenger, and other confirmed travelers may share the vehicle. Waiting for other arriving passengers and multiple hotel stops can be part of the journey."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For one or two travelers, a shared shuttle may cost less than a private vehicle. For a larger group, compare the full cost of all shuttle seats with the private vehicle rate."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you are deciding between the two services, see our [[Cappadocia Shuttle Transfer|cappadocia-shuttle-transfer]] page or [[Shared Shuttle vs Private Transfer|cappadocia-shared-shuttle-vs-private-transfer]] comparison."
+          }
         ]
       },
       {
-        "heading": "Payment and Passenger Information",
+        "heading": "Group Size, Luggage and Vehicle Access",
         "paragraphs": [
-          "Payment is made in cash to the driver. The booking still collects the flight number, accommodation, passenger names and WhatsApp contact — these are required to confirm the transfer."
+          "Before choosing a private vehicle, consider three things: the number of passengers, the luggage being carried and the accommodation's accessibility.",
+          "The Vito carries up to five passengers, while the Sprinter carries up to sixteen. These are passenger limits, not guarantees that every possible combination of passengers and oversized luggage will fit.",
+          "If you are traveling with unusually large baggage or specialist equipment, include those details when requesting the transfer. Vehicle suitability can then be reviewed.",
+          "Even with a private vehicle, the final hotel pickup or drop-off point depends on road conditions and safe vehicle access.",
+          "A dedicated vehicle means your party travels without passengers from unrelated reservations. It does not mean every hotel entrance or private street address is accessible."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Before choosing a private vehicle, consider three things: the number of passengers, the luggage being carried and the accommodation's accessibility."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The Vito carries up to five passengers, while the Sprinter carries up to sixteen. These are passenger limits, not guarantees that every possible combination of passengers and oversized luggage will fit."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you are traveling with unusually large baggage or specialist equipment, include those details when requesting the transfer. Vehicle suitability can then be reviewed."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Even with a private vehicle, the final hotel pickup or drop-off point depends on road conditions and safe vehicle access."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A dedicated vehicle means your party travels without passengers from unrelated reservations. It does not mean every hotel entrance or private street address is accessible."
+          }
         ]
       },
       {
-        "heading": "Group Size, Luggage and Hotel Access",
+        "heading": "Payment and WhatsApp Booking Confirmation",
         "paragraphs": [
-          "Passenger capacity is the upper limit, not a guarantee that every combination of passengers and oversized luggage fits identically — note any unusually large baggage or child-equipment needs in the booking. A dedicated vehicle skips stops for other passengers, but old streets don't get wider because the service is private: the driver still uses the safest practical stopping point for the vehicle and hotel location."
+          "Submitting the booking form sends a reservation request. It is **not an automatic booking confirmation**.",
+          "We review the flight, accommodation, passenger information and service availability.",
+          "Your reservation is confirmed when you receive the booking confirmation message on WhatsApp.",
+          "Please provide an active WhatsApp number and check your confirmation details before traveling.",
+          "Payment is made **in cash to the driver**.",
+          "The accepted cash currencies are:",
+          "Euros (EUR)  ·  US dollars (USD)  ·  Turkish lira (TRY)",
+          "Credit cards, debit cards and online payments are not accepted.",
+          "Private transfer fares are calculated per vehicle. Your applicable total depends on the airport, vehicle and journey selected in the booking form.",
+          "You can also review the [[Airport Transfer Prices|airport-transfer-prices]] page."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "When Is the Booking Confirmed?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Submitting the booking form sends a reservation request. It is **not an automatic booking confirmation**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "We review the flight, accommodation, passenger information and service availability."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Your reservation is confirmed when you receive the booking confirmation message on WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Please provide an active WhatsApp number and check your confirmation details before traveling."
+          },
+          {
+            "kind": "subheading",
+            "text": "How Do I Pay?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Payment is made **in cash to the driver**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The accepted cash currencies are:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Euros (EUR)  ·  US dollars (USD)  ·  Turkish lira (TRY)"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Credit cards, debit cards and online payments are not accepted."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Private transfer fares are calculated per vehicle. Your applicable total depends on the airport, vehicle and journey selected in the booking form."
+          },
+          {
+            "kind": "paragraph",
+            "text": "You can also review the [[Airport Transfer Prices|airport-transfer-prices]] page."
+          }
+        ]
+      },
+      {
+        "heading": "One-Way and Round-Trip Private Transfers",
+        "paragraphs": [
+          "Private transfers can be requested for either direction:",
+          "**Airport to hotel:** pickup at Kayseri (ASR) or Nevsehir (NAV), followed by travel to your confirmed accommodation or agreed drop-off point.  ·  **Hotel to airport:** pickup from the confirmed hotel location or agreed meeting point, followed by travel to the selected airport.  ·  **Round trip:** airport arrival and return departure arrangements for the same booking party.",
+          "The booking system currently calculates a standard same-airport round trip as twice the corresponding one-way vehicle fare.",
+          "If you arrive through Nevsehir Airport but depart from Kayseri Airport, or the reverse, **each transfer leg must be reviewed and priced for its own airport**.",
+          "Send both flight numbers, travel dates and accommodation details through WhatsApp so the two arrangements can be checked and confirmed separately.",
+          "The availability of late-night arrivals or early departures must be confirmed for the actual flight details. A dedicated vehicle should not be taken to mean that every date or time is automatically available.",
+          "For a broader explanation of the two airports and mixed-airport itineraries, see [[Cappadocia Airport Transfer|cappadocia-airport-transfer]]."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Private transfers can be requested for either direction:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Airport to hotel:** pickup at Kayseri (ASR) or Nevsehir (NAV), followed by travel to your confirmed accommodation or agreed drop-off point.  ·  **Hotel to airport:** pickup from the confirmed hotel location or agreed meeting point, followed by travel to the selected airport.  ·  **Round trip:** airport arrival and return departure arrangements for the same booking party."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The booking system currently calculates a standard same-airport round trip as twice the corresponding one-way vehicle fare."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you arrive through Nevsehir Airport but depart from Kayseri Airport, or the reverse, **each transfer leg must be reviewed and priced for its own airport**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Send both flight numbers, travel dates and accommodation details through WhatsApp so the two arrangements can be checked and confirmed separately."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The availability of late-night arrivals or early departures must be confirmed for the actual flight details. A dedicated vehicle should not be taken to mean that every date or time is automatically available."
+          },
+          {
+            "kind": "paragraph",
+            "text": "For a broader explanation of the two airports and mixed-airport itineraries, see [[Cappadocia Airport Transfer|cappadocia-airport-transfer]]."
+          }
         ]
       }
     ],
     "faq": [
       {
-        "q": "How much is Kayseri private Vito?",
-        "a": "{{PRICE:kayseri:vito}} one way per vehicle, up to 5 passengers."
+        "q": "How is the private airport transfer price calculated?",
+        "a": "Private transfers are priced per vehicle, not per passenger. The applicable total depends on Kayseri (ASR) or Nevsehir (NAV), your selected Vito or Sprinter, and whether you book one way or round trip. Check the current total in the booking form."
       },
       {
-        "q": "How much is Nevsehir private Vito?",
-        "a": "{{PRICE:nevsehir:vito}} one way per vehicle, up to 5 passengers."
+        "q": "Where will I meet my private transfer driver?",
+        "a": "After collecting your luggage, proceed to the airport terminal exit. The driver or representative will meet you with a sign displaying the passenger name from your reservation. Keep your WhatsApp confirmation available."
       },
       {
-        "q": "How much is Kayseri Sprinter?",
-        "a": "{{PRICE:kayseri:sprinter}} one way per vehicle, up to 16 passengers."
+        "q": "What happens if my arrival flight is delayed?",
+        "a": "We monitor your arrival flight and adjust the pickup according to its updated arrival time. There is no additional waiting charge for an arrival flight delay. If you are moved to a different flight, send us the new details for another availability check."
       },
       {
-        "q": "How much is Nevsehir Sprinter?",
-        "a": "{{PRICE:nevsehir:sprinter}} one way per vehicle, up to 16 passengers."
+        "q": "When is my private transfer booking confirmed?",
+        "a": "Submitting the form sends a booking request. Your transfer is confirmed only after the details have been reviewed and you receive the booking confirmation message through WhatsApp."
       },
       {
-        "q": "How much is round trip?",
-        "a": "Exactly double the one-way price."
+        "q": "How is my hotel pickup time arranged for departure?",
+        "a": "The pickup arrangement is based on your departure flight and confirmed accommodation details. The agreed pickup time is communicated separately. A time requested by the passenger is not automatically guaranteed."
       },
       {
-        "q": "Is private transfer door to door?",
-        "a": "The vehicle is dedicated to your booking, but historic hotel access still depends on whether the street can safely accommodate the vehicle."
+        "q": "Can a private vehicle reach every hotel or Airbnb?",
+        "a": "No. Private vehicles can collect and drop off passengers at suitable hotel locations, but narrow historic streets may require a nearby practical meeting point. Direct pickup or drop-off at private Airbnb or apartment addresses is not provided."
       },
       {
-        "q": "How do I pay for a private transfer?",
-        "a": "Cash to the driver."
+        "q": "How can I pay for my private transfer?",
+        "a": "Pay in cash to the driver. EUR, USD and TRY cash are accepted. Credit cards, debit cards and online payments are not accepted."
       }
     ],
     "related": [
@@ -942,7 +1350,7 @@ const rawPages: SeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "Cappadocia Private Airport Transfer | Vito & Sprinter",
-    "twitterDescription": "Private Cappadocia airport transfer with Mercedes Vito or Sprinter, Kayseri and Nevsehir fixed prices, cash to driver."
+    "twitterDescription": "Private airport transfers from Kayseri (ASR) and Nevsehir (NAV) to Cappadocia hotels. Choose a Vito for up to 5 or Sprinter for up to 16 passengers."
   },
   {
     "slug": "airport-transfer-prices",
