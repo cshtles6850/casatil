@@ -1101,70 +1101,483 @@ const rawPtPages: PtSeoPage[] = [
   {
     "slug": "private-airport-transfer-cappadocia",
     "title": "Transfer privativo na Capadócia | Vito e Sprinter",
-    "description": "Transfer privativo na Capadócia saindo de Kayseri (ASR) e Nevsehir (NAV), com Vito para até 5 passageiros ou Sprinter para até 16. Pagamento em dinheiro ao motorista.",
-    "eyebrow": "Veículo exclusivo",
-    "h1": "Transfer privativo do Aeroporto na Capadócia",
-    "lead": "Aeroporto de Kayseri, por veículo e por trecho: **Vito {{PRICE:kayseri:vito}}**, **Sprinter {{PRICE:kayseri:sprinter}}**. Aeroporto de Nevsehir, por veículo e por trecho: **Vito {{PRICE:nevsehir:vito}}**, **Sprinter {{PRICE:nevsehir:sprinter}}**. Ida e volta por veículo: Kayseri Vito/Sprinter {{PRICE:kayseri:vito:roundTrip}}/{{PRICE:kayseri:sprinter:roundTrip}}; Nevsehir Vito/Sprinter {{PRICE:nevsehir:vito:roundTrip}}/{{PRICE:nevsehir:sprinter:roundTrip}}.",
+    "description": "Reserve transfer privativo entre os aeroportos de Kayseri (ASR) ou Nevşehir (NAV) e a Capadócia. Mercedes Vito para até 5 pessoas ou Sprinter para até 16.",
+    "eyebrow": "Veículo privativo exclusivo",
+    "h1": "Transfer privativo de aeroporto na Capadócia",
+    "lead": "Reserve um transfer privativo entre o Aeroporto de Kayseri (ASR) ou o Aeroporto de Nevşehir (NAV) e sua hospedagem na Capadócia. Você pode viajar em um Mercedes Vito para até 5 passageiros ou em um Mercedes Sprinter para grupos de até 16 pessoas. O veículo fica reservado exclusivamente para o seu grupo, sem compartilhar a viagem com passageiros de outras reservas. Organize a chegada do aeroporto, o retorno da hospedagem ao aeroporto ou os dois trajetos. O transfer privativo é cobrado por veículo, não por pessoa. O preço varia conforme o aeroporto, o tipo de veículo e o trajeto escolhido. Confira o valor total atualizado no formulário de reserva.",
     "sections": [
       {
         "heading": "Mercedes Vito: até 5 passageiros",
         "paragraphs": [
-          "O Vito é indicado para casais, famílias e pequenos grupos que querem um veículo exclusivo, sem paradas em hotéis de outros passageiros e com mais controle sobre o horário de saída do que no shuttle compartilhado. É a opção privativa menor para embarques no aeroporto, [[acesso a hotéis-caverna|cappadocia-cave-hotel-airport-transfer]] e saídas diretas do hotel para o aeroporto."
+          "O **Mercedes Vito** é a opção de menor capacidade entre nossos veículos privativos, com limite de 5 passageiros.",
+          "É uma alternativa para casais, famílias e pequenos grupos que preferem viajar juntos em um veículo reservado somente para sua própria reserva.",
+          "Durante o percurso, não é necessário buscar passageiros de outras reservas nem fazer paradas em outros hotéis para deixá-los.",
+          "Você pode solicitar um Vito para chegar à Capadócia pelo Aeroporto de Kayseri ou Nevşehir, sair da sua hospedagem em direção ao aeroporto ou organizar um transfer de ida e volta.",
+          "O valor é calculado por veículo e depende do aeroporto escolhido. A capacidade máxima de cinco passageiros não significa que qualquer combinação de pessoas e malas grandes caberá no veículo. Se o grupo levar muita bagagem, informe isso na solicitação."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "O **Mercedes Vito** é a opção de menor capacidade entre nossos veículos privativos, com limite de 5 passageiros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "É uma alternativa para casais, famílias e pequenos grupos que preferem viajar juntos em um veículo reservado somente para sua própria reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Durante o percurso, não é necessário buscar passageiros de outras reservas nem fazer paradas em outros hotéis para deixá-los."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Você pode solicitar um Vito para chegar à Capadócia pelo Aeroporto de Kayseri ou Nevşehir, sair da sua hospedagem em direção ao aeroporto ou organizar um transfer de ida e volta."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O valor é calculado por veículo e depende do aeroporto escolhido. A capacidade máxima de cinco passageiros não significa que qualquer combinação de pessoas e malas grandes caberá no veículo. Se o grupo levar muita bagagem, informe isso na solicitação."
+          }
         ]
       },
       {
         "heading": "Mercedes Sprinter: até 16 passageiros",
         "paragraphs": [
-          "O Sprinter é a opção privativa maior para grupos de até 16 pessoas. O preço por veículo e trecho é gerido por aeroporto: {{PRICE:kayseri:sprinter}} em Kayseri e {{PRICE:nevsehir:sprinter}} em Nevsehir. Para grupos maiores, o valor por pessoa pode ficar próximo ou até abaixo do shuttle compartilhado."
+          "O **Mercedes Sprinter** é a alternativa de maior capacidade, adequada para grupos de até 16 passageiros.",
+          "Vale a pena considerá-lo quando o grupo ultrapassa o limite do Vito ou quando todos preferem viajar juntos em um veículo exclusivo.",
+          "Por exemplo, seis pessoas já ultrapassam a capacidade máxima de cinco passageiros do Vito. Nesse caso, é possível comparar o preço de um Sprinter privativo com o custo total de seis lugares em um shuttle compartilhado.",
+          "O Sprinter é cobrado por veículo, e não por passageiro. O valor depende do aeroporto escolhido, Kayseri (ASR) ou Nevşehir (NAV), e do trajeto solicitado.",
+          "**Um veículo maior nem sempre será a opção mais econômica para todos os grupos.** Antes de decidir, compare os valores totais atualizados das opções disponíveis.",
+          "Se o grupo levar malas muito grandes, equipamentos esportivos ou outros volumes fora do comum, descreva a bagagem ao fazer a solicitação. Assim, será possível verificar se o veículo é adequado."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "O **Mercedes Sprinter** é a alternativa de maior capacidade, adequada para grupos de até 16 passageiros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Vale a pena considerá-lo quando o grupo ultrapassa o limite do Vito ou quando todos preferem viajar juntos em um veículo exclusivo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Por exemplo, seis pessoas já ultrapassam a capacidade máxima de cinco passageiros do Vito. Nesse caso, é possível comparar o preço de um Sprinter privativo com o custo total de seis lugares em um shuttle compartilhado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O Sprinter é cobrado por veículo, e não por passageiro. O valor depende do aeroporto escolhido, Kayseri (ASR) ou Nevşehir (NAV), e do trajeto solicitado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Um veículo maior nem sempre será a opção mais econômica para todos os grupos.** Antes de decidir, compare os valores totais atualizados das opções disponíveis."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se o grupo levar malas muito grandes, equipamentos esportivos ou outros volumes fora do comum, descreva a bagagem ao fazer a solicitação. Assim, será possível verificar se o veículo é adequado."
+          }
         ]
       },
       {
-        "heading": "Por que os preços de Kayseri e Nevsehir são geridos separadamente",
+        "heading": "Como funciona a recepção do transfer privativo no aeroporto",
         "paragraphs": [
-          "Kayseri e Nevsehir não são o mesmo trajeto. As distâncias rodoviárias e a operação de cada aeroporto são diferentes, por isso as tarifas privativas de ASR e NAV são mantidas separadamente. Confira sempre o aeroporto selecionado e os valores atuais antes de comparar as opções."
+          "O transfer privativo de chegada é organizado com base nos dados do voo e na reserva confirmada.",
+          "Ao solicitar o transfer, selecione o aeroporto de chegada correto, o tipo de veículo, o número de passageiros e a região da hospedagem.",
+          "Informe os nomes dos passageiros, a data de chegada, o número exato do voo, o nome completo da hospedagem e um número de WhatsApp ativo.",
+          "**O envio do formulário gera uma solicitação de reserva, não uma confirmação automática.** Nossa equipe verifica os dados e a disponibilidade do serviço. O transfer fica confirmado somente quando você recebe a mensagem de confirmação da reserva pelo WhatsApp.",
+          "Acompanhamos as informações do voo de chegada informado na reserva para organizar a busca conforme o horário atualizado de pouso.",
+          "Depois de desembarcar, conclua os procedimentos de chegada necessários, retire sua bagagem e siga até a **saída do terminal**.",
+          "O motorista ou um representante estará esperando nesse local com uma placa mostrando o nome do passageiro informado na reserva.",
+          "Mantenha a confirmação recebida pelo WhatsApp à mão. Se tiver dificuldade para encontrar o ponto de encontro ou o responsável pela recepção, confira as instruções da confirmação e entre em contato conosco pelo WhatsApp.",
+          "Depois de encontrar o motorista, seu grupo seguirá no veículo privativo até a hospedagem confirmada ou o ponto de desembarque combinado.",
+          "Não são feitas paradas adicionais para deixar passageiros de outras reservas em hotéis diferentes.",
+          "Quando houver acesso adequado pela rua, o veículo poderá chegar diretamente ao hotel. Em alguns bairros históricos e regiões com hotéis-caverna, pode ser necessário utilizar um ponto próximo onde seja possível parar com segurança."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "O transfer privativo de chegada é organizado com base nos dados do voo e na reserva confirmada."
+          },
+          {
+            "kind": "subheading",
+            "text": "Antes da viagem"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ao solicitar o transfer, selecione o aeroporto de chegada correto, o tipo de veículo, o número de passageiros e a região da hospedagem."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Informe os nomes dos passageiros, a data de chegada, o número exato do voo, o nome completo da hospedagem e um número de WhatsApp ativo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**O envio do formulário gera uma solicitação de reserva, não uma confirmação automática.** Nossa equipe verifica os dados e a disponibilidade do serviço. O transfer fica confirmado somente quando você recebe a mensagem de confirmação da reserva pelo WhatsApp."
+          },
+          {
+            "kind": "subheading",
+            "text": "Onde encontrar o motorista no aeroporto"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Acompanhamos as informações do voo de chegada informado na reserva para organizar a busca conforme o horário atualizado de pouso."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Depois de desembarcar, conclua os procedimentos de chegada necessários, retire sua bagagem e siga até a **saída do terminal**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O motorista ou um representante estará esperando nesse local com uma placa mostrando o nome do passageiro informado na reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Mantenha a confirmação recebida pelo WhatsApp à mão. Se tiver dificuldade para encontrar o ponto de encontro ou o responsável pela recepção, confira as instruções da confirmação e entre em contato conosco pelo WhatsApp."
+          },
+          {
+            "kind": "subheading",
+            "text": "Do aeroporto até sua hospedagem"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Depois de encontrar o motorista, seu grupo seguirá no veículo privativo até a hospedagem confirmada ou o ponto de desembarque combinado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Não são feitas paradas adicionais para deixar passageiros de outras reservas em hotéis diferentes."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Quando houver acesso adequado pela rua, o veículo poderá chegar diretamente ao hotel. Em alguns bairros históricos e regiões com hotéis-caverna, pode ser necessário utilizar um ponto próximo onde seja possível parar com segurança."
+          }
         ]
       },
       {
-        "heading": "Acesso ao hotel continua dependendo da rua",
+        "heading": "Atrasos e alterações de voo",
         "paragraphs": [
-          "Um veículo privativo elimina as paradas de outros passageiros, mas não transforma uma rua estreita em uma via acessível. Em hotéis históricos ou hospedagens em encostas, o motorista pode precisar usar o ponto seguro mais próximo onde seja possível parar. O local exato é confirmado de acordo com a propriedade real."
+          "Acompanhamos o voo de chegada informado na reserva e ajustamos a organização da busca de acordo com o horário atualizado.",
+          "**Não cobramos taxa adicional de espera por atraso do voo de chegada.**",
+          "Como o veículo fica reservado para o seu grupo, o trajeto não depende da busca de passageiros de outras reservas.",
+          "Se a companhia aérea transferir você para outro voo, alterar o número do voo ou cancelar o voo original, envie as novas informações pelo WhatsApp assim que possível.",
+          "O novo voo pode ter outro horário de chegada ou até mesmo pousar em um aeroporto diferente. Nesse caso, será necessário revisar a organização do transfer e verificar a disponibilidade para as novas informações.",
+          "A mudança para outro voo não garante automaticamente a manutenção das condições da reserva original."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Se o voo de chegada atrasar"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Acompanhamos o voo de chegada informado na reserva e ajustamos a organização da busca de acordo com o horário atualizado."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Não cobramos taxa adicional de espera por atraso do voo de chegada.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Como o veículo fica reservado para o seu grupo, o trajeto não depende da busca de passageiros de outras reservas."
+          },
+          {
+            "kind": "subheading",
+            "text": "Se houver alteração no número do voo"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se a companhia aérea transferir você para outro voo, alterar o número do voo ou cancelar o voo original, envie as novas informações pelo WhatsApp assim que possível."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O novo voo pode ter outro horário de chegada ou até mesmo pousar em um aeroporto diferente. Nesse caso, será necessário revisar a organização do transfer e verificar a disponibilidade para as novas informações."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A mudança para outro voo não garante automaticamente a manutenção das condições da reserva original."
+          }
         ]
       },
       {
-        "heading": "Reserva, passageiros e pagamento",
+        "heading": "Busca no hotel, hotéis-caverna e endereços de Airbnb",
         "paragraphs": [
-          "Para confirmar um transfer privativo, informe número do voo, nome completo do hotel, nomes dos passageiros e contato de WhatsApp. O pagamento é feito em dinheiro ao motorista. Os preços publicados estão em EUR; USD ou TRY também podem ser combinados usando a cotação vigente no momento do pagamento."
+          "Você também pode reservar um transfer privativo da sua hospedagem na Capadócia para o Aeroporto de Kayseri ou Nevşehir.",
+          "A organização da busca considera os dados do voo de saída, a localização da hospedagem e as informações da reserva confirmada.",
+          "**O horário de busca combinado será informado separadamente.** Um horário solicitado pelo passageiro só deve ser considerado confirmado depois de aceito.",
+          "Ao contrário de um shuttle compartilhado, o veículo privativo não precisa passar por outros hotéis para buscar passageiros de reservas diferentes.",
+          "Para informações específicas sobre os trajetos de retorno, consulte nossos guias de [[transfer da Capadócia para o Aeroporto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] e [[transfer da Capadócia para o Aeroporto de Nevşehir|cappadocia-to-nevsehir-airport-shuttle]].",
+          "Muitos hotéis-caverna da Capadócia ficam em bairros históricos com ruas estreitas ou íngremes.",
+          "Mesmo em um transfer privativo, algumas dessas ruas podem não permitir a entrada ou a parada segura do veículo.",
+          "Se for possível chegar e parar com segurança junto ao hotel, a busca ou o desembarque poderá acontecer ali. Caso contrário, poderá ser necessário combinar um ponto próximo e acessível.",
+          "Informe o nome completo da sua hospedagem, não apenas o endereço da rua. Para saber mais, consulte nosso guia de [[transfer para hotéis-caverna na Capadócia|cappadocia-cave-hotel-airport-transfer]].",
+          "Não realizamos busca ou desembarque diretamente em endereços particulares de Airbnb ou apartamentos privados.",
+          "Se você estiver hospedado em um desses imóveis, siga as orientações do formulário de reserva e escolha um hotel próximo e adequado como ponto de encontro ou desembarque.",
+          "O local escolhido precisa permitir o acesso do veículo e ser confirmado durante a organização do transfer."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Transfer da hospedagem para o aeroporto"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Você também pode reservar um transfer privativo da sua hospedagem na Capadócia para o Aeroporto de Kayseri ou Nevşehir."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A organização da busca considera os dados do voo de saída, a localização da hospedagem e as informações da reserva confirmada."
+          },
+          {
+            "kind": "paragraph",
+            "text": "**O horário de busca combinado será informado separadamente.** Um horário solicitado pelo passageiro só deve ser considerado confirmado depois de aceito."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ao contrário de um shuttle compartilhado, o veículo privativo não precisa passar por outros hotéis para buscar passageiros de reservas diferentes."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para informações específicas sobre os trajetos de retorno, consulte nossos guias de [[transfer da Capadócia para o Aeroporto de Kayseri|cappadocia-to-kayseri-airport-shuttle]] e [[transfer da Capadócia para o Aeroporto de Nevşehir|cappadocia-to-nevsehir-airport-shuttle]]."
+          },
+          {
+            "kind": "subheading",
+            "text": "Hotéis-caverna e ruas estreitas"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Muitos hotéis-caverna da Capadócia ficam em bairros históricos com ruas estreitas ou íngremes."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Mesmo em um transfer privativo, algumas dessas ruas podem não permitir a entrada ou a parada segura do veículo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se for possível chegar e parar com segurança junto ao hotel, a busca ou o desembarque poderá acontecer ali. Caso contrário, poderá ser necessário combinar um ponto próximo e acessível."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Informe o nome completo da sua hospedagem, não apenas o endereço da rua. Para saber mais, consulte nosso guia de [[transfer para hotéis-caverna na Capadócia|cappadocia-cave-hotel-airport-transfer]]."
+          },
+          {
+            "kind": "subheading",
+            "text": "Airbnb e apartamentos particulares"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Não realizamos busca ou desembarque diretamente em endereços particulares de Airbnb ou apartamentos privados."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se você estiver hospedado em um desses imóveis, siga as orientações do formulário de reserva e escolha um hotel próximo e adequado como ponto de encontro ou desembarque."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O local escolhido precisa permitir o acesso do veículo e ser confirmado durante a organização do transfer."
+          }
+        ]
+      },
+      {
+        "heading": "Quando vale a pena escolher um transfer privativo em vez de um shuttle",
+        "paragraphs": [
+          "O transfer privativo pode ser uma boa alternativa para famílias, grupos de amigos ou passageiros que preferem viajar em um veículo reservado exclusivamente para sua própria reserva.",
+          "Também permite evitar paradas em outros hotéis para buscar ou deixar pessoas de reservas diferentes.",
+          "Vale a pena comparar essa opção em chegadas noturnas ou saídas para voos muito cedo. No entanto, a disponibilidade do serviço precisa ser confirmada para a data e o voo específicos.",
+          "O [[shuttle compartilhado na Capadócia|cappadocia-shuttle-transfer]] funciona de outra maneira: o valor é cobrado por passageiro, e outras pessoas com reservas confirmadas podem viajar no mesmo veículo. A espera por passageiros que chegam ao aeroporto e as paradas em diferentes hotéis podem fazer parte do percurso.",
+          "Para uma ou duas pessoas, o shuttle compartilhado pode sair mais barato. Para famílias ou grupos maiores, compare o custo total dos lugares no shuttle com o preço de um veículo privativo.",
+          "Se ainda estiver em dúvida, veja nossa [[comparação entre shuttle compartilhado e transfer privativo|cappadocia-shared-shuttle-vs-private-transfer]]."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "O transfer privativo pode ser uma boa alternativa para famílias, grupos de amigos ou passageiros que preferem viajar em um veículo reservado exclusivamente para sua própria reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Também permite evitar paradas em outros hotéis para buscar ou deixar pessoas de reservas diferentes."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Vale a pena comparar essa opção em chegadas noturnas ou saídas para voos muito cedo. No entanto, a disponibilidade do serviço precisa ser confirmada para a data e o voo específicos."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O [[shuttle compartilhado na Capadócia|cappadocia-shuttle-transfer]] funciona de outra maneira: o valor é cobrado por passageiro, e outras pessoas com reservas confirmadas podem viajar no mesmo veículo. A espera por passageiros que chegam ao aeroporto e as paradas em diferentes hotéis podem fazer parte do percurso."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para uma ou duas pessoas, o shuttle compartilhado pode sair mais barato. Para famílias ou grupos maiores, compare o custo total dos lugares no shuttle com o preço de um veículo privativo."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se ainda estiver em dúvida, veja nossa [[comparação entre shuttle compartilhado e transfer privativo|cappadocia-shared-shuttle-vs-private-transfer]]."
+          }
+        ]
+      },
+      {
+        "heading": "Número de passageiros, bagagem e acesso do veículo",
+        "paragraphs": [
+          "Antes de escolher um veículo privativo, considere três fatores: quantas pessoas vão viajar, a quantidade de bagagem e as condições de acesso à hospedagem.",
+          "O Mercedes Vito transporta até 5 passageiros, enquanto o Mercedes Sprinter tem capacidade para até 16. Esses números representam os limites de passageiros, mas não garantem espaço para todas as combinações possíveis de pessoas e malas volumosas.",
+          "Se você estiver viajando com malas muito grandes, equipamentos esportivos ou outros itens fora do comum, informe os detalhes na solicitação. Assim, a adequação do veículo poderá ser analisada antes da confirmação.",
+          "A busca e o desembarque na hospedagem também dependem das condições da via e da possibilidade de acesso seguro.",
+          "Um veículo exclusivo significa que seu grupo não dividirá o transfer com passageiros de outras reservas. Isso não significa que o motorista poderá acessar qualquer entrada de hotel ou endereço particular."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Antes de escolher um veículo privativo, considere três fatores: quantas pessoas vão viajar, a quantidade de bagagem e as condições de acesso à hospedagem."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O Mercedes Vito transporta até 5 passageiros, enquanto o Mercedes Sprinter tem capacidade para até 16. Esses números representam os limites de passageiros, mas não garantem espaço para todas as combinações possíveis de pessoas e malas volumosas."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se você estiver viajando com malas muito grandes, equipamentos esportivos ou outros itens fora do comum, informe os detalhes na solicitação. Assim, a adequação do veículo poderá ser analisada antes da confirmação."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A busca e o desembarque na hospedagem também dependem das condições da via e da possibilidade de acesso seguro."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Um veículo exclusivo significa que seu grupo não dividirá o transfer com passageiros de outras reservas. Isso não significa que o motorista poderá acessar qualquer entrada de hotel ou endereço particular."
+          }
+        ]
+      },
+      {
+        "heading": "Pagamento e confirmação da reserva pelo WhatsApp",
+        "paragraphs": [
+          "Ao enviar o formulário, você faz uma solicitação de reserva. **O envio não confirma automaticamente o transfer.**",
+          "Nossa equipe verifica os dados do voo, da hospedagem, dos passageiros e a disponibilidade do serviço.",
+          "A reserva fica confirmada quando você recebe a mensagem de confirmação correspondente pelo WhatsApp.",
+          "Por isso, informe um número de WhatsApp correto e ativo e confira os dados recebidos antes da viagem.",
+          "O pagamento é realizado **em dinheiro ao motorista**.",
+          "Aceitamos as seguintes moedas em espécie:",
+          "**Euro (EUR) · Dólar americano (USD) · Lira turca (TRY)**",
+          "Não aceitamos cartões de crédito, cartões de débito nem pagamentos online.",
+          "O transfer privativo é cobrado por veículo. O valor total depende do aeroporto, do tipo de veículo e do trajeto selecionados no formulário de reserva.",
+          "Para consultar as tarifas, acesse nossa página de [[preços de transfer para os aeroportos|airport-transfer-prices]]."
+        ],
+        "blocks": [
+          {
+            "kind": "subheading",
+            "text": "Quando a reserva fica confirmada?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ao enviar o formulário, você faz uma solicitação de reserva. **O envio não confirma automaticamente o transfer.**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Nossa equipe verifica os dados do voo, da hospedagem, dos passageiros e a disponibilidade do serviço."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A reserva fica confirmada quando você recebe a mensagem de confirmação correspondente pelo WhatsApp."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Por isso, informe um número de WhatsApp correto e ativo e confira os dados recebidos antes da viagem."
+          },
+          {
+            "kind": "subheading",
+            "text": "Como é feito o pagamento?"
+          },
+          {
+            "kind": "paragraph",
+            "text": "O pagamento é realizado **em dinheiro ao motorista**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Aceitamos as seguintes moedas em espécie:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Euro (EUR) · Dólar americano (USD) · Lira turca (TRY)**"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Não aceitamos cartões de crédito, cartões de débito nem pagamentos online."
+          },
+          {
+            "kind": "paragraph",
+            "text": "O transfer privativo é cobrado por veículo. O valor total depende do aeroporto, do tipo de veículo e do trajeto selecionados no formulário de reserva."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para consultar as tarifas, acesse nossa página de [[preços de transfer para os aeroportos|airport-transfer-prices]]."
+          }
+        ]
+      },
+      {
+        "heading": "Transfers privativos de ida e volta",
+        "paragraphs": [
+          "Você pode solicitar um transfer privativo nos dois sentidos:",
+          "**Do aeroporto para a hospedagem:** busca no Aeroporto de Kayseri (ASR) ou Nevşehir (NAV) e deslocamento até a hospedagem confirmada ou o ponto de desembarque combinado. · **Da hospedagem para o aeroporto:** busca no hotel confirmado ou no ponto de encontro combinado, com destino ao aeroporto selecionado. · **Ida e volta:** organização da chegada e do retorno ao aeroporto para o mesmo grupo de passageiros.",
+          "Atualmente, o sistema de reservas calcula uma ida e volta padrão utilizando o mesmo aeroporto como dois trechos, com base na tarifa correspondente ao veículo escolhido.",
+          "Se você chegar pelo Aeroporto de Nevşehir e sair pelo Aeroporto de Kayseri, ou vice-versa, **cada trecho precisará ser analisado e calculado conforme seu respectivo aeroporto**.",
+          "Nesse caso, envie pelo WhatsApp os números dos dois voos, as datas da viagem e os dados da hospedagem, para que os trajetos sejam verificados e confirmados separadamente.",
+          "A disponibilidade para chegadas durante a noite ou saídas de madrugada precisa ser confirmada conforme a data e os dados reais do voo. Reservar um veículo exclusivo não significa que todos os horários estejam automaticamente disponíveis.",
+          "Para entender melhor as opções dos dois aeroportos, consulte nosso guia de [[transfer entre os aeroportos e a Capadócia|cappadocia-airport-transfer]]."
+        ],
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Você pode solicitar um transfer privativo nos dois sentidos:"
+          },
+          {
+            "kind": "paragraph",
+            "text": "**Do aeroporto para a hospedagem:** busca no Aeroporto de Kayseri (ASR) ou Nevşehir (NAV) e deslocamento até a hospedagem confirmada ou o ponto de desembarque combinado. · **Da hospedagem para o aeroporto:** busca no hotel confirmado ou no ponto de encontro combinado, com destino ao aeroporto selecionado. · **Ida e volta:** organização da chegada e do retorno ao aeroporto para o mesmo grupo de passageiros."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Atualmente, o sistema de reservas calcula uma ida e volta padrão utilizando o mesmo aeroporto como dois trechos, com base na tarifa correspondente ao veículo escolhido."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Se você chegar pelo Aeroporto de Nevşehir e sair pelo Aeroporto de Kayseri, ou vice-versa, **cada trecho precisará ser analisado e calculado conforme seu respectivo aeroporto**."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Nesse caso, envie pelo WhatsApp os números dos dois voos, as datas da viagem e os dados da hospedagem, para que os trajetos sejam verificados e confirmados separadamente."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A disponibilidade para chegadas durante a noite ou saídas de madrugada precisa ser confirmada conforme a data e os dados reais do voo. Reservar um veículo exclusivo não significa que todos os horários estejam automaticamente disponíveis."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Para entender melhor as opções dos dois aeroportos, consulte nosso guia de [[transfer entre os aeroportos e a Capadócia|cappadocia-airport-transfer]]."
+          }
         ]
       }
     ],
     "faq": [
       {
-        "q": "Quanto custa um Vito privativo a partir de Kayseri?",
-        "a": "{{PRICE:kayseri:vito}} por trecho e por veículo, para até 5 passageiros."
+        "q": "Como é calculado o preço do transfer privativo?",
+        "a": "O transfer privativo é cobrado por veículo, não por passageiro. O valor depende do aeroporto, Kayseri (ASR) ou Nevşehir (NAV), do veículo escolhido, Mercedes Vito ou Sprinter, e da opção de apenas um trecho ou ida e volta. Confira o valor total atualizado no formulário de reserva."
       },
       {
-        "q": "Quanto custa um Vito privativo a partir de Nevsehir?",
-        "a": "{{PRICE:nevsehir:vito}} por trecho e por veículo, para até 5 passageiros."
+        "q": "Onde encontro o motorista no aeroporto?",
+        "a": "Depois de retirar sua bagagem, siga até a saída do terminal. O motorista ou um representante estará esperando com uma placa mostrando o nome do passageiro informado na reserva. Mantenha sua confirmação do WhatsApp à mão."
       },
       {
-        "q": "Quanto custa um Sprinter a partir de Kayseri?",
-        "a": "{{PRICE:kayseri:sprinter}} por trecho e por veículo, para até 16 passageiros."
+        "q": "O que acontece se meu voo de chegada atrasar?",
+        "a": "Acompanhamos o voo informado e ajustamos a organização da busca conforme o horário atualizado. Não cobramos taxa adicional de espera por atraso do voo de chegada. Se você for transferido para outro voo, envie os novos dados para verificarmos a disponibilidade novamente."
       },
       {
-        "q": "Quanto custa um Sprinter a partir de Nevsehir?",
-        "a": "{{PRICE:nevsehir:sprinter}} por trecho e por veículo, para até 16 passageiros."
+        "q": "Quando minha reserva de transfer privativo fica confirmada?",
+        "a": "O envio do formulário gera uma solicitação de reserva. O transfer fica confirmado somente depois que os dados e a disponibilidade forem verificados e você receber a mensagem de confirmação pelo WhatsApp."
       },
       {
-        "q": "Quanto custa ida e volta?",
-        "a": "Exatamente o dobro do preço de um trecho."
+        "q": "Como é definido o horário de busca no hotel para o voo de saída?",
+        "a": "O horário é organizado com base no voo de saída e nos dados da hospedagem confirmada. O horário combinado será informado separadamente. Não é possível considerar automaticamente garantido um horário solicitado pelo passageiro."
       },
       {
-        "q": "O transfer privativo é sempre porta a porta?",
-        "a": "O veículo é exclusivo para a sua reserva, mas o acesso a hotéis históricos ainda depende de a rua permitir entrada e parada com segurança."
+        "q": "O veículo privativo consegue chegar a qualquer hotel ou Airbnb?",
+        "a": "Não. O veículo pode buscar ou deixar passageiros em hotéis com acesso adequado, mas algumas ruas históricas exigem um ponto próximo e seguro. Não realizamos busca ou desembarque diretamente em endereços particulares de Airbnb ou apartamentos privados."
       },
       {
-        "q": "Como é feito o pagamento?",
-        "a": "Em dinheiro ao motorista."
+        "q": "Como posso pagar pelo transfer privativo?",
+        "a": "O pagamento é feito em dinheiro ao motorista. Aceitamos euros (EUR), dólares americanos (USD) e liras turcas (TRY). Não aceitamos cartões de crédito, cartões de débito nem pagamentos online."
       }
     ],
     "related": [
@@ -1173,7 +1586,7 @@ const rawPtPages: PtSeoPage[] = [
       "nevsehir-airport-shuttle"
     ],
     "twitterTitle": "Transfer privativo na Capadócia | Vito e Sprinter",
-    "twitterDescription": "Transfer privativo na Capadócia com Mercedes Vito ou Sprinter, tarifas fixas para Kayseri e Nevsehir e pagamento em dinheiro ao motorista."
+    "twitterDescription": "Transfer privativo entre Kayseri (ASR), Nevşehir (NAV) e a Capadócia. Mercedes Vito para até 5 passageiros ou Sprinter para até 16. Reserva pelo WhatsApp."
   },
   {
     "slug": "airport-transfer-prices",
